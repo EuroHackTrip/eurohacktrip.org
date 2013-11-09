@@ -1,0 +1,78 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h2><%= @post.title %></h2>
+</p>
+
+<p>
+  <pre><%= @post.content %></pre>
+</p>
+<div class="row">
+  <div class="span8">
+    <h3>Share this article</h3>
+  </div>
+  <div class="span4">
+    <button style = "border:none; background-color:white;" data-toggle="modal" data-target="#myModal">
+    <h2>Add a Comment</h2>
+    </button>
+  </div>
+</div>
+<div class="panel panel-primary">
+  <div class = "panel-heading">
+    <h3 class = "panel-title">
+      Comments <span class="badge"><%= @post.comments.count %></span>
+    </h3>
+  </div>
+  <% count = 0 %>
+    <% @post.comments.each do |comment| %>
+      <% if comment.approved %>
+        <div class = "well">
+          <div class="row">
+            <div class="span6">
+              <a href = "http://<%= comment.website %>"> <%= comment.commenter %> </a> says:
+            </div>
+            <div class="span6">
+              <%= comment.created_at.to_s.split(" ")[0] + " " + comment.created_at.to_s.split(" ")[1] %>
+            </div>
+          </div>
+            <p>
+              <%= comment.content %>
+            </p>
+        </div>
+        <% else %>
+          <% count = count + 1 %>
+      <% end %>
+    <% end %>
+    <%= pluralize(count, " comment") %> pending approval
+</div>
+
+<h2>Add a Comment</h2>
+<%= form_for([@post, @post.comments.build]) do |f| %>
+  <div class="field">
+    <%= f.label :commenter %><br>
+    <%= f.text_field :commenter %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :website %><br>
+    <%= f.text_field :website %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </div>
+  <div class="field">
+    <%= f.label :approved %><br>
+    <%= f.check_box :approved %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

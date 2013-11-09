@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eurohacktrip</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+ <!--[if lte IE 8]>
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+ <![endif]-->
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+   <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class = "navbar navbar-fixed-top navbar-inverse">
+		<div class = "navbar-inner">
+			<div class = "container">
+				<a href="/" class = "brand">EuroHackTrip</a>
+				<ul class = "navbar-text nav pull-right">
+					<li class = "navbar-text nav pull-right">Link 1</li>
+					<li><%= link_to "Blog", posts_path %></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+<div class = "container">
+	<%= yield %>
+</div>
+<footer id="page-footer">
+  <div class="container">
+    <div class="row">
+      <div class="span3">
+        <h3>Contact/follow</h3>
+        <ul>
+          <li class="twitter"><a href="https://twitter.com/AfricaHackTrip">@AfricaHackTrip</a></li>
+          <li class="tumblr"><a href="https://africahacktrip.tumblr.com">AfricaHackTrip.tumblr.com</a></li>
+          <li class="facebook"><a href="https://facebook.com/Africahacktrip2013">facebook.com/AfricaHackTrip2013</a></li>
+          <li class="email"><a href="mailto:hello@AfricaHackTrip.org">hello@AfricaHackTrip.org</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <h3>Press</h3>
+        <ul>
+          <li class="presskit"><a href="https://github.com/AfricaHackTrip/PressKit/archive/master.zip">Press kit download</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <h3>Supporters</h3>
+        <div class="sponsor-logos">
+          <p><a href="https://github.com" class="github">GitHub</a></p>
+          <p><a href="http://geeksphone.com" class="geeksphone">Geeksphone</a></p>
+        </div>
+      </div>
+      <div class="span3">
+        <h3>Media Partners</h3>
+        <h4><strong><a href="http://www.eufrika.org/">Eufrika.org</a></strong></h4>
+        <p>
+          Eufrika is a blog focusing on independent news for an African-European public.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

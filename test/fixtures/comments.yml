@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  commenter: MyString
+  email: MyString
+  website: MyString
+  content: MyText
+  approved: false
+  post_id: 
+
+two:
+  commenter: MyString
+  email: MyString
+  website: MyString
+  content: MyText
+  approved: false
+  post_id: 
