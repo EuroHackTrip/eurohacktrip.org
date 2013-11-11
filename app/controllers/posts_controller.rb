@@ -1,16 +1,20 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
+  before_action :authenticate_admin!, except: [:show, :index]
 
   # GET /posts
   # GET /posts.json
   def index
+    @posts = Post.new
     @posts = Post.all.order("created_at desc")
   end
 
   # GET /posts/1
   # GET /posts/1.json
+  $view_count = 0
   def show
     @post = Post.find(params[:id])
+    $view_count = $view_count + 1
   end
 
   # GET /posts/new

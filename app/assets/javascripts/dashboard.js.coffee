@@ -2,5 +2,5 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
-	$('.posts').hover (event) ->
+	$('.to-hide').hover (event) ->
 		$(this).toggleClass("hover")

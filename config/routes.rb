@@ -1,10 +1,14 @@
 EurohacktripOrg::Application.routes.draw do
+  
+  get "dashboard/index"
   devise_for :admins
   get "home/index"
 
   resources :posts do
     resources :comments
   end
+
+  match "comment/:id" => "comments#approve", :as => "comment_approve", via: [:post]
 
   root to: "home#index"
 

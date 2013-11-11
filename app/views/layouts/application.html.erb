@@ -3,12 +3,10 @@
 <head>
   <title>Eurohacktrip</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
  <!--[if lte IE 8]>
      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
  <![endif]-->
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-   <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -17,13 +15,18 @@
 			<div class = "container">
 				<a href="/" class = "brand">EuroHackTrip</a>
 				<ul class = "navbar-text nav pull-right">
-					<li class = "navbar-text nav pull-right">Link 1</li>
-					<li><%= link_to "Blog", posts_path %></li>
+				<% if admin_signed_in? %>
+					<li class = "navbar-text nav pull-right"><%= link_to 'Sign out', destroy_admin_session_path, :method => :delete %></li>
+					<li class = "navbar-text nav pull-right"><%= link_to 'Dashboard', dashboard_index_path %> </li>
+				<% end %>
+					<li class = "navbar-text nav pull-right"><%= link_to "Blog", posts_path %></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 <div class = "container">
+	 <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
 	<%= yield %>
 </div>
 <footer id="page-footer">

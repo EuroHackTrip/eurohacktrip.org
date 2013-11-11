@@ -48,9 +48,16 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url }
-      format.json { head :no_content }
+      #format.html { redirect_to comments_url }
+      #format.json { head :no_content }
     end
+  end
+
+  def approve
+    @comment = Comment.find(params[:id])
+    @comment.approved = true
+    @comment.save!
+    redirect_to dashboard_index_path, notice: "comment has been approved"
   end
 
   private

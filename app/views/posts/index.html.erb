@@ -1,10 +1,15 @@
 <% @posts.each do |post| %>
-  <h1><%= link_to post.title, post %></h1>
-  <pre>Posted at <%= post.created_at %></pre>
-  <pre><%= post.content.split("\n")[0] %> <%= link_to "Read More. . .", post %></pre>
-  <%= link_to 'Show', post %>
-  <%= link_to 'Edit', edit_post_path(post) %>
-  <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <div class="posts">
+    <h1><%= link_to post.title, post %></h1>
+    <pre>Posted at <%= post.created_at %></pre>
+    <pre><%= post.content.split("\n")[0] %> <%= link_to "Read More. . .", post %></pre>
+    <span class="admin">
+      <% if admin_signed_in? %>
+        <%= link_to 'Edit', edit_post_path(post) %>
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </span>
+  </div>
 <% end %>
 
 <br>
