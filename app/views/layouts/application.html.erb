@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Eurohacktrip</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
  <!--[if lte IE 8]>
      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
@@ -13,13 +14,25 @@
 <div class = "navbar navbar-fixed-top navbar-inverse">
 		<div class = "navbar-inner">
 			<div class = "container">
-				<a href="/" class = "brand">EuroHackTrip</a>
+				<a href="/" class = "brand"><img src="assets/logo.jpg">EuroHackTrip</a>
 				<ul class = "navbar-text nav pull-right">
-				<% if admin_signed_in? %>
-					<li class = "navbar-text nav pull-right"><%= link_to 'Sign out', destroy_admin_session_path, :method => :delete %></li>
-					<li class = "navbar-text nav pull-right"><%= link_to 'Dashboard', dashboard_index_path %> </li>
-				<% end %>
+					<% if admin_signed_in? %>
+						<li class = "navbar-text nav pull-right"><%= link_to 'Sign out', destroy_admin_session_path, :method => :delete %></li>
+						<li class = "navbar-text nav pull-right"><%= link_to 'Dashboard', dashboard_index_path %> </li>
+					<% end %>
 					<li class = "navbar-text nav pull-right"><%= link_to "Blog", posts_path %></li>
+					<li class = "navbar-text nav pull-right">
+						<%= link_to 'France', "#" %>
+					</li>
+					<li class = "navbar-text nav pull-right">
+						<%= link_to 'Germany', "#" %>
+					</li>
+					<li class = "navbar-text nav pull-right">
+						<%= link_to 'Switzerland', "#" %>
+					</li>
+					<li class = "navbar-text nav pull-right">
+						<%= link_to 'Belgium', "#" %>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -42,12 +55,6 @@
         </ul>
       </div>
       <div class="span3">
-        <h3>Press</h3>
-        <ul>
-          <li class="presskit"><a href="https://github.com/AfricaHackTrip/PressKit/archive/master.zip">Press kit download</a></li>
-        </ul>
-      </div>
-      <div class="span3">
         <h3>Supporters</h3>
         <div class="sponsor-logos">
           <p><a href="https://github.com" class="github">GitHub</a></p>
@@ -60,6 +67,15 @@
         <p>
           Eufrika is a blog focusing on independent news for an African-European public.
         </p>
+      </div>
+      <div class="span3">        
+        <h3>Admin</h3>
+        <% if !admin_signed_in? %>
+          <p><%= link_to "Sign Up", new_admin_registration_path %></p>
+          <p><%= link_to "Sign In", new_admin_session_path %></p>
+        <% else %>
+          <p><%= link_to "Sign Out", destroy_admin_session_path %></p>
+        <% end %>
       </div>
     </div>
   </div>

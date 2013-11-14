@@ -5,8 +5,9 @@
 	        <li><a href="#comments" data-toggle="tab">Comments <span class = "badge pull-right"><%= comments_count %></span></a></li>
 	        <li><a href="#categories" data-toggle="tab">Categories</a></li>
 	        <li><a href="#stats" data-toggle="tab">Statistics</a></li>
-	        <li><a href="#people" data-toggle="tab">People</a></li>
 	        <li><a href="#countries" data-toggle="tab">Countries</a></li>
+	        <li><a href="#people" data-toggle="tab">People</a></li>
+	        <li><a href="#cities" data-toggle="tab">Cities</a></li>
 	        <li><a href="#settings" data-toggle="tab">Settings</a></li>
       	</ul>
 	</div>
@@ -14,73 +15,12 @@
 
 	<div class="span9">
 		<!-- Tab panes -->
-		<div class="tab-content well">
+		<div class="tab-content well" style="height:500px; width:800px;">
 		  <div class="tab-pane active" id="posts">
-		  	<ul class="nav nav-tabs">
-			  <li><a href="#all-posts" data-toggle="tab">All Posts</a></li>
-			  <li><a href="#new-post" data-toggle="tab">New Post</a></li>
-			</ul>
-
-		<!-- Tab panes -->
-		<div class="tab-content">
-		  <div class="tab-pane active post" id="all-posts">
-			  <% all_posts.each do |post| %>
-			  	<div class = "to-hide post">
-				  <div>
-				  	<%= link_to post.title, edit_post_path(post) %>
-				  	<span class="label label-warning">Warning</span>
-				  </div>
-				  <div class="hidden-links">
-					<%= link_to "Edit", edit_post_path(post) %> |
-					<%= link_to "Edit", edit_post_path(post) %> |
-					<%= link_to "Edit", edit_post_path(post) %>
-				  </div>
-				</div>
-			<% end %>
-		  </div>
-		  <div class="tab-pane" id="new-post">
-		  	<%= form_for(@post) do |f| %>
-			  <% if @post.errors.any? %>
-			    <div id="error_explanation">
-			      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-			      <ul>
-			      <% @post.errors.full_messages.each do |msg| %>
-			        <li><%= msg %></li>
-			      <% end %>
-			      </ul>
-			    </div>
-			  <% end %>
-
-			  <div class="field">
-			    <%= f.label :title %><br>
-			    <%= f.text_field :title %>
-			  </div>
-			  <div class="field">
-			    <%= f.label :content %><br>
-			    <%= f.text_area :content %>
-			  </div>
-			  <div class="actions">
-			    <%= f.submit %>
-			  </div>
-			<% end %>
-
-		  </div>
-		</div>
+		  	<%= render 'posts' %>
 		  </div>
 		  <div class="tab-pane" id="comments">
-		  	<% all_comments.each do |comment| %>
-		  	<div class="to-hide comment">
-		  		<h3><%= comment.commenter %></h3>
-			  	<h5><%= comment.content %></h5>
-			  	<div class="hidden-links">
-				  	<% if !comment.approved %>
-		        		<%= link_to 'Approve', comment_approve_path(comment), method: :post, data: { confirm: 'Are you sure you want to approve this comment?' } %> |
-		    		<% end %>
-		    		<a href = "#">Delete</a>
-	    		</div>
-		  	</div>
-		  	<% end %>
+		  	<%= render 'comments' %>
 		  </div>
 		  <div class="tab-pane" id="categories">
 		  	
@@ -94,8 +34,11 @@
 		  <div class="tab-pane" id="people">
 		  	
 		  </div>
+		  <div class="tab-pane" id="cities">
+		  	<%= render 'cities' %>
+		  </div>
 		  <div class="tab-pane" id="countries">
-		  	
+		  	<%= render 'countries' %>
 		  </div>
 		</div>
 	</div>

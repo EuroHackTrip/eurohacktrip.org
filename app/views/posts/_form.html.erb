@@ -17,7 +17,21 @@
   </div>
   <div class="field">
     <%= f.label :content %><br>
-    <%= f.text_area :content %>
+    <%= f.text_area :content, class: 'wysihtml5' %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+
+      $('.wysihtml5').each(function(i, elem) {
+        $(elem).wysihtml5();
+      });
+
+    })
+  </script>
+<script>
+    $(document).on('page:load', function(){
+  window['rangy'].initialized = false
+})
+    </script>
   </div>
   <div class="actions">
     <%= f.submit %>

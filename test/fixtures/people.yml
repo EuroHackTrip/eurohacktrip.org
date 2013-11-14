@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  online_profile_link: MyString
+  photo: MyString
+  occupation: MyString
+  country_id: 
+
+two:
+  name: MyString
+  online_profile_link: MyString
+  photo: MyString
+  occupation: MyString
+  country_id: 

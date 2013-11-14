@@ -3,6 +3,14 @@
     <h1><%= link_to post.title, post %></h1>
     <pre>Posted at <%= post.created_at %></pre>
     <pre><%= post.content.split("\n")[0] %> <%= link_to "Read More. . .", post %></pre>
+    <% if post.tag_list.count > 0 %>
+      <p>Tags:
+      <% post.tag_list.each do |tag| %>
+        <span class="label label-info"><%= link_to tag, tag_path(tag), style: "color:white;"%></span>
+      <% end %>
+      </p>
+      <br>
+    <% end %>
     <span class="admin">
       <% if admin_signed_in? %>
         <%= link_to 'Edit', edit_post_path(post) %>

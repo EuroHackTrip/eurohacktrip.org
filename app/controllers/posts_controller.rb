@@ -6,7 +6,11 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.new
-    @posts = Post.all.order("created_at desc")
+    if params[:tag]
+      @posts = Post.tagged_with(params[:tag])
+    else
+      @posts = Post.all.order("created_at desc")
+    end
   end
 
   # GET /posts/1
@@ -42,6 +46,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def save_as_draft
+     @post = Post.new(params[:post])
+     @post.save
+     @post.published = false
+     @post.save
+  end
+
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
@@ -74,6 +85,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content)
+      params.require(:post).permit(:title, :content, :tag_list)
     end
 end

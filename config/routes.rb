@@ -1,5 +1,14 @@
 EurohacktripOrg::Application.routes.draw do
-  
+  get 'tags/:tag', to: 'posts#index', as: :tag
+
+  resources :cities do
+    resources :categories
+    resources :people
+  end
+
+  resources :countries
+
+  get "france/home"
   get "dashboard/index"
   devise_for :admins
   get "home/index"

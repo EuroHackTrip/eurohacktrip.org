@@ -1,0 +1,62 @@
+<ul class="nav nav-tabs">
+        <li><a href="#all-countries" data-toggle="tab">All Cities</a></li>
+        <li><a href="#new-city" data-toggle="tab">New City</a></li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active city" id="all-cities">
+    <% all_cities.each do |city| %>
+        <div class = "to-hide city">
+        <div>
+          <%= city.name %><br>
+          <% all_countries.each do |country| %>
+            <% if city.country_id == city.id %>
+              <p><%= country.name %></p>
+            <% end %>
+          <% end %>
+          <%= city.description %><br>
+          <%= city.map %>
+        </div>
+        <div class="hidden-links">
+        <%= link_to 'Edit', edit_city_path(city) %> |
+        <%= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="tab-pane" id="new-city">
+    <%= form_for(@city) do |f| %>
+      <% if @city.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@city.errors.count, "error") %> prohibited this city from being saved:</h2>
+
+          <ul>
+          <% @city.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label :description %><br>
+        <%= f.text_area :description %>
+      </div>
+      <div class="field">
+        <%= f.label :country %><br>
+        <%= f.text_field :country %>
+      </div>
+      <div class="field">
+        <%= f.label :map %><br>
+        <%= f.text_field :map %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
+    </div>
+</div>
