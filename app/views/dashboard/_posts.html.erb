@@ -14,6 +14,9 @@
               <span class="label label-info"><%= link_to tag, tag_path(tag), style: "color:white;"%></span>
             <% end %>
           </div>
+          <% if !post.published %>
+            <div>Publishing Status: <span class="label label-warning">Not Published</span></div>
+          <% end %>
           <div class="hidden-links">
           <%= link_to "Edit", edit_post_path(post) %> |
           <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %> |
@@ -45,20 +48,22 @@
               <%= f.label :content %>
               <%= f.text_area :content, style: "height:400px;width:550px;" %>
             </div>
-            <div class="field">
-              <%= f.label :tag_list, "Tags (Separated by commas)" %>
-              <%= f.text_field :tag_list %>
-            </div>
             <div class="actions">
               <%= f.submit "Publish", class: "btn btn-primary btn-lg" %>
-              <a class="btn btn-primary btn-lg" role="button">Save as Draft</a>
             </div>
           </div>
           <div class="span5" style="height:600px; width:180px;">
             <fieldset>
               <legend>Post Settings</legend>
               <h4>Tags </h4>(Seperated by commas)
-              <%= f.text_field :tag_list %>
+              <%= f.text_field :tag_list, style: "width:170px;" %>
+              <hr>
+              <h4>Publishing</h4>
+              <%= f.check_box :published, {checked: true} %> Publish
+              <br>
+              <div>
+                <em>By default, a post is published once you create it. Uncheck if you just want to save it as a draft and not publish it. Note that it won't be visible to your visitors</em>
+              </div>
               <hr>
             </fieldset>
           </div>

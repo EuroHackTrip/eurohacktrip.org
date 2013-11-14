@@ -46,12 +46,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def save_as_draft
-     @post = Post.new(params[:post])
-     @post.save
-     @post.published = false
-     @post.save
-  end
 
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
@@ -85,6 +79,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :tag_list)
+      params.require(:post).permit(:title, :content, :published, :tag_list)
     end
 end
