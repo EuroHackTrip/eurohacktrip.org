@@ -3,9 +3,9 @@
 <p>
   <h2><%= @post.title %></h2>
 </p>
-
+<pre>Posted at <%= @post.created_at %><span class="pull-right">Share</span></pre>
 <p>
-  <pre><%= @post.content %></pre>
+  <%= raw @post.content %>
 </p>
 <p>Article viewed <%= pluralize($view_count, " time") %></p>
 <ul class="nav nav-tabs">

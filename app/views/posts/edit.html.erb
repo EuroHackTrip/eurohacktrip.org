@@ -21,7 +21,7 @@
             </div>
             <div class="field">
               <%= f.label :content %>
-              <%= f.text_area :content, style: "height:400px;width:550px;" %>
+              <%= f.text_area :content, style: "height:400px;width:550px;", :class => 'ckeditor'  %>
             </div>
             <div class="actions">
               <%= f.submit "Publish", class: "btn btn-primary btn-lg" %>
@@ -29,11 +29,12 @@
           </div>
           <div class="span5" style="height:600px; width:180px;">
             <fieldset>
-              <legend>Post Settings</legend>
-              <h4>Tags </h4>(Seperated by commas)
-              <%= f.text_field :tag_list, style: "width:170px;" %>
+              <legend style="color:#00598D;">Post Settings</legend>
+              <%= f.select :tag_list, Country.all.collect {|country| [ country.name] }, { include_blank: false } %>
+              <!--<h4 style="color:#00598D;">Tags </h4>(Seperated by commas)
+              <%= f.text_field :tag_list, style: "width:170px;" %> -->
               <hr>
-              <h4>Publishing</h4>
+              <h4 style="color:#00598D;">Publishing</h4>
               <%= f.check_box :published, {checked: true} %> Publish
               <br>
               <div>

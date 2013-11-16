@@ -13,6 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
-//= require bootstrap-wysihtml5
-//= require bootstrap-wysihtml5/locales
+//= require bootstrap
+//= require posts
+//= require dashboard
+//= require ckeditor-jquery
+
+
+$('.ckeditor').ckeditor({
+  // optional config
+});

@@ -1,19 +1,17 @@
-<p id="notice"><%= notice %></p>
+<div class = "row">
+	<div class="span8 well">
+		<legend><h4>Events we organize</h4></legend>
+	</div>
+	<div class="span3 well pull-right">
+		<legend><h4><%= @country.name %></h4></legend>
+		<div><%= image_tag(@country.flag) %></div>
+		<div><%= @country.description %></div>
+	</div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @country.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @country.description %>
-</p>
-
-<p>
-  <strong>Flag:</strong>
-  <%= image_tag @country.flag %>
-</p>
-
-<%= link_to 'Edit', edit_country_path(@country) %> |
-<%= link_to 'Back', countries_path %>
+<div class = "posts">
+	<% all_posts.tagged_with(@country.name).each do |post| %>
+		<h4><%= raw post.title %></h4>
+		<%= raw post.content %>
+	<% end %>
+</div>

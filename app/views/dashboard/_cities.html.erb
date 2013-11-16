@@ -1,5 +1,5 @@
 <ul class="nav nav-tabs">
-        <li><a href="#all-countries" data-toggle="tab">All Cities</a></li>
+        <li><a href="#all-cities" data-toggle="tab">All Cities</a></li>
         <li><a href="#new-city" data-toggle="tab">New City</a></li>
 </ul>
 <!-- Tab panes -->
@@ -10,21 +10,23 @@
         <div>
           <%= city.name %><br>
           <% all_countries.each do |country| %>
-            <% if city.country_id == city.id %>
-              <p><%= country.name %></p>
+            <% if city.country_id == country.id %>
+              <%= country.name %><br>
             <% end %>
           <% end %>
           <%= city.description %><br>
           <%= city.map %>
         </div>
         <div class="hidden-links">
-        <%= link_to 'Edit', edit_city_path(city) %> |
-        <%= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Edit', edit_city_path(city) %> |
+          <%= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>
+        <br><hr>
       </div>
     <% end %>
   </div>
-  <div class="tab-pane" id="new-city">
+  
+  <div class="tab-pane city" id="new-city">
     <%= form_for(@city) do |f| %>
       <% if @city.errors.any? %>
         <div id="error_explanation">
@@ -47,8 +49,8 @@
         <%= f.text_area :description %>
       </div>
       <div class="field">
-        <%= f.label :country %><br>
-        <%= f.text_field :country %>
+        <%= f.label :country_id %><br>
+        <%= f.select "country_id", Country.all.collect {|p| [ p.name, p.id ] }, { include_blank: false } %>
       </div>
       <div class="field">
         <%= f.label :map %><br>

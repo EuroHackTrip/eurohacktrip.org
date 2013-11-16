@@ -1,12 +1,11 @@
 EurohacktripOrg::Application.routes.draw do
   get 'tags/:tag', to: 'posts#index', as: :tag
 
-  resources :cities do
-    resources :categories
-    resources :people
-  end
-
   resources :countries
+  resources :cities
+  resources :people
+
+  resources :categories
 
   get "france/home"
   get "dashboard/index"
@@ -20,6 +19,8 @@ EurohacktripOrg::Application.routes.draw do
   match "comment/:id" => "comments#approve", :as => "comment_approve", via: [:post]
 
   root to: "home#index"
+
+  mount Ckeditor::Engine => "/ckeditor"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -7,7 +7,7 @@ class PostTest < ActiveSupport::TestCase
      assert !post.errors[:title].empty?
    end
 
-   test "The body a post should be entered" do
+   test "The body of a post should be entered" do
   	post = Post.new
      assert !post.save
      assert !post.errors[:content].empty?

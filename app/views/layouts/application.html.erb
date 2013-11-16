@@ -14,25 +14,18 @@
 <div class = "navbar navbar-fixed-top navbar-inverse">
 		<div class = "navbar-inner">
 			<div class = "container">
-				<a href="/" class = "brand"><img src="assets/logo.jpg">EuroHackTrip</a>
+				<a href="/" class = "brand"><%= image_tag("/assets/logo.jpg") %> EuroHackTrip</a>
 				<ul class = "navbar-text nav pull-right">
 					<% if admin_signed_in? %>
 						<li class = "navbar-text nav pull-right"><%= link_to 'Sign out', destroy_admin_session_path, :method => :delete %></li>
 						<li class = "navbar-text nav pull-right"><%= link_to 'Dashboard', dashboard_index_path %> </li>
 					<% end %>
 					<li class = "navbar-text nav pull-right"><%= link_to "Blog", posts_path %></li>
-					<li class = "navbar-text nav pull-right">
-						<%= link_to 'France', "#" %>
-					</li>
-					<li class = "navbar-text nav pull-right">
-						<%= link_to 'Germany', "#" %>
-					</li>
-					<li class = "navbar-text nav pull-right">
-						<%= link_to 'Switzerland', "#" %>
-					</li>
-					<li class = "navbar-text nav pull-right">
-						<%= link_to 'Belgium', "#" %>
-					</li>
+					<% all_countries.each do |country| %>
+            <li class = "navbar-text nav pull-right">
+              <%= link_to country.name, country_path(country.id) %>
+            </li>
+          <% end %>
 				</ul>
 			</div>
 		</div>
@@ -48,9 +41,9 @@
       <div class="span3">
         <h3>Contact/follow</h3>
         <ul>
-          <li class="twitter"><a href="https://twitter.com/AfricaHackTrip">@AfricaHackTrip</a></li>
+          <li class="twitter"><a href="https://twitter.com/AfricaHackTrip">@EuroHackTrip</a></li>
           <li class="tumblr"><a href="https://africahacktrip.tumblr.com">AfricaHackTrip.tumblr.com</a></li>
-          <li class="facebook"><a href="https://facebook.com/Africahacktrip2013">facebook.com/AfricaHackTrip2013</a></li>
+          <li class="facebook"><a href="https://facebook.com/Africahacktrip2013">facebook.com/EuroHackTrip</a></li>
           <li class="email"><a href="mailto:hello@AfricaHackTrip.org">hello@AfricaHackTrip.org</a></li>
         </ul>
       </div>

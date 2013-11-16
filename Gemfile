@@ -8,6 +8,14 @@ gem 'sqlite3'
 
 gem 'bootstrap-wysihtml5-rails'
 
+gem 'carrierwave'
+
+gem "ckeditor"
+
+gem 'ckeditor_rails'
+
+gem "mini_magick"
+
 gem 'acts-as-taggable-on'
 
 gem 'devise'
