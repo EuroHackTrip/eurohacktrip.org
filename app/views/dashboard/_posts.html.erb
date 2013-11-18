@@ -4,7 +4,7 @@
 </ul>
 
     <!-- Tab panes -->
-    <div class="tab-content">
+    <div class="tab-content" data-no-turbolink>
       <div class="tab-pane active post" id="all-posts">
         <% all_posts.each do |post| %>
           <div class = "to-hide post">
@@ -19,7 +19,8 @@
           <% end %>
           <div class="hidden-links">
             <%= link_to "Edit", edit_post_path(post) %> |
-            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %> |
+            <%= link_to 'View', post %>
           </div>
           <br>
         </div>
@@ -38,39 +39,24 @@
             </ul>
           </div>
         <% end %>
-        <div class = "row">
-          <div class = "span7" style="margin-right:15px;">
-            <div class="field">
-              <%= f.label :title %>
-              <%= f.text_field :title, style: "width:550px;" %>
-            </div>
-            <div class="field">
-              <%= f.label :content %>
-              <%= f.text_area :content, style: "height:400px;width:550px;", :class => 'ckeditor' %>
-            </div>
-            <div class="actions">
-              <%= f.submit "Publish", class: "btn btn-primary btn-lg" %>
-            </div>
-          </div>
-          <div class="span5" style="height:600px; width:180px;">
-            <fieldset>
-              <legend style="color:#00598D;">Post Settings</legend>
-              <h4 style="color:#00598D;">Posted Under: </h4>
-              <%= f.select :tag_list, Country.all.collect {|country| [ country.name] }, { include_blank: false } %>
-              <!--<h4 style="color:#00598D;">Tags </h4>(Seperated by commas)
-              <%= f.text_field :tag_list, style: "width:170px;" %> -->
-              <hr>
-              <h4 style="color:#00598D;">Publishing</h4>
-              <%= f.check_box :published, {checked: true} %> Publish
-              <br>
-              <div>
-                <em>By default, a post is published once you create it. Uncheck if you just want to save it as a draft and not publish it. Note that it won't be visible to your visitors</em>
-              </div>
-              <hr>
-            </fieldset>
-          </div>
+        <div class="field">
+          <%= f.label :title %>
+          <%= f.text_field :title, style: "width:98%;" %>
         </div>
-      <% end %>
+        <div class="field">
+          <%= f.label :content %>
+          <%= f.text_area :content, style: "height:400px;width:550px;", :class => 'ckeditor' %>
+        </div>
+        <br>
+        <div class="actions">
+          <span style="color:#00598D;">Posted Under: </span>
+          <%= f.select :tag_list, Country.all.collect {|country| [ country.name] }, { include_blank: false }, style: "margin-right:19px;" %>
+          <%= f.check_box :published, {checked: true}, style: "margin-right:10px;" %> Publish
+          <%= f.submit "Publish", class: "btn btn-primary btn-lg pull-right" %>
+        </div>
+            
+        <% end %>
+        </div>
+      
 
       </div>
-    </div>

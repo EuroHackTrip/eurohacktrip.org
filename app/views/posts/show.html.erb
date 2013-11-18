@@ -20,17 +20,11 @@
     <% @post.comments.each do |comment| %>
       <% if comment.approved %>
         <div class = "well">
-          <div class="row">
-            <div class="span6">
-              <a href = "http://<%= comment.website %>"> <%= comment.commenter %> </a> says:
-            </div>
-            <div class="span6">
-              <%= comment.created_at.to_s.split(" ")[0] + " " + comment.created_at.to_s.split(" ")[1] %>
-            </div>
-          </div>
-            <p>
-              <%= comment.content %>
-            </p>
+          <%= link_to comment.commenter, "http://" + comment.website %> says:
+          <span class = "pull-right"><%= comment.created_at.to_s.split(" ")[0] + " " + comment.created_at.to_s.split(" ")[1] %></span>
+          <p>
+            <%= comment.content %>
+          </p>
         </div>
         <% else %>
           <% count = count + 1 %>
@@ -56,8 +50,6 @@
       <div class="field">
         <%= f.label :content %><br>
         <%= f.text_area :content %>
-      </div>
-      <div class="field">
       </div>
       <div class="actions">
         <%= f.submit %>

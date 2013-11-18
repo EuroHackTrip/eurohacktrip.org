@@ -7,6 +7,18 @@
  *
  * Designed and built with all the love in the world by @mdo and @fat.
  */
+
+.col-md-4 {
+  width: 33.33333333333333%;
+}
+.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11 {
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
 .panel {
 margin-bottom: 20px;
 background-color: #fff;

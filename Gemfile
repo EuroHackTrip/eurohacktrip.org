@@ -8,6 +8,8 @@ gem 'sqlite3'
 
 gem 'bootstrap-wysihtml5-rails'
 
+gem 'bootsy'
+
 gem 'carrierwave'
 
 gem "ckeditor"

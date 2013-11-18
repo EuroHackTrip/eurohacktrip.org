@@ -3,5 +3,5 @@ class Comment < ActiveRecord::Base
   validates :commenter, presence: true
   validates :email, presence: true
   validates :website, presence: true
-  validates :comment, presence: true
+  validates :content, presence: true
 end

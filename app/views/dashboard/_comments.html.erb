@@ -9,7 +9,7 @@
 		<% end %>
 		<div class="hidden-links">
 	  	<% if !comment.approved %>
-			<%= link_to 'Approve', comment_approve_path(comment), method: :post, data: { confirm: 'Are you sure you want to approve this comment?' } %> |
+			<%= link_to 'Approve', comment_approve_path(comment), method: :post, data: { confirm: 'Are you sure you want to approve this comment?' } %> | 
 		<% end %>
 		</div>
 	</div>

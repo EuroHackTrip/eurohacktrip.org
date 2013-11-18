@@ -1,4 +1,29 @@
-<%= form_for(@person) do |f| %>
+<ul class="nav nav-tabs">
+        <li><a href="#all-people" data-toggle="tab">All People</a></li>
+        <li><a href="#new-person" data-toggle="tab">New person</a></li>
+</ul>
+<!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active person" id="all-people">
+        <% all_people.each do |person| %>
+            <div class = "to-hide person">
+            <div>
+              <%= link_to person.name, person.online_profile_link %><br>
+              <%= person.occupation %><br>
+              <% if person.country_id > 0 %>
+                <%= Country.find(person.country_id).name %>
+              <% end %>
+            </div>
+            <div class="hidden-links">
+            <%= link_to 'Edit', edit_person_path(person) %> |
+            <%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+            <br>
+          </div>
+        <% end %>
+      </div>
+      <div class="tab-pane" id="new-person">
+        <%= form_for(@person) do |f| %>
   <% if @person.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
@@ -28,10 +53,14 @@
     <%= f.text_field :occupation %>
   </div>
   <div class="field">
-    <%= f.label :country %><br>
-    <%= f.text_field :country %>
+    <%= f.label :country_id %><br>
+    <%= f.select :country_id, Country.all.collect {|country| [ country.name, country.id] }, { include_blank: false } %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+      </div>
+
+    </div>

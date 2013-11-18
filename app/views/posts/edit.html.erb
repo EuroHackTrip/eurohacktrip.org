@@ -14,22 +14,24 @@
           </div>
         <% end %>
         <div class = "row">
-          <div class = "span7" style="margin-right:15px;">
+          <div class = "span7" style="margin-right:15px; width:75%;">
             <div class="field">
               <%= f.label :title %>
-              <%= f.text_field :title, style: "width:550px;" %>
+              <%= f.text_field :title, style: "width:98%;" %>
             </div>
             <div class="field">
               <%= f.label :content %>
               <%= f.text_area :content, style: "height:400px;width:550px;", :class => 'ckeditor'  %>
             </div>
-            <div class="actions">
+            <br>
+            <div class="actions pull-right">
               <%= f.submit "Publish", class: "btn btn-primary btn-lg" %>
             </div>
           </div>
           <div class="span5" style="height:600px; width:180px;">
             <fieldset>
               <legend style="color:#00598D;">Post Settings</legend>
+              <h4 style="color:#00598D;">Published Under:</h4>
               <%= f.select :tag_list, Country.all.collect {|country| [ country.name] }, { include_blank: false } %>
               <!--<h4 style="color:#00598D;">Tags </h4>(Seperated by commas)
               <%= f.text_field :tag_list, style: "width:170px;" %> -->
