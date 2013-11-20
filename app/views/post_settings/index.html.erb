@@ -1,0 +1,29 @@
+<h1>Listing post_settings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Posts per page</th>
+      <th>Allow comments</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @post_settings.each do |post_setting| %>
+      <tr>
+        <td><%= post_setting.posts_per_page %></td>
+        <td><%= post_setting.allow_comments %></td>
+        <td><%= link_to 'Show', post_setting %></td>
+        <td><%= link_to 'Edit', edit_post_setting_path(post_setting) %></td>
+        <td><%= link_to 'Destroy', post_setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post setting', new_post_setting_path %>

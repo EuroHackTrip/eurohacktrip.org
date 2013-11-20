@@ -7,7 +7,7 @@
  *
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
- *
+ *= require leaflet
  *= require bootstrap-wysihtml5
  *= require_self
  *= require bootsy
@@ -15,6 +15,7 @@
  */
 body {
 	padding-top: 40px;
+	background-color:#FBF8EF;
 }
 
 h2 {
@@ -22,7 +23,17 @@ h2 {
 	font-weight: normal;
 	margin: 0 0 20px 0;
 	padding: 5px 0 5px 0;
-	border-bottom: 1px solid #d1d1d1;
+	//border-bottom: 1px solid #d1d1d1;
+}
+
+p {
+	margin: 0 0 10px;
+	line-height: 1.6em;
+	display: block;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
 }
 
 footer#page-footer {
@@ -33,6 +44,17 @@ padding: 0 0 40px 0;
 color: #999;
 }
 
+.links, a {
+	color: #F06361;
+}
+a {
+	color: #F06361;
+}
+.map {
+	width:100%; 
+	height:220px; 
+	margin-bottom:10px;
+}
 .container {
 //padding-bottom: 30px;
 max-width: 960px;

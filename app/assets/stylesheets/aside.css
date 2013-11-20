@@ -1,0 +1,42 @@
+aside {
+  background-color: #fff;
+  border: 1px solid #d1d1d1;
+  padding-bottom: 40px; }
+  aside.country {
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px; }
+  aside h1 {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+    padding: 0;
+    border: none; }
+  aside h2 {
+    margin: 10px 0px;
+    padding: 5px 0px;
+    font-size: 22px;
+    font-weight: normal;
+    border: none; }
+  aside h3 {
+    font-size: 18px;
+    margin: 5px 0px;
+    padding: 0; }
+  aside .country-info {
+    border-top: 1px solid #d1d1d1;
+    padding-top: 10px; }
+  aside .flag {
+    padding-left: 70px;
+    height: 35px; }
+  aside.kenya .flag {
+    background: url(/wp-content/themes/africahacktrip/images/flags/kenya.png) no-repeat;
+    background-size: contain; }
+  aside.uganda .flag {
+    background: url(/wp-content/themes/africahacktrip/images/flags/uganda.png) no-repeat;
+    background-size: contain; }
+  aside.rwanda .flag {
+    background: url(/wp-content/themes/africahacktrip/images/flags/rwanda.png) no-repeat;
+    background-size: contain; }
+  aside.tanzania .flag {
+    background: url(/wp-content/themes/africahacktrip/images/flags/tanzania.png) no-repeat;
+    background-size: contain; }

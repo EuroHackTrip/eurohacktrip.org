@@ -10,6 +10,8 @@ gem 'bootstrap-wysihtml5-rails'
 
 gem 'bootsy'
 
+gem 'simple_captcha', :git => 'git://github.com/Azdaroth/simple-captcha.git', :branch => 'rails-4'
+
 gem 'carrierwave'
 
 gem "ckeditor"
@@ -49,7 +51,7 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
-
+gem 'social-share-button'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -1,8 +1,12 @@
+<div class="map">
+	
+</div>
+
 <div class = "row">
-	<div class="span8 well">
+	<div class="span8">
 		<legend><h4>Events we organize</h4></legend>
 	</div>
-	<div class="span3 well pull-right">
+	<div class="span3 well pull-right" style="background-color:white;">
 		<legend><h4><%= @country.name %></h4></legend>
 		<div><%= image_tag(@country.flag) %></div>
 		<div><%= @country.description %></div>
@@ -19,7 +23,7 @@
 	 				<div class="thumbnail">
 	 					<%= image_tag person.photo, size: "200x150" %>
 	 					<div class="caption">
-	 						<h3><%= link_to person.name, "http://" + person.online_profile_link %></h3>
+	 						<h3><%= link_to person.name, "http://" + person.online_profile_link, class: "links" %></h3>
 	         			    <%= person.occupation %><br>
 	         			    <%= Country.find(person.country_id).name %>
 	 					</div>
@@ -29,11 +33,20 @@
 	 	<% end %>
 	 </div>
 	 <hr>
-	 
 </div>
-	<% all_posts.tagged_with(@country.name).each do |post| %>
-		<h2><%= raw post.title %></h2>
-		<!--<%= post.created_at %> -->
-		<%= raw post.content %>
-	<% end %>
-</div>
+<div class="row">
+	<div class="span8">
+		<% all_posts.tagged_with(@country.name).each do |post| %>
+			<h2><%= raw post.title %></h2><br>
+			<pre>Posted at <%= post.created_at %><span class="pull-right">Share:</span></pre><br><br>
+			<!--<%= post.created_at %> -->
+			<%= raw post.content %><br><br>
+			<% if post.comments.count > 0 %>
+				<%= link_to pluralize(post.comments.count, " comment") + " so far.", "/posts/"+post.id.to_s+"#comments", class: "links" %>
+			<% else %>
+				<%= link_to "Leave a Comment", "/posts/"+post.id.to_s+"#add-comment", class: "links" %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="span4"></div>
+</div>	 

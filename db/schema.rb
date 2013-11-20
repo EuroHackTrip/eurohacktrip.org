@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118114604) do
+ActiveRecord::Schema.define(version: 20131119103055) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -98,6 +98,13 @@ ActiveRecord::Schema.define(version: 20131118114604) do
 
   add_index "people", ["country_id"], name: "index_people_on_country_id"
 
+  create_table "post_settings", force: true do |t|
+    t.integer  "posts_per_page"
+    t.boolean  "allow_comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
@@ -105,6 +112,15 @@ ActiveRecord::Schema.define(version: 20131118114604) do
     t.datetime "updated_at"
     t.boolean  "published"
   end
+
+  create_table "simple_captcha_data", force: true do |t|
+    t.string   "key",        limit: 40
+    t.string   "value",      limit: 6
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "simple_captcha_data", ["key"], name: "idx_key"
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

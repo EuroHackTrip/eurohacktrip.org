@@ -1,0 +1,25 @@
+<%= form_for(@post_setting) do |f| %>
+  <% if @post_setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post_setting.errors.count, "error") %> prohibited this post_setting from being saved:</h2>
+
+      <ul>
+      <% @post_setting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :posts_per_page %><br>
+    <%= f.number_field :posts_per_page %>
+  </div>
+  <div class="field">
+    <%= f.label :allow_comments %><br>
+    <%= f.check_box :allow_comments %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

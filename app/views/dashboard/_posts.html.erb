@@ -1,62 +1,62 @@
 <ul class="nav nav-tabs">
-        <li><a href="#all-posts" data-toggle="tab">All Posts</a></li>
-        <li><a href="#new-post" data-toggle="tab">New Post</a></li>
+  <li><a href="#all-posts" data-toggle="tab">All Posts</a></li>
+  <li><a href="#new-post" data-toggle="tab">New Post</a></li>
 </ul>
 
-    <!-- Tab panes -->
-    <div class="tab-content" data-no-turbolink>
-      <div class="tab-pane active post" id="all-posts">
-        <% all_posts.each do |post| %>
-          <div class = "to-hide post">
-          <div>
-            <%= link_to post.title, edit_post_path(post) %>
-            <% post.tag_list.each do |tag| %>
-              <span class="label label-info"><%= link_to tag, tag_path(tag), style: "color:white;"%></span>
-            <% end %>
-          </div>
-          <% if !post.published %>
-            <div>Publishing Status: <span class="label label-warning">Not Published</span></div>
-          <% end %>
-          <div class="hidden-links">
-            <%= link_to "Edit", edit_post_path(post) %> |
-            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %> |
-            <%= link_to 'View', post %>
-          </div>
-          <br>
-        </div>
+<!-- Tab panes -->
+<div class="tab-content" data-no-turbolink>
+  <div class="tab-pane active post" id="all-posts">
+    <% all_posts.each do |post| %>
+      <div class = "to-hide post">
+      <div>
+        <%= link_to post.title, edit_post_path(post) %>
+        <% post.tag_list.each do |tag| %>
+          <span class="label label-info"><%= link_to tag, tag_path(tag), style: "color:white;"%></span>
+        <% end %>
+      </div>
+      <% if !post.published %>
+        <div>Publishing Status: <span class="label label-warning">Not Published</span></div>
       <% end %>
+      <div class="hidden-links">
+        <%= link_to "Edit", edit_post_path(post) %> |
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %> |
+        <%= link_to 'View', post %>
       </div>
-      <div class="tab-pane" id="new-post">
-        <%= form_for(@post) do |f| %>
-        <% if @post.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <br>
+    </div>
+  <% end %>
+  </div>
+  <div class="tab-pane" id="new-post">
+    <%= form_for(@post) do |f| %>
+    <% if @post.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-            <ul>
-            <% @post.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-            </ul>
-          </div>
+        <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
         <% end %>
-        <div class="field">
-          <%= f.label :title %>
-          <%= f.text_field :title, style: "width:98%;" %>
-        </div>
-        <div class="field">
-          <%= f.label :content %>
-          <%= f.text_area :content, style: "height:400px;width:550px;", :class => 'ckeditor' %>
-        </div>
-        <br>
-        <div class="actions">
-          <span style="color:#00598D;">Posted Under: </span>
-          <%= f.select :tag_list, Country.all.collect {|country| [ country.name] }, { include_blank: false }, style: "margin-right:19px;" %>
-          <%= f.check_box :published, {checked: true}, style: "margin-right:10px;" %> Publish
-          <%= f.submit "Publish", class: "btn btn-primary btn-lg pull-right" %>
-        </div>
-            
-        <% end %>
-        </div>
-      
-
+        </ul>
       </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title, style: "width:98%;" %>
+    </div>
+    <div class="field">
+      <%= f.label :content %>
+      <%= f.text_area :content, style: "height:400px;width:550px;", :class => 'ckeditor' %>
+    </div>
+    <br>
+    <div class="actions">
+      <span style="color:#00598D;">Posted Under: </span>
+      <%= f.select :tag_list, Country.all.collect {|country| [ country.name] }, { include_blank: false }, style: "margin-right:19px;" %>
+      <%= f.check_box :published, {checked: true}, style: "margin-right:10px;" %> Publish
+      <%= f.submit "Publish", class: "btn btn-primary btn-lg pull-right" %>
+    </div>
+        
+    <% end %>
+    </div>
+  
+
+  </div>

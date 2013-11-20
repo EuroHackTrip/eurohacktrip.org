@@ -3,7 +3,6 @@
 		<ul class="nav nav-pills nav-stacked nav-tabs" id = "tab" style="max-width: 300px;">
 	        <li class="active"><a href="#posts"  data-toggle="tab">Posts <span class = "badge pull-right"><%= posts_count %></span></a></li>
 	        <li><a href="#comments" data-toggle="tab">Comments <span class = "badge pull-right"><%= comments_count %></span></a></li>
-	        <li><a href="#categories" data-toggle="tab">Categories</a></li>
 	        <li><a href="#stats" data-toggle="tab">Statistics</a></li>
 	        <li><a href="#countries" data-toggle="tab">Countries</a></li>
 	        <li><a href="#people" data-toggle="tab">People</a></li>
@@ -22,11 +21,8 @@
 		  <div class="tab-pane" id="comments">
 		  	<%= render 'comments' %>
 		  </div>
-		  <div class="tab-pane" id="categories">
-		  	
-		  </div>
 		  <div class="tab-pane" id="settings">
-		  	
+		  	<%= render 'settings' %>
 		  </div>
 		  <div class="tab-pane" id="stats">
 		  	

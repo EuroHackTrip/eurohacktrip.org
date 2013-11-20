@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Posts per page:</strong>
+  <%= @post_setting.posts_per_page %>
+</p>
+
+<p>
+  <strong>Allow comments:</strong>
+  <%= @post_setting.allow_comments %>
+</p>
+
+<%= link_to 'Edit', edit_post_setting_path(@post_setting) %> |
+<%= link_to 'Back', post_settings_path %>

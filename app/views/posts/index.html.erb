@@ -4,24 +4,35 @@
 <% @posts.each do |post| %>
   <% if post.published || post.published == nil %>
     <div class="posts">
-      <h2><%= link_to post.title, post %></h2>
-      <!--<pre>Posted at <%= post.created_at %><span class="pull-right">Share</span></pre>-->
-      <%= raw post.content.split("\n")[0] %><br> <%= link_to "Read More. . .", post %>
-      <% if post.tag_list.count > 0 %>
-        <p>Tags:
-        <% post.tag_list.each do |tag| %>
-          <span class="label label-info"><%= link_to tag, tag_path(tag), style: "color:white;"%></span>
-        <% end %>
-        </p>
-        <br>
-      <% end %>
-      <span class="admin">
-        <% if admin_signed_in? %>
-          <%= link_to 'Edit', edit_post_path(post) %> | 
-          <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <% end %>
-        <br>
-      </span>
+      <div class="row">
+        <div class="span8">
+          <h2><%= link_to post.title, post %></h2>
+          <pre>Posted at <%= post.created_at %><span class="pull-right">Share:</span></pre>
+          <%= raw post.content %>
+          <% if post.tag_list.count > 0 %>
+            <p>Tags:
+            <% post.tag_list.each do |tag| %>
+              <span class="label label-info"><%= link_to tag, tag_path(tag), style: "color:white;"%></span>
+            <% end %>
+            </p>
+          <% end %>
+          <% if post.comments.count > 0 %>
+            <%= link_to pluralize(post.comments.count, " comment") + " so far.", "/posts/"+post.id.to_s+"#comments", class: "links" %>
+          <% else %>
+            <%= link_to "Leave a Comment", "/posts/"+post.id.to_s+"#add-comment", class: "links" %>
+          <% end %>
+          <br>
+          <% if admin_signed_in? %>
+            <span class="admin">
+              <%= link_to 'Edit', edit_post_path(post) %> | 
+              <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </span>
+          <% end %>
+          <br>
+          
+        </div>
+      </div>
+      <div class="span4"></div>
     </div>
   <% end %>
 <% end %>

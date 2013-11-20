@@ -1,5 +1,9 @@
 EurohacktripOrg::Application.routes.draw do
+  resources :post_settings
+
   get 'tags/:tag', to: 'posts#index', as: :tag
+
+  devise_for :admins
 
   resources :countries
   resources :cities
@@ -7,10 +11,9 @@ EurohacktripOrg::Application.routes.draw do
 
   resources :categories
 
-  get "france/home"
   get "dashboard/index"
-  devise_for :admins
   get "home/index"
+
 
   resources :posts do
     resources :comments
