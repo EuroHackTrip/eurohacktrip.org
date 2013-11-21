@@ -5,5 +5,7 @@ class DashboardController < ApplicationController
   	@country = Country.new
   	@city = City.new
   	@person = Person.new
+  	@event = Event.new
+  	@post_setting = PostSetting.new
   end
 end

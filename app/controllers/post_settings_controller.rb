@@ -42,7 +42,7 @@ class PostSettingsController < ApplicationController
   def update
     respond_to do |format|
       if @post_setting.update(post_setting_params)
-        format.html { redirect_to @post_setting, notice: 'Post setting was successfully updated.' }
+        format.html { redirect_to dashboard_index_path, notice: 'Post setting was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -56,7 +56,7 @@ class PostSettingsController < ApplicationController
   def destroy
     @post_setting.destroy
     respond_to do |format|
-      format.html { redirect_to post_settings_url }
+      format.html { redirect_to dashboard_index_path }
       format.json { head :no_content }
     end
   end

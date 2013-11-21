@@ -1,4 +1,7 @@
 EurohacktripOrg::Application.routes.draw do
+  resources :events
+
+  #resources :post_settings, except: :create
   resources :post_settings
 
   get 'tags/:tag', to: 'posts#index', as: :tag

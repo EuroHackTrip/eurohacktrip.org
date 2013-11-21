@@ -5,9 +5,13 @@
 <div class = "row">
 	<div class="span8">
 		<legend><h4>Events we organize</h4></legend>
-		<div style="width:195px; text-align:center;">
-		  <iframe src="http://www.eventbrite.com/countdown-widget?eid=4653432542" frameborder="0" height="479" width="195" marginheight="0" marginwidth="0" scrolling="no" allowtransparency="true"></iframe>
-		</div>
+		<% all_events.each do |event| %>
+			<% if event.country_id == @country.id %>
+				<div style="width:195px; text-align:center; float:left">
+				  <iframe src="http://www.eventbrite.com/countdown-widget?eid=<%= event.event_id %>" frameborder="0" height="479" width="195" marginheight="0" marginwidth="0" scrolling="no" allowtransparency="true"></iframe>
+				</div>
+			<% end %>
+		<% end %>
 	</div>
 	<div class="span3 well pull-right" style="background-color:white;">
 		<legend><h4><%= @country.name %></h4></legend>

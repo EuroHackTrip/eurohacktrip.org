@@ -2,3 +2,28 @@
 <legend>Account Settings</legend>
 <%= link_to 'Edit Account', edit_admin_registration_path %><br><hr>
 <legend>Post Settings</legend>
+<%= form_for(@post_setting) do |f| %>
+  <% if @post_setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post_setting.errors.count, "error") %> prohibited this post_setting from being saved:</h2>
+
+      <ul>
+      <% @post_setting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :posts_per_page %>
+    <%= f.number_field :posts_per_page, value: '10' %>
+  </div>
+  <div class="field">
+    <%= f.check_box :allow_comments, {checked: true} %>  Alow Comments 
+  </div>
+  <div class="actions">
+  	<br>
+    <%= f.submit %>
+  </div>
+<% end %>
