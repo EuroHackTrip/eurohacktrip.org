@@ -73,7 +73,11 @@ GEM
     erubis (2.7.0)
     execjs (2.0.2)
     hike (1.2.3)
+    httpclient (2.3.4.1)
     i18n (0.6.5)
+    impressionist (1.4.12)
+      httpclient (~> 2.2)
+      nokogiri (~> 1.5.0)
     jbuilder (1.5.2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -93,6 +97,7 @@ GEM
       subexec (~> 0.2.1)
     minitest (4.7.5)
     multi_json (1.8.2)
+    nokogiri (1.5.10)
     orm_adapter (0.4.0)
     paperclip (3.5.2)
       activemodel (>= 3.0.0)
@@ -168,6 +173,7 @@ DEPENDENCIES
   ckeditor_rails
   coffee-rails (~> 4.0.0)
   devise
+  impressionist
   jbuilder (~> 1.2)
   jquery-rails
   mercury-rails

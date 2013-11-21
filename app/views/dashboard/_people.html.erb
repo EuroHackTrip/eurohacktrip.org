@@ -8,7 +8,7 @@
         <% all_people.each do |person| %>
             <div class = "to-hide person">
             <div>
-              <%= person.avatar.url %>
+              <%= image_tag person.avatar.url, size: "250x250" %><br>
               <%= link_to person.name, person.online_profile_link %><br>
               <%= person.occupation %><br>
               <% if person.country_id > 0 %>

@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  #impressionist :actions=>[:show,:index]
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :authenticate_admin!, except: [:show, :index]
 
