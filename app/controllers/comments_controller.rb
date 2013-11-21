@@ -46,8 +46,9 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.find(params[:id])
+    #@post = Post.find(params[:post_id])
+    #@comment = @post.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
     @comment.destroy
     redirect_to dashboard_index_path
   end

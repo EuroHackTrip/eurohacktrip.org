@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119103055) do
+ActiveRecord::Schema.define(version: 20131121091800) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -84,6 +84,10 @@ ActiveRecord::Schema.define(version: 20131119103055) do
     t.datetime "updated_at"
     t.string   "map"
     t.string   "avatar"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "people", force: true do |t|
@@ -94,6 +98,10 @@ ActiveRecord::Schema.define(version: 20131119103055) do
     t.integer  "country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "people", ["country_id"], name: "index_people_on_country_id"

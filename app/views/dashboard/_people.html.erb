@@ -8,6 +8,7 @@
         <% all_people.each do |person| %>
             <div class = "to-hide person">
             <div>
+              <%= person.avatar.url %>
               <%= link_to person.name, person.online_profile_link %><br>
               <%= person.occupation %><br>
               <% if person.country_id > 0 %>
@@ -46,7 +47,7 @@
   </div>
   <div class="field">
     <%= f.label :photo %><br>
-    <%= f.text_field :photo %>
+    <%= f.file_field :avatar %>
   </div>
   <div class="field">
     <%= f.label :occupation %><br>

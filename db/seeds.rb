@@ -7,3 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 #Admin.create! :email => "admin@eurohacktrip.org", :password => "euro-1234"
+
+#Country.find_by_id_or_create 

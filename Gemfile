@@ -14,6 +14,8 @@ gem 'simple_captcha', :git => 'git://github.com/Azdaroth/simple-captcha.git', :b
 
 gem 'carrierwave'
 
+gem "paperclip"
+
 gem "ckeditor"
 
 gem 'ckeditor_rails'

@@ -172,6 +172,7 @@ DEPENDENCIES
   jquery-rails
   mercury-rails
   mini_magick
+  paperclip
   rails (= 4.0.0)
   sass-rails (~> 4.0.0)
   sdoc

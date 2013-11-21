@@ -14,6 +14,7 @@ EurohacktripOrg::Application.routes.draw do
   get "dashboard/index"
   get "home/index"
 
+  resources :comments
 
   resources :posts do
     resources :comments

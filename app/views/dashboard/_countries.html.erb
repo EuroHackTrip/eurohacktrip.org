@@ -9,7 +9,7 @@
             <div class = "to-hide country">
             <div>
               <%= country.name %><br>
-              <%= image_tag country.flag, size: "250x250" %><br>
+              <%= image_tag country.avatar.url, size: "250x250" %><br>
               <%= country.description %><br>
               <%= country.map %>
             </div>
@@ -45,7 +45,7 @@
           </div>
           <div class="field">
             <%= f.label :flag %><br>
-            <%= f.text_field :flag %>
+            <%= f.file_field :avatar %>
           </div>
           <div class="field">
             <%= f.label :map %><br>
