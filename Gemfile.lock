@@ -88,10 +88,6 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mercury-rails (0.3.1)
-      coffee-script
-      paperclip
-      rails (>= 3.1.0)
     mime-types (1.25)
     mini_magick (3.6.0)
       subexec (~> 0.2.1)
@@ -182,7 +178,6 @@ DEPENDENCIES
   impressionist
   jbuilder (~> 1.2)
   jquery-rails
-  mercury-rails
   mini_magick
   paperclip
   pg

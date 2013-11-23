@@ -67,7 +67,7 @@
           <div><%= link_to "Sign Up", new_admin_registration_path %></div>
           <div><%= link_to "Sign In", new_admin_session_path %></div>
         <% else %>
-          <div><%= link_to "Sign Out", destroy_admin_session_path %></div>
+          <div><%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %></div>
         <% end %>
       </div>
     </div>
