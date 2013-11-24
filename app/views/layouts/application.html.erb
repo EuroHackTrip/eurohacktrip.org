@@ -22,9 +22,11 @@
 					<% end %>
 					<li class = "navbar-text nav pull-right"><%= link_to "Blog", posts_path %></li>
 					<% all_countries.each do |country| %>
-            <li class = "navbar-text nav pull-right">
-              <%= link_to country.name, country_path(country.id) %>
-            </li>
+            <% if country.show_in_nav %>
+              <li class = "navbar-text nav pull-right">
+                <%= link_to country.name, country_path(country.id) %>
+              </li>
+            <% end %>
           <% end %>
 				</ul>
 			</div>

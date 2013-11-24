@@ -51,6 +51,13 @@ class CountriesController < ApplicationController
     end
   end
 
+  def show_in_nav
+    @country = Country.find(params[:id])
+    @country.show_in_nav = true
+    @country.save!
+    redirect_to dashboard_index_path, notice: "Country to be shown in nav bar"
+  end
+
   # DELETE /countries/1
   # DELETE /countries/1.json
   def destroy
@@ -69,6 +76,6 @@ class CountriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def country_params
-      params.require(:country).permit(:name, :description, :flag, :map, :avatar)
+      params.require(:country).permit(:name, :description, :flag, :map, :avatar, :show_in_nav)
     end
 end
