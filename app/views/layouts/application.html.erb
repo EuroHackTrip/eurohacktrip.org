@@ -31,8 +31,12 @@
 		</div>
 	</div>
 <div class = "container" style="margin-top:40px;">
-	<!--<p class="notice"><%= notice %></div>
-       <p class="alert"><%= alert %></div>-->
+	<% if flash[:notice] %>
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
 	<%= yield %>
 </div>
 <footer id="page-footer">
@@ -64,6 +68,7 @@
       <div class="span3">        
         <h3>Admin</h3>
         <% if !admin_signed_in? %>
+          <div><%= link_to "Sign Up", new_admin_registration_path %></div>
           <div><%= link_to "Sign In", new_admin_session_path %></div>
         <% else %>
           <div><%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %></div>
