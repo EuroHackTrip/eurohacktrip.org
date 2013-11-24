@@ -10,7 +10,7 @@
     </p>
     <p>Article viewed <%= pluralize($view_count, " time") %></p>
     <ul class="nav nav-tabs">
-      <li><a href="#comments" data-toggle="tab">Comments <span class="badge"><%= @post.comments.count %></span></a></li>
+      <li><a href="#comments" data-toggle="tab">Comments <span class="badge"><%= approved_comments_count(@post) %></span></a></li>
       <li><a href="#add-comment" data-toggle="tab">Add a Comment</a></li>
     </ul>
 
