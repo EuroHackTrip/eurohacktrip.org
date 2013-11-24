@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootsy
-//= require turbolinks
 //= require bootstrap
 //= require posts
 //= require dashboard
