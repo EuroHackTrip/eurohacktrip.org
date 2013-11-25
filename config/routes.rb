@@ -25,6 +25,10 @@ EurohacktripOrg::Application.routes.draw do
 
   match "comment/:id" => "comments#approve", :as => "comment_approve", via: [:post]
 
+  match "country/:id" => "countries#show_in_nav", :as => "country_show", via: [:post]
+
+  #match "country/:id" => "countries#dont_show_in_nav", :as => "country_dont_show", via: [:post]
+
   root to: "home#index"
 
   mount Ckeditor::Engine => "/ckeditor"
