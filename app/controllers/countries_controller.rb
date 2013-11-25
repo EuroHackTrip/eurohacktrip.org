@@ -51,12 +51,12 @@ class CountriesController < ApplicationController
     end
   end
 
-  def show_in_nav
-    @country = Country.find(params[:id])
-    @country.show_in_nav = true
-    @country.save!
-    redirect_to dashboard_index_path, notice: "Country to be shown in nav bar"
-  end
+  #def show_in_nav
+    #@country = Country.find(params[:id])
+    #@country.show_in_nav = true
+    #@country.save!
+    #redirect_to dashboard_index_path, notice: "Country to be shown in nav bar"
+  #end
 
   # DELETE /countries/1
   # DELETE /countries/1.json
