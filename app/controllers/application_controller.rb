@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  helper_method :posts_count, :comments_count, :all_posts, :all_comments, :all_countries, :all_cities, :all_people, :all_events, :approved_comments_count
+  helper_method :posts_count, :comments_count, :all_posts, :all_comments, :all_countries, :all_cities, :all_people, :all_events, :approved_comments_count, :homepage_content
 
   def store_location
   # store last url - this is needed for post-login redirect to whatever the user last visited.
@@ -65,5 +65,9 @@ end
       end
     end
     count
+  end
+
+  def homepage_content
+    HomepageContent.all
   end
 end

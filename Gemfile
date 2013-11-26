@@ -25,6 +25,8 @@ gem "paperclip"
 
 gem 'impressionist'
 
+gem 'friendly_id'
+
 gem "ckeditor"
 
 gem 'ckeditor_rails'

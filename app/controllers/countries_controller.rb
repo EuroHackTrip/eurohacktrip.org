@@ -58,8 +58,6 @@ class CountriesController < ApplicationController
     redirect_to dashboard_index_path
   end
 
-
-
   # DELETE /countries/1
   # DELETE /countries/1.json
   def destroy

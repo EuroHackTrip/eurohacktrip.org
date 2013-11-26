@@ -16,10 +16,11 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   # GET /posts/1.json
-  $view_count = 0
   def show
-    @post = Post.find(params[:id])
-    $view_count = $view_count + 1
+    @post = Post.find_by_slug(params[:id])
+    if request.path != post_path(@post)
+      redirect_to @post
+    end
   end
 
   # GET /posts/new
@@ -75,7 +76,7 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.find_by_slug(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

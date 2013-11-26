@@ -1,0 +1,20 @@
+<%= form_for(@home_page_content) do |f| %>
+  <% if @home_page_content.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@home_page_content.errors.count, "error") %> prohibited this home_page_content from being saved:</h2>
+
+      <ul>
+      <% @home_page_content.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_area :content, style: "height:1000px;width:100%;", :class => 'ckeditor' %>
+  </div><br>
+  <div class="actions">
+    <%= f.submit "Edit Home", class: "btn btn-primary btn-lg pull-right" %>
+  </div>
+<% end %>

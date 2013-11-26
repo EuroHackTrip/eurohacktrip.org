@@ -1,4 +1,6 @@
 EurohacktripOrg::Application.routes.draw do
+  resources :home_page_contents
+
   resources :events
 
   #resources :post_settings, except: :create
