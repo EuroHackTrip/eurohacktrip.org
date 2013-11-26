@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131124175810) do
+ActiveRecord::Schema.define(version: 20131126161622) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -96,6 +96,8 @@ ActiveRecord::Schema.define(version: 20131124175810) do
     t.integer  "country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "event_link"
+    t.string   "event_name"
   end
 
   add_index "events", ["country_id"], name: "index_events_on_country_id"

@@ -34,10 +34,18 @@
       <% end %>
 
       <div class="field">
-        Enter Eventbrite link: </br>
+        Enter Event Name: </br>
+        <%= f.text_field :event_name %>
+      </div>
+       <div class="field">
+        Enter Event link: </br>
+        <%= f.text_field :event_link %>
+      </div>
+    <!--    <div class="field">
+        Eventbrite link: </br>
         <label for="eventinput" class="stripwell hide"></label>
         <%= f.text_field :event_id %>
-      </div>
+      </div> -->
       <div class="field">
         <%= f.label :country_id %>
         <%= f.select :country_id, Country.all.collect {|country| [ country.name, country.id] }, { include_blank: false } %>
