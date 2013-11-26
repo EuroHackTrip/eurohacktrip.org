@@ -105,14 +105,14 @@
 
     var popup = L.popup();//initialize a leaflet popup and assign it to a variable
 
-    function onMapClick(e) {
-        popup
-            .setLatLng(e.latlng)
-            .setContent("You clicked the mapmaker at " + e.latlng.toString())
-            .openOn(mapmaker);//activate the 'popup'
-    }
+    // function onMapClick(e) {
+    //     popup
+    //         .setLatLng(e.latlng)
+    //         .setContent("You clicked the mapmaker at " + e.latlng.toString())
+    //         .openOn(mapmaker);//activate the 'popup'
+    // }
 
-    mapmaker.on('click', onMapClick);
+   // mapmaker.on('click', onMapClick);
 
 
  });  

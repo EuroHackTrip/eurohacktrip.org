@@ -39,14 +39,16 @@
 <script type="text/javascript">
   $(document).ready(function(){ 
 
-  var mapmaker = L.map('map').setView([51.505, -0.09], 10); 
+  var mapmaker = L.map('map').setView([51.505, 7], 5); 
+  //http://maps.cloudmade.com/?styleId=114841
+  
    // var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png',  
    // cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 FirstFuel',  
    // cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution, key: 'xxxxxxxxxxxx'  
    // }),  
    // latlng = new L.LatLng(<%= raw @lat.to_json %>,<%= raw @lng.to_json %>);  
    // fsMap = new L.Map('map', {center: latlng, zoom:15, zoomControl:false, layers: [cloudmade], scrollWheelZoom : false});     
-  L.tileLayer('http://{s}.tile.cloudmade.com/5e9427487a6142f7934b07d07a967ba3/997/256/{z}/{x}/{y}.png', {
+  L.tileLayer('http://{s}.tile.cloudmade.com/5e9427487a6142f7934b07d07a967ba3/114841/256/{z}/{x}/{y}.png', {
       attribution: 'EuroHackTrip',
       maxZoom: 18
   }).addTo(mapmaker);
@@ -69,7 +71,7 @@
             .setLatLng(e.latlng)
             .setContent("You clicked the mapmaker at " + e.latlng.toString())
             .openOn(mapmaker);//activate the 'popup'
-    }
+    };
 
     mapmaker.on('click', onMapClick);
 
