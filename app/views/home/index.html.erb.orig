@@ -1,6 +1,12 @@
+<<<<<<< HEAD
+<div id="map">
+  
+</div>
+=======
  <div id="map">
    
  </div>
+>>>>>>> 5c9ea3851a0177366c1b6115e0f56a7fc6755d15
 <div id = "intro">
 	<h1 id = "tagline">
 		We are a group of developers and designers from Europe, curious about the emerging African tech hubs.

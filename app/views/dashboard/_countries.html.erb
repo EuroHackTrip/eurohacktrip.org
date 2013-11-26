@@ -17,7 +17,12 @@
             </div>
             <div class="hidden-links">
             <%= link_to 'Edit', edit_country_path(country) %> |
-            <%= link_to 'Destroy', country, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Destroy', country, method: :delete, data: { confirm: 'Are you sure?' } %> | 
+            <% if !country.show_in_nav %>
+              <%= link_to 'Show in Navbar', country_show_path(country), method: :post, data: { confirm: 'Are you sure?' } %>
+            <% else %>
+              <%= link_to 'Don\'t show in Navbar', country_show_path(country), method: :post, data: { confirm: 'Are you sure?' } %>
+            <% end %>
             </div>
             <br>
           </div>

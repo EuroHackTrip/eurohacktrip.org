@@ -17,7 +17,6 @@
 //= require posts
 //= require dashboard
 //= require ckeditor-jquery
-//= require map
 
 
 $('.ckeditor').ckeditor({
