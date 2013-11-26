@@ -1,19 +1,22 @@
+
+
 <ul class="nav nav-tabs">
   <li><a href="#all-events" data-toggle="tab">All events</a></li>
-  <li><a href="#new-event" data-toggle="tab">New events</a></li>
+  <li><a href="#new-event" data-toggle="tab">Add event</a></li>
 </ul>
 <!-- Tab panes -->
 <div class="tab-content">
   <div class="tab-pane active event" id="all-events">
     <% all_events.each do |event| %>
-      <div style="width:195px; text-align:center;">
+      <div style="display:inline;">
+       
         <iframe src="http://www.eventbrite.com/countdown-widget?eid=<%= event.event_id %>" frameborder="0" height="479" width="195" marginheight="0" marginwidth="0" scrolling="no" allowtransparency="true"></iframe>
+    
+        <div class="hidden-links">
+          <%= link_to 'Edit', edit_event_path(event) %> |
+          <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
       </div>
-      <div class="hidden-links">
-        <%= link_to 'Edit', edit_event_path(event) %> |
-        <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </div>
-      <br>
     <% end %>
   </div>
   <div class="tab-pane event" id="new-event">
@@ -31,11 +34,12 @@
       <% end %>
 
       <div class="field">
-        <%= f.label :event_id %><br>
-        <%= f.number_field :event_id %>
+        Enter Eventbrite link: </br>
+        <label for="eventinput" class="stripwell hide"></label>
+        <%= f.text_field :event_id %>
       </div>
       <div class="field">
-        <%= f.label :country_id %><br>
+        <%= f.label :country_id %>
         <%= f.select :country_id, Country.all.collect {|country| [ country.name, country.id] }, { include_blank: false } %>
       </div>
       <div class="actions">
@@ -44,3 +48,35 @@
     <% end %>
   </div>
 </div>
+
+
+<script type="text/javascript">
+  //eventbrite url into event id
+  //http://www.eventbrite.com/e/tedxstrathmoreuniversity-tickets-9346225813?ref=ecount
+  //https://www.eventbrite.com/e/euro-hack-trip-first-meetup-tickets-9139643921
+  //http://www.eventbrite.com/e/spoken-word-event-tickets-9311395635
+  //http://www.eventbritickets-9311395634vfsv
+  //remove events easy
+
+  n = $("form#new_event input#event_event_id");
+  // n.on('click', function(){console.log('enter event url');});
+  n.on('paste', function(){
+    setTimeout(function(){
+    console.log(n[0].value);
+      if(n[0].value.charAt(10)){ //check if guy brings url or event id
+        event_id= n.val().substr(n.val().search("tickets-")+8, 10);
+        if(!isNaN(event_id)){ //Check if string is a number
+          n[0].value = event_id;
+          $('label.stripwell').attr('class', 'stripwell alert alert-success');
+          $('label.stripwell')[0].innerText = "Event ID stripped!";
+        }else{
+          $('label.stripwell').attr('class', 'stripwell alert alert-danger');
+          $('label.stripwell')[0].innerText = "Please copy URL from the event at Eventbrite.com";
+
+        };
+      };
+    }, 500);
+    
+  });
+
+</script>

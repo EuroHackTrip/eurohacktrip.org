@@ -4,10 +4,12 @@
   <title>Eurohacktrip</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => false %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
+  <%= javascript_include_tag '/assets/leaflet/leaflet.js' %>
+  <link rel="stylesheet" href="/assets/leaflet/leaflet.css" />
  <!--[if lte IE 8]>
      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
  <![endif]-->
-  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
   <%= csrf_meta_tags %>
   <link rel="shortcut icon" href="/assets/favico.png"/>
 </head>
@@ -33,7 +35,7 @@
 			</div>
 		</div>
 	</div>
-<div class = "container" style="margin-top:40px;">
+<div class = "container main">
 	<% if flash[:notice] %>
       <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -72,12 +74,15 @@
         <h3>Admin</h3>
         <% if !admin_signed_in? %>
           <div><%= link_to "Sign In", new_admin_session_path %></div>
+          <div><%= link_to "Sign Up", new_admin_session_path %></div>
         <% else %>
           <div><%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %></div>
         <% end %>
       </div>
     </div>
   </div>
+
 </footer>
+
 </body>
 </html>

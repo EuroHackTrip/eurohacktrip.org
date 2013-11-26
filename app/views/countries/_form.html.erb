@@ -12,24 +12,25 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label :description %>
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :flag %><br>
+    <%= f.label :flag %>
     <%= f.file_field :avatar %>
   </div>
   <div class="field">
-    <%= f.label :map %><br>
+    <%= f.label :map %>
     <%= f.text_field :map %>
   </div>
   <div class="field">
-    <%= f.label :show_in_nav %>
-    <%= f.check_box :show_in_nav, {checked: @country.show_in_nav} %>
+   <%= f.check_box :show_in_nav, {checked: @country.show_in_nav, :class => 'checkbox inline'} %>
+    <%= f.label :show_in_nav, {:class => 'badge badge-important'} %>
+   
   </div>
   <div class="actions">
     <%= f.submit %>
