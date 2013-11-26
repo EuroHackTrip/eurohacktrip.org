@@ -77,26 +77,16 @@
       maxZoom: 18
   }).addTo(map);
 
-  var marker = L.marker([51.5, -0.09]).addTo(map);
+  var marker = L.marker([51.5, -0.09]).bindLabel("City").addTo(map);
 
-    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-
-    var popup = L.popup()
-    .setLatLng([51.5, -0.15])
-    .setContent("I am a standalone popup.")
-    .openOn(map); 
-
-    var popup = L.popup();//initialize a leaflet popup and assign it to a variable
-
-    function onMapClick(e) {
-        popup
-            .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString())
-            .openOn(map);//activate the 'popup'
-    }
-
-    map.on('click', onMapClick);
-
+    // var popup = L.popup();//initialize a leaflet popup and assign it to a variable
+    // function onMapClick(e) {
+    //     popup
+    //         .setLatLng(e.latlng)
+    //         .setContent("You clicked the map at " + e.latlng.toString())
+    //         .openOn(map);//activate the 'popup'
+    // }
+    // map.on('click', onMapClick);
 
  });  
 </script>
