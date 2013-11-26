@@ -10,8 +10,9 @@
 		<ol>	
 		<% all_events.each do |event| %>
 			<% if event.country_id == @country.id %>
-				<li><a href="http://www.eventbrite.com/event/<%= event.event_id %>">
-				<%= event.event_name %></a></li>
+				<li>
+				<a href="<%= event.event_link %>"><%= event.event_name %></a>
+				</li>
 			<% end %>
 		<% end %>
 		</ol>
