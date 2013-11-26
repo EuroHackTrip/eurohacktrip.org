@@ -28,7 +28,7 @@ class HomePageContentsController < ApplicationController
 
     respond_to do |format|
       if @home_page_content.save
-        format.html { redirect_to @home_page_content, notice: 'Home page content was successfully created.' }
+        format.html { redirect_to dashbard_index_path, notice: 'Home page content was successfully created.' }
         format.json { render action: 'show', status: :created, location: @home_page_content }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class HomePageContentsController < ApplicationController
   def update
     respond_to do |format|
       if @home_page_content.update(home_page_content_params)
-        format.html { redirect_to @home_page_content, notice: 'Home page content was successfully updated.' }
+        format.html { redirect_to dashbard_index_path, notice: 'Home page content was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -56,7 +56,7 @@ class HomePageContentsController < ApplicationController
   def destroy
     @home_page_content.destroy
     respond_to do |format|
-      format.html { redirect_to home_page_contents_url }
+      format.html { redirect_to dashbard_index_path }
       format.json { head :no_content }
     end
   end

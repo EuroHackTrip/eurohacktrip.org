@@ -2,7 +2,7 @@
 
 <p>
   <strong>Content:</strong>
-  <%= @home_page_content.content %>
+  <%= raw @home_page_content.content %>
 </p>
 
 <%= link_to 'Edit', edit_home_page_content_path(@home_page_content) %> |
