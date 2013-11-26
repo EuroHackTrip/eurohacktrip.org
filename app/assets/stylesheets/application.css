@@ -52,9 +52,10 @@ a {
 	height:220px; 
 	margin-bottom:10px;
 }
-.container {
+.main {
 //padding-bottom: 30px;
 max-width: 960px;
+margin-top: 25px;
 }
 
 .row {
