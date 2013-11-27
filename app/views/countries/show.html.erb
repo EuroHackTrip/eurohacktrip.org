@@ -5,14 +5,14 @@
 <div class = "row">
 	<div class="span8">
 
-		<legend><h4>Events we organize</h4></legend>
+		<legend><h4>Events we organize here</h4></legend>
 
 		<ol>	
 		<% all_events.each do |event| %>
 			<% if event.country_id == @country.id %>
-				<li>
-				<a href="<%= event.event_link %>"><%= event.event_name %></a>
-				</li>
+				<h4><li><a href="<%= event.event_link %>">
+				<%= event.event_name %>
+				</a></li></h4>
 			<% end %>
 		<% end %>
 		</ol>
@@ -65,7 +65,11 @@
 
 <script type="text/javascript">
   $(document).ready(function(){ 
-  var map = L.map('map').setView([51.505, -0.09], 13); 
+  var map = L.map('map', {
+    scrollWheelZoom: false,
+    zoomControl: false,
+    attributionControl: false,
+  }).setView([51.505, -0.09], 13); 
    // var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png',  
    // cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 FirstFuel',  
    // cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution, key: 'xxxxxxxxxxxx'  

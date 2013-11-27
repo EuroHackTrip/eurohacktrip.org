@@ -10,6 +10,7 @@ class CountriesController < ApplicationController
   # GET /countries/1
   # GET /countries/1.json
   def show
+    puts response.body
   end
 
   # GET /countries/new

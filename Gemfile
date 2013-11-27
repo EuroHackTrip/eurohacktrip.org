@@ -72,3 +72,5 @@ gem 'social-share-button'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'eventbrite-client'
