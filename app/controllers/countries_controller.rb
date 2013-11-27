@@ -1,5 +1,5 @@
 class CountriesController < ApplicationController
-  before_action :set_country, only: [:show, :edit, :update, :destroy]
+  before_action :set_country, only: [:edit, :update, :destroy]
 
   # GET /countries
   # GET /countries.json
@@ -10,6 +10,7 @@ class CountriesController < ApplicationController
   # GET /countries/1
   # GET /countries/1.json
   def show
+    @country = Country.friendly.find(params[:id])
     puts response.body
   end
 
@@ -53,7 +54,7 @@ class CountriesController < ApplicationController
   end
 
   def show_in_nav
-    @country = Country.find(params[:id])
+    @country = Country.friendly.find(params[:id])
     @country.show_in_nav = !@country.show_in_nav
     @country.save!
     redirect_to dashboard_index_path
@@ -72,7 +73,7 @@ class CountriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_country
-      @country = Country.find(params[:id])
+      @country = Country.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
