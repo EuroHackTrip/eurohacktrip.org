@@ -43,7 +43,9 @@
   </div>
 </div>
  -->
- <%= raw HomePageContent.first.content %>
+ <% if HomePageContent.all.count != 0 %>
+  <%= raw HomePageContent.first.content %>
+ <% end %>
 
 <script type="text/javascript">
   
