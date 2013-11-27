@@ -44,7 +44,7 @@
 <div class="row">
 	<div class="span8">
 		<% all_posts.tagged_with(@country.name).each do |post| %>
-			<h2><%= raw post.title %></h2><br>
+			<h2><%= link_to post.title, post_path(post) %></h2><br>
 			<pre>Posted at <%= post.created_at %><span class="pull-right">Share:</span></pre><br><br>
 			<!--<%= post.created_at %> -->
 			<%= raw post.content %><br><br>

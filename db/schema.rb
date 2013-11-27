@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131126151903) do
+ActiveRecord::Schema.define(version: 20131126193653) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -89,7 +89,10 @@ ActiveRecord::Schema.define(version: 20131126151903) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.boolean  "show_in_nav"
+    t.string   "slug"
   end
+
+  add_index "countries", ["slug"], name: "index_countries_on_slug", unique: true
 
   create_table "events", force: true do |t|
     t.integer  "event_id"
