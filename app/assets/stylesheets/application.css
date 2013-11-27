@@ -52,6 +52,25 @@ a {
 	height:220px; 
 	margin-bottom:10px;
 }
+
+#map { 
+height: 250px; 
+}
+h1#tagline {
+font-size: 23px;
+line-height: 1.5;
+font-weight: bold;
+color: #000;
+}
+
+#intro {
+top: 60px;
+padding-left:10px;
+width: 40%;
+position:absolute;
+z-index:10;
+//padding: 20px 0px 0px 0px;
+}
 .main {
 //padding-bottom: 30px;
 max-width: 960px;

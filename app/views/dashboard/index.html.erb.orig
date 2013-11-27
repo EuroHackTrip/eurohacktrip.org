@@ -1,0 +1,57 @@
+
+<div class = "row">
+	<div class="span3">
+		<ul class="nav nav-pills nav-stacked nav-tabs" id = "tab" style="max-width: 300px;">
+<<<<<<< HEAD
+			<% if HomePageContent.all.count == 0 %>
+	        	<li class="active"><%= link_to "HomePage Content", new_home_page_content_path %></li>
+	        <% else %>
+	        	<li class="active"><%= link_to "HomePage Content", edit_home_page_content_path(HomePageContent.first) %></li>
+	        <% end %>
+	        <li><a href="#posts"  data-toggle="tab">Posts <span class = "badge pull-right"><%= posts_count %></span></a></li>
+	        <!--<li><a href="#comments" data-toggle="tab">Comments <span class = "badge pull-right"><%= comments_count %></span></a></li>-->
+	        <li><a href="#stats" data-toggle="tab">Statistics</a></li>
+=======
+	        <li class="active"><a href="#posts"  data-toggle="tab">Blog Posts <span class = "badge pull-right"><%= posts_count %></span></a></li>
+	        <!-- <li><a href="#comments" data-toggle="tab">Comments <span class = "badge pull-right"><%= comments_count %></span></a></li> -->
+	        <!-- <li><a href="#stats" data-toggle="tab">Statistics</a></li> -->
+>>>>>>> 193b59ef0aa4e054f0f5cb6fe12754e96d2f6c9e
+	        <li><a href="#countries" data-toggle="tab">Countries</a></li>
+	        <li><a href="#events" data-toggle="tab">Events</a></li>
+	        <li><a href="#people" data-toggle="tab">People To Meet</a></li>
+	        <li><a href="#cities" data-toggle="tab">Cities</a></li>
+	        <li><a href="#settings" data-toggle="tab">Settings</a></li>
+      	</ul>
+	</div>
+
+
+	<div class="span9">
+		<!-- Tab panes -->
+		<div class="tab-content well" style="height:500px; width:800px;">
+		  <div class="tab-pane active" id="posts">
+		  	<%= render 'posts' %>
+		  </div>
+		  <div class="tab-pane" id="comments">
+		  	<%= render 'comments' %>
+		  </div>
+		  <div class="tab-pane" id="settings">
+		  	<%= render 'settings' %>
+		  </div>
+		  <div class="tab-pane" id="stats">
+		  	
+		  </div>
+		  <div class="tab-pane" id="events">
+		  	<%= render 'events' %>
+		  </div>
+		  <div class="tab-pane" id="people">
+		  	<%= render 'people' %>
+		  </div>
+		  <div class="tab-pane" id="cities">
+		  	<%= render 'cities' %>
+		  </div>
+		  <div class="tab-pane" id="countries">
+		  	<%= render 'countries' %>
+		  </div>
+		</div>
+	</div>
+</div>

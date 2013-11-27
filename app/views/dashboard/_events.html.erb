@@ -34,7 +34,15 @@
       <% end %>
 
       <div class="field">
-        Enter Eventbrite link: </br>
+        Enter Event Name: </br>
+        <%= f.text_field :event_name %>
+      </div>
+       <div class="field hide">
+        Enter Event link: </br>
+        <%= f.text_field :event_link %>
+      </div>
+       <div class="field">
+        Eventbrite link: </br>
         <label for="eventinput" class="stripwell hide"></label>
         <%= f.text_field :event_id %>
       </div>
@@ -64,7 +72,8 @@
     setTimeout(function(){
     console.log(n[0].value);
       if(n[0].value.charAt(10)){ //check if guy brings url or event id
-        event_id= n.val().substr(n.val().search("tickets-")+8, 10);
+        $("form#new_event input#event_event_link").value = n.val();
+        event_id = n.val().substr(n.val().search("tickets-")+8, 10);
         if(!isNaN(event_id)){ //Check if string is a number
           n[0].value = event_id;
           $('label.stripwell').attr('class', 'stripwell alert alert-success');

@@ -4,14 +4,18 @@
 
 <div class = "row">
 	<div class="span8">
-		<legend><h4>Events we organize</h4></legend>
+
+		<legend><h4>Events we organize here</h4></legend>
+
+		<ol>	
 		<% all_events.each do |event| %>
 			<% if event.country_id == @country.id %>
-				<div style="width:195px; text-align:center; float:left">
-				  <iframe src="http://www.eventbrite.com/countdown-widget?eid=<%= event.event_id %>" frameborder="0" height="479" width="195" marginheight="0" marginwidth="0" scrolling="no" allowtransparency="true"></iframe>
-				</div>
+				<h4><li><a href="<%= event.event_link %>">
+				<%= event.event_name %>
+				</a></li></h4>
 			<% end %>
 		<% end %>
+		</ol>
 	</div>
 	<div class="span3 well pull-right" style="background-color:white;">
 		<legend><h4><%= @country.name %></h4></legend>
@@ -61,7 +65,11 @@
 
 <script type="text/javascript">
   $(document).ready(function(){ 
-  var map = L.map('map').setView([51.505, -0.09], 13); 
+  var map = L.map('map', {
+    scrollWheelZoom: false,
+    zoomControl: false,
+    attributionControl: false,
+  }).setView([51.505, -0.09], 13); 
    // var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png',  
    // cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 FirstFuel',  
    // cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution, key: 'xxxxxxxxxxxx'  
@@ -69,30 +77,20 @@
    // latlng = new L.LatLng(<%= raw @lat.to_json %>,<%= raw @lng.to_json %>);  
    // fsMap = new L.Map('map', {center: latlng, zoom:15, zoomControl:false, layers: [cloudmade], scrollWheelZoom : false});     
   L.tileLayer('http://{s}.tile.cloudmade.com/5e9427487a6142f7934b07d07a967ba3/997/256/{z}/{x}/{y}.png', {
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+      attribution: 'EuroHackTrip',
       maxZoom: 18
   }).addTo(map);
 
-  var marker = L.marker([51.5, -0.09]).addTo(map);
+  var marker = L.marker([51.5, -0.09]).bindLabel("City").addTo(map);
 
-    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-
-    var popup = L.popup()
-    .setLatLng([51.5, -0.15])
-    .setContent("I am a standalone popup.")
-    .openOn(map); 
-
-    var popup = L.popup();//initialize a leaflet popup and assign it to a variable
-
-    function onMapClick(e) {
-        popup
-            .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString())
-            .openOn(map);//activate the 'popup'
-    }
-
-    map.on('click', onMapClick);
-
+    // var popup = L.popup();//initialize a leaflet popup and assign it to a variable
+    // function onMapClick(e) {
+    //     popup
+    //         .setLatLng(e.latlng)
+    //         .setContent("You clicked the map at " + e.latlng.toString())
+    //         .openOn(map);//activate the 'popup'
+    // }
+    // map.on('click', onMapClick);
 
  });  
 </script>
