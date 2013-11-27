@@ -182,8 +182,8 @@ DEPENDENCIES
   ckeditor_rails
   coffee-rails (~> 4.0.0)
   devise
-  friendly_id
   eventbrite-client
+  friendly_id
   impressionist
   jbuilder (~> 1.2)
   jquery-rails
