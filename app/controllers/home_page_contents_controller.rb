@@ -65,6 +65,7 @@ class HomePageContentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_home_page_content
       @home_page_content = HomePageContent.find(params[:id])
+      #impressionist(@home_page_content)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

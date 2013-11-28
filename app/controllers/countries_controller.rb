@@ -11,6 +11,7 @@ class CountriesController < ApplicationController
   # GET /countries/1.json
   def show
     @country = Country.friendly.find(params[:id])
+    impressionist(@country)
     puts response.body
   end
 

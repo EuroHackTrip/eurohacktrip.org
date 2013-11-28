@@ -21,6 +21,7 @@ class PostsController < ApplicationController
     if request.path != post_path(@post)
       redirect_to @post
     end
+    impressionist(@post)
   end
 
   # GET /posts/new

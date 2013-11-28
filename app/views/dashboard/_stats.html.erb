@@ -1,0 +1,140 @@
+<ul class="nav nav-tabs">
+        <li><a href="#overview" data-toggle="tab">Overview</a></li>
+        <li><a href="#posts-stats" data-toggle="tab">Posts</a></li>
+        <li><a href="#traffic-sources" data-toggle="tab">Traffic Sources</a></li>
+        <li><a href="#audience" data-toggle="tab">Audience</a></li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active city" id="overview">
+    <div>
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row">Unique Visitors</div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= total_unique_post_views %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row">Returning Visitors</div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= total_returning %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br><br>
+    <div class="page-views">
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row">Pageviews today </div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= page_views(Date.today, Date.today) %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row">Pageviews yesterday</div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= page_views(Date.yesterday, Date.today) %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row">Pageviews this week</div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= page_views(Date.beginning_of_week, Date.today) %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row">Pageviews last month</div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= page_views(Date.yesterday, Date.today) %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table cellspacing="0" cellpadding="0" class="tbl GHUY-LPKDC">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+             <div class="pv-row">Pageviews all time </div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= page_views(Date.yesterday, Date.today) %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="tab-pane city" id="posts-stats">
+  <legend>Posts</legend>
+    <% all_posts.each do |post| %>
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row"><%= link_to post.title, post_path(post) %></div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= post.impressionist_count(:filter=>:ip_address) %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+      <br>
+      <legend>Pages</legend>
+      <% all_countries.each do |country| %>
+        <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row"><%= link_to country.name, country_path(country) %></div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= country.impressionist_count(:filter=>:ip_address) %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+     <% end %>
+  </div>
+  <div class="tab-pane city" id="traffic-sources">
+      
+  </div>
+  <div class="tab-pane city" id="audience">
+      
+  </div>
+</div>

@@ -1,4 +1,5 @@
 class Country < ActiveRecord::Base
+	is_impressionable
 	extend FriendlyId
 	friendly_id :name, use: [:slugged, :history]
 	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"

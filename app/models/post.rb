@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-	#is_impressionable
+	is_impressionable
 
 	extend FriendlyId
 	friendly_id :title, use: [:slugged, :history]
