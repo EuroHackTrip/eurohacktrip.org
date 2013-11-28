@@ -1,0 +1,9 @@
+<% provide(:title, @page.name) %>
+<p id="notice"><%= notice %></p>
+<p>
+<%= raw @page.body %>
+</p>
+
+<% if admin_signed_in? %>
+	<%= link_to 'Edit', edit_page_path(@page) %>
+<% end %>

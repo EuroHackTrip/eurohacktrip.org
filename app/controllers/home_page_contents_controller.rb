@@ -1,5 +1,6 @@
 class HomePageContentsController < ApplicationController
   before_action :set_home_page_content, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!, except: [:show]
 
   # GET /home_page_contents
   # GET /home_page_contents.json

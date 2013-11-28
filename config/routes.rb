@@ -1,4 +1,6 @@
 EurohacktripOrg::Application.routes.draw do
+  resources :pages
+
   resources :home_page_contents
 
   resources :events

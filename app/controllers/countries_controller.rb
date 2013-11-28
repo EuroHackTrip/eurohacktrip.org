@@ -1,5 +1,6 @@
 class CountriesController < ApplicationController
   before_action :set_country, only: [:edit, :update, :destroy]
+  before_action :authenticate_admin!, except: [:show]
 
   # GET /countries
   # GET /countries.json
