@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131128155050) do
+ActiveRecord::Schema.define(version: 20131128164625) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -155,7 +155,10 @@ ActiveRecord::Schema.define(version: 20131128155050) do
     t.boolean  "show_in_nav"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
+
+  add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true
 
   create_table "people", force: true do |t|
     t.string   "name"
