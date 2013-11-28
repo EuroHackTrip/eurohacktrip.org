@@ -130,6 +130,20 @@
         </tbody>
       </table>
      <% end %>
+     <% Page.all.each do |page| %>
+        <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row"><%= link_to page.name, page_path(page) %></div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= page.impressionist_count(:filter=>:ip_address) %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+     <% end %>
   </div>
   <div class="tab-pane city" id="traffic-sources">
       
