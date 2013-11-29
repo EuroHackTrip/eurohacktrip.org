@@ -7,5 +7,6 @@ class DashboardController < ApplicationController
   	@person = Person.new
   	@event = Event.new
   	@post_setting = PostSetting.last
+  	@post_setting_new = PostSetting.new
   end
 end
