@@ -42,8 +42,8 @@
               <div class="pv-row">Pageviews today </div>
             </td>
             <td align="left" style="vertical-align: top;">
-              <div class="count pull-right"><%= page_views(Date.today, Date.today) %></div>
-            </td>
+        <!--      <div class="count pull-right"><%= page_views(Date.today, Date.today) %></div>
+  -->          </td>
           </tr>
         </tbody>
       </table>
@@ -54,8 +54,8 @@
               <div class="pv-row">Pageviews yesterday</div>
             </td>
             <td align="left" style="vertical-align: top;">
-              <div class="count pull-right"><%= page_views(Date.yesterday, Date.today) %></div>
-            </td>
+            <!--  <div class="count pull-right"><%= page_views(Date.yesterday, Date.today) %></div>
+  -->          </td>
           </tr>
         </tbody>
       </table>
@@ -66,8 +66,8 @@
               <div class="pv-row">Pageviews this week</div>
             </td>
             <td align="left" style="vertical-align: top;">
-              <div class="count pull-right"><%= page_views(Date.beginning_of_week, Date.today) %></div>
-            </td>
+              <div class="cou<!--nt pull-right"><%= page_views(Date.beginning_of_week, Date.today) %></div>
+  -->          </td>
           </tr>
         </tbody>
       </table>
@@ -78,8 +78,8 @@
               <div class="pv-row">Pageviews last month</div>
             </td>
             <td align="left" style="vertical-align: top;">
-              <div class="count pull-right"><%= page_views(Date.yesterday, Date.today) %></div>
-            </td>
+            <!--  <div class="count pull-right"><%= page_views(Date.yesterday, Date.today) %></div>
+  -->          </td>
           </tr>
         </tbody>
       </table>
@@ -90,7 +90,7 @@
              <div class="pv-row">Pageviews all time </div>
             </td>
             <td align="left" style="vertical-align: top;">
-              <div class="count pull-right"><%= page_views(Date.yesterday, Date.today) %></div>
+              <!--<div class="count pull-right"><%= page_views(Post.first.created_at, Date.today) %></div>-->
             </td>
           </tr>
         </tbody>
