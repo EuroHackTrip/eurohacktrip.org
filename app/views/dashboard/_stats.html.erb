@@ -1,14 +1,100 @@
 <ul class="nav nav-tabs">
-        <li><a href="#overview" data-toggle="tab">Overview</a></li>
-        <li><a href="#posts-stats" data-toggle="tab">Posts</a></li>
-        <li><a href="#traffic-sources" data-toggle="tab">Traffic Sources</a></li>
-        <li><a href="#audience" data-toggle="tab">Audience</a></li>
+  <li><a href="#overview" data-toggle="tab">Overview</a></li>
+  <li><a href="#posts-stats" data-toggle="tab">Posts</a></li>
+  <li><a href="#traffic-sources" data-toggle="tab">Traffic Sources</a></li>
+  <li><a href="#audience" data-toggle="tab">Audience</a></li>
 </ul>
 <!-- Tab panes -->
 <div class="tab-content">
   <div class="tab-pane active city" id="overview">
     <div>
-      
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row">Unique Visitors</div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= total_unique_post_views %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row">Returning Visitors</div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= total_returning %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br><br>
+    <div class="page-views">
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row">Pageviews today </div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+        
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row">Pageviews yesterday</div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+            
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row">Pageviews this week</div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+             
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row">Pageviews last month</div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+            
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table cellspacing="0" cellpadding="0" class="tbl GHUY-LPKDC">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+             <div class="pv-row">Pageviews all time </div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   
