@@ -6,6 +6,6 @@ class DashboardController < ApplicationController
   	@city = City.new
   	@person = Person.new
   	@event = Event.new
-  	@post_setting = PostSetting.new
+  	@post_setting = PostSetting.last
   end
 end

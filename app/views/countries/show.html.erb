@@ -61,6 +61,12 @@
 		<% end %>
 	</div>
 	<div class="span4"></div>
+	<div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info all_country_posts(@country.name) %>
+    </div>
+    <%= will_paginate all_country_posts(@country.name), :container => true %>
+  </div>
 </div>	 
 
 

@@ -13,6 +13,8 @@ group :production do
 	gem 'rails_12factor'
 end
 
+gem 'will_paginate' #, '~> 3.0.5'
+
 gem 'bootstrap-wysihtml5-rails'
 
 gem 'bootsy'

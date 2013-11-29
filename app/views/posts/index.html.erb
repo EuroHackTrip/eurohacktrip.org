@@ -44,6 +44,7 @@
             <%= link_to "Leave a Comment", "/posts/"+post.id.to_s+"#add-comment", class: "links" %>
           <% end %>
           <br>
+
           <% if admin_signed_in? %>
             <span class="admin">
               <%= link_to 'Edit', edit_post_path(post) %> | 
@@ -58,6 +59,12 @@
     </div>
   <% end %>
 <% end %>
+<div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @posts %>
+    </div>
+    <%= will_paginate @posts, :container => true %>
+  </div>
 
 <script type="text/javascript">
   
