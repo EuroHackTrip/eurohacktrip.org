@@ -4,83 +4,79 @@
 </div>
 
 <p id="notice"><%= notice %></p>
-<div class="row">
-  <div class="span8">
-    <p>
-      <h2><%= @post.title %></h2>
-    </p>
-    <pre>Posted at <%= @post.created_at %><span class="pull-right">Share</span></pre>
-    <p>
-      <%= raw @post.content %>
-    </p>
-    <!--<ul class="nav nav-tabs">
-      <li><a href="#comments" data-toggle="tab">Comments <span class="badge"><%= approved_comments_count(@post) %></span></a></li>
-      <li><a href="#add-comment" data-toggle="tab">Add a Comment</a></li>
-    </ul>
+<p>
+  <h2><%= @post.title %></h2>
+</p>
+<pre>Posted at <%= @post.created_at %><span class="pull-right">Share</span></pre>
+<p>
+  <%= raw @post.content %>
+</p>
+<!--<ul class="nav nav-tabs">
+  <li><a href="#comments" data-toggle="tab">Comments <span class="badge"><%= approved_comments_count(@post) %></span></a></li>
+  <li><a href="#add-comment" data-toggle="tab">Add a Comment</a></li>
+</ul>
 
-    <div class="tab-content">
-      <div class="tab-pane active" id="comments">
-        <% count = 0 %>
-        <% @post.comments.each do |comment| %>
-          <% if comment.approved %>
-            <div class = "well">
-              <%= link_to comment.commenter, "http://" + comment.website %> says:
-              <span class = "pull-right"><%= comment.created_at.to_s.split(" ")[0] + " " + comment.created_at.to_s.split(" ")[1] %></span>
-              <p>
-                <%= comment.content %>
-              </p>
-            </div>
-            <% else %>
-              <% count = count + 1 %>
-          <% end %>
-        <% end %>
-        <%= pluralize(count, " comment") %> pending approval
+<div class="tab-content">
+  <div class="tab-pane active" id="comments">
+    <% count = 0 %>
+    <% @post.comments.each do |comment| %>
+      <% if comment.approved %>
+        <div class = "well">
+          <%= link_to comment.commenter, "http://" + comment.website %> says:
+          <span class = "pull-right"><%= comment.created_at.to_s.split(" ")[0] + " " + comment.created_at.to_s.split(" ")[1] %></span>
+          <p>
+            <%= comment.content %>
+          </p>
+        </div>
+        <% else %>
+          <% count = count + 1 %>
+      <% end %>
+    <% end %>
+    <%= pluralize(count, " comment") %> pending approval
+  </div>
+  <div class="tab-pane" id="add-comment">
+    <h2>Add a Comment</h2>
+    <%= form_for([@post, @post.comments.build]) do |f| %>
+      <div class="field">
+        <%= f.label :commenter %><br>
+        <%= f.text_field :commenter %>
       </div>
-      <div class="tab-pane" id="add-comment">
-        <h2>Add a Comment</h2>
-        <%= form_for([@post, @post.comments.build]) do |f| %>
-          <div class="field">
-            <%= f.label :commenter %><br>
-            <%= f.text_field :commenter %>
-          </div>
-          <div class="field">
-            <%= f.label :email %><br>
-            <%= f.text_field :email %>
-          </div>
-          <div class="field">
-            <%= f.label :website %><br>
-            <%= f.text_field :website %>
-          </div>
-          <div class="field">
-            <%= f.label :content %><br>
-            <%= f.text_area :content %>
-          </div>
-          <div class="actions">
-            <%= f.submit %>
-          </div>
-        <% end %>
+      <div class="field">
+        <%= f.label :email %><br>
+        <%= f.text_field :email %>
       </div>
-    </div>-->
-    <% if PostSetting.last.allow_comments %>
-    <div id = "add-comment">
-        <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'eurohacktrip'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    </div>
+      <div class="field">
+        <%= f.label :website %><br>
+        <%= f.text_field :website %>
+      </div>
+      <div class="field">
+        <%= f.label :content %><br>
+        <%= f.text_area :content %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
     <% end %>
   </div>
+</div>-->
+<% if PostSetting.last.allow_comments %>
+<div id = "add-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'eurohacktrip'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
+<% end %>
 
 
 <script type="text/javascript">

@@ -6,6 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-PostSetting.create! :posts_per_page => 10, :allow_comments => true
+#PostSetting.create! :posts_per_page => 10, :allow_comments => true
 
 #Country.find_by_id_or_create 
