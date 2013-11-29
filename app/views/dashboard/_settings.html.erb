@@ -29,12 +29,12 @@
 <% end %>
 <% else %>
   <%= form_for(@post_setting_new) do |f| %>
-  <% if @post_setting.errors.any? %>
+  <% if @post_setting_new.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post_setting.errors.count, "error") %> prohibited this post_setting from being saved:</h2>
 
       <ul>
-      <% @post_setting.errors.full_messages.each do |msg| %>
+      <% @post_setting_new.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -43,10 +43,10 @@
 
   <div class="field">
     <%= f.label :posts_per_page %>
-    <%= f.number_field :posts_per_page, value: PostSetting.last.posts_per_page %>
+    <%= f.number_field :posts_per_page, value: 10 %>
   </div>
   <div class="field">
-    <%= f.check_box :allow_comments, {checked: PostSetting.last.allow_comments} %>  Alow Comments 
+    <%= f.check_box :allow_comments, {checked: true} %>  Alow Comments 
   </div>
   <div class="actions">
     <br>

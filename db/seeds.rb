@@ -6,6 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-#Admin.create! :email => "admin@eurohacktrip.org", :password => "euro-1234"
+PostSetting.create! :posts_per_page => 10, :allow_comments => true
 
 #Country.find_by_id_or_create 
