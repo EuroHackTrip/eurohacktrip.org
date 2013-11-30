@@ -59,7 +59,7 @@
     <% end %>
   </div>
 </div>-->
-<% if PostSetting.last.allow_comments %>
+<% if PostSetting.all.count == 0 || PostSetting.last.allow_comments %>
 <div id = "add-comment">
     <div id="disqus_thread"></div>
 <script type="text/javascript">

@@ -51,7 +51,7 @@
     <div class="actions">
       <span style="color:#00598D;">Posted Under: </span>
       <%= f.select :tag_list, Country.all.collect {|country| [ country.name] }, { include_blank: false }, style: "margin-right:19px;" %>
-      <%= f.check_box :published, {checked: true}, style: "margin-right:10px;" %> Publish
+      <%= f.check_box :published, {checked: true} %> Publish
       <%= f.submit "Publish", class: "btn btn-primary btn-lg pull-right" %>
     </div>
         

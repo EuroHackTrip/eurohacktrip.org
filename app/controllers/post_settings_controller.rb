@@ -28,7 +28,7 @@ class PostSettingsController < ApplicationController
 
     respond_to do |format|
       if @post_setting.save
-        format.html { redirect_to @post_setting, notice: 'Post setting was successfully created.' }
+        format.html { redirect_to dashboard_index_path, notice: 'Post setting was successfully created.' }
         format.json { render action: 'show', status: :created, location: @post_setting }
       else
         format.html { render action: 'new' }

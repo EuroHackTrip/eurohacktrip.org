@@ -38,7 +38,7 @@
               <%= f.text_field :tag_list, style: "width:170px;" %> -->
               <hr>
               <h4 style="color:#00598D;">Publishing</h4>
-              <%= f.check_box :published, {checked: true} %> Publish
+              <%= f.check_box :published, {checked: @post.published} %> Publish
               <br>
               <div>
                 <em>By default, a post is published once you create it. Uncheck if you just want to save it as a draft and not publish it. Note that it won't be visible to your visitors</em>

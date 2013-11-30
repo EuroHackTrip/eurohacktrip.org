@@ -25,6 +25,8 @@ gem 'carrierwave'
 
 gem "paperclip"
 
+gem "paperclip-dropbox", ">= 1.1.7"
+
 gem 'impressionist'
 
 gem 'friendly_id'

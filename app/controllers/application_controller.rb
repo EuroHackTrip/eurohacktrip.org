@@ -34,7 +34,11 @@ end
   end
 
   def all_country_posts(country)
-    Post.all.tagged_with(country).paginate(:page => params[:page], :per_page => PostSetting.last.posts_per_page)
+    if PostSetting.all.count > 0
+      Post.all.tagged_with(country).paginate(:page => params[:page], :per_page => PostSetting.last.posts_per_page)
+    else
+      Post.all.tagged_with(country).paginate(:page => params[:page], :per_page => 10)
+    end
   end
 
   def all_post_settings
