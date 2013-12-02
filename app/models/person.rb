@@ -1,4 +1,6 @@
 class Person < ActiveRecord::Base
   belongs_to :country
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :avatar,
+    :storage => :dropbox,
+    :dropbox_credentials => Rails.root.join("config/dropbox.yml")
 end
