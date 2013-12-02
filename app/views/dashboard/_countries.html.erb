@@ -11,7 +11,7 @@
             <div class = "to-hide country">
             <div>
               <%= country.name %><br>
-              <%= image_tag country.avatar.url, size: "250x250" %><br>
+              <%= image_tag country.flag, size: "250x250" %><br>
               <%= country.description %><br>
               <%= country.map %>
             </div>
@@ -52,7 +52,7 @@
           </div>
           <div class="field">
             <%= f.label :flag %>
-            <%= f.file_field :avatar %>
+            <%= f.file_field :flag %>
           </div>
           <div class="field">
             Click on the map below to pick the co-ordinates

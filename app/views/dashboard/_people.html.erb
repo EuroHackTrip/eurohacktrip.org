@@ -8,7 +8,7 @@
         <% all_people.each do |person| %>
             <div class = "to-hide person">
             <div>
-              <%= image_tag person.avatar.url, size: "250x250" %><br>
+              <%= image_tag person.photo, size: "250x250" %><br>
               <%= link_to person.name, person.online_profile_link %><br>
               <%= person.occupation %><br>
               <% if person.country_id > 0 %>
@@ -47,7 +47,7 @@
   </div>
   <div class="field">
     <%= f.label :photo %><br>
-    <%= f.file_field :avatar %>
+    <%= f.file_field :photo %>
   </div>
   <div class="field">
     <%= f.label :occupation %><br>

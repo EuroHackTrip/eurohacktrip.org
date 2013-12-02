@@ -20,7 +20,7 @@
 	</div>
 	<div class="span3 well pull-right" style="background-color:white;">
 		<legend><h4><%= @country.name %></h4></legend>
-		<div><%= image_tag(@country.avatar.url) %></div>
+		<div><%= image_tag(@country.flag) %></div>
 		<div><%= @country.description %></div>
 	</div>
 </div>
@@ -33,7 +33,7 @@
 	 		<% if @country.id == person.country_id %> 
 	 			<div class="col-sm-3 col-md-2">
 	 				<div class="thumbnail">
-	 					<%= image_tag person.avatar.url, size: "200x150" %>
+	 					<%= image_tag person.photo, size: "200x150" %>
 	 					<div class="caption">
 	 						<h3><%= link_to person.name, "http://" + person.online_profile_link, class: "links" %></h3>
 	         			    <%= person.occupation %><br>
