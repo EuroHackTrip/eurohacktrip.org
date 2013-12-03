@@ -78,6 +78,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def publish
+    @post = Post.friendly.find(params[:id])
+    @post.published = !@post.published
+    @post.save!
+    redirect_to dashboard_index_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post

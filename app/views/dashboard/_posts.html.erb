@@ -20,7 +20,12 @@
       <div class="hidden-links">
         <%= link_to "Edit", edit_post_path(post) %> |
         <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %> |
-        <%= link_to 'View', post %>
+        <%= link_to 'View', post %> | 
+        <% if !post.published %>
+          <%= link_to 'Publish', post_publish_path(post), method: :post, data: { confirm: 'Are you sure?' } %>
+        <% else %>
+          <%= link_to 'Unpublish', post_publish_path(post), method: :post, data: { confirm: 'Are you sure?' } %>
+        <% end %>
       </div>
       <br>
     </div>

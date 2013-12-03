@@ -31,7 +31,7 @@ EurohacktripOrg::Application.routes.draw do
 
   match "country/:id" => "countries#show_in_nav", :as => "country_show", via: [:post]
 
-  #match "country/:id" => "countries#dont_show_in_nav", :as => "country_dont_show", via: [:post]
+  match "post/:id" => "posts#publish", :as => "post_publish", via: [:post]
 
   root to: "home#index"
 
