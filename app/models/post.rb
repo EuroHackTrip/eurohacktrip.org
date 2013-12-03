@@ -1,8 +1,6 @@
 class Post < ActiveRecord::Base
 	is_impressionable
 
-	#self.per_page = PostSetting.last.posts_per_page
-
 	extend FriendlyId
 	friendly_id :title, use: [:slugged, :history]
 

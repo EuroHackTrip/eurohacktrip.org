@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131130120930) do
+ActiveRecord::Schema.define(version: 20131203155842) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -95,12 +95,13 @@ ActiveRecord::Schema.define(version: 20131130120930) do
   add_index "countries", ["slug"], name: "index_countries_on_slug", unique: true
 
   create_table "events", force: true do |t|
-    t.integer  "event_id"
     t.integer  "country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "event_link"
     t.string   "event_name"
+    t.string   "event_venue"
+    t.integer  "event_id"
   end
 
   add_index "events", ["country_id"], name: "index_events_on_country_id"

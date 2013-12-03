@@ -4,15 +4,7 @@ require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env)
-
-    require 'eventbrite-client'
-    eb_auth_tokens = { app_key: 'POR5GB24DLDRC7HF5T',
-                   user_key: '134744050840598882350'}
-    eb_client = EventbriteClient.new(eb_auth_tokens)
-      response = eb_client.event_get({ id: 9139643921})
-    widget_html = EventbriteWidgets::ticketWidget(response['event'])
-
+Bundler.require(:default, Rails.env)    
 
 module EurohacktripOrg
   class Application < Rails::Application

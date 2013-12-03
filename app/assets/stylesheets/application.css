@@ -8,98 +8,18 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require bootstrap-wysihtml5
+ * require bootstrap-wysihtml5
+ * require bootstrap
  *= require_self
  *
  *= require_tree .
  */
-body {
-	padding-top: 40px;
-	background-color:#FBF8EF;
-}
 
-h2 {
-	font-size: 28px;
-	font-weight: normal;
-	margin: 0 0 20px 0;
-	padding: 5px 0 5px 0;
-	//border-bottom: 1px solid #d1d1d1;
-}
-
-p {
-	margin: 0 0 10px;
-	line-height: 1.6em;
-	display: block;
-	font-size: 18px;
-}
-
-footer#page-footer {
-margin-bottom: 0;
-border-radius: 0;
-background: #383838;
-padding: 0 0 40px 0;
-color: #999;
-}
-
-.links, a {
-	color: #F06361;
-}
-a {
-	color: #F06361;
-}
-.map {
-	width:100%; 
-	height:220px; 
-	margin-bottom:10px;
-}
-
-#map { 
-height: 250px; 
-}
-h1#tagline {
-font-size: 23px;
-line-height: 1.5;
-font-weight: bold;
-color: #000;
-}
-
-#intro {
-top: 60px;
-padding-left:10px;
-width: 40%;
-position:absolute;
-z-index:10;
-//padding: 20px 0px 0px 0px;
-}
-.main {
-//padding-bottom: 30px;
-max-width: 960px;
-margin-top: 25px;
-}
-
-.row {
-margin-left: -15px;
-margin-right: -15px;
-}
-
-.col-md-3 {
-width: 25%;
-}
-
-footer#page-footer h3 {
-font-size: 16px;
-font-weight: normal;
-padding: 40px 0 5px 0;
-margin: 0 0 10px 0;
-color: #f06361;
-}
-
-footer#page-footer ul {
-padding: 0;
-list-style: none;
-}
-
-footer#page-footer li {
-line-height: 1.6em;
-}
-
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../assets/glyphicons-halflings-regular.eot');
+  src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
+       url('../assets/glyphicons-halflings-regular.woff') format('woff'), 
+       url('../assets/glyphicons-halflings-regular.ttf') format('truetype'), 
+       url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}	

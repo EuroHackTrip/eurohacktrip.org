@@ -1,4 +1,4 @@
-<% provide(:title, 'Blog | ' + @post.title) %>
+<% provide(:title, @post.title) %>
 <div id="map">
   
 </div>
@@ -11,6 +11,13 @@
 <p>
   <%= raw @post.content %>
 </p>
+    <% if admin_signed_in? %>
+      <span class="admin">
+        <%= link_to 'Edit', edit_post_path(@post) %> | 
+        <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </span>
+    <% end %>
+          <br>
 <!--<ul class="nav nav-tabs">
   <li><a href="#comments" data-toggle="tab">Comments <span class="badge"><%= approved_comments_count(@post) %></span></a></li>
   <li><a href="#add-comment" data-toggle="tab">Add a Comment</a></li>
@@ -78,35 +85,3 @@
 </div>
 <% end %>
 
-
-<script type="text/javascript">
-  $(document).ready(function(){ 
-  var map = L.map('map', {
-    scrollWheelZoom: false,
-    zoomControl: false,
-    attributionControl: false,
-  }).setView([51.505, -0.09], 13); 
-   // var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png',  
-   // cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 FirstFuel',  
-   // cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution, key: 'xxxxxxxxxxxx'  
-   // }),  
-   // latlng = new L.LatLng(<%= raw @lat.to_json %>,<%= raw @lng.to_json %>);  
-   // fsMap = new L.Map('map', {center: latlng, zoom:15, zoomControl:false, layers: [cloudmade], scrollWheelZoom : false});     
-  L.tileLayer('http://{s}.tile.cloudmade.com/5e9427487a6142f7934b07d07a967ba3/997/256/{z}/{x}/{y}.png', {
-      attribution: 'EuroHackTrip',
-      maxZoom: 18
-  }).addTo(map);
-
-  var marker = L.marker([51.5, -0.09]).bindLabel("City").addTo(map);
-
-    // var popup = L.popup();//initialize a leaflet popup and assign it to a variable
-    // function onMapClick(e) {
-    //     popup
-    //         .setLatLng(e.latlng)
-    //         .setContent("You clicked the map at " + e.latlng.toString())
-    //         .openOn(map);//activate the 'popup'
-    // }
-    // map.on('click', onMapClick);
-
- });  
-</script>

@@ -3,8 +3,11 @@
 <table>
   <thead>
     <tr>
-      <th>Event</th>
+      <th>EventBrite ID</th>
+      <th>Event Name</th>
+      <th>Event Venue</th>      
       <th>Country</th>
+      <th>Event Link</th>
       <th></th>
       <th></th>
       <th></th>
@@ -15,7 +18,10 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.event_id %></td>
-        <td><%= event.country %></td>
+        <td><%= event.event_name %></td>
+        <td><%= event.event_venue %></td>
+        <td><%= Country::find(event.country_id).name %></td>
+        <td><%= event.event_link %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>

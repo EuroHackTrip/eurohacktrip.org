@@ -1,6 +1,7 @@
 <ul class="nav nav-tabs">
         <li><a href="#all-cities" data-toggle="tab">All Cities</a></li>
-        <li><a href="#new-city" data-toggle="tab">Add City</a></li>
+        <li><a href="#new-city" data-toggle="tab">
+        <span class="glyphicon glyphicon-plus-sign"></span>Add City</a></li>
 </ul>
 <!-- Tab panes -->
 <div class="tab-content">
@@ -49,16 +50,58 @@
         <%= f.text_area :description %>
       </div>
       <div class="field">
-        <%= f.label :country_id %><br>
-        <%= f.select "country_id", Country.all.collect {|p| [ p.name, p.id ] }, { include_blank: false } %>
+
+        <b>Pick country to start the map:</b><br>
+        <%= f.select "country_id", Country.all.collect {|p| [ p.name, p.id ] }, { include_blank: true } %>
       </div>
-      <div class="field">
-        <%= f.label :map %><br>
-        <%= f.text_field :map %>
-      </div>
+		<div class="field">
+		<b>Click on the City in the map:</b>
+		<div id="mapmaker" style="height:300px;"></div>
+		<b>City Location</b>(Do not change):<%= f.text_field :map, {style: 'width: 300px;'} %>
+		</div>
       <div class="actions">
         <%= f.submit %>
       </div>
     <% end %>
     </div>
 </div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){ 
+
+  $('select#city_country_id').click(function(){
+  	console.log('clicked a#to-cities')
+  	var mapmaker = L.map('mapmaker').setView([51.505, -0.09], 6); 
+	  L.tileLayer('http://{s}.tile.cloudmade.com/5e9427487a6142f7934b07d07a967ba3/997/256/{z}/{x}/{y}.png', {
+	      attribution: 'EuroHackTrip',
+	      maxZoom: 18
+	  }).addTo(mapmaker);
+
+
+	  var myIcon = L.icon({
+	    iconUrl: '/assets/bubble-pink.png',
+	    iconSize: [20, 20],
+	    iconAnchor: [10, 10],
+	    labelAnchor: [6, 0] // as I want the label to appear 2px past the icon (10 + 2 - 6)
+	    });
+
+	  var marker = L.marker()
+
+	  function onMapClick(e) {
+	    console.log(e)
+
+	    marker
+	      .setLatLng(e.latlng)
+	      .setIcon(myIcon)
+	      .addTo(mapmaker);
+
+	    $('#city_map')[0].value = e.latlng.lat + ', ' + e.latlng.lng 
+	  }
+
+	mapmaker.on('click', onMapClick)
+
+  })
+
+ });  
+</script>

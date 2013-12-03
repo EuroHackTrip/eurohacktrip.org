@@ -2,22 +2,72 @@
 
 <ul class="nav nav-tabs">
   <li><a href="#all-events" data-toggle="tab">All events</a></li>
-  <li><a href="#new-event" data-toggle="tab">Add event</a></li>
+  <li><a href="#new-event" data-toggle="tab">
+  <span class="glyphicon glyphicon-plus-sign"></span>Add event</a></li>
 </ul>
 <!-- Tab panes -->
 <div class="tab-content">
   <div class="tab-pane active event" id="all-events">
+  <ol>  
     <% all_events.each do |event| %>
       <div style="display:inline;">
        
-        <iframe src="http://www.eventbrite.com/countdown-widget?eid=<%= event.event_id %>" frameborder="0" height="479" width="195" marginheight="0" marginwidth="0" scrolling="no" allowtransparency="true"></iframe>
-    
-        <div class="hidden-links">
+ <!--        <iframe src="http://www.eventbrite.com/countdown-widget?eid=<%= event.event_id %>" frameborder="0" height="479" width="195" marginheight="0" marginwidth="0" scrolling="no" allowtransparency="true"></iframe> -->
+
+        <li style="font-size: 20px">
+
+          <% if ENV["RAILS_ENV"] == 'production' %>
+          <% begin %>
+
+            <% eventx = CountryEvent.new(event.event_id) %>
+            <% e = eventx.response['event'] %>
+
+            <a href="<%= e['url'] %>" >
+            <%= e['title'] %>
+            </a>
+
+            <span style="font-size: 10px; text-align: right; float: right">
+              At <%= e['venue']['name'] %> <br/>
+              <%= e['tickets'][0]['ticket']['quantity_available'] %> Tickets Remaining
+              <a href="<%= e['url'] %>">Order</a>
+            </span>
+
+          <% rescue Exception => e %>
+
+
+            <div class="hide">
+              <%= "Error: #{$!}" %> <br/>
+              <%= "Error: #{e}" %> <br/>
+              <%= "Error:" + e.inspect %>
+            </div>
+            
+          <% end %>
+          <% end %>
+
+
+            <a href="<%= event.event_link %>" >
+            <%= event.event_name %>
+            </a>
+
+            <span style="font-size: 10px; text-align: right; float: right">
+              At <%= event.event_venue %> <br/>
+              <a href="<%= event.event_link %>">Order</a>
+            </span>
+
+
+        </li>
+
+        <div class="not-hidden-links">
           <%= link_to 'Edit', edit_event_path(event) %> |
           <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>
+
+        <hr>
+    
+       
       </div>
     <% end %>
+  </ol>
   </div>
   <div class="tab-pane event" id="new-event">
     <%= form_for(@event) do |f| %>
@@ -32,19 +82,24 @@
           </ul>
         </div>
       <% end %>
-
       <div class="field">
-        Enter Event Name: </br>
-        <%= f.text_field :event_name %>
-      </div>
-       <div class="field hide">
         Enter Event link: </br>
         <%= f.text_field :event_link %>
       </div>
-       <div class="field">
-        Eventbrite link: </br>
-        <label for="eventinput" class="stripwell hide"></label>
+
+      <label for="eventlabel" class="fetched hide"></label>
+
+      <div class="field eventid hide">
+        Event ID: <br/>
         <%= f.text_field :event_id %>
+      </div>
+      <div class="field">
+        Event Name: </br>
+        <%= f.text_field :event_name %>
+      </div>
+      <div class="field">
+        Event Venue: </br>
+        <%= f.text_field :event_venue %>
       </div>
       <div class="field">
         <%= f.label :country_id %>
@@ -56,36 +111,3 @@
     <% end %>
   </div>
 </div>
-
-
-<script type="text/javascript">
-  //eventbrite url into event id
-  //http://www.eventbrite.com/e/tedxstrathmoreuniversity-tickets-9346225813?ref=ecount
-  //https://www.eventbrite.com/e/euro-hack-trip-first-meetup-tickets-9139643921
-  //http://www.eventbrite.com/e/spoken-word-event-tickets-9311395635
-  //http://www.eventbritickets-9311395634vfsv
-  //remove events easy
-
-  n = $("form#new_event input#event_event_id");
-  // n.on('click', function(){console.log('enter event url');});
-  n.on('paste', function(){
-    setTimeout(function(){
-    console.log(n[0].value);
-      if(n[0].value.charAt(10)){ //check if guy brings url or event id
-        $("form#new_event input#event_event_link").value = n.val();
-        event_id = n.val().substr(n.val().search("tickets-")+8, 10);
-        if(!isNaN(event_id)){ //Check if string is a number
-          n[0].value = event_id;
-          $('label.stripwell').attr('class', 'stripwell alert alert-success');
-          $('label.stripwell')[0].innerText = "Event ID stripped!";
-        }else{
-          $('label.stripwell').attr('class', 'stripwell alert alert-danger');
-          $('label.stripwell')[0].innerText = "Please copy URL from the event at Eventbrite.com";
-
-        };
-      };
-    }, 500);
-    
-  });
-
-</script>

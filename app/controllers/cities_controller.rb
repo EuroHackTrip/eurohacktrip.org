@@ -1,6 +1,6 @@
 class CitiesController < ApplicationController
   before_action :set_city, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin!, except: [:show]
+  before_action :authenticate_admin!, except: [:show, :single, :byCountry, :byPost, :all]
 
   # GET /cities
   # GET /cities.json
@@ -11,6 +11,50 @@ class CitiesController < ApplicationController
   # GET /cities/1
   # GET /cities/1.json
   def show
+  end
+
+  def single
+    city = City.find(params[:id])
+    # render json: {
+    #   'id' => params[:id],
+    #   'title' => e['title'],
+    #   'venue' => e['venue']['name'],
+    #   'tickets' => e['tickets'][0]['ticket']['quantity_available'].to_s
+    # }
+    # render text: ''
+    render json: city
+  end
+
+  def byCountry
+    country = Country.friendly.find(params[:id])
+
+    bunch = []
+  
+    City.all.each { |city|
+      if city.country_id == country.id
+        bunch << city
+      end
+    }
+    render json: bunch
+  end
+
+  def byPost
+    post = Post.friendly.find(params[:id])
+
+    bunch = []
+
+    City.all.each do |city|
+      if city.country_id = post.country_id #all cities in the same country as post
+        #error: post.country_id is nill
+        bunch << city
+      end
+    end
+  
+    render json: bunch
+  end
+
+  def all
+    render json: City.all
   end
 
   # GET /cities/new
@@ -57,10 +101,11 @@ class CitiesController < ApplicationController
   def destroy
     @city.destroy
     respond_to do |format|
-      format.html { redirect_to dashboard_index_pathl }
+      format.html { redirect_to dashboard_index_path }
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

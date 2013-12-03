@@ -1,3 +1,5 @@
+require Rails.root.to_s + "/lib/eventbrite/eventbrite.rb"
+
 class Country < ActiveRecord::Base
 	is_impressionable
 	extend FriendlyId

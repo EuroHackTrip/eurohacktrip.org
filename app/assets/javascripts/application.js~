@@ -1,0 +1,201 @@
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// compiled file.
+//
+// Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
+// about supported directives.
+//
+//= require jquery
+//= require jquery_ujs
+//= require bootsy
+//= require bootstrap.min
+//= require posts
+//= require dashboard
+//= require ckeditor-jquery
+
+
+$(document).ready(function(){ 
+
+$('.ckeditor').ckeditor({
+  // optional config
+});
+
+if(window.location.pathname == '/' 
+	|| window.location.pathname ==  '/posts'
+	|| window.location.pathname ==  '/countries'){ 
+//mapping for home and /posts page
+
+	var mapmaker = L.map('allmap', {
+	  scrollWheelZoom: false,
+	  zoomControl: false,
+	  doubleClickZoom: false,
+	  attributionControl: false,
+	}).setView([50.005, -7], 5); 
+
+	L.tileLayer('http://{s}.tile.cloudmade.com/5e9427487a6142f7934b07d07a967ba3/114841/256/{z}/{x}/{y}.png', {
+	  attribution: 'EuroHackTrip',
+	  maxZoom: 18,
+	  opacity: 0.5
+	}).addTo(mapmaker);
+
+	var myIcon = L.icon({
+	iconUrl: 'assets/bubble-pink.png',
+	iconSize: [20, 20],
+	iconAnchor: [10, 10],
+	labelAnchor: [6, 0] // as I want the label to appear 2px past the icon (10 + 2 - 6)
+	});
+
+	// L.marker([51.72703, -0.04395], {
+	// icon: myIcon
+	// })
+	// .bindLabel("London", {
+	// noHide: true,
+	// direction: 'auto'
+	// }).addTo(mapmaker); 
+
+	L.marker([48.89362, 2.37305], {
+	icon: myIcon
+	})
+	.bindLabel("Paris", {
+	noHide: true,
+	direction: 'auto'
+	}).addTo(mapmaker); 
+
+	L.marker([50.76426, 4.79004], {
+	icon: myIcon
+	})
+	.bindLabel("Brussels", {
+	noHide: true,
+	direction: 'auto'
+	}).addTo(mapmaker);
+
+	L.marker([52.32191, 5.18555], {
+	icon: myIcon
+	})
+	.bindLabel("Amsterdam", {
+	noHide: true,
+	direction: 'auto'
+	}).addTo(mapmaker); 
+
+	L.marker([52.45601, 13.27148], {
+	icon: myIcon
+	})
+	.bindLabel("Berlin", {
+	noHide: true,
+	direction: 'auto'
+	}).addTo(mapmaker); 
+
+	L.marker([46.98025, 7.60254], {
+	icon: myIcon
+	})
+	.bindLabel("Zurich", {
+	noHide: true,
+	  direction: 'auto'
+	}).addTo(mapmaker); 
+
+
+}
+
+
+if(window.location.pathname.indexOf('/countries/') > -1 || window.location.pathname.indexOf('/posts/') > -1){ 
+//mapping for single country and single post page
+
+  var map = L.map('map', {
+    scrollWheelZoom: false,
+    zoomControl: false,
+    attributionControl: false,
+  }).setView([51.505, -0.09], 13); 
+   // var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png',  
+   // cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 FirstFuel',  
+   // cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution, key: 'xxxxxxxxxxxx'  
+   // }),  
+   // latlng = new L.LatLng(<%= raw @lat.to_json %>,<%= raw @lng.to_json %>);  
+   // fsMap = new L.Map('map', {center: latlng, zoom:15, zoomControl:false, layers: [cloudmade], scrollWheelZoom : false});     
+  L.tileLayer('http://{s}.tile.cloudmade.com/5e9427487a6142f7934b07d07a967ba3/997/256/{z}/{x}/{y}.png', {
+      attribution: 'EuroHackTrip',
+      maxZoom: 18
+  }).addTo(map);
+
+  var marker = L.marker([51.5, -0.09]).bindLabel("City").addTo(map);
+
+    // var popup = L.popup();//initialize a leaflet popup and assign it to a variable
+    // function onMapClick(e) {
+    //     popup
+    //         .setLatLng(e.latlng)
+    //         .setContent("You clicked the map at " + e.latlng.toString())
+    //         .openOn(map);//activate the 'popup'
+    // }
+    // map.on('click', onMapClick);
+
+}
+
+
+if($('form #event_event_link')[0] != undefined && $('form #event_event_link')[0] != null){ 
+	//creating or editing an event:
+
+	//eventbrite url into event id
+	//http://www.eventbrite.com/e/tedxstrathmoreuniversity-tickets-9346225813?ref=ecount
+	//https://www.eventbrite.com/e/euro-hack-trip-first-meetup-tickets-9139643921
+	//http://www.eventbrite.com/e/spoken-word-event-tickets-9311395635
+	//http://www.eventbritickets-9311395634vfsv
+	//remove events easy
+
+	function ValidUrl(str) { //check if string is a valid url
+	  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+	  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+	  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+	  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+	  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+	  '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+	  if(!pattern.test(str)) {
+	    return false;
+	  } else {
+	    return true;
+	  }
+	}
+	n = $("form#new_event input#event_event_link");
+	var event_id = '' 
+	// n.on('click', function(){console.log('enter event url');});
+	n.on('paste', function(){
+	setTimeout(function(){
+	  if (ValidUrl(n[0].value)){
+	    console.log(n[0].value);
+	    event_id = parseInt(n.val().substr(n.val().search("tickets-")+8, n.val().length));
+	    console.log(event_id);
+	    $('label.fetched').attr('class', 'fetched alert alert-info');
+	    $('label.fetched')[0].innerText = "Fetching Event Data..."; 
+	    $("form#new_event #eventidlabel").slideToggle(500)
+	    var e = {}
+	    $.get('/eventbrite/' + event_id, function(e){
+	      console.log(e);
+	      $("form#new_event input#event_event_id")[0].value = event_id;
+	      $("form#new_event input#event_event_name")[0].value = e['title'];
+	      $("form#new_event input#event_event_venue")[0].value = e['venue'];
+	      $('label.fetched').attr('class', 'fetched alert alert-success');
+	      $('label.fetched')[0].innerText = "Successful! " + 0+e['tickets'] + " Tickets Remaining"; 
+	      $("form#new_event .eventid").slideToggle(500)
+	      setTimeout(function(){
+	        $("form#new_event .eventid").slideToggle(500)
+	      }, 1000)
+
+	    })
+	    .fail(function() {
+	      $('label.fetched').attr('class', 'fetched alert alert-warning');
+	      $('label.fetched')[0].innerText = "Provide more information...";
+	    })
+	  }else{
+	    $('label.fetched').attr('class', 'fetched alert alert-danger');
+	    $('label.fetched')[0].innerText = "Please provide a valid link:"; 
+	  }
+	}, 200)
+	})
+
+}//end creating and editing events
+
+
+});  

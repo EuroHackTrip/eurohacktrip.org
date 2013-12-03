@@ -62,6 +62,27 @@ class EventsController < ApplicationController
     end
   end
 
+  def pingeventbrite
+    # render nothing: true
+    # render text: params[:id]
+    
+    # begin
+    
+    require Rails.root.to_s + "/lib/eventbrite/eventbrite.rb"
+    e = CountryEvent.new(params[:id]).response['event']
+    render json: {
+      'id' => params[:id],
+      'title' => e['title'],
+      'venue' => e['venue']['name'],
+      'tickets' => e['tickets'][0]['ticket']['quantity_available'].to_s
+    }
+
+    # rescue Exception => e
+    #     render text: e
+    # end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
@@ -70,6 +91,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:event_id, :event_link, :event_name, :country_id)
+      params.require(:event).permit(:event_id, :event_link, :event_name, :event_venue, :country_id)
     end
 end

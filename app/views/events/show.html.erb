@@ -1,14 +1,30 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Event:</strong>
-  <%= @event.event_id %>
+	<strong>Link:</strong>
+	<%= @event.event_link %>
 </p>
 
 <p>
-  <strong>Country:</strong>
-  <%= @event.country %>
+	<strong>Eventbrite ID:</strong>
+	<%= @event.event_id %>
 </p>
+
+<p>
+  	<strong>Name:</strong>
+  	<%= @event.event_name %>
+ </p>
+
+<p>
+  	<strong>Venue:</strong>
+  	<%= @event.event_venue %>
+ </p>
+
+<p>
+  <strong>Country:</strong>
+  <%= Country::find(@event.country_id).name %>
+</p>
+
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

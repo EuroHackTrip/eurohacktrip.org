@@ -4,24 +4,84 @@
 </div>
 <br>
 <div class = "row">
-	<div class="span8">
+	<div class="eventslist">
 
-		<legend><h4>Events we organize here</h4></legend>
-
-		<ol>	
+	<legend><h4>Events we organize here</h4></legend>
+	
+	<ol>	
 		<% all_events.each do |event| %>
+						
+			<% 
+			# puts @country.id
+			# event.country_id 
+			%>
+
 			<% if event.country_id == @country.id %>
-				<h4><li><a href="<%= event.event_link %>">
-				<%= event.event_name %>
-				</a></li></h4>
+
+				<li style="font-size: 20px">
+
+					<% if ENV["RAILS_ENV"] == 'production' %>
+					<% begin %>
+				
+						<% eventx = CountryEvent.new(event.event_id) %>
+						<% e = eventx.response['event'] %>
+
+						<a href="<%= e['url'] %>" >
+						<%= e['title'] %>
+						</a>
+
+						<span style="font-size: 10px; text-align: right; float: right">
+							At <%= e['venue']['name'] %> <br/>
+							<%= e['tickets'][0]['ticket']['quantity_available'] %> Tickets Remaining
+							<a href="<%= e['url'] %>">Order</a>
+						</span>
+
+					<% rescue Exception => e %>
+
+						<div class="hide">
+							<%= "Error: #{$!}" %> <br/>
+							<%= "Error: #{e}" %> <br/>
+							<%= "Error:" + e.inspect %>
+						</div>
+
+					<% end %>
+					<% end %>
+
+						<a href="<%= event.event_link %>" >
+						<%= event.event_name %>
+						</a>
+
+						<span style="font-size: 10px; text-align: right; float: right">
+							At <%= event.event_venue %> <br/>
+							<a href="<%= event.event_link %>">Order</a>
+						</span>
+
+
+
+				</li>
+
+					<% if admin_signed_in? %>
+				      <span class="admin">
+				        <%= link_to 'Edit', edit_event_path(event) %> | 
+				        <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+				      </span>
+				    <% end %>
+				<hr>
 			<% end %>
 		<% end %>
-		</ol>
+	</ol>
+
 	</div>
-	<div class="span3 well pull-right" style="background-color:white;">
+	<div class="countrybox well pull-right" style="background-color:white;">
 		<legend><h4><%= @country.name %></h4></legend>
 		<div><%= image_tag(@country.avatar.url) %></div>
 		<div><%= @country.description %></div>
+		<% if admin_signed_in? %>
+	      <span class="admin">
+	        <%= link_to 'Edit', edit_country_path(@country) %> | 
+	        <%= link_to 'Destroy', @country, method: :delete, data: { confirm: 'Are you sure?' } %>
+	      </span>
+	    <% end %>
 	</div>
 </div>
 <div>
@@ -53,46 +113,24 @@
 			<pre>Posted at <%= post.created_at %><span class="pull-right">Share:</span></pre><br><br>
 			<!--<%= post.created_at %> -->
 			<%= raw post.content %><br><br>
+
+			<% if admin_signed_in? %>
+		      <span class="admin">
+		        <%= link_to 'Edit', edit_post_path(post) %> | 
+		        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+		      </span>
+		    <% end %>
+
+		    <%= link_to "Leave a Comment", "/posts/"+post.id.to_s+"#add-comment", class: "links" %>
+			<!--
 			<% if post.comments.count > 0 %>
 				<%= link_to pluralize(post.comments.count, " comment") + " so far.", "/posts/"+post.id.to_s+"#comments", class: "links" %>
 			<% else %>
 				<%= link_to "Leave a Comment", "/posts/"+post.id.to_s+"#add-comment", class: "links" %>
 			<% end %>
+			-->
 		<% end %>
 	</div>
 	<div class="span4"></div>
 	<%= will_paginate all_country_posts(@country.name), :container => true %>
 </div>	 
-
-
-<script type="text/javascript">
-  $(document).ready(function(){ 
-  var map = L.map('map', {
-    scrollWheelZoom: false,
-    zoomControl: false,
-    attributionControl: false,
-  }).setView([51.505, -0.09], 13); 
-   // var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png',  
-   // cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 FirstFuel',  
-   // cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution, key: 'xxxxxxxxxxxx'  
-   // }),  
-   // latlng = new L.LatLng(<%= raw @lat.to_json %>,<%= raw @lng.to_json %>);  
-   // fsMap = new L.Map('map', {center: latlng, zoom:15, zoomControl:false, layers: [cloudmade], scrollWheelZoom : false});     
-  L.tileLayer('http://{s}.tile.cloudmade.com/5e9427487a6142f7934b07d07a967ba3/997/256/{z}/{x}/{y}.png', {
-      attribution: 'EuroHackTrip',
-      maxZoom: 18
-  }).addTo(map);
-
-  var marker = L.marker([51.5, -0.09]).bindLabel("City").addTo(map);
-
-    // var popup = L.popup();//initialize a leaflet popup and assign it to a variable
-    // function onMapClick(e) {
-    //     popup
-    //         .setLatLng(e.latlng)
-    //         .setContent("You clicked the map at " + e.latlng.toString())
-    //         .openOn(map);//activate the 'popup'
-    // }
-    // map.on('click', onMapClick);
-
- });  
-</script>

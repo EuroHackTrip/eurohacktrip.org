@@ -12,6 +12,7 @@ class CountriesController < ApplicationController
   # GET /countries/1.json
   def show
     @country = Country.friendly.find(params[:id])
+    # @country = Country.friendly.find_by({'id' => params[:id]})
     impressionist(@country)
     puts response.body
   end
@@ -46,7 +47,7 @@ class CountriesController < ApplicationController
   def update
     respond_to do |format|
       if @country.update(country_params)
-        format.html { redirect_to dashboard_index_path, notice: 'Country was successfully updated.' }
+        format.html { redirect_to country_path, notice: 'Country was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

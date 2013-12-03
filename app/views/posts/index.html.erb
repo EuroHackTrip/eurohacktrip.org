@@ -1,16 +1,15 @@
 <% provide(:title, 'Blog') %>
  <div id = "intro">
   <h1 id = "tagline">
-    We are a group of developers and designers from Europe, curious about the emerging African tech hubs.
+    The Blog...
   </h1>
 
   <p>
-    The trip has started on September 23, and it's been an amazing experience so far! African hackers: Munavutia
-    Check out our Blog or Tumblr and see what's happening on Twitter! 
+   Story of the hacktrip...
   </p>
 </div>
 
-<div id="map">
+<div id="allmap" style="margin-bottom: 10px;">
    
 </div>
 
@@ -23,6 +22,7 @@
 <% if admin_signed_in? %>
   <%= link_to 'New Post', new_post_path, class: "btn btn-primary pull-right" %>
 <% end %>
+
 <% @posts.each do |post| %>
   <% if post.published || post.published == nil %>
     <div class="posts">
@@ -44,7 +44,6 @@
             <%= link_to "Leave a Comment", "/posts/"+post.id.to_s+"#add-comment", class: "links" %>
           <% end %>
           <br>
-
           <% if admin_signed_in? %>
             <span class="admin">
               <%= link_to 'Edit', edit_post_path(post) %> | 
@@ -60,78 +59,3 @@
   <% end %>
 <% end %>
 <%= will_paginate @posts, :container => true %>
-
-<script type="text/javascript">
-  
-$(document).ready(function(){ 
-
-  var mapmaker = L.map('map', {
-    scrollWheelZoom: false,
-    zoomControl: false,
-    attributionControl: false,
-  }).setView([50.005, -7], 5); 
-
-  L.tileLayer('http://{s}.tile.cloudmade.com/5e9427487a6142f7934b07d07a967ba3/114841/256/{z}/{x}/{y}.png', {
-    attribution: 'EuroHackTrip',
-    maxZoom: 18,
-    opacity: 0.5
-  }).addTo(mapmaker);
-
-  var myIcon = L.icon({
-  iconUrl: 'assets/bubble-pink.png',
-  iconSize: [20, 20],
-  iconAnchor: [10, 10],
-  labelAnchor: [6, 0] // as I want the label to appear 2px past the icon (10 + 2 - 6)
-  });
-
-  // L.marker([51.72703, -0.04395], {
-  // icon: myIcon
-  // })
-  // .bindLabel("London", {
-  // noHide: true,
-  // direction: 'auto'
-  // }).addTo(mapmaker); 
-
-  L.marker([48.89362, 2.37305], {
-  icon: myIcon
-  })
-  .bindLabel("Paris", {
-  noHide: true,
-  direction: 'auto'
-  }).addTo(mapmaker); 
-
-  L.marker([50.76426, 4.79004], {
-  icon: myIcon
-  })
-  .bindLabel("Brussels", {
-  noHide: true,
-  direction: 'auto'
-  }).addTo(mapmaker);
-
-  L.marker([52.32191, 5.18555], {
-  icon: myIcon
-  })
-  .bindLabel("Amsterdam", {
-  noHide: true,
-  direction: 'auto'
-  }).addTo(mapmaker); 
-
-  L.marker([52.45601, 13.27148], {
-  icon: myIcon
-  })
-  .bindLabel("Berlin", {
-  noHide: true,
-  direction: 'auto'
-  }).addTo(mapmaker); 
-
-  L.marker([46.98025, 7.60254], {
-  icon: myIcon
-  })
-  .bindLabel("Zurich", {
-  noHide: true,
-    direction: 'auto'
-  }).addTo(mapmaker); 
-
-});  
-
-</script>

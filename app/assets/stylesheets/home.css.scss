@@ -3,7 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .home-title {
-color: #000;
-font-size: 22px;
-margin-bottom: 30px;
+	color: #000;
+	font-size: 22px;
+	margin-bottom: 30px;
+}
+.homewrap{
+	position: relative;
+}
+
+#allmap { 
+	/* margin-bottom: -240px; */
+	height: 250px;
+	width:100%;
+	/* z-index:-1; */
 }

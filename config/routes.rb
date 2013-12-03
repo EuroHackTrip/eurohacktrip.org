@@ -21,6 +21,9 @@ EurohacktripOrg::Application.routes.draw do
   get "dashboard/index"
   get "home/index"
 
+  #ping our eventbrite client:
+  get 'eventbrite/:id' => 'events#pingeventbrite'
+
   resources :comments
 
   resources :posts do
@@ -91,4 +94,10 @@ EurohacktripOrg::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  #citiez apis like a boss....
+  get 'citiez/:id' => 'cities#single'
+  get 'citiez/country/:id' => 'cities#byCountry'
+  get 'citiez/post/:id' => 'cities#byPost'
+  get 'citiez' => 'cities#all'
 end
