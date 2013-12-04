@@ -42,7 +42,7 @@
         <% all_countries.each do |country| %>
           <% if country.show_in_nav %>
             <li>
-              <%= link_to country.name, country_path(country.id) %>
+              <%= link_to country.name, country_path(country.slug) %>
             </li>
           <% end %>
         <% end %>

@@ -1,8 +1,10 @@
+require 'date'
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  helper_method :posts_count, :comments_count, :all_posts, :all_comments, :all_countries, :all_cities, :all_people, :all_events, :approved_comments_count, :homepage_content, :total_unique, :total_returning, :total_unique_post_views, :page_views, :all_country_posts
+  helper_method :posts_count, :comments_count, :all_posts, :all_comments, :all_countries, :all_cities, :all_people, :all_events, :approved_comments_count, :homepage_content, :total_unique, :total_returning, :total_unique_post_views, :page_views, :all_country_posts, :init_date
 
   def store_location
   # store last url - this is needed for post-login redirect to whatever the user last visited.
@@ -77,6 +79,14 @@ end
 
   def homepage_content
     HomepageContent.all
+  end
+
+  def init_date
+    today_date = Time.now.to_s.split(" ")[0]
+    year = today_date.split("-")[0].to_i
+    month = today_date.split("-")[1].to_i
+    day = today_date.split("-")[2].to_i
+    date = Date.new(year, month, day)
   end
 
   def total_unique_post_views
