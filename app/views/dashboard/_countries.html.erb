@@ -54,6 +54,10 @@
             <%= f.label :flag %>
             <%= f.file_field :avatar %>
           </div>
+          <div>
+            <%= f.check_box :show_in_nav, {checked: true, :class => 'checkbox inline', style: 'display: inline;'} %>
+            <%= f.label :show_in_nav, {:class => 'badge badge-important'} %>
+          </div>
           <div class="actions">
             <%= f.submit %>
           </div>
