@@ -34,7 +34,7 @@ end
   end
 
   def current_user
-   @current_user ||= user_from_remember_token
+   @current_admin
   end
 
   def posts_count

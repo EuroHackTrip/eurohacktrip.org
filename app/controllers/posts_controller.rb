@@ -43,6 +43,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.admin_id = current_admin.id
+    if current_admin.email == 'admin@eurohacktrip.org'
+      @post.published = true
+    else
+      @post.published = false
+    end
     respond_to do |format|
       if @post.save
         format.html { redirect_to dashboard_index_path, notice: 'Post was successfully created.' }
@@ -80,10 +85,14 @@ class PostsController < ApplicationController
   end
 
   def publish
-    @post = Post.friendly.find(params[:id])
-    @post.published = !@post.published
-    @post.save!
-    redirect_to dashboard_index_path
+    if current_admin.email == 'admin@eurohacktrip.org'
+      @post = Post.friendly.find(params[:id])
+      @post.published = !@post.published
+      @post.save!
+      redirect_to dashboard_index_path
+    else
+      redirect_to dashboard_index_path, notice: 'You don\'t have permission to do that.'
+    end
   end
 
   private

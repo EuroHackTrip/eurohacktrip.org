@@ -17,7 +17,7 @@
       <% if !post.published %>
         <div>Publishing Status: <span class="label label-warning">Not Published</span></div>
       <% end %>
-      <% if post.admin_id %>
+      <% if post.admin_id && Admin.find(post.admin_id).first_name && Admin.find(post.admin_id).last_name %>
         <div>Posted by: <%= Admin.find(post.admin_id).first_name + " " + Admin.find(post.admin_id).last_name %></div>
       <% end %>
       <div class="hidden-links">
