@@ -49,15 +49,11 @@
         <% Page.all.each do |page| %>
           <% if page.show_in_nav %>
             <li>
-              <%= link_to page.name, page_path(page.id) %>
+              <%= link_to page.name, page_path(page.slug) %>
             </li>
           <% end %>
         <% end %>
-            <li><%= link_to "Blog", posts_path %></li>
-        <% if admin_signed_in? %>
-          <li><%= link_to 'Dashboard', dashboard_index_path %> </li>
-          <li><%= link_to 'Sign out', destroy_admin_session_path, :method => :delete %></li>
-        <% end %>
+          <li><%= link_to "Blog", posts_path %></li>
       </ul>
     </div>
 
@@ -106,6 +102,7 @@
         <% if !admin_signed_in? %>
           <div><%= link_to "Sign In", new_admin_session_path %></div>
         <% else %>
+          <div><%= link_to 'Dashboard', dashboard_index_path %> </div>
           <div><%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %></div>
         <% end %>
       </div>
