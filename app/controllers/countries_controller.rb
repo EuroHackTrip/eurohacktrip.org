@@ -1,6 +1,7 @@
 class CountriesController < ApplicationController
   before_action :set_country, only: [:edit, :update, :destroy]
   before_action :authenticate_admin!, except: [:show]
+  impressionist :unique => [:impressionable_type, :impressionable_id, :session_hash]
 
   # GET /countries
   # GET /countries.json

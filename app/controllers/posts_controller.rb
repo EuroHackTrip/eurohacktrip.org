@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   #impressionist :actions=>[:show,:index]
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :authenticate_admin!, except: [:show, :index]
+  impressionist :unique => [:impressionable_type, :impressionable_id, :session_hash]
 
   # GET /posts
   # GET /posts.json

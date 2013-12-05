@@ -42,7 +42,7 @@
               <div class="pv-row">Pageviews today </div>
             </td>
             <td align="left" style="vertical-align: top;">
-              <%= init_date.yesterday %>
+              <%= page_views(init_date, init_date) %>
             </td>
           </tr>
         </tbody>
@@ -54,7 +54,7 @@
               <div class="pv-row">Pageviews yesterday</div>
             </td>
             <td align="left" style="vertical-align: top;">
-            
+              <%= page_views(init_date.yesterday, init_date) %>
             </td>
           </tr>
         </tbody>
@@ -66,7 +66,7 @@
               <div class="pv-row">Pageviews this week</div>
             </td>
             <td align="left" style="vertical-align: top;">
-             
+              <%= page_views(init_date.beginning_of_week, init_date) %>
             </td>
           </tr>
         </tbody>
@@ -78,7 +78,7 @@
               <div class="pv-row">Pageviews last month</div>
             </td>
             <td align="left" style="vertical-align: top;">
-            
+              <%= page_views(init_date.beginning_of_month, init_date) %>
             </td>
           </tr>
         </tbody>
@@ -90,7 +90,7 @@
              <div class="pv-row">Pageviews all time </div>
             </td>
             <td align="left" style="vertical-align: top;">
-              
+              <%= total_views %>
             </td>
           </tr>
         </tbody>

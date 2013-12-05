@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   before_action :set_page, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, except: [:show]
+  impressionist :unique => [:impressionable_type, :impressionable_id, :session_hash]
 
   # GET /pages
   # GET /pages.json
