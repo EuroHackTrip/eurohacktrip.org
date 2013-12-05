@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131203155842) do
+ActiveRecord::Schema.define(version: 20131205125924) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(version: 20131203155842) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.text     "activity"
   end
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
@@ -191,8 +194,10 @@ ActiveRecord::Schema.define(version: 20131203155842) do
     t.datetime "updated_at"
     t.boolean  "published"
     t.string   "slug"
+    t.integer  "admin_id"
   end
 
+  add_index "posts", ["admin_id"], name: "index_posts_on_admin_id"
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true
 
   create_table "simple_captcha_data", force: true do |t|

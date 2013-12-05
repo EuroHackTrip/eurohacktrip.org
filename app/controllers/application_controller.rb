@@ -6,6 +6,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :posts_count, :comments_count, :all_posts, :all_comments, :all_countries, :all_cities, :all_people, :all_events, :approved_comments_count, :homepage_content, :total_unique, :total_returning, :total_unique_post_views, :page_views, :all_country_posts, :init_date, :total_views
 
+  before_filter :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :first_name
+    devise_parameter_sanitizer.for(:sign_up) << :last_name
+    devise_parameter_sanitizer.for(:sign_up) << :activity
+  end
+
   def store_location
   # store last url - this is needed for post-login redirect to whatever the user last visited.
   if (request.fullpath != "/users/sign_in" &&
@@ -21,6 +31,10 @@ end
 
   def after_sign_out_path_for(arg)
   	new_admin_session_path
+  end
+
+  def current_user
+   @current_user ||= user_from_remember_token
   end
 
   def posts_count

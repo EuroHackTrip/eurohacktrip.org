@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-
+    @post.admin_id = current_admin.id
     respond_to do |format|
       if @post.save
         format.html { redirect_to dashboard_index_path, notice: 'Post was successfully created.' }
@@ -94,6 +94,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :published, :tag_list)
+      params.require(:post).permit(:title, :content, :published, :tag_list, :admin_id)
     end
 end
