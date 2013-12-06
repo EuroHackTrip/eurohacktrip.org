@@ -1,7 +1,9 @@
 <ul class="nav nav-tabs">
-        <li><a href="#all-people" data-toggle="tab">People</a></li>
-        <li><a href="#new-person" data-toggle="tab">
-        <span class="glyphicon glyphicon-plus-sign"></span>Add People</a></li>
+  <li><a href="#all-people" data-toggle="tab">People</a></li>
+  <% if current_admin.email == 'admin@eurohacktrip.org' %>
+    <li><a href="#new-person" data-toggle="tab">
+    <span class="glyphicon glyphicon-plus-sign"></span>Add People</a></li>
+  <% end %>
 </ul>
 <!-- Tab panes -->
     <div class="tab-content">
@@ -17,8 +19,10 @@
               <% end %>
             </div>
             <div class="hidden-links">
-            <%= link_to 'Edit', edit_person_path(person) %> |
-            <%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% if current_admin.email == 'admin@eurohacktrip.org' %>
+              <%= link_to 'Edit', edit_person_path(person) %> |
+              <%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
             </div>
             <br>
           </div>

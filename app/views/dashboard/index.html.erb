@@ -9,13 +9,16 @@
         <li><a id="to-people" href="#people" data-toggle="tab">People To Meet</a></li>
         <li><a id="to-countries" href="#countries" data-toggle="tab">Countries</a></li>
         <li><a id="to-cities" href="#cities" data-toggle="tab">Cities</a></li>
-        <li><a id="to-stats" href="#stats" data-toggle="tab">Statistics</a></li>
-        <li><a id="to-settings" href="#settings" data-toggle="tab">Settings</a></li>
-        <li><%= link_to "Pages", pages_path %></li>
-        <% if HomePageContent.all.count == 0 %>
-        	<li><%= link_to "Home Page", new_home_page_content_path %></li>
-        <% else %>
-        	<li><%= link_to "Home Page", edit_home_page_content_path(HomePageContent.first) %></li>
+        <% if current_admin.email == 'admin@eurohacktrip.org' %>
+        	<li><a id="to-stats" href="#stats" data-toggle="tab">Statistics</a></li>
+	        <li><a id="to-settings" href="#settings" data-toggle="tab">Settings</a></li>
+	        <li><%= link_to "Pages", pages_path %></li>
+	        <% if HomePageContent.all.count == 0 %>
+	        	<li><%= link_to "Home Page", new_home_page_content_path %></li>
+	        <% else %>
+	        	<li><%= link_to "Home Page", edit_home_page_content_path(HomePageContent.first) %></li>
+	        <% end %>
+        	<li><a id="to-users" href="#users" data-toggle="tab">Manage Users</a></li>
         <% end %>
   	</ul>
 
@@ -44,6 +47,9 @@
 	  </div>
 	  <div class="tab-pane" id="countries">
 	  	<%= render 'countries' %>
+	  </div>
+	  <div class="tab-pane" id="users">
+	  	<%= render 'users' %>
 	  </div>
 	</div>
 </div>

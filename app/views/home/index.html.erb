@@ -6,7 +6,7 @@
  <% if HomePageContent.all.count != 0 %>
   <%= raw HomePageContent.first.content %>
  <% end %>
- <% if admin_signed_in? %>
+ <% if admin_signed_in? && current_admin.email == 'admin@eurohacktrip.org' %>
     <span class="admin">
       <%= link_to 'Edit', edit_home_page_content_path(HomePageContent.first) %>
     </span>
