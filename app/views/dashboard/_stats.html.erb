@@ -8,91 +8,32 @@
 <div class="tab-content">
   <div class="tab-pane active city" id="overview">
     <div>
-      <table cellspacing="0" cellpadding="0" class="tbl">
-        <tbody>
-          <tr>
-            <td align="left" style="vertical-align: top;">
-              <div class="pv-row">Unique Visitors</div>
-            </td>
-            <td align="left" style="vertical-align: top;">
-              <div class="count pull-right"><%= total_unique_post_views %></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table cellspacing="0" cellpadding="0" class="tbl">
-        <tbody>
-          <tr>
-            <td align="left" style="vertical-align: top;">
-              <div class="pv-row">Returning Visitors</div>
-            </td>
-            <td align="left" style="vertical-align: top;">
-              <div class="count pull-right" style="float:right;"><%= total_returning %></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <br><br>
-    <div class="page-views">
-      <table cellspacing="0" cellpadding="0" class="tbl">
-        <tbody>
-          <tr>
-            <td align="left" style="vertical-align: top;">
-              <div class="pv-row">Pageviews today </div>
-            </td>
-            <td align="left" style="vertical-align: top;">
-              <%= page_views(init_date, init_date) %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table cellspacing="0" cellpadding="0" class="tbl">
-        <tbody>
-          <tr>
-            <td align="left" style="vertical-align: top;">
-              <div class="pv-row">Pageviews yesterday</div>
-            </td>
-            <td align="left" style="vertical-align: top;">
-              <%= page_views(init_date.yesterday, init_date) %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table cellspacing="0" cellpadding="0" class="tbl">
-        <tbody>
-          <tr>
-            <td align="left" style="vertical-align: top;">
-              <div class="pv-row">Pageviews this week</div>
-            </td>
-            <td align="left" style="vertical-align: top;">
-              <%= page_views(init_date.beginning_of_week, init_date) %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table cellspacing="0" cellpadding="0" class="tbl">
-        <tbody>
-          <tr>
-            <td align="left" style="vertical-align: top;">
-              <div class="pv-row">Pageviews last month</div>
-            </td>
-            <td align="left" style="vertical-align: top;">
-              <%= page_views(init_date.beginning_of_month, init_date) %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <%
+        vars = {
+          'Unique Visitors' => total_unique_post_views,
+          'Returning Visitors' => total_returning,
+          'Pageviews today' => page_views(init_date, init_date),
+          'Pageviews Yesterday' => page_views(init_date.yesterday, init_date),
+          'Pageviews this week' => page_views(init_date.beginning_of_week, init_date),
+          'Pageviews this month' => page_views(init_date.beginning_of_month, init_date),
+          'Pageviews all time' => total_views
+        }
+
+        %>
+
       <table cellspacing="0" cellpadding="0" class="tbl GHUY-LPKDC">
         <tbody>
+        <br>
+        <% vars.each do |key, val|%>
           <tr>
             <td align="left" style="vertical-align: top;">
-             <div class="pv-row">Pageviews all time </div>
+             <div class="pv-row"><%= key %> </div>
             </td>
             <td align="left" style="vertical-align: top;">
-              <%= total_views %>
+              <%= val %>
             </td>
           </tr>
+        <% end %>
         </tbody>
       </table>
     </div>
