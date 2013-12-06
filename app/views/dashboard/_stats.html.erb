@@ -8,23 +8,10 @@
 <div class="tab-content">
   <div class="tab-pane active city" id="overview">
     <div>
-        <%
-        vars = {
-          'Unique Visitors' => total_unique_post_views,
-          'Returning Visitors' => total_returning,
-          'Pageviews today' => page_views(init_date, init_date),
-          'Pageviews Yesterday' => page_views(init_date.yesterday, init_date),
-          'Pageviews this week' => page_views(init_date.beginning_of_week, init_date),
-          'Pageviews this month' => page_views(init_date.beginning_of_month, init_date),
-          'Pageviews all time' => total_views
-        }
-
-        %>
-
       <table cellspacing="0" cellpadding="0" class="tbl GHUY-LPKDC">
         <tbody>
         <br>
-        <% vars.each do |key, val|%>
+        <% views_hash.each do |key, val|%>
           <tr>
             <td align="left" style="vertical-align: top;">
              <div class="pv-row"><%= key %> </div>

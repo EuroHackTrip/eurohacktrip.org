@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  helper_method :posts_count, :comments_count, :all_posts, :all_comments, :all_countries, :all_cities, :all_people, :all_events, :approved_comments_count, :homepage_content, :total_unique, :total_returning, :total_unique_post_views, :page_views, :all_country_posts, :init_date, :total_views
+  helper_method :posts_count, :comments_count, :all_posts, :all_comments, 
+                :all_countries, :all_cities, :all_people, :all_events, 
+                :approved_comments_count, :homepage_content, :total_unique, 
+                :total_returning, :total_unique_post_views, :page_views, 
+                :all_country_posts, :init_date, :total_views, :views_hash
   # rescue_from CanCan::AccessDenied do |exception|
   #   redirect_to root_url, :alert => exception.message
   # end
@@ -104,6 +108,18 @@ end
     month = today_date.split("-")[1].to_i
     day = today_date.split("-")[2].to_i
     date = Date.new(year, month, day)
+  end
+
+  def views_hash
+    views = {
+          'Unique Visitors' => total_unique_post_views,
+          'Returning Visitors' => total_returning,
+          'Pageviews today' => page_views(init_date, init_date),
+          'Pageviews Yesterday' => page_views(init_date.yesterday, init_date),
+          'Pageviews this week' => page_views(init_date.beginning_of_week, init_date),
+          'Pageviews this month' => page_views(init_date.beginning_of_month, init_date),
+          'Pageviews all time' => total_views
+        }
   end
 
   def total_unique_post_views
