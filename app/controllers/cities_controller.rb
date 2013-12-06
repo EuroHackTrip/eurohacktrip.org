@@ -1,6 +1,7 @@
 class CitiesController < ApplicationController
   before_action :set_city, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, except: [:show, :single, :byCountry, :byPost, :all]
+  # load_and_authorize_resource
 
   # GET /cities
   # GET /cities.json
@@ -32,7 +33,14 @@ class CitiesController < ApplicationController
   
     City.all.each { |city|
       if city.country_id == country.id
-        bunch << city
+        data = {}
+        city.attributes.each do | x, y |
+          # if y != ''
+            data[x] = y
+          # end
+        end
+        data['country_name'] = Country.find(city.country_id).name.downcase
+        bunch << data
       end
     }
     render json: bunch
@@ -46,7 +54,14 @@ class CitiesController < ApplicationController
     City.all.each do |city|
       if city.country_id = post.country_id #all cities in the same country as post
         #error: post.country_id is nill
-        bunch << city
+        data = {}
+        city.attributes.each do | x, y |
+          # if y != ''
+            data[x] = y
+          # end
+        end
+        data['country_name'] = Country.find(city.country_id).name.downcase
+        bunch << data
       end
     end
   
@@ -54,7 +69,22 @@ class CitiesController < ApplicationController
   end
 
   def all
-    render json: City.all
+
+    bunch = []
+    City.all.each do |city|
+      data = {}
+      city.attributes.each do | x, y |
+        # if y != ''
+          data[x] = y
+        # end
+      end
+      data['country_name'] = Country.find(city.country_id).name.downcase
+      bunch << data
+    end
+    render json: bunch
+    # render json: City.all
+
+
   end
 
   # GET /cities/new

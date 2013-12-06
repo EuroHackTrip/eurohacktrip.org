@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   before_action :set_page, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, except: [:show]
   impressionist :unique => [:impressionable_type, :impressionable_id, :session_hash]
+  # load_and_authorize_resource
 
   # GET /pages
   # GET /pages.json
@@ -29,7 +30,7 @@ class PagesController < ApplicationController
   # POST /pages.json
   def create
     @page = Page.new(page_params)
-
+    # authorize! :create, @page
     respond_to do |format|
       if @page.save
         format.html { redirect_to @page, notice: 'Page was successfully created.' }
@@ -44,6 +45,7 @@ class PagesController < ApplicationController
   # PATCH/PUT /pages/1
   # PATCH/PUT /pages/1.json
   def update
+    # authorize! :update, @page
     respond_to do |format|
       if @page.update(page_params)
         format.html { redirect_to @page, notice: 'Page was successfully updated.' }

@@ -39,8 +39,8 @@ if(window.location.pathname == '/'
 
 	// foreach city in the whole fucking hacktrip
 	var mapmaker = L.map('allmap', {
-		scrollWheelZoom: true,
-		zoomControl: false,
+		scrollWheelZoom: false,
+		zoomControl: true,
 		doubleClickZoom: true,
 		attributionControl: false,
 		}).setView([51.505, -0.09], 5); 
@@ -64,7 +64,7 @@ if(window.location.pathname == '/'
 			var marker = L.marker([lat, lng], {
 						icon: myIcon
 						})
-						.bindLabel('<a href="'+window.location.origin+'/countries/'+city.country_id+'">'
+						.bindLabel('<a href="'+window.location.origin+'/countries/'+city.country_name+'">'
 									+city.name+'</a>', { 
 						//label markers
 						noHide: true,
@@ -72,7 +72,7 @@ if(window.location.pathname == '/'
 						}).addTo(mapmaker);
 			var popup = L.popup()
 			    // .setLatLng(latlng)
-			    .setContent('<a href="'+window.location.origin+'/countries/'+city.country_id+'">'
+			    .setContent('<a href="'+window.location.origin+'/countries/'+city.country_name+'">'
 			    			+city.name+'</a><br />'+city.description+'</p>')
 			    .openOn(marker);
 			marker.bindPopup(popup)
@@ -94,8 +94,8 @@ if(window.location.pathname == '/'
 if(window.location.pathname.indexOf('/countries/') > -1){ 
 
 	var map = L.map('map', {
-		scrollWheelZoom: true,
-		zoomControl: false,
+		scrollWheelZoom: false,
+		zoomControl: true,
 		attributionControl: false,
 		}).setView([51.505, -0.09], 5); 
 	var markersgroup = []
@@ -106,43 +106,45 @@ if(window.location.pathname.indexOf('/countries/') > -1){
 	}).addTo(map);
 
 	var path = window.location.pathname
-	var country_id = path.substr(path.length-1, path.length)
+	// var country_id = path.substr(path.length-1, path.length)
+	// var country_name = country_name = path.substr(11, path.length)
+	var country_id = $('#map').data('country-id')
 
-	$.get('/citiez/country/' + country_id, function(data){ //create markers for all cities in country
+		$.get('/citiez/country/' + country_id, function(data){ //create markers for all cities in country
 
-		$.each(data, function(key, city){
-			console.log(city.name);
-			coords = city.map;
-			lat = parseFloat(coords.substr(0, coords.indexOf(', ')))
-			lng = parseFloat(coords.substr(coords.indexOf(', ')+2, coords.length))
-			console.log(lat);
-			console.log(lng);
-			var marker = L.marker([lat, lng], {
-						icon: myIcon
-						})
-						.bindLabel('<a href="'+window.location.origin+'/countries/'+city.country_id+'">'
-									+city.name+'</a>', { 
-						//label markers
-						noHide: true,
-						direction: 'auto'
-						}).addTo(map);
-			var popup = L.popup()
-			    // .setLatLng(latlng)
-			    .setContent('<a href="'+window.location.origin+'/countries/'+city.country_id+'">'
-			    			+city.name+'</a><br />'+city.description+'</p>')
-			    .openOn(marker);
-			marker.bindPopup(popup)
+			$.each(data, function(key, city){
+				console.log(city.name);
+				coords = city.map;
+				lat = parseFloat(coords.substr(0, coords.indexOf(', ')))
+				lng = parseFloat(coords.substr(coords.indexOf(', ')+2, coords.length))
+				console.log(lat);
+				console.log(lng);
+				var marker = L.marker([lat, lng], {
+							icon: myIcon
+							})
+							.bindLabel('<a href="'+window.location.origin+'/countries/'+city.country_name+'">'
+										+city.name+'</a>', { 
+							//label markers
+							noHide: true,
+							direction: 'auto'
+							}).addTo(map);
+				var popup = L.popup()
+				    // .setLatLng(latlng)
+				    .setContent('<a href="'+window.location.origin+'/countries/'+city.country_name+'">'
+				    			+city.name+'</a><br />'+city.description+'</p>')
+				    .openOn(marker);
+				marker.bindPopup(popup)
 
-			markersgroup.push([lat, lng])
-			// markersgroup.push(marker.getLatLng())
-			// console.log(marker.getLatLng());
+				markersgroup.push([lat, lng])
+				// markersgroup.push(marker.getLatLng())
+				// console.log(marker.getLatLng());
+			})
+			map.fitBounds(markersgroup);
+			
 		})
-		map.fitBounds(markersgroup);
-		
-	})
-	.fail(function() {
-		console.log('check your db bro...');
-	})
+		.fail(function() {
+			console.log('check your db bro...');
+		})
 
 }
 
@@ -212,5 +214,41 @@ if($('form #event_event_link')[0] != undefined && $('form #event_event_link')[0]
 
 // if(window.location.pathname.indexOf('/posts/') > -1){ 
 // }
+
+//mapping for _cities under dashboard
+if(window.location.pathname.indexOf('/dashboard') > -1){ 
+	$('select#city_country_id').click(function(){
+		console.log('clicked a#to-cities')
+		var mapmaker = L.map('mapmaker').setView([51.505, -0.09], 6); 
+		L.tileLayer('http://{s}.tile.cloudmade.com/5e9427487a6142f7934b07d07a967ba3/997/256/{z}/{x}/{y}.png', {
+			attribution: 'EuroHackTrip',
+			maxZoom: 18
+		}).addTo(mapmaker);
+
+
+		var myIcon = L.icon({
+			iconUrl: '/assets/bubble-pink.png',
+			iconSize: [20, 20],
+			iconAnchor: [10, 10],
+			labelAnchor: [6, 0] // as I want the label to appear 2px past the icon (10 + 2 - 6)
+		});
+
+		var marker = L.marker()
+
+		function onMapClick(e) {
+		console.log(e)
+
+		marker
+		  .setLatLng(e.latlng)
+		  .setIcon(myIcon)
+		  .addTo(mapmaker);
+
+		$('#city_map')[0].value = e.latlng.lat + ', ' + e.latlng.lng 
+		}
+
+	mapmaker.on('click', onMapClick)
+
+	})
+}
 
 });  

@@ -1,5 +1,6 @@
-<!-- 
-<legend>Account Settings</legend><hr> -->
+<legend>Account Settings</legend>
+  <%= link_to 'Edit Account', edit_admin_registration_path %>
+<hr />
 <legend>Post Settings</legend>
 <% if PostSetting.all.count > 0 %>
 <%= form_for(@post_setting, :html => {:method => :put }) do |f| %>

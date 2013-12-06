@@ -10,6 +10,7 @@
  *
  * require bootstrap-wysihtml5
  * require bootstrap
+ * require bootstrap-theme
  *= require_self
  *
  *= require_tree .

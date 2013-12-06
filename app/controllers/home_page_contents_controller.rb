@@ -1,6 +1,7 @@
 class HomePageContentsController < ApplicationController
   before_action :set_home_page_content, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, except: [:show]
+  # load_and_authorize_resource
 
   # GET /home_page_contents
   # GET /home_page_contents.json
@@ -26,7 +27,7 @@ class HomePageContentsController < ApplicationController
   # POST /home_page_contents.json
   def create
     @home_page_content = HomePageContent.new(home_page_content_params)
-
+    # authorize! :create, @home_page_content
     respond_to do |format|
       if @home_page_content.save
         format.html { redirect_to root_path, notice: 'Home page content was successfully created.' }
@@ -41,6 +42,7 @@ class HomePageContentsController < ApplicationController
   # PATCH/PUT /home_page_contents/1
   # PATCH/PUT /home_page_contents/1.json
   def update
+    # authorize! :update, @home_page_contents
     respond_to do |format|
       if @home_page_content.update(home_page_content_params)
         format.html { redirect_to root_path, notice: 'Home page content was successfully updated.' }

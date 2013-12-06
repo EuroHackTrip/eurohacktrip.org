@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :posts_count, :comments_count, :all_posts, :all_comments, :all_countries, :all_cities, :all_people, :all_events, :approved_comments_count, :homepage_content, :total_unique, :total_returning, :total_unique_post_views, :page_views, :all_country_posts, :init_date, :total_views
+  # rescue_from CanCan::AccessDenied do |exception|
+  #   redirect_to root_url, :alert => exception.message
+  # end
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 

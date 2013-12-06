@@ -1,6 +1,7 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, except: [:show]
+  # load_and_authorize_resource
 
   # GET /people
   # GET /people.json
@@ -26,7 +27,7 @@ class PeopleController < ApplicationController
   # POST /people.json
   def create
     @person = Person.new(person_params)
-
+    # authorize! :create, @person
     respond_to do |format|
       if @person.save
         format.html { redirect_to dashboard_index_path, notice: 'Person was successfully created.' }
@@ -41,6 +42,7 @@ class PeopleController < ApplicationController
   # PATCH/PUT /people/1
   # PATCH/PUT /people/1.json
   def update
+    # authorize! :update, @person
     respond_to do |format|
       if @person.update(person_params)
         format.html { redirect_to dashboard_index_path, notice: 'Person was successfully updated.' }

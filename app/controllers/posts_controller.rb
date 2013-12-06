@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   #impressionist :actions=>[:show,:index]
+  # before_action :load_posts
+  # load_and_authorize_resource
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :authenticate_admin!, except: [:show, :index]
   impressionist :unique => [:impressionable_type, :impressionable_id, :session_hash]
@@ -18,6 +20,10 @@ class PostsController < ApplicationController
       @posts = @posts.all
     end
   end
+
+  # def load_posts
+  #   @all_posts = Post.new(post_params)
+  # end
 
   # GET /posts/1
   # GET /posts/1.json
@@ -42,6 +48,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    # authorize! :create, @post
     @post.admin_id = current_admin.id
     if current_admin.email == 'admin@eurohacktrip.org'
       @post.published = true

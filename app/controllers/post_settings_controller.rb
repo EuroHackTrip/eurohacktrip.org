@@ -1,5 +1,6 @@
 class PostSettingsController < ApplicationController
   before_action :set_post_setting, only: [:show, :edit, :update, :destroy]
+  # load_and_authorize_resource
 
   # GET /post_settings
   # GET /post_settings.json
@@ -25,7 +26,7 @@ class PostSettingsController < ApplicationController
   # POST /post_settings.json
   def create
     @post_setting = PostSetting.new(post_setting_params)
-
+    # authorize! :create, @post_setting
     respond_to do |format|
       if @post_setting.save
         format.html { redirect_to dashboard_index_path, notice: 'Post setting was successfully created.' }
@@ -40,6 +41,7 @@ class PostSettingsController < ApplicationController
   # PATCH/PUT /post_settings/1
   # PATCH/PUT /post_settings/1.json
   def update
+    # authorize! :update, @post_setting
     respond_to do |format|
       if @post_setting.update(post_setting_params)
         format.html { redirect_to dashboard_index_path, notice: 'Post setting was successfully updated.' }

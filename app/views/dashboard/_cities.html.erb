@@ -41,67 +41,28 @@
         </div>
       <% end %>
 
-      <div class="field">
-        <%= f.label :name %><br>
-        <%= f.text_field :name %>
-      </div>
-      <div class="field">
-        <%= f.label :description %><br>
-        <%= f.text_area :description %>
-      </div>
-      <div class="field">
-
-        <b>Pick country to start the map:</b><br>
-        <%= f.select "country_id", Country.all.collect {|p| [ p.name, p.id ] }, { include_blank: true } %>
-      </div>
-		<div class="field">
-		<b>Click on the City in the map:</b>
+	<div class="field">
+		<b>Pick country to start the map:</b><br>
+		<%= f.select "country_id", Country.all.collect {|p| [ p.name, p.id ] }, { include_blank: true } %>
+	</div>
+	<div class="field">
+		<b>Name of City:</b><br>
+		<%= f.text_field :name %>
+	</div>
+	<div class="field">
+		<%= f.label :description %><br>
+		<%= f.text_area :description %>
+	</div>
+	<div class="field">
+		<b>Click on map to pin the City:</b>
 		<div id="mapmaker" style="height:300px;"></div>
-		<b>City Location</b>(Do not change):<%= f.text_field :map, {style: 'width: 300px;'} %>
-		</div>
-      <div class="actions">
-        <%= f.submit %>
-      </div>
+	</div>
+	<div class="field hide">
+		<b>City Location</b>(Do not edit):<%= f.text_field :map, style: 'width: 300px;'%>
+	</div>
+	<div class="actions">
+	<%= f.submit %>
+	</div>
     <% end %>
     </div>
 </div>
-
-
-<script type="text/javascript">
-  $(document).ready(function(){ 
-
-  $('select#city_country_id').click(function(){
-  	console.log('clicked a#to-cities')
-  	var mapmaker = L.map('mapmaker').setView([51.505, -0.09], 6); 
-	  L.tileLayer('http://{s}.tile.cloudmade.com/5e9427487a6142f7934b07d07a967ba3/997/256/{z}/{x}/{y}.png', {
-	      attribution: 'EuroHackTrip',
-	      maxZoom: 18
-	  }).addTo(mapmaker);
-
-
-	  var myIcon = L.icon({
-	    iconUrl: '/assets/bubble-pink.png',
-	    iconSize: [20, 20],
-	    iconAnchor: [10, 10],
-	    labelAnchor: [6, 0] // as I want the label to appear 2px past the icon (10 + 2 - 6)
-	    });
-
-	  var marker = L.marker()
-
-	  function onMapClick(e) {
-	    console.log(e)
-
-	    marker
-	      .setLatLng(e.latlng)
-	      .setIcon(myIcon)
-	      .addTo(mapmaker);
-
-	    $('#city_map')[0].value = e.latlng.lat + ', ' + e.latlng.lng 
-	  }
-
-	mapmaker.on('click', onMapClick)
-
-  })
-
- });  
-</script>
