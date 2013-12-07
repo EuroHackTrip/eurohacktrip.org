@@ -21,6 +21,8 @@ EurohacktripOrg::Application.routes.draw do
   get "dashboard/index"
   get "home/index"
 
+  resources :users
+
   #ping our eventbrite client:
   get 'eventbrite/:id' => 'events#pingeventbrite'
 
@@ -35,6 +37,8 @@ EurohacktripOrg::Application.routes.draw do
   match "country/:id" => "countries#show_in_nav", :as => "country_show", via: [:post]
 
   match "post/:id" => "posts#publish", :as => "post_publish", via: [:post]
+
+  match "admin/:id" => "users#toggle_admin", :as => "toggle_admin", via: [:post]
 
   root to: "home#index"
 

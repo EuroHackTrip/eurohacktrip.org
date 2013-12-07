@@ -7,13 +7,19 @@
 <p>
   <h2><%= @post.title %></h2>
 </p>
-<pre>Posted at <%= @post.created_at %><span class="pull-right">Share</span></pre>
+<% if @post.admin_id && Admin.find(@post.admin_id).first_name && Admin.find(@post.admin_id).last_name %>
+  <pre>Posted by: <%= Admin.find(@post.admin_id).first_name + " " + Admin.find(@post.admin_id).last_name %> at <%= @post.created_at %><span class="pull-right">Share</span></pre>
+<% end %>
 <p>
   <%= raw @post.content %>
 </p>
-    <% if admin_signed_in? && current_admin.email == 'admin@eurohacktrip.org' %>
+    <% if current_admin.email == 'admin@eurohacktrip.org' || (@post.admin_id && @post.admin_id == current_admin.id) %>
       <span class="admin">
-        <%= link_to 'Edit', edit_post_path(@post) %> | 
+        <%= link_to 'Edit', edit_post_path(@post) %>
+      </span> 
+    <% end %>
+    <% if admin_signed_in? && current_admin.email == 'admin@eurohacktrip.org' %>
+      <span class="admin"> |
         <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
       </span>
     <% end %>
