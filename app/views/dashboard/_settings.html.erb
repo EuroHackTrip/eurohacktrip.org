@@ -1,112 +1,114 @@
 <legend>Account Settings</legend>
   <%= link_to 'Edit Account', edit_admin_registration_path %>
 <hr />
-<legend>Post Settings</legend>
-<% if PostSetting.all.count > 0 %>
-<%= form_for(@post_setting, :html => {:method => :put }) do |f| %>
-  <% if @post_setting.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post_setting.errors.count, "error") %> prohibited this post_setting from being saved:</h2>
+<% if current_admin.email == 'admin@eurohacktrip.org' %>
+  <legend>Post Settings</legend>
+  <% if PostSetting.all.count > 0 %>
+  <%= form_for(@post_setting, :html => {:method => :put }) do |f| %>
+    <% if @post_setting.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@post_setting.errors.count, "error") %> prohibited this post_setting from being saved:</h2>
 
-      <ul>
-      <% @post_setting.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @post_setting.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :posts_per_page %>
+      <%= f.number_field :posts_per_page, value: PostSetting.last.posts_per_page %>
+    </div>
+    <div class="field">
+      <%= f.check_box :allow_comments, {checked: PostSetting.last.allow_comments} %>  Alow Comments 
+    </div>
+    <div class="actions">
+    	<br>
+      <%= f.submit "Edit Settings" %>
     </div>
   <% end %>
+  <% else %>
+    <%= form_for(@post_setting_new) do |f| %>
+    <% if @post_setting_new.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@post_setting.errors.count, "error") %> prohibited this post_setting from being saved:</h2>
 
-  <div class="field">
-    <%= f.label :posts_per_page %>
-    <%= f.number_field :posts_per_page, value: PostSetting.last.posts_per_page %>
-  </div>
-  <div class="field">
-    <%= f.check_box :allow_comments, {checked: PostSetting.last.allow_comments} %>  Alow Comments 
-  </div>
-  <div class="actions">
-  	<br>
-    <%= f.submit "Edit Settings" %>
-  </div>
-<% end %>
-<% else %>
-  <%= form_for(@post_setting_new) do |f| %>
-  <% if @post_setting_new.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post_setting.errors.count, "error") %> prohibited this post_setting from being saved:</h2>
+        <ul>
+        <% @post_setting_new.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-      <% @post_setting_new.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="field">
+      <%= f.label :posts_per_page %>
+      <%= f.number_field :posts_per_page, value: 10 %>
+    </div>
+    <div class="field">
+      <%= f.check_box :allow_comments, {checked: true} %>  Allow Comments 
+    </div>
+    <div class="actions">
+      <br>
+      <%= f.submit "Add Settings" %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :posts_per_page %>
-    <%= f.number_field :posts_per_page, value: 10 %>
-  </div>
-  <div class="field">
-    <%= f.check_box :allow_comments, {checked: true} %>  Allow Comments 
-  </div>
-  <div class="actions">
-    <br>
-    <%= f.submit "Add Settings" %>
-  </div>
-<% end %>
-<% end %>
-
-<br />
-
-<% if Image.all.count == 0 %>
-  <%= form_for(@image_new) do |f| %>
-  <% if @image_new.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved:</h2>
-
-      <ul>
-      <% @image.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
   <% end %>
-  <legend>Logo</legend>
-    <%= f.file_field :logo %>
+
   <br />
 
-  <legend>Favicon</legend>
-    <%= f.file_field :favicon %>
+  <% if Image.all.count == 0 %>
+    <%= form_for(@image_new) do |f| %>
+    <% if @image_new.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved:</h2>
 
-  <div class="actions">
-    <%= f.submit 'Save Changes'%>
-  </div>
-<% end %>
+        <ul>
+        <% @image.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <legend>Logo</legend>
+      <%= f.file_field :logo %>
+    <br />
 
-<% else %>
-  <%= form_for(@image, :html => {:method => :put }) do |f| %>
-  <% if @image.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved:</h2>
-
-      <ul>
-      <% @image.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <legend>Logo</legend>
-    <%= f.file_field :logo %>
-  <br />
-
-  <legend>Favicon</legend>
-    <div>
+    <legend>Favicon</legend>
       <%= f.file_field :favicon %>
-    </div>
 
-  <div class="actions">
-    <%= f.submit 'Save Changes'%>
-  </div>
-<% end %>
+    <div class="actions">
+      <%= f.submit 'Save Changes'%>
+    </div>
+  <% end %>
+
+  <% else %>
+    <%= form_for(@image, :html => {:method => :put }) do |f| %>
+    <% if @image.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved:</h2>
+
+        <ul>
+        <% @image.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <legend>Logo</legend>
+      <%= f.file_field :logo %>
+    <br />
+
+    <legend>Favicon</legend>
+      <div>
+        <%= f.file_field :favicon %>
+      </div>
+
+    <div class="actions">
+      <%= f.submit 'Save Changes'%>
+    </div>
+  <% end %>
+  <% end %>
 <% end %>
