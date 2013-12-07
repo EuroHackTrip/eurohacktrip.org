@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :set_page, only: [:show, :edit, :update, :destroy]
+  before_action :set_page, only: [:edit, :update, :destroy]
   before_action :authenticate_admin!, except: [:show]
   impressionist :unique => [:impressionable_type, :impressionable_id, :session_hash]
   # load_and_authorize_resource
@@ -70,7 +70,11 @@ class PagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_page
-      @page = Page.friendly.find(params[:id])
+      if current_admin.email == 'admin@eurohacktrip.org'
+        @page = Page.friendly.find(params[:id])
+      else
+        redirect_to dashboard_index_path, notice: 'You don\'t have permission to do that.'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

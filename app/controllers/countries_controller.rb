@@ -78,7 +78,11 @@ class CountriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_country
-      @country = Country.friendly.find(params[:id])
+      if current_admin.email == 'admin@eurohacktrip.org'
+        @country = Country.friendly.find(params[:id])
+      else
+        redirect_to dashboard_index_path, notice: 'You don\'t have permission to do that.'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

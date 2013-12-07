@@ -1,5 +1,5 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:show, :edit, :update, :destroy]
+  before_action :set_city, only: [:edit, :update, :destroy]
   before_action :authenticate_admin!, except: [:show, :single, :byCountry, :byPost, :all]
   # load_and_authorize_resource
 
@@ -12,6 +12,7 @@ class CitiesController < ApplicationController
   # GET /cities/1
   # GET /cities/1.json
   def show
+    @city = City.find(params[:id])
   end
 
   def single
@@ -140,7 +141,11 @@ class CitiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_city
-      @city = City.find(params[:id])
+      if current_admin.email == 'admin@eurohacktrip.org'
+        @city = City.find(params[:id])
+      else
+        redirect_to dashboard_index_path, notice: 'You don\'t have permission to do that.'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

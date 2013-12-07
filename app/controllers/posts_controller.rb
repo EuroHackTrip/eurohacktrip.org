@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   #impressionist :actions=>[:show,:index]
   # before_action :load_posts
   # load_and_authorize_resource
-  before_action :set_post, only: [:edit, :update, :destroy]
+  before_action :set_post, only: [:update, :destroy]
   before_action :authenticate_admin!, except: [:show, :index]
   impressionist :unique => [:impressionable_type, :impressionable_id, :session_hash]
 
@@ -42,6 +42,12 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    set_post
+    if current_admin.email == 'admin@eurohacktrip.org' || @post.admin_id == current_admin.id
+      @post = Post.friendly.find(params[:id])
+    else
+      redirect_to dashboard_index_path, notice: 'You don\'t have permission to do that.'
+    end
   end
 
   # POST /posts
