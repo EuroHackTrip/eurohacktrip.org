@@ -8,5 +8,7 @@ class DashboardController < ApplicationController
   	@event = Event.new
   	@post_setting = PostSetting.last
   	@post_setting_new = PostSetting.new
+    @image = Image.last
+    @image_new = Image.new
   end
 end

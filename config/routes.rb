@@ -1,4 +1,10 @@
 EurohacktripOrg::Application.routes.draw do
+  resources :images
+
+  get "images/create"
+  get "images/update"
+  get "image/create"
+  get "image/update"
   resources :pages
 
   resources :home_page_contents
