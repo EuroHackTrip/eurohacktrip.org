@@ -23,6 +23,8 @@ gem 'simple_captcha', :git => 'git://github.com/Azdaroth/simple-captcha.git', :b
 
 gem 'carrierwave'
 
+gem 'simple_form'
+
 gem "paperclip"
 
 gem "paperclip-dropbox", ">= 1.1.7"
