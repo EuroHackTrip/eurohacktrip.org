@@ -16,7 +16,7 @@
   <% if ENV["RAILS_ENV"] == 'production' %>
     <% begin %>
       <% if Image.all.count > 0 %>
-        <link rel="shortcut icon" <%= image_tag(Image.last.favicon.url) : image_tag("/assets/black_eht_logo.png") %> />
+        <link rel="shortcut icon" <%= image_tag(Image.last.favicon.url) %> />
       <% else %>
         <link rel="shortcut icon" <%= image_tag("/assets/black_eht_logo.png") %> />
       <% end %>
