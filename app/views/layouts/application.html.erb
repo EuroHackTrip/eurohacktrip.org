@@ -13,8 +13,18 @@
    <%= javascript_include_tag '/assets/leaflet_label/leaflet.label.js' %>
   <link rel="stylesheet" href="/assets/leaflet_label/leaflet.label.css" />
   <%= csrf_meta_tags %>
-  <link rel="shortcut icon" <%= Image.all.count > 0 ? image_tag(Image.last.favicon.url) : image_tag("/assets/black_eht_logo.png") %> />
-  
+  <% if ENV["RAILS_ENV"] == 'production' %>
+    <% begin %>
+      <% if Image.all.count > 0 %>
+        <link rel="shortcut icon" <%= image_tag(Image.last.favicon.url) : image_tag("/assets/black_eht_logo.png") %> />
+      <% else %>
+        <link rel="shortcut icon" <%= image_tag("/assets/black_eht_logo.png") %> />
+      <% end %>
+      
+    <% rescue Exception => e %>
+      <link rel="shortcut icon" <%= image_tag("/assets/black_eht_logo.png") %> />
+    <% end %>
+  <% end %>
 </head>
 <body style ="background-color:#FBF8EF;">
 <div class="wrapper">
@@ -32,10 +42,16 @@
       </a>
       <a href="/" class = "navbar-brand" 
       style="padding: 5px 0px 5px 15px;">
-      <% if Image.all.count > 0 %>
-        <%= image_tag(Image.last.logo.url, style: "width: 50px;") %>
-      <% else %>
-        <%= image_tag("/assets/white_eht_logo.png", style: "width: 50px;") %>
+      <% if ENV["RAILS_ENV"] == 'production' %>
+        <% begin %>
+          <% if Image.all.count > 0 %>
+            <%= image_tag(Image.last.logo.url, style: "width: 50px;") %>
+          <% else %>
+            <%= image_tag("/assets/white_eht_logo.png", style: "width: 50px;") %>
+          <% end %>
+        <% rescue Exception => e %>
+          <%= image_tag("/assets/white_eht_logo.png", style: "width: 50px;") %>
+        <% end %>
       <% end %>
        EuroHackTrip</a>
     </div>
