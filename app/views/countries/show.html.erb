@@ -130,10 +130,10 @@
 			<pre>Posted at <%= post.created_at %><span class="pull-right">Share:</span></pre><br><br>
 			<!--<%= post.created_at %> -->
 			<%= raw post.content %><br><br>
-			<% if current_admin.email == 'admin@eurohacktrip.org' || (post.admin_id && post.admin_id == current_admin.id) %>
-		 		<%= link_to 'Edit', edit_post_path(post) %> | 
-		 	<% end %>
 			<% if admin_signed_in? %>
+			  <% if current_admin.email == 'admin@eurohacktrip.org' && (post.admin_id && post.admin_id == current_admin.id) %>
+		 		<%= link_to 'Edit', edit_post_path(post) %> | 
+		 	  <% end %>
 			  <% if current_admin.email == 'admin@eurohacktrip.org' %>
 			      <span class="admin">		        
 			        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
