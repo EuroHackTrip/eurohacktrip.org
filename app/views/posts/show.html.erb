@@ -18,10 +18,12 @@
         <%= link_to 'Edit', edit_post_path(@post) %>
       </span> 
     <% end %>
-    <% if admin_signed_in? && current_admin.email == 'admin@eurohacktrip.org' %>
-      <span class="admin"> |
-        <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </span>
+    <% if admin_signed_in? %>
+      <% if current_admin.email == 'admin@eurohacktrip.org' %>
+        <span class="admin"> |
+          <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </span>
+      <% end %>
     <% end %>
           <br>
 <!--<ul class="nav nav-tabs">

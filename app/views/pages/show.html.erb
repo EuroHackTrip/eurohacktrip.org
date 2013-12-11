@@ -4,6 +4,8 @@
 <%= raw @page.body %>
 </p>
 
-<% if admin_signed_in? && current_admin.email == 'admin@eurohacktrip.org' %>
-	<%= link_to 'Edit', edit_page_path(@page) %>
+<% if admin_signed_in? %>
+	<% if current_admin.email == 'admin@eurohacktrip.org' %>
+		<%= link_to 'Edit', edit_page_path(@page) %>
+	<% end %>
 <% end %>
