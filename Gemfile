@@ -15,6 +15,14 @@ end
 
 gem 'will_paginate' #, '~> 3.0.5'
 
+gem 'bootstrap-wysihtml5-rails'
+
+gem 'bootsy'
+
+gem 'simple_captcha', :git => 'git://github.com/Azdaroth/simple-captcha.git', :branch => 'rails-4'
+
+gem 'carrierwave'
+
 gem 'simple_form'
 
 gem "paperclip"
