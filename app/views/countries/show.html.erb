@@ -127,7 +127,7 @@
 	<div class="span8">
 		<% all_posts.tagged_with(@country.name).each do |post| %>
 			<h2><%= link_to post.title, post_path(post) %></h2><br>
-			<pre>Posted at <%= post.created_at %><span class="pull-right">Share:</span></pre><br><br>
+			<span class = "post-details">Posted at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %> </span></span><br><br>
 			<!--<%= post.created_at %> -->
 			<%= raw post.content %><br><br>
 			<% if admin_signed_in? %>

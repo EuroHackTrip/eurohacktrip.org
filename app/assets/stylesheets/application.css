@@ -8,7 +8,7 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- * require bootstrap-wysihtml5
+ *= require social-share-button
  * require bootstrap
  * require bootstrap-theme
  *= require_self
@@ -23,4 +23,19 @@
        url('../assets/glyphicons-halflings-regular.woff') format('woff'), 
        url('../assets/glyphicons-halflings-regular.ttf') format('truetype'), 
        url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+
+.post-details {
+	display: block;
+	padding: 9.5px;
+	margin: 0 0 10px;
+	font-size: 13px;
+	line-height: 1.428571429;
+	color: #333333;
+	//word-break: break-all;
+	//word-wrap: break-word;
+	background-color: #f5f5f5;
+	border: 1px solid #cccccc;
+	border-radius: 4px;
 }	

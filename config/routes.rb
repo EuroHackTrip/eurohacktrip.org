@@ -22,8 +22,6 @@ EurohacktripOrg::Application.routes.draw do
   resources :cities
   resources :people
 
-  resources :categories
-
   get "dashboard/index"
   get "home/index"
 

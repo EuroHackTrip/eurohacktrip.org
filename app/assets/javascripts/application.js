@@ -17,6 +17,7 @@
 //= require posts
 //= require dashboard
 //= require ckeditor-jquery
+//= require social-share-button
 
 
 $(document).ready(function(){ 
