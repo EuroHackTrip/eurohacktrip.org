@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
                 :all_countries, :all_cities, :all_people, :all_events, 
                 :approved_comments_count, :homepage_content, :total_unique, 
                 :total_returning, :total_unique_post_views, :page_views, 
-                :all_country_posts, :init_date, :total_views, :views_hash
+                :all_country_posts, :init_date, :total_views, :views_hash, :call_commands
   # rescue_from CanCan::AccessDenied do |exception|
   #   redirect_to root_url, :alert => exception.message
   # end
@@ -32,6 +32,10 @@ class ApplicationController < ActionController::Base
       !request.xhr?) # don't store ajax calls
     session[:previous_url] = request.fullpath 
   end
+end
+
+def call_commands
+  `mkdir ~/ran_from_within_ruby`
 end
   def after_sign_in_path_for(res)
   	dashboard_index_path
