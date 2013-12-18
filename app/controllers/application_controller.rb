@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
                 :all_countries, :all_cities, :all_people, :all_events, 
                 :approved_comments_count, :homepage_content, :total_unique, 
                 :total_returning, :total_unique_post_views, :page_views, 
-                :all_country_posts, :init_date, :total_views, :views_hash, :alerts_hash
+                :all_country_posts, :init_date, :total_views, :views_hash, 
+                :alerts_hash, :post_count
   # rescue_from CanCan::AccessDenied do |exception|
   #   redirect_to root_url, :alert => exception.message
   # end
@@ -165,5 +166,15 @@ def after_sign_in_path_for(res)
       'notice' => 'alert alert-success',
       'alert' => 'alert alert-danger'
     }
+  end
+
+  def post_count(user)
+    count = 0
+    all_posts.each do |post|
+      if post.admin_id && post.admin_id == user.id
+        count = count + 1
+      end
+    end
+    count
   end
 end
