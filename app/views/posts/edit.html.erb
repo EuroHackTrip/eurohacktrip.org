@@ -33,7 +33,7 @@
             <fieldset>
               <legend style="color:#00598D;">Post Settings</legend>
               <h4 style="color:#00598D;">Published Under:</h4>
-              <%= f.select :tag_list, Country.all.collect {|country| [ country.name] }, { include_blank: false } %>
+              <%= f.select :tag_list, Country.all.collect {|country| [ country.name] }, { include_blank: true } %>
               <!--<h4 style="color:#00598D;">Tags </h4>(Seperated by commas)
               <%= f.text_field :tag_list, style: "width:170px;" %> -->
               <hr>

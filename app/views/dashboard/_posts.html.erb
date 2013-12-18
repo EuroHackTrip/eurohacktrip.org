@@ -18,7 +18,7 @@
         <div>Publishing Status: <span class="label label-warning">Not Published</span></div>
       <% end %>
       <% if post.admin_id && Admin.find(post.admin_id).first_name && Admin.find(post.admin_id).last_name %>
-        <div>Posted by: <%= Admin.find(post.admin_id).first_name + " " + Admin.find(post.admin_id).last_name %></div>
+        <div>Posted by: <%= link_to Admin.find(post.admin_id).first_name + " " + Admin.find(post.admin_id).last_name, "/" + Admin.find(post.admin_id).first_name + "-" + Admin.find(post.admin_id).last_name + "/posts" %></div>
       <% end %>
       <div class="hidden-links">
         <% if current_admin.email == 'admin@eurohacktrip.org' || (post.admin_id && post.admin_id == current_admin.id) %>
@@ -65,7 +65,7 @@
     <br>
     <div class="actions">
       <span style="color:#00598D;">Posted Under: </span>
-      <%= f.select :tag_list, Country.all.collect {|country| [ country.name] }, { include_blank: false }, style: "margin-right:19px;" %>
+      <%= f.select :tag_list, Country.all.collect {|country| [ country.name] }, { include_blank: true }, style: "margin-right:19px;" %>
       <%= f.check_box :published, {checked: true} %> Publish
       <%= f.submit "Publish", class: "btn btn-primary btn-lg pull-right" %>
     </div>
