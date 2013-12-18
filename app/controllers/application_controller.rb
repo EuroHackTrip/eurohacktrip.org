@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
                 :approved_comments_count, :homepage_content, :total_unique, 
                 :total_returning, :total_unique_post_views, :page_views, 
                 :all_country_posts, :init_date, :total_views, :views_hash, 
-                :alerts_hash, :post_count, :nick_names
+                :alerts_hash, :post_count, :nick_names, :author, :author_path
   # rescue_from CanCan::AccessDenied do |exception|
   #   redirect_to root_url, :alert => exception.message
   # end
@@ -201,5 +201,16 @@ def after_sign_in_path_for(res)
       end
     end
     @arr
+  end
+
+  def author(post)
+    if Admin.find(post.admin_id).first_name && Admin.find(post.admin_id).first_name
+      author = Admin.find(post.admin_id).first_name + " " + Admin.find(post.admin_id).last_name
+    end
+    author
+  end
+
+  def author_path(user)
+    "/#{user.first_name}-#{user.last_name}"
   end
 end

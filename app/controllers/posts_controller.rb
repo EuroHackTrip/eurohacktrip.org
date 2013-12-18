@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   # before_action :load_posts
   # load_and_authorize_resource
   before_action :set_post, only: [:update, :destroy]
-  before_action :authenticate_admin!, except: [:show, :index]
+  before_action :authenticate_admin!, except: [:show, :index, :post_by_author]
   impressionist :unique => [:impressionable_type, :impressionable_id, :session_hash]
 
   # GET /posts

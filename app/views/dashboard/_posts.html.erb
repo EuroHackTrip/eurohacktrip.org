@@ -18,7 +18,7 @@
         <div>Publishing Status: <span class="label label-warning">Not Published</span></div>
       <% end %>
       <% if post.admin_id && Admin.find(post.admin_id).first_name && Admin.find(post.admin_id).last_name %>
-        <div>Posted by: <%= link_to Admin.find(post.admin_id).first_name + " " + Admin.find(post.admin_id).last_name, "/" + Admin.find(post.admin_id).first_name + "-" + Admin.find(post.admin_id).last_name + "/posts" %></div>
+        <div>Posted by: <%= link_to author(post), author_path(Admin.find(post.admin_id)) + "/posts" %></div>
       <% end %>
       <div class="hidden-links">
         <% if current_admin.email == 'admin@eurohacktrip.org' || (post.admin_id && post.admin_id == current_admin.id) %>

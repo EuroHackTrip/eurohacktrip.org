@@ -8,21 +8,21 @@
   <h2><%= @post.title %></h2>
 </p>
 <% if @post.admin_id && Admin.find(@post.admin_id).first_name && Admin.find(@post.admin_id).last_name %>
-  <span class = "post-details">Posted by: <%= Admin.find(@post.admin_id).first_name + " " + Admin.find(@post.admin_id).last_name %> at <%= @post.created_at %><span class="pull-right"><%= social_share_button_tag(@post.title) %>
+  <span class = "post-details">Posted by: <%= link_to author(@post), author_path(Admin.find(@post.admin_id)) + "/posts" %> at <%= @post.created_at %><span class="pull-right"><%= social_share_button_tag(@post.title) %>
 </span></span>
 <% else %>
-  <span class = "post-details">Posted at <%= @post.created_at %><span class="pull-right"><%= social_share_button_tag(@post.title) %>
+  <span class = "post-details">Posted by: <%= link_to author(@post), author_path(Admin.find(@post.admin_id)) + "/posts" %> at <%= @post.created_at %><span class="pull-right"><%= social_share_button_tag(@post.title) %>
 </span></span>
 <% end %>
 <p>
   <%= raw @post.content %>
 </p>
-    <% if current_admin.email == 'admin@eurohacktrip.org' || (@post.admin_id && @post.admin_id == current_admin.id) %>
-      <span class="admin">
-        <%= link_to 'Edit', edit_post_path(@post) %>
-      </span> 
-    <% end %>
     <% if admin_signed_in? %>
+      <% if current_admin.email == 'admin@eurohacktrip.org' || (@post.admin_id && @post.admin_id == current_admin.id) %>
+        <span class="admin">
+          <%= link_to 'Edit', edit_post_path(@post) %>
+        </span> 
+      <% end %>
       <% if current_admin.email == 'admin@eurohacktrip.org' %>
         <span class="admin"> |
           <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
