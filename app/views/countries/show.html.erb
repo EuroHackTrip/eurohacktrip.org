@@ -126,29 +126,33 @@
 <div class="row">
 	<div class="span8">
 		<% all_posts.tagged_with(@country.name).each do |post| %>
-			<h2><%= link_to post.title, post_path(post) %></h2><br>
-			<span class = "post-details">Posted at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %> </span></span><br><br>
-			<!--<%= post.created_at %> -->
-			<%= raw post.content %><br><br>
-			<% if admin_signed_in? %>
-			  <% if current_admin.email == 'admin@eurohacktrip.org' && (post.admin_id && post.admin_id == current_admin.id) %>
-		 		<%= link_to 'Edit', edit_post_path(post) %> | 
-		 	  <% end %>
-			  <% if current_admin.email == 'admin@eurohacktrip.org' %>
-			      <span class="admin">		        
-			        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-			      </span>
-		      <% end %>
-		    <% end %>
+			<% if post.published || post.published == nil %>
+				<h2><%= link_to post.title, post_path(post) %></h2>
+				<span class = "post-details">Posted at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %> </span></span><br>
+				<!--<%= post.created_at %> -->
+				<%= raw post.content %><br><br>
+				<% if admin_signed_in? %>
+				  <% if current_admin.email == 'admin@eurohacktrip.org' || (post.admin_id && post.admin_id == current_admin.id) %>
+			 		<%= link_to 'Edit', edit_post_path(post) %> | 
+			 	  <% end %>
+				  <% if current_admin.email == 'admin@eurohacktrip.org' %>
+				      <span>		        
+				        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+				      </span> | 
+			      <% end %>
+			    <% end %>
 
-		    <%= link_to "Leave a Comment", "/posts/"+post.id.to_s+"#add-comment", class: "links" %>
-			<!--
-			<% if post.comments.count > 0 %>
-				<%= link_to pluralize(post.comments.count, " comment") + " so far.", "/posts/"+post.id.to_s+"#comments", class: "links" %>
-			<% else %>
-				<%= link_to "Leave a Comment", "/posts/"+post.id.to_s+"#add-comment", class: "links" %>
+			    <%= link_to "Leave a Comment", "/posts/"+post.slug+"#add-comment", class: "links" %>
+			    <br>
+			    <br>
+				<!--
+				<% if post.comments.count > 0 %>
+					<%= link_to pluralize(post.comments.count, " comment") + " so far.", "/posts/"+post.id.to_s+"#comments", class: "links" %>
+				<% else %>
+					<%= link_to "Leave a Comment", "/posts/"+post.id.to_s+"#add-comment", class: "links" %>
+				<% end %>
+				-->
 			<% end %>
-			-->
 		<% end %>
 	</div>
 	<div class="span4"></div>
