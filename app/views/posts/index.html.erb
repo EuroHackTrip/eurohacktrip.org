@@ -29,7 +29,7 @@
       <div class="row">
         <div class="span8">
           <h2><%= link_to post.title, post %></h2>
-          <span class = "post-details">Posted by: <%= link_to author(post), author_path(Admin.find(post.admin_id)) + "/posts" %> at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %></span></span>
+          <span class = "post-details">Posted by: <%= @post.admin_id && Admin.find(@post.admin_id).first_name && Admin.find(@post.admin_id).last_name ? link_to author(post), author_path(Admin.find(post.admin_id)) + "/posts" : "" %> at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %></span></span>
           <%= raw post.content %>
           <% if post.tag_list.count > 0 %>
             <p>Tags:
