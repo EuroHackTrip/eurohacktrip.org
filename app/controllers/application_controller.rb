@@ -196,7 +196,9 @@ def after_sign_in_path_for(res)
     # nick_names
     @arr = []
     Admin.all.each do |user|
+      if user.first_name && user.last_name
         @arr << user.first_name + "-" + user.last_name + "=>" + user.id.to_s
+      end
     end
     @arr
   end
