@@ -128,7 +128,11 @@
 		<% all_posts.tagged_with(@country.name).each do |post| %>
 			<% if post.published || post.published == nil %>
 				<h2><%= link_to post.title, post_path(post) %></h2>
-				<span class = "post-details">Posted by: <%= @post.admin_id && Admin.find(@post.admin_id).first_name && Admin.find(@post.admin_id).last_name ? link_to author(post), author_path(Admin.find(post.admin_id)) + "/posts" : "" %>  at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %> </span></span><br>
+				<% if post.admin_id && Admin.find(post.admin_id).first_name && Admin.find(post.admin_id).last_name %>
+					<span class = "post-details">Posted by: <%= link_to author(post), author_path(Admin.find(post.admin_id)) + "/posts" %>  at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %> </span></span><br>
+				<% else %>
+					<span class = "post-details">Posted  at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %> </span></span><br>
+				<% end %>
 				<!--<%= post.created_at %> -->
 				<%= raw post.content %><br><br>
 				<% if admin_signed_in? %>
