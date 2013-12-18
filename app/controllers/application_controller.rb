@@ -204,15 +204,15 @@ def after_sign_in_path_for(res)
   end
 
   def author(post)
-    if post
-      if Admin.find(post.admin_id).first_name && Admin.find(post.admin_id).first_name
-        author = Admin.find(post.admin_id).first_name + " " + Admin.find(post.admin_id).last_name
-      end
+    if Admin.find(post.admin_id).first_name && Admin.find(post.admin_id).first_name
+      author = Admin.find(post.admin_id).first_name + " " + Admin.find(post.admin_id).last_name
     end
     author
   end
 
   def author_path(user)
-    "/#{user.first_name}-#{user.last_name}"
+    if user.first_name && user.last_name
+      "/#{user.first_name}-#{user.last_name}"
+    end
   end
 end
