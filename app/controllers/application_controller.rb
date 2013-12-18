@@ -204,7 +204,7 @@ def after_sign_in_path_for(res)
   end
 
   def author(post)
-    if !post.admin_id && (Admin.find(post.admin_id).first_name && Admin.find(post.admin_id).first_name)
+    if post.admin_id && (Admin.find(post.admin_id).first_name && Admin.find(post.admin_id).first_name)
       author = Admin.find(post.admin_id).first_name + " " + Admin.find(post.admin_id).last_name
     end
     author
