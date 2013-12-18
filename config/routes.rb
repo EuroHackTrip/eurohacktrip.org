@@ -42,6 +42,8 @@ EurohacktripOrg::Application.routes.draw do
 
   match "post/:id" => "posts#publish", :as => "post_publish", via: [:post]
 
+  match ":first_name-:last_name/posts" => "posts#post_by_author", :as => "post_by_author", via: [:get]
+
   match "admin/:id" => "users#toggle_admin", :as => "toggle_admin", via: [:post]
 
   root to: "home#index"

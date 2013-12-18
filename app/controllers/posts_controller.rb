@@ -104,7 +104,16 @@ class PostsController < ApplicationController
       @post.save!
       redirect_to dashboard_index_path
     else
-      redirect_to dashboard_index_path, notice: 'You don\'t have permission to do that.'
+      redirect_to dashboard_index_path, alert: 'You don\'t have permission to do that.'
+    end
+  end
+
+  def post_by_author
+    nick_names.each do |author|
+      if author.split("=>")[0] == request.fullpath.split("/")[1]
+        author_id = author.split("=>")[1]
+        @posts = Post.where(admin_id: author_id)
+      end
     end
   end
 

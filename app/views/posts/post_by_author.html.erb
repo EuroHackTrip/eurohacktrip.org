@@ -1,24 +1,4 @@
-<% provide(:title, 'Blog') %>
- <div id = "intro">
-  <h1 id = "tagline">
-    The Blog...
-  </h1>
-
-  <p>
-   Story of the hacktrip...
-  </p>
-</div>
-
-<div id="allmap" style="margin-bottom: 10px;">
-   
-</div>
-
-<hr>
-<h1 class = "home-title">5 Weeks / 4 Countries / 9 Hackers</h1>
-<hr>
-
-<!-- everything else below here is the blogposts -->
-
+<% provide(:title, 'Articles by ' + request.fullpath.split("/")[1].split("-")[0] + " " + request.fullpath.split("/")[1].split("-")[1]) %>
 <% if admin_signed_in? %>
   <%= link_to 'New Post', new_post_path, class: "btn btn-primary pull-right" %>
 <% end %>
@@ -41,7 +21,7 @@
           <% if post.comments.count > 0 %>
             <%= link_to pluralize(post.comments.count, " comment") + " so far.", "/posts/"+post.id.to_s+"#comments", class: "links" %>
           <% else %>
-            <%= link_to "Leave a Comment", "/posts/"+post.slug.to_s+"#add-comment", class: "links" %>
+            <%= link_to "Leave a Comment", "/posts/"+post.id.to_s+"#add-comment", class: "links" %>
           <% end %>
           <br>
           <% if admin_signed_in? %>
@@ -63,4 +43,3 @@
     </div>
   <% end %>
 <% end %>
-<%= will_paginate @posts, :container => true %>

@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
                 :approved_comments_count, :homepage_content, :total_unique, 
                 :total_returning, :total_unique_post_views, :page_views, 
                 :all_country_posts, :init_date, :total_views, :views_hash, 
-                :alerts_hash, :post_count
+                :alerts_hash, :post_count, :nick_names
   # rescue_from CanCan::AccessDenied do |exception|
   #   redirect_to root_url, :alert => exception.message
   # end
@@ -178,5 +178,26 @@ def after_sign_in_path_for(res)
     count
   end
 
-  
+  # def country_id_for_post(post)
+  #   all_countries.each do |country|
+  #     if post.tag_list[0] == country
+  #       country_id = country.id
+  #     end
+  #   end
+  #   country_id
+  # end
+
+  def nick_names
+    # nick_names = {
+    #   Admin.all.each do |user|
+    #     user.first_name + "-" + user.last_name => user.id
+    #   end
+    # }
+    # nick_names
+    @arr = []
+    Admin.all.each do |user|
+        @arr << user.first_name + "-" + user.last_name + "=>" + user.id.to_s
+    end
+    @arr
+  end
 end
