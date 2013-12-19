@@ -10,5 +10,9 @@ class Post < ActiveRecord::Base
 	validates :content, presence: true
 
 	# acts_as_taggable
-	acts_as_taggable rescue nil
+	# acts_as_taggable rescue nil
+
+	unless (ARGV & ['assets:precompile', 'assets:clean']).any?
+	    acts_as_taggable_on
+	end
 end
