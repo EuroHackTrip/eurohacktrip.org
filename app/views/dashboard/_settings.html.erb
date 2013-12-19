@@ -1,7 +1,7 @@
 <legend>Account Settings</legend>
   <%= link_to 'Edit Account', edit_admin_registration_path %>
 <hr />
-<% if current_admin.email == 'admin@eurohacktrip.org' %>
+<% if current_admin.is_admin %>
   <legend>Post Settings</legend>
   <% if PostSetting.all.count > 0 %>
   <%= form_for(@post_setting, :html => {:method => :put }) do |f| %>

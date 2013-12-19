@@ -10,7 +10,7 @@
         <li><a id="to-countries" href="#countries" data-toggle="tab">Countries</a></li>
         <li><a id="to-cities" href="#cities" data-toggle="tab">Cities</a></li>
         <li><a id="to-settings" href="#settings" data-toggle="tab">Settings</a></li>
-        <% if current_admin.email == 'admin@eurohacktrip.org' %>
+        <% if current_admin.is_admin %>
         	<li><a id="to-stats" href="#stats" data-toggle="tab">Statistics</a></li>
 	        <li><%= link_to "Pages", pages_path %></li>
 	        <% if HomePageContent.all.count == 0 %>

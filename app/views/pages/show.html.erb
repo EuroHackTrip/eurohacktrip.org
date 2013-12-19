@@ -5,7 +5,7 @@
 </p>
 
 <% if admin_signed_in? %>
-	<% if current_admin.email == 'admin@eurohacktrip.org' %>
+	<% if current_admin.is_admin %>
 		<%= link_to 'Edit', edit_page_path(@page) %>
 	<% end %>
 <% end %>

@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs">
   <li><a href="#all-cities" data-toggle="tab">All Cities</a></li>
-  <% if current_admin.email == 'admin@eurohacktrip.org' %>
+  <% if current_admin.is_admin %>
     <li><a href="#new-city" data-toggle="tab">
     <span class="glyphicon glyphicon-plus-sign"></span>Add City</a></li>
   <% end %>
@@ -21,7 +21,7 @@
           <%= city.map %>
         </div>
         <div class="hidden-links">
-          <% if current_admin.email == 'admin@eurohacktrip.org' %>
+          <% if current_admin.is_admin %>
             <%= link_to 'Edit', edit_city_path(city) %> |
             <%= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %>

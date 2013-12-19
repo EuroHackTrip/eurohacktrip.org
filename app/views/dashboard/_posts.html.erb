@@ -21,11 +21,11 @@
         <div>Posted by: <%= link_to author(post), author_path(Admin.find(post.admin_id)) + "/posts" %></div>
       <% end %>
       <div class="hidden-links">
-        <% if current_admin.email == 'admin@eurohacktrip.org' || (post.admin_id && post.admin_id == current_admin.id) %>
+        <% if current_admin.is_admin || (post.admin_id && post.admin_id == current_admin.id) %>
          <%= link_to "Edit", edit_post_path(post) %> | 
         <% end %>
         
-         <% if current_admin.email == 'admin@eurohacktrip.org' %>
+         <% if current_admin.is_admin %>
             <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %> |
             <% if !post.published %>
               <%= link_to 'Publish', post_publish_path(post), method: :post, data: { confirm: 'Are you sure?' } %> | 

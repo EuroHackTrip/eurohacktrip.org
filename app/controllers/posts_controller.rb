@@ -43,7 +43,7 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     set_post
-    if current_admin.email == 'admin@eurohacktrip.org' || @post.admin_id == current_admin.id
+    if current_admin.is_admin || @post.admin_id == current_admin.id
       @post = Post.friendly.find(params[:id])
     else
       redirect_to dashboard_index_path, notice: 'You don\'t have permission to do that.'
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     # authorize! :create, @post
     @post.admin_id = current_admin.id
-    if current_admin.email == 'admin@eurohacktrip.org'
+    if current_admin.is_admin
       @post.published = true
     else
       @post.published = false
@@ -98,7 +98,7 @@ class PostsController < ApplicationController
   end
 
   def publish
-    if current_admin.email == 'admin@eurohacktrip.org'
+    if current_admin.is_admin
       @post = Post.friendly.find(params[:id])
       @post.published = !@post.published
       @post.save!

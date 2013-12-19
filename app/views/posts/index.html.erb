@@ -50,11 +50,11 @@
           <br>
           <% if admin_signed_in? %>
             <span class="admin">
-              <% if current_admin.email == 'admin@eurohacktrip.org' || (post.admin_id && post.admin_id == current_admin.id) %>
+              <% if current_admin.is_admin || (post.admin_id && post.admin_id == current_admin.id) %>
                   <%= link_to 'Edit', edit_post_path(post) %> 
                  | 
               <% end %>
-              <% if current_admin.email == 'admin@eurohacktrip.org' %>
+              <% if current_admin.is_admin %>
                 <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
               <% end %>
             </span>

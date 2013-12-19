@@ -5,7 +5,7 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
     user = Admin.new
-    if user.email == 'admin@eurohacktrip.org'
+    if user.is_admin
       can :manage, :all
     else
       can :create, Post

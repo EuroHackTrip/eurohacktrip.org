@@ -1,5 +1,5 @@
 <% if admin_signed_in? %>
-	<% if current_admin.email == "admin@eurohacktrip.org" %>
+	<% if current_admin.is_admin %>
 		<% Admin.all.each do |user| %>
 			<% if user.first_name && user.last_name %>
 				<div class = "to-hide">
