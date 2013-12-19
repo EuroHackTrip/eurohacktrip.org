@@ -40,6 +40,16 @@
 	border-radius: 4px;
 }
 
+.name {
+	display: block;
+	overflow: hidden;
+	width: 100%;
+	font-size: 23px;
+	line-height: 30px;
+	text-overflow: ellipsis;
+	font-weight: bold;
+}
+
 textarea {
 	width: 80%;
 	height: 120px;

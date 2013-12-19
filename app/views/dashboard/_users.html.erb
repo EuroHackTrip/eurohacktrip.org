@@ -3,7 +3,7 @@
 		<% Admin.all.each do |user| %>
 			<% if user.first_name && user.last_name %>
 				<div class = "to-hide">
-					<p><%= user.first_name + " " + user.last_name %></p>
+					<p><%= link_to user.first_name + " " + user.last_name, user_path(user) %></p>
 					<%= user.activity %><br>
 					<% if post_count(user) > 0 %>
 						<%= link_to "Authored: #{post_count(user)} post", "/" + user.first_name + "-" + user.last_name + "/posts" %>.

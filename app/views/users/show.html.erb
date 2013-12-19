@@ -1,9 +1,20 @@
-<% if @user.first_name && @user.last_name %>
-	<div class = "to-hide">
-		<p><%= @user.first_name + " " + @user.last_name %></p>
-		<%= @user.activity %><br>
-		<% if post_count(@user) > 0 %>
-			<%= link_to "Authored: #{post_count(@user)} post", "/" + @user.first_name + "-" + @user.last_name + "/posts" %>.
+<div class = "row">
+    <div class = "col-sm-3">
+		<%= image_tag("/assets/avatar.png", style: "width: 220px;") %>
+
+		<% if @user.first_name && @user.last_name %>
+				<p class="name"><%= @user.first_name + " " + @user.last_name %></p>
+				<%= @user.activity %><br>
+				<% if post_count(@user) > 0 %>
+					<%= link_to "Authored: #{post_count(@user)} post", "/" + @user.first_name + "-" + @user.last_name + "/posts" %>.
+				<% end %>
 		<% end %>
 	</div>
-<% end %>
+	<div class = "col-sm-9">
+		<% Post.where(admin_id: @user.id).each do |post| %>
+			<% if admin_signed_in? || post.published %>
+				<p><%= link_to post.title, post %></p>
+			<% end %>
+		<% end %>
+	</div>
+</div>
