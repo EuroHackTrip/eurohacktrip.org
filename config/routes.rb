@@ -5,6 +5,7 @@ EurohacktripOrg::Application.routes.draw do
   get "images/update"
   get "image/create"
   get "image/update"
+
   resources :pages
 
   resources :home_page_contents
@@ -25,7 +26,7 @@ EurohacktripOrg::Application.routes.draw do
   get "dashboard/index"
   get "home/index"
 
-  resources :users
+  resources :users, only: [:show, :index]
 
   #ping our eventbrite client:
   get 'eventbrite/:id' => 'events#pingeventbrite'
@@ -36,6 +37,9 @@ EurohacktripOrg::Application.routes.draw do
     resources :comments
   end
 
+  # get "users/index"
+  # get "users/show"
+
   match "comment/:id" => "comments#approve", :as => "comment_approve", via: [:post]
 
   match "country/:id" => "countries#show_in_nav", :as => "country_show", via: [:post]
@@ -43,6 +47,8 @@ EurohacktripOrg::Application.routes.draw do
   match "post/:id" => "posts#publish", :as => "post_publish", via: [:post]
 
   match ":first_name-:last_name/posts" => "posts#post_by_author", :as => "post_by_author", via: [:get]
+  
+  # match ":first_name-:last_name" => "users#show", :as => "user", via: [:get]
 
   match "admin/:id" => "users#toggle_admin", :as => "toggle_admin", via: [:post]
 
