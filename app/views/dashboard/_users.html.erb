@@ -7,7 +7,12 @@
 					<%= user.activity %><br>
 					<% if post_count(user) > 0 %>
 						<%= link_to "Authored: #{post_count(user)} post", "/" + user.first_name + "-" + user.last_name + "/posts" %>.
-					<% end %>
+					<% end %> | 
+					<% if !user.is_admin %>
+		              <%= link_to 'Make Admin', toggle_admin_path(user), method: :post, data: { confirm: 'Are you sure?' } %> | 
+		            <% else %>
+		              <%= link_to 'Remove Admin', toggle_admin_path(user), method: :post, data: { confirm: 'Are you sure?' } %> | 
+		            <% end %> 
 				</div>
 			<% end %>
 		<% end %>
