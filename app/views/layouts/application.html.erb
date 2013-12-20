@@ -74,7 +74,29 @@
             </li>
           <% end %>
         <% end %>
-          <li><%= link_to "Blog", posts_path %></li>
+        <li><%= link_to "Blog", posts_path %></li>
+        <% if admin_signed_in? %>
+          <li class="dropdown">
+            <% if current_admin.first_name && current_admin.last_name %>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= current_admin.first_name + " "  + current_admin.last_name %>
+                <span class="caret"></span>
+              </a>
+            <% else %>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= image_tag("/assets/gear.png", style: "width: 30px;") %>
+                <span class="caret"></span>
+              </a>
+            <% end %>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Profile', user_path(current_admin) %></li>
+              <li class="divider"></li>
+              <li><%= link_to 'Dashboard', dashboard_index_path %></li>
+              <li class="divider"></li>
+              <li><%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %></li>
+            </ul>
+          </li>
+        <% end %>
       </ul>
     </div>
 
