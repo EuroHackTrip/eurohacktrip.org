@@ -50,6 +50,24 @@
 	font-weight: bold;
 }
 
+.author-posts {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+	border-spacing: 2px;
+	border-color: gray;
+	width: 660px;
+	border-top: dotted 1px #aaa;
+	border-bottom: dotted 1px #aaa;
+	margin-top: 10px;
+	padding-bottom: 10px;
+	line-height: 135%;
+	color: #444;
+}
+
 textarea {
 	width: 80%;
 	height: 120px;

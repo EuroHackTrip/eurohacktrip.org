@@ -9,10 +9,24 @@
 			<% if user.first_name && user.last_name || user.activity %>
 				<p class="name"><%= link_to user.first_name + " " + user.last_name, user_path(user) %></p>
 				<%= user.activity %><br>
+				<br>
 			<% end %>
-			<% posts_by_author(user).each do |post| %>
-				<%= link_to post.title, post %><br>
-			<% end %>
+			<table>
+				<% posts_by_author(user)[0, 5].each do |post| %>
+					<tr>
+						<td class="author-posts">
+							<%= link_to post.title, post %><br>
+						</td>
+					</tr>
+				<% end %>
+				<% if posts_by_author(user).length > 5 %>
+					<tr>
+						<td style="text-align:right;">
+							<%= link_to 'More posts by this user', author_path(user) +"/posts" %>
+						</td>
+					</tr>
+				<% end %>
+			</table>
 		</div>
 	</div>
 <% end %>
