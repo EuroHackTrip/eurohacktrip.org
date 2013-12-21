@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
                 :approved_comments_count, :homepage_content, :total_unique, 
                 :total_returning, :total_unique_post_views, :page_views, 
                 :all_country_posts, :init_date, :total_views, :views_hash, 
-                :alerts_hash, :post_count, :nick_names, :author, :author_path
+                :alerts_hash, :posts_by_author, :nick_names, :author, :author_path
   # rescue_from CanCan::AccessDenied do |exception|
   #   redirect_to root_url, :alert => exception.message
   # end
@@ -168,14 +168,16 @@ def after_sign_in_path_for(res)
     }
   end
 
-  def post_count(user)
-    count = 0
+  def posts_by_author(user)
+    posts_by_author = []
     all_posts.each do |post|
       if post.admin_id && post.admin_id == user.id
-        count = count + 1
+        if admin_signed_in? || post.published
+          posts_by_author << post
+        end
       end
     end
-    count
+    posts_by_author
   end
 
   # def country_id_for_post(post)

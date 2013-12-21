@@ -1,0 +1,16 @@
+<% provide(:title, 'The Team') %>
+<h2 style="padding-top: 10px;">The Team</h2>
+<% @users.each do |user| %>
+	<div class="row">
+		<div class = "col-sm-3">
+			<%= image_tag("/assets/avatar.png", style: "width: 220px;") %>
+		</div>
+		<div class="col-sm-9">
+			<p class="name"><%= link_to user.first_name + " " + user.last_name, user_path(user) %></p>
+			<%= user.activity %><br>
+			<% posts_by_author(user).each do |post| %>
+				<%= link_to post.title, post %><br>
+			<% end %>
+		</div>
+	</div>
+<% end %>

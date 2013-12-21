@@ -79,6 +79,7 @@
           <li class="dropdown">
             <% if current_admin.first_name && current_admin.last_name %>
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= image_tag("/assets/avatar.png", style: "width: 30px;") %>  
               <%= current_admin.first_name + " "  + current_admin.last_name %>
                 <span class="caret"></span>
               </a>
@@ -127,6 +128,7 @@
       <div class="span3">
         <h3>Contact/follow</h3>
         <ul>
+          <li><%= link_to 'The Team', users_path %></li>
           <li class="twitter"><a href="https://twitter.com/EuroHackTrip">@EuroHackTrip</a></li>
           <li class="facebook"><a href="https://facebook.com/Africahacktrip2013">facebook.com/EuroHackTrip</a></li>
           <li class="email"><a href="mailto:hello@EuroHackTrip.org">hello@EuroHackTrip.org</a></li>

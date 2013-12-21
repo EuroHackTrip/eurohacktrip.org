@@ -5,8 +5,8 @@
 				<div class = "to-hide">
 					<p><%= link_to user.first_name + " " + user.last_name, user_path(user) %></p>
 					<%= user.activity %><br>
-					<% if post_count(user) > 0 %>
-						<%= link_to "Authored: #{post_count(user)} post", "/" + user.first_name + "-" + user.last_name + "/posts" %>. | 
+					<% if posts_by_author(user).length > 0 %>
+						<%= link_to "Authored: " + pluralize(posts_by_author(user).length, "post"), "/" + user.first_name + "-" + user.last_name + "/posts" %>. | 
 					<% end %>
 					<% if !user.is_admin %>
 		              <%= link_to 'Make Admin', toggle_admin_path(user), method: :post, data: { confirm: 'Are you sure?' } %>
