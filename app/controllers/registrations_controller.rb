@@ -1,6 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
     def create
       if verify_recaptcha
+        # @admin = Admin.find_for_facebook_oauth(request.env["omniauth.auth"], current_admin)
         super
       else
         build_resource

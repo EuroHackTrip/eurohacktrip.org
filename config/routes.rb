@@ -17,7 +17,8 @@ EurohacktripOrg::Application.routes.draw do
 
   get 'tags/:tag', to: 'posts#index', as: :tag
 
-  devise_for :admins, controllers: { registrations: 'registrations' }
+  # devise_for :admins, controllers: { registrations: 'registrations' }
+  devise_for :admins, :controllers => { registrations: 'registrations', :omniauth_callbacks => "admins/omniauth_callbacks" }
 
   resources :countries
   resources :cities

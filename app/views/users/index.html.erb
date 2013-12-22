@@ -1,7 +1,7 @@
 <% provide(:title, 'The Team') %>
 <h2 style="padding-top: 10px;">The Team</h2>
 <% @users.each do |user| %>
-	<div class="row">
+	<div class="row" style="border-bottom: dotted 1px #aaa; padding-top:10px;">
 		<div class = "col-sm-3">
 			<%= image_tag("/assets/avatar.png", style: "width: 220px;") %>
 		</div>
@@ -11,7 +11,7 @@
 				<%= user.activity %><br>
 				<br>
 			<% end %>
-			<table>
+			<table width="100%">
 				<% posts_by_author(user)[0, 5].each do |post| %>
 					<tr>
 						<td class="author-posts">

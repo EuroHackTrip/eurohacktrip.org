@@ -23,6 +23,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :last_name
     devise_parameter_sanitizer.for(:sign_up) << :activity
     devise_parameter_sanitizer.for(:sign_up) << :is_admin
+    devise_parameter_sanitizer.for(:sign_up) << :provider
+    devise_parameter_sanitizer.for(:sign_up) << :uid
+    devise_parameter_sanitizer.for(:sign_up) << :name
   end
 
   def store_location
