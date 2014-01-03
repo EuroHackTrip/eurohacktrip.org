@@ -1,4 +1,6 @@
-<% provide(:title, @user.first_name + " " + @user.last_name) %>
+<% if @user.first_name && @user.last_name %>
+	<% provide(:title, @user.first_name + " " + @user.last_name) %>
+<% end %>
 <div class = "row" style="padding-top: 10px;">
     <div class = "col-sm-3">
 		<%= image_tag("/assets/avatar.png", style: "width: 220px;") %>
