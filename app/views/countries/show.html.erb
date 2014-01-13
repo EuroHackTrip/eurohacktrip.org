@@ -1,164 +1,200 @@
 <% provide(:title, @country.name) %>
+<link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
 <div id="map" data-country-id="<%= @country.id %>">
 
 </div>
 <br>
-<div class = "row">
-	<div class="eventslist">
 
-	<legend><h4>Events we organize here</h4></legend>
-	
-	<ol>	
-		<% all_events.each do |event| %>
-						
-			<% 
+<div id="main-wrapper">
+
+	<!-- Main -->
+	<div id="main" class="container">
+		<div class="row">
+
+			
+
+						<!-- Content -->
+						<div id="content" class="8u skel-cell-mainContent" style="clear:both;">
+
+							<!-- Events -->
+							<header>
+								<h2>EVENTS WE ORGANIZE HERE</h2>
+							</header>
+							<ol>	
+								<% all_events.each do |event| %>
+
+								<% 
 			# puts @country.id
 			# event.country_id 
 			%>
 
 			<% if event.country_id == @country.id %>
 
-				<li style="font-size: 20px">
+			<li style="font-size: 20px">
 
-					<% if ENV["RAILS_ENV"] == 'production' %>
-					<% begin %>
+				<% if ENV["RAILS_ENV"] == 'production' %>
+				<% begin %>
 				
-						<% eventx = CountryEvent.new(event.event_id) %>
-						<% e = eventx.response['event'] %>
+				<% eventx = CountryEvent.new(event.event_id) %>
+				<% e = eventx.response['event'] %>
 
-						<a href="<%= e['url'] %>" >
-						<%= e['title'] %>
-						</a>
+				<a href="<%= e['url'] %>" >
+					<%= e['title'] %>
+				</a>
 
-						<span style="font-size: 10px; text-align: right; float: right">
-							At <%= e['venue']['name'] %> <br/>
-							<%= e['tickets'][0]['ticket']['quantity_available'] %> Tickets Remaining
-							<a href="<%= e['url'] %>">Order</a>
-						</span>
+				<span style="font-size: 10px; text-align: right; float: right">
+					At <%= e['venue']['name'] %> <br/>
+					<%= e['tickets'][0]['ticket']['quantity_available'] %> Tickets Remaining
+					<a href="<%= e['url'] %>">Order</a>
+				</span>
 
-					<% rescue Exception => e %>
+				<% rescue Exception => e %>
 
-						<div class="hide">
-							<%= "Error: #{$!}" %> <br/>
-							<%= "Error: #{e}" %> <br/>
-							<%= "Error:" + e.inspect %>
-						</div>
+				<div class="hide">
+					<%= "Error: #{$!}" %> <br/>
+					<%= "Error: #{e}" %> <br/>
+					<%= "Error:" + e.inspect %>
+				</div>
 
-					<% end %>
-					<% else %>
-
-						<a href="<%= event.event_link %>" >
-						<%= event.event_name %>
-						</a>
-
-						<span style="font-size: 10px; text-align: right; float: right">
-							At <%= event.event_venue %> <br/>
-							<a href="<%= event.event_link %>">Order</a>
-						</span>
-
-					<% end %>
-
-
-				</li>
-
-					<% if admin_signed_in? %>
-					  <% if current_admin.is_admin %>
-					      <span class="admin">
-					        <%= link_to 'Edit', edit_event_path(event) %> | 
-					        <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
-					      </span>
-				      <% end %>
-				    <% end %>
-				<hr>
-			<% end %>
-		<% end %>
-	</ol>
-
-	</div>
-	<div class="countrybox well pull-right" style="background-color:white;">
-		<legend><h4><%= @country.name %></h4></legend>
-		<% if ENV["RAILS_ENV"] == 'production' %>
-	        <% begin %>
-	          <%= image_tag @country.avatar.url %>
-	        <% rescue Exception => e %>
-	          <%= image_tag "/assets/flag/"+country+".png" %>
-	        <% end %>
-	     <% end %>
-		<div><%= @country.description %></div>
-		<% if admin_signed_in? %>
-		  <% if current_admin.is_admin %>
-		      <span class="admin">
-		        <%= link_to 'Edit', edit_country_path(@country) %> | 
-		        <%= link_to 'Destroy', @country, method: :delete, data: { confirm: 'Are you sure?' } %>
-		      </span>
-	      <% end %>
-	    <% end %>
-	</div>
-</div>
-<div>
-	<legend>
-		<h4>We are looking forward to meet</h4>
-	</legend>
-	 <div class="row" style="margin-bottom:10px;">
-	 	<% all_people.each do |person| %>
-	 		<% if @country.id == person.country_id %> 
-	 			<div class="col-sm-3 col-md-2">
-	 				<div class="thumbnail">
-	 					<% if ENV["RAILS_ENV"] == 'production' %>
-			                <% begin %>
-			                  <%= image_tag person.avatar.url, size: "200x150" %><br>
-			                <% rescue Exception => e %>
-			                  <%= image_tag "/assets/flag/", size: "250x250" %><br>
-			                <% end %>
-			             <% end %>
-	 					<div class="caption">
-	 						<h3><%= link_to person.name, "http://" + person.online_profile_link, class: "links" %></h3>
-	         			    <%= person.occupation %><br>
-	         			    <%= Country.find(person.country_id).name %>
-	 					</div>
-	 				</div>
-	 			</div>
-	 		<% end %>
-	 	<% end %>
-	 </div>
-	 <hr>
-</div>
-<div class="row">
-	<div class="span8">
-		<% all_posts.tagged_with(@country.name).each do |post| %>
-			<% if post.published || post.published == nil %>
-				<h2><%= link_to post.title, post_path(post) %></h2>
-				<% if post.admin_id && Admin.find(post.admin_id).first_name && Admin.find(post.admin_id).last_name %>
-					<span class = "post-details">Posted by: <%= link_to author(post), author_path(Admin.find(post.admin_id)) + "/posts" %>  at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %> </span></span><br>
-				<% else %>
-					<span class = "post-details">Posted  at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %> </span></span><br>
 				<% end %>
-				<!--<%= post.created_at %> -->
-				<%= raw post.content %><br><br>
-				<% if admin_signed_in? %>
-				  <% if current_admin.is_admin || (post.admin_id && post.admin_id == current_admin.id) %>
-			 		<%= link_to 'Edit', edit_post_path(post) %> | 
-			 	  <% end %>
-				  <% if current_admin.is_admin %>
-				      <span>		        
-				        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-				      </span> | 
-			      <% end %>
-			    <% end %>
+				<% else %>
 
-			    <%= link_to "Leave a Comment", "/posts/"+post.slug+"#add-comment", class: "links" %>
-			    <br>
-			    <br>
+				<a href="<%= event.event_link %>" >
+					<%= event.event_name %>
+				</a>
+
+				<span style="font-size: 10px; text-align: right; float: right">
+					At <%= event.event_venue %> <br/>
+					<a href="<%= event.event_link %>">Order</a>
+				</span>
+
+				<% end %>
+
+
+			</li>
+
+			<% if admin_signed_in? %>
+			<% if current_admin.is_admin %>
+			<span class="admin">
+				<%= link_to 'Edit', edit_event_path(event) %> | 
+				<%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+			</span>
+			<% end %>
+			<% end %>
+			<hr>
+			<% end %>
+			<% end %>
+		</ol>
+
+		<!-- People -->
+
+		<header>
+			<h2>We are looking forward to meet</h2>
+		</header>
+		<div class="carousel">
+			<div class="reel">
+				<% all_people.each do |person| %>
+				<% if @country.id == person.country_id %> 
+				<article>
+					<div class="thumbnail">
+						<% if ENV["RAILS_ENV"] == 'production' %>
+						<% begin %>
+						<%= image_tag person.avatar.url, size: "200x150" %><br>
+						<% rescue Exception => e %>
+						<%= image_tag "/assets/flag/", size: "250x250" %><br>
+						<% end %>
+						<% end %>
+						<header>
+							<h3><%= link_to person.name, "http://" + person.online_profile_link, class: "links" %></h3>
+						</header>
+						<p><%= person.occupation %></p>
+						<p><%= Country.find(person.country_id).name %></p>
+
+					</div>
+				</article>
+				<% end %>
+				<% end %>
+			</div>
+		</div>
+		<!-- Posts -->
+		<div class="12u skel-cell-mainContent">
+		<% all_posts.tagged_with(@country.name).each do |post| %>
+		<% if post.published || post.published == nil %>
+		<article>
+			<h3><%= link_to post.title, post_path(post) %></h3>
+			<% if post.admin_id && Admin.find(post.admin_id).first_name && Admin.find(post.admin_id).last_name %>
+			<span class = "post-details">Posted by: <%= link_to author(post), author_path(Admin.find(post.admin_id)) + "/posts" %>  at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %> </span></span><br>
+			<% else %>
+			<span class = "post-details">Posted  at <%= post.created_at %><span style = "float: right"><%= social_share_button_tag(post.title) %> </span></span><br>
+			<% end %>
+			<!--<%= post.created_at %> -->
+			<%= raw post.content %><br><br>
+			<% if admin_signed_in? %>
+			<% if current_admin.is_admin || (post.admin_id && post.admin_id == current_admin.id) %>
+			<%= link_to 'Edit', edit_post_path(post) %> | 
+			<% end %>
+			<% if current_admin.is_admin %>
+			<span>		        
+				<%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+			</span> | <link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
+			<% end %>
+			<% end %>
+
+			<%= link_to "Leave a Comment", "/posts/"+post.slug+"#add-comment", class: "links" %>
+			<br>
+			<br>
 				<!--
 				<% if post.comments.count > 0 %>
 					<%= link_to pluralize(post.comments.count, " comment") + " so far.", "/posts/"+post.id.to_s+"#comments", class: "links" %>
 				<% else %>
 					<%= link_to "Leave a Comment", "/posts/"+post.id.to_s+"#add-comment", class: "links" %>
 				<% end %>
-				-->
-			<% end %>
+			-->
+		</article>
 		<% end %>
+		<% end %>
+
+		<%= will_paginate all_country_posts(@country.name), :container => true %>
+		</div>
 	</div>
-	<div class="span4"></div>
-	<%= will_paginate all_country_posts(@country.name), :container => true %>
-</div>	 
+
+	<!-- Sidebar -->
+			<div id="sidebar" class="4u">
+
+				<!-- Excerpts -->
+				<section>
+					<ul class="divided">
+						<li>
+
+							<!-- Excerpt -->
+							<div class="well">
+							<article class="is-excerpt">
+								<% if ENV["RAILS_ENV"] == 'production' %>
+								<% begin %>
+								<%= image_tag @country.avatar.url %>
+								<% rescue Exception => e %>
+								<%= image_tag @country.avatar.url %>
+								<% end %>
+								<% end %>
+								<div><%= @country.description %></div>
+								<% if admin_signed_in? %>
+								<% if current_admin.is_admin %>
+								<span class="admin">
+									<%= link_to 'Edit', edit_country_path(@country) %> | 
+									<%= link_to 'Destroy', @country, method: :delete, data: { confirm: 'Are you sure?' } %>
+								</span>
+								<% end %>
+								<% end %>
+							</article>
+							</div>
+						</li>
+					</ul>
+
+				</section>
+
+						</div>
+
+</div>
+</div>
+
+</div>

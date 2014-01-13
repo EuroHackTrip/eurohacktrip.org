@@ -1,9 +1,11 @@
 <% provide(:title, @post.title) %>
+<link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
 <div id="map">
   
 </div>
 
 <p id="notice"><%= notice %></p>
+<div style="padding: 6em 6em;">
 <p>
   <h2><%= @post.title %></h2>
 </p>
@@ -95,4 +97,5 @@
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 <% end %>
+</div>
 

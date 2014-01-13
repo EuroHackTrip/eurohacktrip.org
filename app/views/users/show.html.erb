@@ -1,7 +1,8 @@
 <% if @user.first_name && @user.last_name %>
-	<% provide(:title, @user.first_name + " " + @user.last_name) %>
+<link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
+<% provide(:title, @user.first_name + " " + @user.last_name) %>
 <% end %>
-<div class = "row" style="padding-top: 10px;">
+<!--<div class = "row" style="padding-top: 10px;">
     <div class = "col-sm-3">
 		<%= image_tag("/assets/avatar.png", style: "width: 220px;") %>
 
@@ -19,3 +20,68 @@
 		<% end %>
 	</div>
 </div>
+-->
+<div id="main-wrapper">
+
+	<!-- Main -->
+	<div id="main" class="container">
+		<div class="row">
+
+			<!-- Content -->
+			<div id="content" class="8u skel-cell-mainContent">
+
+				<!-- Post -->
+				<article class="is-post">
+					<header>
+						<% if @user.first_name && @user.last_name %>
+						<h2><%= @user.first_name + " " + @user.last_name %></h2>
+						<% end %>
+					</header>
+					<span class="image image-full"><%= image_tag("/assets/avatar.png", style: "width: 220px;") %></span>
+					<h3>What I do:</h3>
+					<p>
+						<% if @user.activity %>
+						<%= @user.activity %>
+						<% end %>
+					</p>
+				</article>
+
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar" class="4u">
+
+				<!-- Excerpts -->
+
+				<section>
+					<p>Posts Authored:</p><br>
+					<ul class="divided">
+						<% posts_by_author(@user)[0,5].each do |post| %>
+						<li>
+
+							<!-- Excerpt -->
+							<article class="is-excerpt">
+								<header>
+									<span class="date" style = "width:100%; text-align:right;"><%= post.created_at %></span>
+									<h3><%= link_to post.title, post %></h3>
+								</header><br>
+								<p><%= raw post.content.split("\n")[0] %></p>
+							</article>
+
+						</li>
+						<% end %>
+						<% if posts_by_author(@user).length > 5 %>
+							<ul class="actions">
+								<li><%= link_to 'More posts by this user', author_path(@user) +"/posts", class:"button button-icon icon icon-file", style:"width:100%;" %></li>
+							</ul>
+						<% end %>
+					</ul>
+				</section>
+
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>

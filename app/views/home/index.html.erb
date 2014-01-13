@@ -1,7 +1,34 @@
 <% provide(:title, 'Home') %>
- <div id="allmap">
-   
- </div>
+ 
+ <div class="carousel">
+	<div class="reel">
+		<% Admin.all.each do |user| %>
+			<article>
+				<%= image_tag("/assets/avatar.png", style: "width: 220px;") %>
+				<header>
+					<% if user.first_name && user.last_name %>
+						<h3><a href="#"><%= user.first_name + " " + user.last_name %></a></h3>
+					<% end %>
+				</header>
+				<p><%= user.activity %></p>							
+			</article>
+		<% end %>
+
+		
+	</div>
+</div>
+
+<div id="banner-wrapper">
+	<div class="inner">
+
+		<!-- Banner -->
+			<section id="banner" class="container">
+				<p>Use this space for <strong>profound thoughts</strong>.<br />
+				Or an enormous ad. Whatever.</p>
+			</section>
+
+	</div>
+</div>
 <div class="homewrap">
  <% if HomePageContent.all.count != 0 %>
   <%= raw HomePageContent.first.content %>

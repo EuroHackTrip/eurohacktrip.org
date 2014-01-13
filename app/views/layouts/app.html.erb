@@ -1,0 +1,166 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>Eurohacktrip | <%= yield(:title) %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => false %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
+  <%= javascript_include_tag '/assets/leaflet/leaflet.js' %>
+  <link rel="stylesheet" href="/assets/leaflet/leaflet.css" />
+ <!--[if lte IE 8]>
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+ <![endif]-->
+   <%= javascript_include_tag '/assets/leaflet_label/leaflet.label.js' %>
+  <link rel="stylesheet" href="/assets/leaflet_label/leaflet.label.css" />
+  <%= csrf_meta_tags %>
+  <% if ENV["RAILS_ENV"] == 'production' %>
+    <% begin %>
+      <% if Image.all.count > 0 %>
+        <link rel="shortcut icon" <%= image_tag(Image.last.favicon.url) %> />
+      <% else %>
+        <link rel="shortcut icon" <%= image_tag("/assets/black_eht_logo.png") %> />
+      <% end %>
+      
+    <% rescue Exception => e %>
+      <link rel="shortcut icon" <%= image_tag("/assets/black_eht_logo.png") %> />
+    <% end %>
+  <% end %>
+</head>
+<body style ="background-color:#FBF8EF;">
+<div class="wrapper">
+
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+  <div class="container">
+
+    <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+    <div class="navbar-header">
+      <a class="btn navbar-toggle" data-toggle="collapse" data-target=".nav-collapse"  style="margin-top: 15px 0px">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a href="/" class = "navbar-brand" 
+      style="padding: 5px 0px 5px 15px;">
+      <% if ENV["RAILS_ENV"] == 'production' %>
+        <% begin %>
+          <% if Image.all.count > 0 %>
+            <%= image_tag(Image.last.logo.url, style: "width: 50px;") %>
+          <% else %>
+            <%= image_tag("/assets/white_eht_logo.png", style: "width: 50px;") %>
+          <% end %>
+        <% rescue Exception => e %>
+          <%= image_tag("/assets/white_eht_logo.png", style: "width: 50px;") %>
+        <% end %>
+      <% end %>
+       EuroHackTrip</a>
+    </div>
+
+    <!-- Everything you want hidden at 940px or less, place within here -->
+    <div class="nav-collapse collapse">
+      <!-- .nav, .navbar-search, .navbar-form, etc -->
+      <ul class="nav navbar-nav navbar-right ournav">
+        <% all_countries.each do |country| %>
+          <% if country.show_in_nav %>
+            <li>
+              <%= link_to country.name, country_path(country.slug) %>
+            </li>
+          <% end %>
+        <% end %>
+        <% Page.all.each do |page| %>
+          <% if page.show_in_nav %>
+            <li>
+              <%= link_to page.name, page_path(page.slug) %>
+            </li>
+          <% end %>
+        <% end %>
+        <li><%= link_to "Blog", posts_path %></li>
+        <% if admin_signed_in? %>
+          <li class="dropdown">
+            <% if current_admin.first_name && current_admin.last_name %>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= image_tag("/assets/avatar.png", style: "width: 30px;") %>  
+              <%= current_admin.first_name + " "  + current_admin.last_name %>
+                <span class="caret"></span>
+              </a>
+            <% else %>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= image_tag("/assets/gear.png", style: "width: 30px;") %>
+                <span class="caret"></span>
+              </a>
+            <% end %>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Profile', user_path(current_admin) %></li>
+              <li class="divider"></li>
+              <li><%= link_to 'Dashboard', dashboard_index_path %></li>
+              <li class="divider"></li>
+              <li><%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %></li>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+</div><!-- /.navbar -->
+
+<div class = "container">
+	<% if flash[:notice] %>
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+	<%= yield %>
+</div><!-- /.container [middle] -->
+
+</div><!-- /.wrapper -->
+
+<footer id="page-footer" class="navbar-fixed-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="span3">
+        <h3>Contact/follow</h3>
+        <ul>
+          <li><%= link_to 'The Team', users_path %></li>
+          <li class="twitter"><a href="https://twitter.com/EuroHackTrip">@EuroHackTrip</a></li>
+          <li class="facebook"><a href="https://facebook.com/Africahacktrip2013">facebook.com/EuroHackTrip</a></li>
+          <li class="email"><a href="mailto:hello@EuroHackTrip.org">hello@EuroHackTrip.org</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <h3>Supporters</h3>
+        <div class="sponsor-logos">
+          <div><a href="https://github.com" class="github">GitHub</a></div>
+          <div><a href="http://geeksphone.com" class="geeksphone">Geeksphone</a></div>
+        </div>
+      </div>
+      <div class="span3">
+        <h3>Media Partners</h3>
+        <h4><strong><a href="http://www.eufrika.org/">Eufrika.org</a></strong></h4>
+        <div>
+          Eufrika is a blog focusing on independent news for an African-European public.
+        </div>
+      </div>
+      <div class="span3">        
+        <h3>Admin</h3>
+        <% if !admin_signed_in? %>
+          <div><%= link_to "Sign In", new_admin_session_path %></div>
+          <div><%= link_to "Sign Up", new_admin_registration_path %></div>
+        <% else %>
+          <div><%= link_to 'Dashboard', dashboard_index_path %> </div>
+          <div><%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

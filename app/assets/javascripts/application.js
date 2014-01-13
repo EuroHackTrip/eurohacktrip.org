@@ -11,6 +11,10 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.dropotron
+//= require config
+//= require skel.min
+//= require skel-panels.min
 //= require jquery_ujs
 //= require bootsy
 //= require bootstrap

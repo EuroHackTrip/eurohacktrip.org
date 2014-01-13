@@ -1,4 +1,5 @@
 <% provide(:title, 'Articles by ' + request.fullpath.split("/")[1].split("-")[0] + " " + request.fullpath.split("/")[1].split("-")[1]) %>
+<link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
 <% if admin_signed_in? %>
   <%= link_to 'New Post', new_post_path, class: "btn btn-primary pull-right" %>
 <% end %>
