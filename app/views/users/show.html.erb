@@ -54,7 +54,7 @@
 									<span class="date" style = "width:100%; text-align:right;"><%= post.created_at %></span>
 									<h3><%= link_to post.title, post %></h3>
 								</header>
-								<p><%= raw post.content.split("")[0, 150].join + "...." %></p>
+								<p><%= raw post.content.split("")[0, 150].join + "..." %></p>
 							</article>
 
 						</li>

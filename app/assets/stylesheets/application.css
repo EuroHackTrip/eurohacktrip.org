@@ -13,6 +13,7 @@
  *= require style-desktop
  *= require skel-noscript
  *= require style
+ *= require add
  */
 
 @font-face {
@@ -191,6 +192,11 @@ textarea {
 .leaflet-container a {
 	color: #2F95BE;
 }
+.carousel article p{
+	height: 40px;
+	overflow: hidden;
+}
+
 
 @media(min-width: 650px){
 	#header {

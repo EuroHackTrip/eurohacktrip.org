@@ -1,0 +1,15 @@
+#main-wrapper {
+	padding: 0px !important;
+}
+
+#main-wrapper .homewrap {
+	padding: 0px 5% !important;
+}
+
+p.tag_line {
+	display: inline;
+	vertical-align: top;
+}
+.carousel{
+	padding: 0px !important;
+}

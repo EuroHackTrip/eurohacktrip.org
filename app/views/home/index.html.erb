@@ -11,7 +11,9 @@
 						<h3><a href="#"><%= user.first_name + " " + user.last_name %></h3>
 					<% end %>
 				</header>
-				<p><%= user.activity %></p>							
+				<% if user.tag_line %>
+					<p><%= user.tag_line.split("")[0, 150].join + "..." %></p>
+				<% end %>							
 			</article>
 			</a>
 		<% end %>
@@ -24,7 +26,7 @@
 		<!-- Banner -->
 			<section id="banner" class="container">
 				<p>A Campaign for <strong>Diversity</strong> in The Tech Community.<br />
-				From Barcelona to Vienna</p>
+				From 	Barcelona to Vienna</p>
 			</section>
 
 	</div>
