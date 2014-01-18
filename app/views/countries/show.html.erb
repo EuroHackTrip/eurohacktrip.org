@@ -1,5 +1,4 @@
 <% provide(:title, @country.name) %>
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
 <div id="map" data-country-id="<%= @country.id %>">
 
 </div>
@@ -86,6 +85,44 @@
 			<% end %>
 		</ol>
 
+		</div>
+		<div class="4u skel-cell-mainContent">
+
+				<!-- Excerpts -->
+				<section>
+					<ul class="divided">
+						<li>
+
+							<!-- Excerpt -->
+							<div class="well">
+							<article class="is-excerpt">
+								<% if ENV["RAILS_ENV"] == 'production' %>
+								<% begin %>
+								<%= image_tag @country.avatar.url %>
+								<% rescue Exception => e %>
+								<%= image_tag @country.avatar.url %>
+								<% end %>
+								<% end %>
+								<div><%= @country.description %></div>
+								<% if admin_signed_in? %>
+								<% if current_admin.is_admin %>
+								<span class="admin">
+									<%= link_to 'Edit', edit_country_path(@country) %> | 
+									<%= link_to 'Destroy', @country, method: :delete, data: { confirm: 'Are you sure?' } %>
+								</span>
+								<% end %>
+								<% end %>
+							</article>
+							</div>
+						</li>
+					</ul>
+
+				</section>
+
+						</div>
+
+		</div>
+
 		<!-- People -->
 
 		<header>
@@ -158,43 +195,6 @@
 		</div>
 	</div>
 
-	<!-- Sidebar -->
-			<div id="sidebar" class="4u">
-
-				<!-- Excerpts -->
-				<section>
-					<ul class="divided">
-						<li>
-
-							<!-- Excerpt -->
-							<div class="well">
-							<article class="is-excerpt">
-								<% if ENV["RAILS_ENV"] == 'production' %>
-								<% begin %>
-								<%= image_tag @country.avatar.url %>
-								<% rescue Exception => e %>
-								<%= image_tag @country.avatar.url %>
-								<% end %>
-								<% end %>
-								<div><%= @country.description %></div>
-								<% if admin_signed_in? %>
-								<% if current_admin.is_admin %>
-								<span class="admin">
-									<%= link_to 'Edit', edit_country_path(@country) %> | 
-									<%= link_to 'Destroy', @country, method: :delete, data: { confirm: 'Are you sure?' } %>
-								</span>
-								<% end %>
-								<% end %>
-							</article>
-							</div>
-						</li>
-					</ul>
-
-				</section>
-
-						</div>
-
-</div>
 </div>
 
 </div>

@@ -1,20 +1,20 @@
 <% provide(:title, 'Home') %>
- 
+ <!-- Carousel -->
  <div class="carousel">
 	<div class="reel">
 		<% Admin.all.each do |user| %>
+			<a href="<%= user_path(user) %>">
 			<article>
 				<%= image_tag("/assets/avatar.png", style: "width: 220px;") %>
 				<header>
 					<% if user.first_name && user.last_name %>
-						<h3><a href="#"><%= user.first_name + " " + user.last_name %></a></h3>
+						<h3><a href="#"><%= user.first_name + " " + user.last_name %></h3>
 					<% end %>
 				</header>
 				<p><%= user.activity %></p>							
 			</article>
+			</a>
 		<% end %>
-
-		
 	</div>
 </div>
 
@@ -23,8 +23,8 @@
 
 		<!-- Banner -->
 			<section id="banner" class="container">
-				<p>Use this space for <strong>profound thoughts</strong>.<br />
-				Or an enormous ad. Whatever.</p>
+				<p>A Campaign for <strong>Diversity</strong> in The Tech Community.<br />
+				From Barcelona to Vienna</p>
 			</section>
 
 	</div>

@@ -1,8 +1,4 @@
 <% provide(:title, @post.title) %>
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
-<div id="map">
-  
-</div>
 
 <p id="notice"><%= notice %></p>
 <div style="padding: 6em 6em;">
@@ -32,54 +28,7 @@
       <% end %>
     <% end %>
           <br>
-<!--<ul class="nav nav-tabs">
-  <li><a href="#comments" data-toggle="tab">Comments <span class="badge"><%= approved_comments_count(@post) %></span></a></li>
-  <li><a href="#add-comment" data-toggle="tab">Add a Comment</a></li>
-</ul>
 
-<div class="tab-content">
-  <div class="tab-pane active" id="comments">
-    <% count = 0 %>
-    <% @post.comments.each do |comment| %>
-      <% if comment.approved %>
-        <div class = "well">
-          <%= link_to comment.commenter, "http://" + comment.website %> says:
-          <span class = "pull-right"><%= comment.created_at.to_s.split(" ")[0] + " " + comment.created_at.to_s.split(" ")[1] %></span>
-          <p>
-            <%= comment.content %>
-          </p>
-        </div>
-        <% else %>
-          <% count = count + 1 %>
-      <% end %>
-    <% end %>
-    <%= pluralize(count, " comment") %> pending approval
-  </div>
-  <div class="tab-pane" id="add-comment">
-    <h2>Add a Comment</h2>
-    <%= form_for([@post, @post.comments.build]) do |f| %>
-      <div class="field">
-        <%= f.label :commenter %><br>
-        <%= f.text_field :commenter %>
-      </div>
-      <div class="field">
-        <%= f.label :email %><br>
-        <%= f.text_field :email %>
-      </div>
-      <div class="field">
-        <%= f.label :website %><br>
-        <%= f.text_field :website %>
-      </div>
-      <div class="field">
-        <%= f.label :content %><br>
-        <%= f.text_area :content %>
-      </div>
-      <div class="actions">
-        <%= f.submit %>
-      </div>
-    <% end %>
-  </div>
-</div>-->
 <% if PostSetting.all.count == 0 || PostSetting.last.allow_comments %>
 <div id = "add-comment">
     <div id="disqus_thread"></div>

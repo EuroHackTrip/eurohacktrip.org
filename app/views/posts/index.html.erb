@@ -1,5 +1,4 @@
 <% provide(:title, 'Blog') %>
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/assets/posts.css">
 <div id = "intro">
   <h1 id = "tagline">
@@ -11,10 +10,6 @@
  </p>
 </div>
 
-<div id="allmap" style="margin-bottom: 10px;">
-
-</div>
-
 <hr>
 <h1 class = "home-title">5 Weeks / 4 Countries / 9 Hackers</h1>
 <hr>
@@ -22,46 +17,46 @@
 <!-- everything else below here is the blogposts -->
 
 <% if admin_signed_in? %>
-<%= link_to 'New Post', new_post_path, class: "btn btn-primary pull-right" %>
+  <%= link_to 'New Post', new_post_path, class: "btn btn-primary pull-right" %>
 <% end %>
 
 <% @posts.each do |post| %>
-<% if post.published || post.published == nil %>
-<div class="posts">
-  <h2><%= link_to post.title, post %></h2>
-  <% if post.admin_id && Admin.find(post.admin_id).first_name && Admin.find(post.admin_id).last_name %>
-  <span class = "post-details">Posted by: <%= link_to author(post), author_path(Admin.find(post.admin_id)) + "/posts" %> at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %></span></span>
-  <% else %>
-  <span class = "post-details">Posted at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %></span></span>
-  <% end %>
-  <%= raw post.content %>
-  <% if post.tag_list.count > 0 %>
-  <p>Tags:
-    <% post.tag_list.each do |tag| %>
-    <span class="label label-info"><%= link_to tag, tag_path(tag), style: "color:white;"%></span>
+  <% if post.published || post.published == nil %>
+  <div class="posts">
+    <h2><%= link_to post.title, post %></h2>
+    <% if post.admin_id && Admin.find(post.admin_id).first_name && Admin.find(post.admin_id).last_name %>
+    <span class = "post-details">Posted by: <%= link_to author(post), author_path(Admin.find(post.admin_id)) + "/posts" %> at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %></span></span>
+    <% else %>
+    <span class = "post-details">Posted at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %></span></span>
     <% end %>
-  </p>
-  <% end %>
-  <% if post.comments.count > 0 %>
-  <%= link_to pluralize(post.comments.count, " comment") + " so far.", "/posts/"+post.id.to_s+"#comments", class: "links" %>
-  <% else %>
-  <%= link_to "Leave a Comment", "/posts/"+post.slug.to_s+"#add-comment", class: "links" %>
-  <% end %>
-  <br>
-  <% if admin_signed_in? %>
-  <span class="admin">
-    <% if current_admin.is_admin || (post.admin_id && post.admin_id == current_admin.id) %>
-    <%= link_to 'Edit', edit_post_path(post) %> 
-    | 
+    <%= raw post.content %>
+    <% if post.tag_list.count > 0 %>
+    <p>Tags:
+      <% post.tag_list.each do |tag| %>
+      <span class="label label-info"><%= link_to tag, tag_path(tag), style: "color:white;"%></span>
+      <% end %>
+    </p>
     <% end %>
-    <% if current_admin.is_admin %>
-    <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% if post.comments.count > 0 %>
+    <%= link_to pluralize(post.comments.count, " comment") + " so far.", "/posts/"+post.id.to_s+"#comments", class: "links" %>
+    <% else %>
+    <%= link_to "Leave a Comment", "/posts/"+post.slug.to_s+"#add-comment", class: "links" %>
     <% end %>
-  </span>
-  <% end %>
-  <br>
+    <br>
+    <% if admin_signed_in? %>
+    <span class="admin">
+      <% if current_admin.is_admin || (post.admin_id && post.admin_id == current_admin.id) %>
+      <%= link_to 'Edit', edit_post_path(post) %> 
+      | 
+      <% end %>
+      <% if current_admin.is_admin %>
+      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </span>
+    <% end %>
+    <br>
 
-</div>
-<% end %>
+  </div>
+  <% end %>
 <% end %>
 <%= will_paginate @posts, :container => true %>

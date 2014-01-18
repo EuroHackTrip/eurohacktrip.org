@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131222094314) do
+ActiveRecord::Schema.define(version: 20140118121623) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20131222094314) do
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
+    t.string   "tag_line"
   end
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true

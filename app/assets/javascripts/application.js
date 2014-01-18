@@ -15,9 +15,8 @@
 //= require config
 //= require skel.min
 //= require skel-panels.min
+//= require init
 //= require jquery_ujs
-//= require bootsy
-//= require bootstrap
 //= require posts
 //= require dashboard
 //= require ckeditor-jquery
@@ -39,7 +38,9 @@ var myIcon = L.icon({
 
 //mapping for home, /posts[blog] and /countries pages
 if(window.location.pathname == '/' 
-	|| window.location.pathname ==  '/posts'
+	|| window.location.pathname.indexOf('/posts') > -1
+	|| window.location.pathname.indexOf('/users/') > -1
+	|| window.location.pathname.indexOf('/dashboard') > -1
 	|| window.location.pathname ==  '/countries'){ 
 
 	// foreach city in the whole fucking hacktrip
@@ -71,10 +72,10 @@ if(window.location.pathname == '/'
 						})
 						.bindLabel('<a href="'+window.location.origin+'/countries/'+city.country_name+'">'
 									+city.name+'</a>', { 
-						//label markers
 						noHide: true,
 						direction: 'auto'
-						}).addTo(mapmaker);
+						})
+						.addTo(mapmaker);
 			var popup = L.popup()
 			    // .setLatLng(latlng)
 			    .setContent('<a href="'+window.location.origin+'/countries/'+city.country_name+'">'
@@ -132,7 +133,8 @@ if(window.location.pathname.indexOf('/countries/') > -1){
 							//label markers
 							noHide: true,
 							direction: 'auto'
-							}).addTo(map);
+							})
+							.addTo(map);
 				var popup = L.popup()
 				    // .setLatLng(latlng)
 				    .setContent('<a href="'+window.location.origin+'/countries/'+city.country_name+'">'
@@ -218,7 +220,7 @@ if($('form #event_event_link')[0] != undefined && $('form #event_event_link')[0]
 
 
 // if(window.location.pathname.indexOf('/posts/') > -1){ 
-// }
+// }	
 
 //mapping for _cities under dashboard
 if(window.location.pathname.indexOf('/dashboard') > -1){ 
@@ -255,5 +257,15 @@ if(window.location.pathname.indexOf('/dashboard') > -1){
 
 	})
 }
+// newFontSize = Math.floor(14 * percentage);
+$( window ).resize(function() {
+	if($(window).width() < 1000){
+		$('#logo a').css("font-size", ($(window).width()*0.055)+"px");
+	}
+	else{
+		$('#logo a').css("font-size", "50px");
+	}
+});
+
 
 });  

@@ -1,15 +1,20 @@
 <% provide(:title, 'The Team') %>
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
+<style>
+	#main-wrapper {
+		padding: 6em;
+	}
+</style>
 <h2 style="padding-top: 10px;">The Team</h2>
 <% @users.each do |user| %>
 	<div class="row" style="border-bottom: dotted 1px #aaa; padding-top:10px;">
 		<div class = "col-sm-3">
 			<%= image_tag("/assets/avatar.png", style: "width: 220px;") %>
+			
 		</div>
 		<div class="col-sm-9">
-			<% if user.first_name && user.last_name || user.activity %>
+			<% if user.first_name && user.last_name || user.tag_line %>
 				<p class="name"><%= link_to user.first_name + " " + user.last_name, user_path(user) %></p>
-				<%= user.activity %><br>
+				<%= raw user.tag_line %><br>
 				<br>
 			<% end %>
 			<table width="100%">

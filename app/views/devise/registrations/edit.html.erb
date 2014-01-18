@@ -1,4 +1,9 @@
 <% provide(:title, 'Edit Account') %>
+<style>
+  #main-wrapper {
+    padding: 6em;
+  }
+</style>
 <h2>Edit Account </h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
@@ -10,8 +15,11 @@
   <div><%= f.label :last_name %><br />
   <%= f.text_field :last_name %></div>
 
+  <div><%= f.label :tag_line %><br />
+  <%= f.text_field :tag_line %></div>
+
   <div><%= f.label :activity, "What are you working on?" %><br />
-  <%= f.text_area :activity %></div>
+  <%= f.text_area :activity, :class => 'ckeditor' %></div>
 
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>

@@ -5,170 +5,164 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-	<head>
-		<title>Eurohacktrip | <%= yield(:title) %></title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<meta name="viewport" content="width=1040" />
-		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+<head>
+<title>Eurohacktrip | <%= yield(:title) %></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="hacktrip, eurohacktrip, hackers, developers" />
+<meta name="viewport" content="width=1040" />
+
+<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => false %>
+<%= javascript_include_tag "application", "data-turbolinks-track" => false %>
+<%= javascript_include_tag '/assets/leaflet/leaflet.js' %>
+<link rel="stylesheet" href="/assets/leaflet/leaflet.css" />
+ <!--[if lte IE 8]>
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+     <![endif]-->
+     <%= javascript_include_tag '/assets/leaflet_label/leaflet.label.js' %>
+     <link rel="stylesheet" href="/assets/leaflet_label/leaflet.label.css" />
+     <%= csrf_meta_tags %>
+</head>
+<body class="homepage">
+
+ 	<!-- Header Wrapper -->
+ 	<div id="header-wrapper">
+
+ 		<!-- Header -->
+ 		<div id="header" class="container">
+
+ 			<!-- Logo -->
+ 			<h1 id="logo"><%= link_to 'EuroHackTrip', root_path %></h1>
+ 			<p>15 Hackers, 6 Countries, 4 Weeks</p>
+
+ 			<!-- Nav -->
+ 			<nav id="nav">
+ 				<ul>
+ 					<% all_countries.each do |country| %>
+ 					<% if country.show_in_nav %>
+ 					<li>
+ 						<a href="<%= country_path(country.slug) %>">
+ 						<% if ENV["RAILS_ENV"] == 'production' %>
+							<% begin %>
+ 							<%= image_tag(country.avatar.url, class: "thumb") %>
+ 							<% rescue Exception => e %>
+ 							<% end %>
+ 						<% end %>
+ 							<span><%= country.name %></span>
+ 						</a>
+ 					</li>
+ 					<% end %>
+ 					<% end %>
+		       <!-- <% Page.all.each do |page| %>
+		          <% if page.show_in_nav %>
+		            <li>
+			            <% if page.name == 'Contact Us' %>
+			              <%= link_to page.name, '#contact', class: "icon icon-cog" %>
+		              	<% end %>
+		            </li>
+		          <% end %>
+		          <% end %>-->
+		          <li>
+		          	<a href="<%=  posts_path %>">
+		          		<%= image_tag('/assets/blog.png', class: "thumb") %>
+		          		<span>Blog</span>
+		          	</a>
+		          </li>
+		          <li><a href="#contact" style = "display:inline;"><%= image_tag('/assets/contact.png', class: "thumb") %> Contact Us</a></li>
+		          <% if admin_signed_in? %>
+		          <li>
+		          	<span>
+		          		<%= image_tag("/assets/settings.png", class: "thumb") %>  
+		          		<%= current_admin.first_name + " "  + current_admin.last_name %>
+		          	</span>
+		          	<ul>
+		          		<li><%= link_to 'Profile', user_path(current_admin) %></li>
+		          		<li><%= link_to 'Dashboard', dashboard_index_path %></li>
+		          		
+		          		<li><%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %></li>
+		          	</ul>
+		          </li>
+		          <% end %>
+		      </ul>
+		  </nav>
+
+		</div>
 		
-		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => false %>
-	  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
-	  <%= javascript_include_tag '/assets/leaflet/leaflet.js' %>
-	  <link rel="stylesheet" href="/assets/leaflet/leaflet.css" />
-	 <!--[if lte IE 8]>
-	     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
-	 <![endif]-->
-	   <%= javascript_include_tag '/assets/leaflet_label/leaflet.label.js' %>
-	  <link rel="stylesheet" href="/assets/leaflet_label/leaflet.label.css" />
-	  <%= csrf_meta_tags %>
-	</head>
-	<body class="homepage">
+		<div id="allmap">
+	  	
+		</div>
+	</div>
+	<div id="main-wrapper">
+		<%= yield %>
+	</div>
+	<!-- Footer Wrapper -->
+	<div id="footer-wrapper">
 
-		<!-- Header Wrapper -->
-			<div id="header-wrapper">
-						
-				<!-- Header -->
-					<div id="header" class="container">
-						
-						<!-- Logo -->
-							<h1 id="logo"><%= link_to 'EuroHackTrip', root_path %></h1>
-							<p>15 Hackers, 4 Countries, 4 Weeks</p>
-						
-						<!-- Nav -->
-							<nav id="nav">
-								<ul>
-								<% all_countries.each do |country| %>
-							          <% if country.show_in_nav %>
-							            <li>
-							              <%= image_tag(country.avatar.url, class: "thumb") %>
-							              <%= link_to country.name, country_path(country.slug), style: "display:inline;" %>
-							            </li>
-							          <% end %>
-							        <% end %>
-							       <!-- <% Page.all.each do |page| %>
-							          <% if page.show_in_nav %>
-							            <li>
-								            <% if page.name == 'Contact Us' %>
-								              <%= link_to page.name, '#contact', class: "icon icon-cog" %>
-							              	<% end %>
-							            </li>
-							          <% end %>
-							        <% end %>-->
-							         <li><%= image_tag('/assets/blog.png', class: "thumb") %> <%= link_to "Blog", posts_path, style: "display:inline;" %></li>
-							         <li><%= image_tag('/assets/contact.png', class: "thumb") %> <a href="#contact" style = "display:inline;">Contact Us</a></li>
-									<% if admin_signed_in? %>
-									<li>
-										<span>
-											<%= image_tag("/assets/avatar.png", class: "thumb") %>  
-              								<%= current_admin.first_name + " "  + current_admin.last_name %>
-										</span>
-										<ul>
-											<li><%= link_to 'Profile', user_path(current_admin) %></li>
-											<li><%= link_to 'Dashboard', dashboard_index_path %></li>
-											<li>
-												<a href="">Phasellus consequat</a>
-												<ul>
-													<li><a href="#">Magna phasellus</a></li>
-													<li><a href="#">Phasellus consequat</a></li>
-												</ul>
-											</li>
-											<li><%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %></li>
-										</ul>
+		<!-- Footer -->
+		<div id="footer" class="container">
+			<header>
+				<h2>Questions or comments? <strong>Get in touch:</strong></h2>
+			</header>
+			<div class="row">
+				<div id="contact" class="6u">
+					<section>
+						<form method="post" action="#">
+							<div class="row half">
+								<div class="6u">
+									<input name="name" placeholder="Name" type="text" class="text" />
+								</div>
+								<div class="6u">
+									<input name="email" placeholder="Email" type="text" class="text" />
+								</div>
+							</div>
+							<div class="row half">
+								<div class="12u">
+									<textarea name="message" placeholder="Message"></textarea>
+								</div>
+							</div>
+							<div class="row half">
+								<div class="12u">
+									<a href="#" class="button button-icon icon icon-envelope">Send Message</a>
+								</div>
+							</div>
+						</form>
+					</section>
+				</div>
+				<div class="6u">
+					<section>
+							<div class="row">
+								<ul class="icons 6u">
+
+									<li class="icon icon-google-plus">
+										<a href="http://groups.google.com/forum/#!forum/euro-hack-trip">Our Google Group</a>
 									</li>
-									<% end %>
+									
+									<li class="icon icon-dribbble">
+										<a href="http://trello.com/b/4paWimZW/eurohacktrip">Our Task List</a>
+									</li>
+									<li class="icon icon-twitter">
+										<a href="http://twitter.com/eurohacktrip">Twitter @EuroHackTrip</a>
+									</li>
+									<li class="icon icon-facebook">
+										<a href="http://facebook.com/EuroHackTrip">facebook.com/EuroHackTrip</a>
+									</li>
 								</ul>
-							</nav>
-
-					</div>
-
-			</div>
-			<div id="main-wrapper">
-				<%= yield %>
-			</div>
-		<!-- Footer Wrapper -->
-			<div id="footer-wrapper">
-
-				<!-- Footer -->
-					<div id="footer" class="container">
-						<header>
-							<h2>Questions or comments? <strong>Get in touch:</strong></h2>
-						</header>
-						<div class="row">
-							<div id="contact" class="6u">
-								<section>
-									<form method="post" action="#">
-										<div class="row half">
-											<div class="6u">
-												<input name="name" placeholder="Name" type="text" class="text" />
-											</div>
-											<div class="6u">
-												<input name="email" placeholder="Email" type="text" class="text" />
-											</div>
-										</div>
-										<div class="row half">
-											<div class="12u">
-												<textarea name="message" placeholder="Message"></textarea>
-											</div>
-										</div>
-										<div class="row half">
-											<div class="12u">
-												<a href="#" class="button button-icon icon icon-envelope">Send Message</a>
-											</div>
-										</div>
-									</form>
-								</section>
 							</div>
-							<div class="6u">
-								<section>
-									<p>Erat lorem ipsum veroeros consequat magna tempus lorem ipsum consequat Phaselamet 
-									mollis tortor congue. Sed quis mauris sit amet magna accumsan tristique. Curabitur 
-									leo nibh, rutrum eu malesuada.</p>
-									<div class="row">
-										<ul class="icons 6u">
-											<li class="icon icon-home">
-												1234 Somewhere Road<br />
-												Nashville, TN 00000<br />
-												USA
-											</li>
-											<li class="icon icon-phone">
-												(000) 000-0000
-											</li>
-											<li class="icon icon-envelope">
-												<a href="#">info@thedevs.org</a>
-											</li>
-										</ul>
-										<ul class="icons 6u">
-											<li class="icon icon-twitter">
-												<a href="http://twitter.com/eurohacktrip">@EuroHackTrip</a>
-											</li>
-											<li class="icon icon-dribbble">
-												<a href="http://dribbble.com/n33">dribbble.com/untitled-tld</a>
-											</li>
-											<li class="icon icon-facebook">
-												<a href="#">facebook.com/EuroHackTrip</a>
-											</li>
-											<li class="icon icon-google-plus">
-												<a href="#">google.com/+untitled-tld</a>
-											</li>
-										</ul>
-									</div>
-								</section>
-							</div>
-						</div>
+						</section>
 					</div>
-
-				<!-- Copyright -->
-					<div id="copyright" class="container">
-						<ul class="links">
-							<li>&copy; EuroHackTrip</li>
-							<!--<li>Demo images: <a href="http://regularjane.deviantart.com/">regularjane</a></li>
-							<li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>-->
-						</ul>
-					</div>
-
+				</div>
 			</div>
 
-	</body>
+			<!-- Copyright -->
+			<div id="copyright" class="container">
+				<ul class="links">
+					<li>&copy; EuroHackTrip</li>
+				<!--<li>Demo images: <a href="http://regularjane.deviantart.com/">regularjane</a></li>
+				<li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>-->
+			</ul>
+		</div>
+
+	</div>
+
+</body>
 </html>
