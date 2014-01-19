@@ -11,5 +11,23 @@ p.tag_line {
 	vertical-align: top;
 }
 .carousel{
-	padding: 0px !important;
+	height: 350px;
+}
+.carousel article{
+	vertical-align: top;
+}
+#footer{
+	padding: 0 5%;
+}
+#banner{
+	padding: 5em 0;
+}
+ul.links li:first-child{
+	border: none;
+}
+.mids{
+	margin: 0 5%;
+}
+.posts{
+	margin-top: 15px;
 }

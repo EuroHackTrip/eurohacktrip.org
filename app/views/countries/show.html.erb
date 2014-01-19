@@ -7,7 +7,7 @@
 <div id="main-wrapper">
 
 	<!-- Main -->
-	<div id="main" class="container">
+	<div id="main" class="mids">
 		<div class="row">
 
 			
@@ -128,30 +128,28 @@
 		<header>
 			<h2>We are looking forward to meet</h2>
 		</header>
-		<div class="carousel">
-			<div class="reel">
-				<% all_people.each do |person| %>
-				<% if @country.id == person.country_id %> 
-				<article>
-					<div class="thumbnail">
-						<% if ENV["RAILS_ENV"] == 'production' %>
-						<% begin %>
-						<%= image_tag person.avatar.url, size: "200x150" %><br>
-						<% rescue Exception => e %>
-						<%= image_tag "/assets/flag/", size: "250x250" %><br>
-						<% end %>
-						<% end %>
-						<header>
-							<h3><%= link_to person.name, "http://" + person.online_profile_link, class: "links" %></h3>
-						</header>
-						<p><%= person.occupation %></p>
-						<p><%= Country.find(person.country_id).name %></p>
+		<div class="meet">
+			<% all_people.each do |person| %>
+			<% if @country.id == person.country_id %> 
+			<article>
+				<div class="thumbnail">
+					<% if ENV["RAILS_ENV"] == 'production' %>
+					<% begin %>
+					<%= image_tag person.avatar.url, size: "200x150" %><br>
+					<% rescue Exception => e %>
+					<%= image_tag "/assets/flag/", size: "250x250" %><br>
+					<% end %>
+					<% end %>
+					<header>
+						<h3><%= link_to person.name, "http://" + person.online_profile_link, class: "links" %></h3>
+					</header>
+					<p><%= person.occupation %></p>
+					<p><%= Country.find(person.country_id).name %></p>
 
-					</div>
-				</article>
-				<% end %>
-				<% end %>
-			</div>
+				</div>
+			</article>
+			<% end %>
+			<% end %>
 		</div>
 		<!-- Posts -->
 		<div class="12u skel-cell-mainContent">
