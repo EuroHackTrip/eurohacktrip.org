@@ -73,7 +73,9 @@
 		          <li>
 		          	<span>
 		          		<%= image_tag("/assets/settings.png", class: "thumb") %>  
-		          		<%= current_admin.first_name + " "  + current_admin.last_name %>
+		          		<% if current_admin.first_name && current_admin.last_name %>
+		          			<%= current_admin.first_name + " "  + current_admin.last_name %>
+		          		<% end %>
 		          	</span>
 		          	<ul>
 		          		<li><%= link_to 'Profile', user_path(current_admin) %></li>
