@@ -1,6 +1,12 @@
 class Admin < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
+  has_attached_file :photo,
+    :storage => :dropbox,
+    :default_url => "/images/:style/missing.png",
+    :dropbox_credentials => Rails.root.join("config/dropbox.yml")
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:facebook]

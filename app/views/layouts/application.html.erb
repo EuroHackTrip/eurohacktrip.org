@@ -148,6 +148,11 @@
 									<li class="icon icon-facebook">
 										<a href="http://facebook.com/EuroHackTrip">facebook.com/EuroHackTrip</a>
 									</li>
+									<li>
+										<% if !admin_signed_in? %>
+											<a href="/admins/sign_in" class="button button-icon icon icon-signin">Join Us</a>
+										<% end %>
+									</li>
 								</ul>
 							</div>
 						</section>
