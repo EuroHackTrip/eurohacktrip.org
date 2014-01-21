@@ -6,7 +6,9 @@
 			<% if user.approved %>
 			<a href="<%= user_path(user) %>">
 			<article>
-				<%= image_tag("/assets/avatar.png", style: "width: 220px;") %>
+				<%if user.photo.url %>
+					<%= image_tag(user.photo.url, style: "width: 220px;") %>
+				<% end %>
 				<header>
 					<% if user.first_name && user.last_name %>
 						<h3><a href="#"><%= user.first_name + " " + user.last_name %></h3>

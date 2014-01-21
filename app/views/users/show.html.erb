@@ -22,7 +22,10 @@
 						<h2><%= @user.first_name + " " + @user.last_name %></h2>
 						<% end %>
 					</header>
-					<span class="image image-full"><%= image_tag("/assets/avatar.png", style: "width: 220px;") %>
+					<span class="image image-full">
+						<%if @user.photo.url %>
+							<%= image_tag(@user.photo.url, style: "width: 220px;") %>
+						<% end %>
 						<% if @user.tag_line %>
 							<p style = "vertical-align: top; display:inline;"><%= @user.tag_line %></p>
 						<% end %>
