@@ -48,6 +48,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << :provider
     devise_parameter_sanitizer.for(:account_update) << :uid
     devise_parameter_sanitizer.for(:account_update) << :name
+    devise_parameter_sanitizer.for(:account_update) << :approved
   end
 
   def store_location

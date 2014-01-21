@@ -19,4 +19,16 @@ class UsersController < ApplicationController
 	    @admin.save!
 	    redirect_to dashboard_index_path
 	end
+
+	def approve
+	    @admin = Admin.find(params[:id])
+	    @admin.approved = !@admin.approved
+	    @admin.save!
+	    redirect_to dashboard_index_path, notice: "User has been approved!"
+  	end
+
+  	def delete
+  		Admin.find(params[:id]).delete
+  		redirect_to dashboard_index_path, notice: "User has been deleted!"
+  	end
 end
