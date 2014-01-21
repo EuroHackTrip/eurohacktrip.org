@@ -3,6 +3,7 @@
  <div class="carousel">
 	<div class="reel">
 		<% Admin.all.each do |user| %>
+			<% if user.approved %>
 			<a href="<%= user_path(user) %>">
 			<article>
 				<%= image_tag("/assets/avatar.png", style: "width: 220px;") %>
@@ -16,6 +17,7 @@
 				<% end %>							
 			</article>
 			</a>
+			<% end %>
 		<% end %>
 	</div>
 </div>

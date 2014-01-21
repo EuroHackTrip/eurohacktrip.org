@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140121104922) do
+ActiveRecord::Schema.define(version: 20140121113205) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -38,6 +38,11 @@ ActiveRecord::Schema.define(version: 20140121104922) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "country"
+    t.text     "interest"
+    t.string   "funding_profile"
+    t.string   "video_link"
+    t.boolean  "approved"
   end
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
