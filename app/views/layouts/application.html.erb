@@ -38,7 +38,7 @@
 
  			<!-- Nav -->
  			<nav id="nav">
- 				<ul>
+ 				<ul class="icons">
  					<% all_countries.each do |country| %>
  					<% if country.show_in_nav %>
  					<li>
@@ -63,27 +63,21 @@
 		            </li>
 		          <% end %>
 		          <% end %>-->
-		          <li>
+		          <li class="fa fa-pencil">
 		          	<a href="<%=  posts_path %>">
-		          		<%= image_tag('/assets/blog.png', class: "thumb") %>
 		          		<span>Blog</span>
 		          	</a>
 		          </li>
-		          <li><a href="#contact" style = "display:inline;"><%= image_tag('/assets/contact.png', class: "thumb") %> Contact Us</a></li>
+		          <li class="fa fa-envelope">
+		          	<a href="#contact" style = "display:inline;">
+		          		Contact Us
+		          	</a>
+		          </li>
 		          <% if admin_signed_in? %>
-		          <li>
+		          <li class="fa fa-user">
 		          	<span>
-		          		<%= image_tag("/assets/settings.png", class: "thumb") %>  
-		          		<% if current_admin.first_name && current_admin.last_name %>
-		          			<%= current_admin.first_name + " "  + current_admin.last_name %>
-		          		<% end %>
+		          		<%= link_to "#{current_admin.first_name} #{current_admin.last_name}", user_path(current_admin) %>
 		          	</span>
-		          	<ul>
-		          		<li><%= link_to 'Profile', user_path(current_admin) %></li>
-		          		<li><%= link_to 'Dashboard', dashboard_index_path %></li>
-		          		
-		          		<li><%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %></li>
-		          	</ul>
 		          </li>
 		          <% end %>
 		      </ul>
@@ -142,6 +136,13 @@
 									<li class="icon icon-plus">
 										<a href="/admins/sign_up">Sign Up</a>
 									</li>
+									<% else %>
+							        	<li class="icon fa-cog">
+							          		<%= link_to 'Dashboard', dashboard_index_path %> 
+							         	</li>
+							        	<li class="icon fa-sign-out">
+							          		<%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %>
+							         	</li>
 									<% end %>
 									<li class="icon icon-google-plus">
 										<a href="http://groups.google.com/forum/#!forum/euro-hack-trip">Our Google Group</a>

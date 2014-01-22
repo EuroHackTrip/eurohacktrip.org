@@ -31,3 +31,18 @@ ul.links li:first-child{
 .posts{
 	margin-top: 15px;
 }
+#nav {
+	top: 0em !important;
+}
+#nav ul {
+	top: 1em !important;
+}
+#nav > ul > li {
+	padding-right: 5px !important;
+	padding-left: 35px;
+}
+
+#nav > ul > li:before{
+	top: 1.5em;
+	font-size: 18px;
+}

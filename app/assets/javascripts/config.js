@@ -13,7 +13,7 @@ window._skel_config = {
 	},
 	breakpoints: {
 		'mobile': {
-			range: '-480',
+			range: '-650',
 			lockViewport: true,
 			containers: 'fluid',
 			grid: {
@@ -21,11 +21,11 @@ window._skel_config = {
 			}
 		},
 		'desktop': {
-			range: '481-',
+			range: '651-',
 			containers: 1200
 		},
 		'1000px': {
-			range: '481-1200',
+			range: '651-1200',
 			containers: 960
 		}
 	}
