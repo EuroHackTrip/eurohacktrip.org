@@ -46,6 +46,8 @@ gem 'recaptcha'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+gem 'country_select'
+
 # gem 'protected_attributes'
 
 # Use SCSS for stylesheets

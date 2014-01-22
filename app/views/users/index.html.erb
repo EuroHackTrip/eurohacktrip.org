@@ -8,7 +8,9 @@
 <% @users.each do |user| %>
 	<div class="row" style="border-bottom: dotted 1px #aaa; padding-top:10px;">
 		<div class = "col-sm-3">
-			<%= image_tag("/assets/avatar.png", style: "width: 220px;") %>
+			<%if user.photo.url %>
+				<%= image_tag(user.photo.url, style: "width: 220px;") %>
+			<% end %>
 			
 		</div>
 		<div class="col-sm-9">

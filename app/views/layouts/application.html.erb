@@ -74,7 +74,9 @@
 		          <li>
 		          	<span>
 		          		<%= image_tag("/assets/settings.png", class: "thumb") %>  
-		          		<%= current_admin.first_name + " "  + current_admin.last_name %>
+		          		<% if current_admin.first_name && current_admin.last_name %>
+		          			<%= current_admin.first_name + " "  + current_admin.last_name %>
+		          		<% end %>
 		          	</span>
 		          	<ul>
 		          		<li><%= link_to 'Profile', user_path(current_admin) %></li>
@@ -152,6 +154,11 @@
 									</li>
 									<li class="icon icon-facebook">
 										<a href="http://facebook.com/EuroHackTrip">facebook.com/EuroHackTrip</a>
+									</li>
+									<li>
+										<% if !admin_signed_in? %>
+											<a href="/admins/sign_in" class="button button-icon icon icon-signin">Join Us</a>
+										<% end %>
 									</li>
 								</ul>
 							</div>

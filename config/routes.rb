@@ -52,6 +52,9 @@ EurohacktripOrg::Application.routes.draw do
   # match ":first_name-:last_name" => "users#show", :as => "user", via: [:get]
 
   match "admin/:id" => "users#toggle_admin", :as => "toggle_admin", via: [:post]
+  match "admin/:id/approve" => "users#approve", :as => "user_approve", via: [:post]
+  match "admin/:id/delete" => "users#delete", :as => "user_delete", via: [:delete]
+
 
   root to: "home#index"
 

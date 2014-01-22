@@ -4,15 +4,23 @@
 			<% if user.first_name && user.last_name %>
 				<div class = "to-hide">
 					<p><%= link_to user.first_name + " " + user.last_name, user_path(user) %></p>
-					<%= user.activity %><br>
+					<% if user.tag_line %>
+						<%= user.tag_line %><br>
+					<% end %>
 					<% if posts_by_author(user).length > 0 %>
 						<%= link_to "Authored: " + pluralize(posts_by_author(user).length, "post"), "/" + user.first_name + "-" + user.last_name + "/posts" %>. | 
 					<% end %>
 					<% if !user.is_admin %>
-		              <%= link_to 'Make Admin', toggle_admin_path(user), method: :post, data: { confirm: 'Are you sure?' } %>
+		              <%= link_to 'Make Admin', toggle_admin_path(user), method: :post, data: { confirm: 'Are you sure?' } %> | 
 		            <% else %>
-		              <%= link_to 'Remove Admin', toggle_admin_path(user), method: :post, data: { confirm: 'Are you sure?' } %>
+		              <%= link_to 'Remove Admin', toggle_admin_path(user), method: :post, data: { confirm: 'Are you sure?' } %> | 
 		            <% end %> 
+		            <% if !user.approved %>
+		              <%= link_to 'Approve', user_approve_path(user), method: :post, data: { confirm: 'Are you sure?' } %> | 
+		            <% else %>
+		              <%= link_to 'Disapprove', user_approve_path(user), method: :post, data: { confirm: 'Are you sure?' } %> | 
+		            <% end %> 
+		            <%= link_to 'Delete', user_delete_path(user), method: :delete, data: { confirm: 'Are you sure?' } %>
 				</div>
 			<% end %>
 		<% end %>

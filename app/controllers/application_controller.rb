@@ -19,14 +19,36 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
+    # for sign up
     devise_parameter_sanitizer.for(:sign_up) << :first_name
     devise_parameter_sanitizer.for(:sign_up) << :last_name
     devise_parameter_sanitizer.for(:sign_up) << :tag_line
+    devise_parameter_sanitizer.for(:sign_up) << :interest
+    devise_parameter_sanitizer.for(:sign_up) << :funding_profile
+    devise_parameter_sanitizer.for(:sign_up) << :video_link
+    devise_parameter_sanitizer.for(:sign_up) << :country
+    devise_parameter_sanitizer.for(:sign_up) << :photo
     devise_parameter_sanitizer.for(:sign_up) << :activity
     devise_parameter_sanitizer.for(:sign_up) << :is_admin
     devise_parameter_sanitizer.for(:sign_up) << :provider
     devise_parameter_sanitizer.for(:sign_up) << :uid
     devise_parameter_sanitizer.for(:sign_up) << :name
+
+    # for account update
+    devise_parameter_sanitizer.for(:account_update) << :first_name
+    devise_parameter_sanitizer.for(:account_update) << :last_name
+    devise_parameter_sanitizer.for(:account_update) << :tag_line
+    devise_parameter_sanitizer.for(:account_update) << :interest
+    devise_parameter_sanitizer.for(:account_update) << :funding_profile
+    devise_parameter_sanitizer.for(:account_update) << :video_link
+    devise_parameter_sanitizer.for(:account_update) << :country
+    devise_parameter_sanitizer.for(:account_update) << :photo
+    devise_parameter_sanitizer.for(:account_update) << :activity
+    devise_parameter_sanitizer.for(:account_update) << :is_admin
+    devise_parameter_sanitizer.for(:account_update) << :provider
+    devise_parameter_sanitizer.for(:account_update) << :uid
+    devise_parameter_sanitizer.for(:account_update) << :name
+    devise_parameter_sanitizer.for(:account_update) << :approved
   end
 
   def store_location
