@@ -2,4 +2,4 @@
 require File.expand_path('../application', __FILE__)
 
 # Initialize the Rails application.
-EurohacktripOrg::Application.initialize!
+EuroHackTripOrg::Application.initialize!

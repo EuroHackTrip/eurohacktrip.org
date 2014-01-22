@@ -3,7 +3,7 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-EurohacktripOrg::Application.load_tasks
+EuroHackTripOrg::Application.load_tasks
 
 task :promote_admin => :environment do
   Admin.first.update_attribute('is_admin', true)

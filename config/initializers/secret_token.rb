@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-EurohacktripOrg::Application.config.secret_key_base = 'e6fbac30a99473dee8a6fae5a11d086bef7cf23b6482805c4c643cf4ad71893ddd996f2850894a0b483c61b63cb31935fde2b863e03f8a957baacb0deed8afbd'
+EuroHackTripOrg::Application.config.secret_key_base = 'e6fbac30a99473dee8a6fae5a11d086bef7cf23b6482805c4c643cf4ad71893ddd996f2850894a0b483c61b63cb31935fde2b863e03f8a957baacb0deed8afbd'

@@ -1,4 +1,4 @@
-EurohacktripOrg::Application.routes.draw do
+EuroHackTripOrg::Application.routes.draw do
   resources :images
 
   get "images/create"
