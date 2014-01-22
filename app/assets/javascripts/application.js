@@ -37,11 +37,7 @@ var myIcon = L.icon({
 });
 
 //mapping for home, /posts[blog] and /countries pages
-if(window.location.pathname == '/' 
-	|| window.location.pathname.indexOf('/posts') > -1
-	|| window.location.pathname.indexOf('/users/') > -1
-	|| window.location.pathname.indexOf('/dashboard') > -1
-	|| window.location.pathname ==  '/countries'){ 
+if($.inArray(window.location.pathname,  ['/admin', '/dashboard', '/posts', '/users/', '/countries'] > -1)){ 
 
 	// foreach city in the whole fucking hacktrip
 	var mapmaker = L.map('allmap', {
