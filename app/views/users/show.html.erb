@@ -30,10 +30,16 @@
 							<p style = "vertical-align: top; display:inline;"><%= @user.tag_line %></p>
 						<% end %>
 					</span>
-					<h3>What I do:</h3>
+					<h3>What I Do:</h3>
 					<p>
 						<% if @user.activity %>
 							<%= raw @user.activity %>
+						<% end %>
+					</p>
+					<h3>My Interest in the Trip:</h3>
+					<p>
+						<% if @user.interest %>
+							<%= raw @user.interest %>
 						<% end %>
 					</p>
 				</article>

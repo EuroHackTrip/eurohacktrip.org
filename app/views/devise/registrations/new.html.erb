@@ -1,9 +1,16 @@
 <% provide(:title, 'Sign Up') %>
 
 <div class="well mids" style="padding: 2em;">
-<h2>Sign up</h2>
+<h2 style="display:inline">Sign up</h2> <a href="/admins/sign_in" class="pull-right">Sign In</a> 
+
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
+
+  <div><%= f.label :funding_profile, "Geeks Gone Global funding campaign link ( http://geeksgoneglobal.com/fundyourtrip/campaigns/)" %><br />
+  <%= f.text_field :funding_profile, class: "text" %></div><br />
+
+  <div><%= f.label :video_link, 'Youtube Video' %>
+  <%= f.text_field :video_link, class: "text" %></div><br />
 
   <div><%= f.label :first_name %>
   <%= f.text_field :first_name, :autofocus => true, class: "text" %></div><br />
@@ -31,17 +38,11 @@
   <div><%= f.label :tag_line %>
   <%= f.text_field :tag_line, class: "text" %></div><br />
 
-  <div><%= f.label :activity, "What are you working on?" %><br />
+  <div><%= f.label :activity, "What You Do" %><br />
   <%= f.text_area :activity, :class => 'ckeditor' %></div><br />
 
-  <div><%= f.label :interest, "Why do you want to go?" %><br />
+  <div><%= f.label :interest, "Your Interest in the trip" %><br />
   <%= f.text_area :interest, :class => 'ckeditor' %></div><br />
-
-  <div><%= f.label :funding_profile, "Geeks gone global funding campaign link ( http://geeksgoneglobal.com/fundyourtrip/campaigns/)" %><br />
-  <%= f.text_field :funding_profile, class: "text" %></div><br />
-
-  <div><%= f.label :video_link %>
-  <%= f.text_field :video_link, class: "text" %></div><br />
 
   <p>Please fill in the captcha below</p>
   <div>
@@ -51,5 +52,4 @@
   <div><%= f.submit "Sign up", class:"button button-icon icon icon-sign-up" %></div>
 <% end %>
 
-<%= render "devise/shared/links" %>
 </div>

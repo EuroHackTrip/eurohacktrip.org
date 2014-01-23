@@ -1,7 +1,5 @@
 <% provide(:title, 'Dashboard') %>
 <link rel="stylesheet" type="text/css" href="/assets/dashboard.css">
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap.min.css">
-<script type="text/javascript" src="/assets/bootstrap.min.js"></script>
 <div style="padding-top: 10px;">
 	<ul class="nav nav-tabs" id = "tab">
 		
@@ -23,7 +21,7 @@
 	        <% end %>
         	<li><a id="to-users" href="#users" data-toggle="tab">Manage Users</a></li>
         <% end %>
-        <li class="pull-right"><a id="logout" href="/signout" data-toggle="tab">Log Out</a></li>
+        <li class="pull-right"><%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %></li>
   	</ul>
 
 	<!-- Tab panes -->

@@ -6,7 +6,7 @@
 -->
 <html>
 <head>
-<title>Eurohacktrip | <%= yield(:title) %></title>
+<title>EuroHackTrip | <%= yield(:title) %></title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="description" content="" />
 <meta name="keywords" content="hacktrip, eurohacktrip, hackers, developers" />
@@ -16,12 +16,14 @@
 <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
 <%= javascript_include_tag '/assets/leaflet/leaflet.js' %>
 <link rel="stylesheet" href="/assets/leaflet/leaflet.css" />
+<link rel="stylesheet" href="/assets/font-awesome.min.css" />
  <!--[if lte IE 8]>
      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
      <![endif]-->
      <%= javascript_include_tag '/assets/leaflet_label/leaflet.label.js' %>
      <link rel="stylesheet" href="/assets/leaflet_label/leaflet.label.css" />
      <%= csrf_meta_tags %>
+     <link rel="shortcut icon" href="/assets/favicon.png"/>
 </head>
 <body class="homepage">
 
@@ -37,7 +39,7 @@
 
  			<!-- Nav -->
  			<nav id="nav">
- 				<ul>
+ 				<ul class="icons">
  					<% all_countries.each do |country| %>
  					<% if country.show_in_nav %>
  					<li>
@@ -62,27 +64,21 @@
 		            </li>
 		          <% end %>
 		          <% end %>-->
-		          <li>
+		          <li class="fa fa-pencil">
 		          	<a href="<%=  posts_path %>">
-		          		<%= image_tag('/assets/blog.png', class: "thumb") %>
 		          		<span>Blog</span>
 		          	</a>
 		          </li>
-		          <li><a href="#contact" style = "display:inline;"><%= image_tag('/assets/contact.png', class: "thumb") %> Contact Us</a></li>
+		          <li class="fa fa-envelope">
+		          	<a href="#contact" style = "display:inline;">
+		          		Contact Us
+		          	</a>
+		          </li>
 		          <% if admin_signed_in? %>
-		          <li>
+		          <li class="fa fa-user">
 		          	<span>
-		          		<%= image_tag("/assets/settings.png", class: "thumb") %>  
-		          		<% if current_admin.first_name && current_admin.last_name %>
-		          			<%= current_admin.first_name + " "  + current_admin.last_name %>
-		          		<% end %>
+		          		<%= link_to "#{current_admin.first_name} #{current_admin.last_name}", user_path(current_admin) %>
 		          	</span>
-		          	<ul>
-		          		<li><%= link_to 'Profile', user_path(current_admin) %></li>
-		          		<li><%= link_to 'Dashboard', dashboard_index_path %></li>
-		          		
-		          		<li><%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %></li>
-		          	</ul>
 		          </li>
 		          <% end %>
 		      </ul>
@@ -95,6 +91,12 @@
 		</div>
 	</div>
 	<div id="main-wrapper">
+		<% if flash[:notice] %>
+	      <div class="alert alert-success">
+	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	        <%= flash[:notice] %>
+	      </div>
+	    <% end %>
 		<%= yield %>
 	</div>
 	<!-- Footer Wrapper -->
@@ -134,24 +136,32 @@
 					<section>
 							<div class="row">
 								<ul class="icons 6u">
-
+									<% if !admin_signed_in? %>
+									<li class="icon icon-signin">
+										<a href="/admins/sign_in">Sign In</a>
+									</li>
+									<li class="icon icon-plus">
+										<a href="/admins/sign_up">Sign Up</a>
+									</li>
+									<% else %>
+							        	<li class="icon fa-cog">
+							          		<%= link_to 'Dashboard', dashboard_index_path %> 
+							         	</li>
+							        	<li class="icon fa-sign-out">
+							          		<%= link_to "Sign Out", destroy_admin_session_path, :method => :delete %>
+							         	</li>
+									<% end %>
 									<li class="icon icon-google-plus">
 										<a href="http://groups.google.com/forum/#!forum/euro-hack-trip">Our Google Group</a>
 									</li>
-									
-									<li class="icon icon-dribbble">
+									<li class="icon fa-list-ol">
 										<a href="http://trello.com/b/4paWimZW/eurohacktrip">Our Task List</a>
 									</li>
 									<li class="icon icon-twitter">
-										<a href="http://twitter.com/eurohacktrip">Twitter @EuroHackTrip</a>
+										<a href="http://twitter.com/eurohacktrip">@EuroHackTrip</a>
 									</li>
 									<li class="icon icon-facebook">
-										<a href="http://facebook.com/EuroHackTrip">facebook.com/EuroHackTrip</a>
-									</li>
-									<li>
-										<% if !admin_signed_in? %>
-											<a href="/admins/sign_in" class="button button-icon icon icon-signin">Join Us</a>
-										<% end %>
+										<a href="http://facebook.com/EuroHackTrip">Fb.com/EuroHackTrip</a>
 									</li>
 								</ul>
 							</div>
