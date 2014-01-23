@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
                 :approved_comments_count, :homepage_content, :total_unique, 
                 :total_returning, :total_unique_post_views, :page_views, 
                 :all_country_posts, :init_date, :total_views, :views_hash, 
-                :alerts_hash, :posts_by_author, :nick_names, :author, :author_path
+                :alerts_hash, :posts_by_author, :nick_names, :author, :author_path,
+                :file_dimensions
   # rescue_from CanCan::AccessDenied do |exception|
   #   redirect_to root_url, :alert => exception.message
   # end
@@ -67,6 +68,10 @@ def after_sign_in_path_for(res)
 
   def after_sign_out_path_for(arg)
   	new_admin_session_path
+  end
+
+  def after_sign_up_path_for(resource)
+      'home_index_path'
   end
 
   def current_user
@@ -241,6 +246,13 @@ def after_sign_in_path_for(res)
   def author_path(user)
     if user.first_name && user.last_name
       "/#{user.first_name}-#{user.last_name}"
+    end
+  end
+
+  def file_dimensions
+    dimensions = Paperclip::Geometry.from_file(photo.queued_for_write[:original].path)
+    if ((dimensions.width < 250 && dimensions.height < 250 ) && (0.8 <= dimensions.width / dimensions || dimensions.width / dimensions <= 1.2))
+        errors.add(:photo,'Image must be a square of at least 250px')
     end
   end
 end

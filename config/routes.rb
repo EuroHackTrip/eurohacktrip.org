@@ -1,4 +1,5 @@
 EurohacktripOrg::Application.routes.draw do
+  get "messages/create"
   resources :images
 
   get "images/create"
@@ -18,8 +19,19 @@ EurohacktripOrg::Application.routes.draw do
   get 'tags/:tag', to: 'posts#index', as: :tag
 
   # devise_for :admins, controllers: { registrations: 'registrations' }
-  devise_for :admins, :controllers => { registrations: 'registrations', :omniauth_callbacks => "admins/omniauth_callbacks" }
+  # devise_for :admins, :controllers => { registrations: 'registrations', :omniauth_callbacks => "admins/omniauth_callbacks" } do 
+  #   get '/login'   => "devise/sessions#new"
+  #   post '/login'  => 'devise/sessions#create'
+  # end
 
+  # devise_for :admins,
+  #          :controllers => { :sessions => 'devise/sessions'},
+  #          :skip => [:sessions] do
+    # get '/login'   => "devise/sessions#new"
+    # post '/login'  => 'devise/sessions#create'
+  #   get '/signout'  => 'devise/sessions#destroy',   :as => :destroy_admin_session
+  #   get "/signup" => "devise/registrations#new", :as => :new_admin_registration
+  # end
   resources :countries
   resources :cities
   resources :people

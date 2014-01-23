@@ -23,4 +23,15 @@ class Admin < ActiveRecord::Base
 	  end
 	  admin
   end
+
+  validate :file_dimensions, :unless => "errors.any?"
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
+  validates :country, presence: true
+  validates :activity, presence: true
+  validates :interest, presence: true
+  validates :video_link, presence: true
+  validates :funding_profile, presence: true
 end
