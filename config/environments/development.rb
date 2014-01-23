@@ -30,4 +30,13 @@ EurohacktripOrg::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  ActionMailer::Base.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "gmail.com",
+    user_name: "mis.library",
+    password: "0720660482",
+    authentication: "plain",
+    enable_starttls_auto: true
+  }
 end

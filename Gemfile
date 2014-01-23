@@ -48,6 +48,8 @@ gem 'omniauth-facebook'
 
 gem 'country_select'
 
+gem "active_attr"
+
 # gem 'protected_attributes'
 
 # Use SCSS for stylesheets
