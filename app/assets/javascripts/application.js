@@ -10,8 +10,10 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
 //= require jquery
 //= require jquery.dropotron
+//= require bootstrap.min
 //= require config
 //= require skel.min
 //= require skel-panels.min
