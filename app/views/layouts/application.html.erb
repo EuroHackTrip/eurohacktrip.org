@@ -97,6 +97,13 @@
 	        <%= flash[:notice] %>
 	      </div>
 	    <% end %>
+
+	    <% if flash[:error] %>
+	      <div class="alert alert-danger">
+	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	        <%= flash[:error] %>
+	      </div>
+	    <% end %>
 		<%= yield %>
 	</div>
 	<!-- Footer Wrapper -->
@@ -110,26 +117,31 @@
 			<div class="row">
 				<div id="contact" class="6u">
 					<section>
-						<form method="post" action="#">
+					
+						<%= form_for @message, :url => contact_path do |form| %>
 							<div class="row half">
 								<div class="6u">
-									<input name="name" placeholder="Name" type="text" class="text" />
+								<%= form.text_field :name, class: "text", placeholder: "Name" %>
 								</div>
 								<div class="6u">
-									<input name="email" placeholder="Email" type="text" class="text" />
+								<%= form.text_field :email, class: "text", placeholder: "Email" %>
+								</div>
+								
+							</div>
+							<div class="row half">
+								<div class="12u">
+								<%= form.text_field :subject, class: "text", placeholder: "Subject" %>
+								</div>
+								<div class="12u">
+								<%= form.text_area :body, placeholder: "Message" %>
 								</div>
 							</div>
 							<div class="row half">
 								<div class="12u">
-									<textarea name="message" placeholder="Message"></textarea>
+								<%= form.submit "Send", class: "button button-icon icon icon-envelope" %>
 								</div>
 							</div>
-							<div class="row half">
-								<div class="12u">
-									<a href="#" class="button button-icon icon icon-envelope">Send Message</a>
-								</div>
-							</div>
-						</form>
+						<% end %>
 					</section>
 				</div>
 				<div class="6u">

@@ -10,5 +10,6 @@ class DashboardController < ApplicationController
   	@post_setting_new = PostSetting.new
     @image = Image.last
     @image_new = Image.new
+    @message = Message.new
   end
 end

@@ -19,7 +19,7 @@ EurohacktripOrg::Application.routes.draw do
   get 'tags/:tag', to: 'posts#index', as: :tag
 
   # devise_for :admins, controllers: { registrations: 'registrations' }
-  # devise_for :admins, :controllers => { registrations: 'registrations', :omniauth_callbacks => "admins/omniauth_callbacks" } do 
+  devise_for :admins, :controllers => { registrations: 'registrations', :omniauth_callbacks => "admins/omniauth_callbacks" }
   #   get '/login'   => "devise/sessions#new"
   #   post '/login'  => 'devise/sessions#create'
   # end
@@ -66,6 +66,9 @@ EurohacktripOrg::Application.routes.draw do
   match "admin/:id" => "users#toggle_admin", :as => "toggle_admin", via: [:post]
   match "admin/:id/approve" => "users#approve", :as => "user_approve", via: [:post]
   match "admin/:id/delete" => "users#delete", :as => "user_delete", via: [:delete]
+
+  match 'contact' => 'messages#create', :as => 'contact', :via => :post
+  match '#contact' => 'messages#new', :as => 'new_contact', :via => :get
 
 
   root to: "home#index"

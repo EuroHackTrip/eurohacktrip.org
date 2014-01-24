@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
 	def index
+		@message = Message.new
 		@users = Admin.all
 	end
 
 	def show
+		@message = Message.new
 		# nick_names.each do |user|
 	 #      if user.split("=>")[0] == request.fullpath.split("/")[1]
 	 #        user_id = user.split("=>")[1]

@@ -13,6 +13,7 @@ class CountriesController < ApplicationController
   # GET /countries/1
   # GET /countries/1.json
   def show
+    @message = Message.new
     @country = Country.friendly.find(params[:id])
     # @country = Country.friendly.find_by({'id' => params[:id]})
     impressionist(@country)

@@ -34,7 +34,7 @@ EurohacktripOrg::Application.configure do
     address: "smtp.gmail.com",
     port: 587,
     domain: "gmail.com",
-    user_name: "mis.library",
+    user_name: "misc.library",
     password: "0720660482",
     authentication: "plain",
     enable_starttls_auto: true
