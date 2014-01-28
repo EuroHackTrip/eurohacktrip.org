@@ -12,7 +12,8 @@ class MessagesController < ApplicationController
       redirect_to(root_path, :notice => "Message was successfully sent.")
     else
       flash.now.alert = "Please fill all fields."
-      render :new
+      # render "/#conact"
+      redirect_to(root_path, :error => "Message not sent.")
     end
   end
 end

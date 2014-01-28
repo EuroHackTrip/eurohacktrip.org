@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
                 :approved_comments_count, :homepage_content, :total_unique, 
                 :total_returning, :total_unique_post_views, :page_views, 
                 :all_country_posts, :init_date, :total_views, :views_hash, 
-                :alerts_hash, :posts_by_author, :nick_names, :author, :author_path
+                :alerts_hash, :posts_by_author, :nick_names, :author, :author_path,
+                :message
   # rescue_from CanCan::AccessDenied do |exception|
   #   redirect_to root_url, :alert => exception.message
   # end
@@ -247,8 +248,9 @@ def after_sign_in_path_for(res)
       "/#{user.first_name}-#{user.last_name}"
     end
   end
-
-  # @message = Message.new
+  def message
+    @message = Message.new
+  end
 
   
 end
