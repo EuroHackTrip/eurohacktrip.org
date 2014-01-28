@@ -46,7 +46,7 @@ class PostsController < ApplicationController
     if current_admin.is_admin || @post.admin_id == current_admin.id
       @post = Post.friendly.find(params[:id])
     else
-      redirect_to dashboard_index_path, notice: 'You don\'t have permission to do that.'
+      redirect_to dashboard_index_path, alert: 'You don\'t have permission to do that.'
     end
   end
 

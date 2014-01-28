@@ -4,7 +4,7 @@ class ContactUsMailer < ActionMailer::Base
 
   def new_message(message)
     @message = message
-    mail(:subject => "[YourWebsite.tld] #{message.subject}")
+    mail(:subject => "[EuroHackTrip] #{message.subject}")
     # mail(to: "muadh24@gmail.com", subject: "Hey")
   end
 end
