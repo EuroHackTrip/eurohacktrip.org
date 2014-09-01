@@ -64,7 +64,7 @@
 				<% if startup.users.first && startup.users.first.approved %>
 
 				<li>
-	            	<a class="img" href="/startups/<%= startup.id %>">
+	            	<a class="img" href="<%= startup_path(startup) %>">
 						<img src="<%= startup.logo %>" alt="<%= startup.name %>" />
 	                </a>
 	                <span>
