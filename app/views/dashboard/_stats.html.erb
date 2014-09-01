@@ -1,0 +1,82 @@
+<ul class="nav nav-tabs">
+  <li><a href="#overview" data-toggle="tab">Overview</a></li>
+  <li><a href="#posts-stats" data-toggle="tab">Posts</a></li>
+  <li><a href="#traffic-sources" data-toggle="tab">Traffic Sources</a></li>
+  <li><a href="#audience" data-toggle="tab">Audience</a></li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active city" id="overview">
+    <div>
+      <table cellspacing="0" cellpadding="0" class="tbl GHUY-LPKDC">
+        <tbody>
+        <br>
+        <% views_hash.each do |key, val|%>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+             <div class="pv-row"><%= key %> </div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <%= val %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="tab-pane city" id="posts-stats">
+  <legend>Posts</legend>
+    <% all_posts.each do |post| %>
+      <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row"><%= link_to post.title, post_path(post) %></div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= post.impressionist_count(:filter=>:ip_address) %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+      <br>
+      <legend>Pages</legend>
+      <% all_countries.each do |country| %>
+        <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row"><%= link_to country.name, country_path(country) %></div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"><%= country.impressionist_count(:filter=>:ip_address) %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+     <% end %>
+     <% all_events.each do |event| %>
+        <table cellspacing="0" cellpadding="0" class="tbl">
+        <tbody>
+          <tr>
+            <td align="left" style="vertical-align: top;">
+              <div class="pv-row"><%= link_to event.event_name, event %></div>
+            </td>
+            <td align="left" style="vertical-align: top;">
+              <div class="count pull-right"> event.impressionist_count(:filter=>:ip_address) %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+     <% end %>
+  </div>
+  <div class="tab-pane city" id="traffic-sources">
+      
+  </div>
+  <div class="tab-pane city" id="audience">
+      
+  </div>
+</div>

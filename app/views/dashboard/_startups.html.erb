@@ -1,0 +1,32 @@
+<ul class="nav nav-tabs">
+  <li><a href="#all-startups" data-toggle="tab">Startups</a></li>
+  <li><a href="#new-startup" data-toggle="tab">
+  <span class="glyphicon glyphicon-plus-sign"></span>Add A Startup</a></li>
+</ul>
+<!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active startup" id="all-startups">
+        <% all_startups.each do |startup| %>
+            <div class = "to-hide startup">
+            <hr>
+            <div>
+              <%= image_tag startup.logo.url, size: "50x50" %><br>
+               
+              <%= link_to startup.name, startup_path(startup.slug) %><br>
+              <%= startup.tagline %><br>
+              <%= startup.city %>
+            </div>
+            <% if involved_in(startup) %>
+              <%= link_to 'Edit', edit_startup_path(startup) %> |
+              <%= link_to 'Delete', startup, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+<div class="tab-pane" id="new-startup">
+
+  <%= render 'startups/form' %>
+
+</div>
+
+</div>

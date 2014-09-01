@@ -1,0 +1,52 @@
+<ul class="nav nav-tabs">
+  <li><a href="#all-countries" data-toggle="tab">All Countries</a></li>
+  <% if user_signed_in? && current_user.is_admin %>
+    <li><a href="#new-country" data-toggle="tab">
+    <span class="glyphicon glyphicon-plus-sign"></span>Add Country</a>
+  <% end %>
+  </li>
+</ul>
+<!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active country" id="all-countries">
+        <% all_countries.each do |country| %>
+            <div class = "to-hide country">
+            <div>
+              <%= country.name %><br>
+              <!--
+              <% if ENV["RAILS_ENV"] == 'production' %>
+                <% begin %>
+                  <%= image_tag country.avatar.url, size: "250x250" %><br>
+                <% rescue Exception => e %>
+                  <% image_tag "/assets/flag/"+country+".png", size: "250x250" %><br>
+                <% end %>
+              <% end %>
+              -->
+              <%= raw shorten(country.description, 150) %> ...<br>
+              <%= country.map %>
+            </div>
+            <div class="hidden-links">
+            <% if current_user.is_admin %>
+              <%= link_to 'Edit', edit_country_path(country) %> |
+              <%= link_to 'Delete', country, method: :delete, data: { confirm: 'Are you sure?' } %> | 
+              <% if !country.show_in_nav %>
+                <%= link_to 'Show in Navbar', country_show_path(country), method: :post, data: { confirm: 'Are you sure?' } %>
+              <% else %>
+                <%= link_to 'Don\'t show in Navbar', country_show_path(country), method: :post, data: { confirm: 'Are you sure?' } %>
+              <% end %>
+            <% end %>
+            </div>
+            <br>
+          </div>
+        <% end %>
+      </div>
+      
+      <div class="tab-pane" id="new-country">
+
+        <%= render 'countries/form' %>
+      
+      </div>
+
+    </div>
+
+

@@ -1,0 +1,30 @@
+<%= form_for(@post) do |f| %>
+<% if @post.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+  <ul>
+    <% @post.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="field">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+<div class="field">
+  <%= f.label :content %>
+  <%= f.text_area :content, :class => 'ckeditor' %>
+</div>
+<br>
+<div class="actions">
+  <span style="color:#00598D;">Posted Under: </span>
+  <%= f.select :tag_list, Country.all.collect {|country| [ country.name] }, { include_blank: 'Select Country' }, style: "margin-right:19px;" %>
+  <%= f.check_box :published, {checked: true} %> Publish
+  <%= f.submit "Publish", class: "btn btn-primary btn-lg pull-right" %>
+</div>
+
+<% end %>

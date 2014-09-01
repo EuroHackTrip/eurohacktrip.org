@@ -1,0 +1,112 @@
+
+<%= simple_form_for(@startup) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="field"><%= f.label :participation, "Click on the event you will participate:" %>
+    <!-- /input-group -->
+
+    <div class="text-center">
+      <div class="btn-group participation" data-toggle="buttons">
+        <% @events = Event.where('year', Time.now.year.to_s) %>
+        <% if @events %>
+          <% @events.where.not(special:1).each do | event| %>
+            <% if @startup.participation.count > 0  %>
+                <% if @startup.participation.first.event_id == event.id %>
+                  <label class="btn active" for="<%= event.id %>">
+                    <i class="fa <%= event.icon %> fa-4x"></i>
+                    <h3><%= event.event_name %></h3>
+                    <span><%= event.city.name %></span>
+                    <input type="radio" name="participation" value="<%= event.id %>">
+                  </label>
+                  <% else %>
+                    <label class="btn" for="<%= event.id %>">
+                      <i class="fa <%= event.icon %> fa-4x"></i>
+                      <h3><%= event.event_name %></h3>
+                      <span><%= event.city.name %></span>
+                      <input type="radio" name="participation" value="<%= event.id %>">
+                    </label>
+                  <% end %>
+            <% else %>
+              <label class="btn" for="<%= event.id %>">
+                <i class="fa <%= event.icon %> fa-4x"></i>
+                <h3><%= event.event_name %></h3>
+                <span><%= event.city.name %></span>
+                <input type="radio" name="participation" value="<%= event.id %>">
+              </label>
+            <% end %>
+
+          <% end %>
+        <% end %>
+        <!-- <input type="hidden" name="participation" >    -->
+      </div>
+    </div>
+
+  </div>
+
+  <div class="field"><%= f.label :name %>
+  <%= f.text_field :name, :autofocus => true, class: "text" %></div><br />
+
+  <div class="field">
+    
+    <% if @startup.logo  %>
+      Logo: <a href="<%= @startup.logo.url  %>"><%= @startup.logo.original_filename  %></a><br>
+    <% else  %>
+      <%= f.label :logo %>
+    <% end  %>
+      <%= f.file_field :logo %>
+    <label for="startup_logo" class="error"></label>
+  </div><br>
+
+  <div class="field"><%= f.label :city, "City/Town where you are based" %>
+  <%= f.text_field :city, class: "text" %></div><br />
+
+  <div class="field"><%= f.label :tagline, "Your Short Mantra. eg. \"Digital Hub For Developers\" or \"Just Do It!\"" %>
+  <%= f.text_field :tagline, class: "text" %></div><br />
+
+  <div class="field" id="description"><%= f.label :description, "About. Describe more about your business" %><br />
+  <%= f.text_area :description, :class => 'ckeditor' %>
+  <label class="startup_description control-label" for="inputError"></label>
+  </div><br>
+
+
+  <div class="form-group">
+    <div class="form-label">Add  Startup Representatives: (they must register first)</div>
+    <input type="text" placeholder="Type Names" class="form-control involvement-adder ui-autocomplete-input ">
+  </div>
+
+  <div class="involvement-list">
+
+    
+    <% if !@startup.users.blank? %> <!-- editing startup -->
+        <% arr = [] %>
+        <% @startup.users.each do | user| %>
+          <% arr << user.id %>
+        <% end %>
+      <input type="hidden" name="involvement" value="<%= arr %>">
+    <% else %>
+      <input type="hidden" name="involvement" value="[<%= current_user.id %>]">
+      <small class="badge" id="_<%= current_user.id %>">
+        <a href="/users/<%= current_user.id %>">
+        <%= current_user.first_name %> <%= current_user.last_name %>
+        </a>
+        &nbsp;<i class="fa fa-times-circle"></i>
+      </small>
+    <% end %>
+
+    <% @startup.users.each do | user| %>
+        <small class="badge" id="_<%= user.id %>">
+          <a href="/users/<%= user.id %>">
+          <%= user.first_name %> <%= user.last_name %>
+          </a>
+          <i class="fa fa-times-circle"></i>
+        </small>
+    <% end %>
+
+  </div>
+
+  <div><%= f.submit "Submit", class:"button button-icon icon icon-sign-up" %></div>
+<% end %>
+
+
+
+

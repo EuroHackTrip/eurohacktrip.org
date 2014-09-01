@@ -1,0 +1,45 @@
+<%= form_for(@partner) do |f| %>
+  <% if @partner.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@partner.errors.count, "error") %> prohibited this partner from being saved:</h2>
+
+      <ul>
+      <% @partner.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description, :class => 'ckeditor' %>
+  </div>
+  <div class="field">
+    <%= f.label :logo, 'Logo - 200px square' %>
+    <%= f.file_field :logo %>
+  </div>
+  <div class="field">
+    <%= f.label :link %>
+    <%= f.text_field :link %>
+  </div>
+  <div class="field">
+    <%= f.label :tier, "Partnership Tier" %>
+    <%= select("partner", 
+      :tier, 
+      options_for_select(partner_tiers, @partner.tier), 
+      {include_blank: 'Click to select'}, 
+      class: "text") %>
+  </div>
+  <div class="field">
+    <%= f.label :year %>
+    <%= f.text_field :year %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,36 @@
+
+	<!-- Modal -->
+	<div class="modal fade trailer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">
+	          Video
+	        </h4>
+	      </div>
+	      <div class="modal-body">
+	        <video style="display:none" width="576" height="324" controls preload>
+            	<source src="/assets/trailer640x360.mp4" type="video/mp4">
+                <source src="/assets/trailer640x360.webm" type="video/webm"/>
+            </video>
+        	</div>
+	      </div>
+	      <div class="modal-footer">
+	        <p class="_left">
+	          lorem ipsum footer
+	        </p>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+
+	// $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+	//     event.preventDefault();
+	//     $(this).ekkoLightbox();
+	// }); 
+	// $('#trailer').click(function(){
+		// $('.trailer').modal('show')
+	// })
+	$('#trailer').ekkoLightbox();

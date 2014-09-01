@@ -1,0 +1,40 @@
+ <div class="_in-block">
+  <!-- Sidebar -->
+  <div id="sidebar" class="4u">
+
+    <div class="panel-body">
+      <%= link_to image_tag(@partner.logo.url), @partner.link, alt:@partner.logo.original_filename %>
+      <br>
+      <% if user_signed_in? %>
+      <% if current_user.is_admin %>
+      <%= link_to 'Edit', edit_partner_path(@partner) %> |
+      <%= link_to 'Back', partners_path %>
+      <% end %>
+      <% end %>
+    </div>
+
+  </div>
+
+  <!-- Content -->
+  <div id="content" class="8u">
+
+    <h2>
+      <%= @partner.name %>
+    </h2>
+
+    <p>
+      <%= raw @partner.description %>
+    </p>
+
+    <p>
+      <strong>
+      <%= partner_tiers[@partner.tier][0] %> Partner, <%= @partner.year %>
+      <br>
+      <%= link_to @partner.link, @partner.link %>
+      </strong>
+    </p>
+
+
+  </div>
+
+</div>

@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>EuroHackTrip | <%= yield(:title) %></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="hacktrip, eurohacktrip, hackers, developers" />
+<meta name="viewport" content="width=1040" />
+
+<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => false %>
+
+<%= javascript_include_tag "application", "data-turbolinks-track" => false %>
+
+<%= stylesheet_link_tag "/assets/font-awesome/css/font-awesome.css", media: "all" %>
+
+<%= javascript_include_tag '/assets/leaflet/leaflet.js' %>
+<link rel="stylesheet" href="/assets/leaflet/leaflet.css" />
+
+<!--[if lte IE 8]>
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+<![endif]-->
+ <!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+
+ <%= javascript_include_tag '/assets/leaflet_label/leaflet.label.js' %>
+ <link rel="stylesheet" href="/assets/leaflet_label/leaflet.label.css" />
+
+
+<script>
+
+</script>
+
+ <%= csrf_meta_tags %>
+ <link rel="shortcut icon" href="/assets/favicon.png"/>
+
+</head>
+<body class="homepage">
+
+ 	<!-- Header Wrapper -->
+ 	<div id="header-wrapper">
+		<div id="allmap">
+	  	
+		</div>
+
+		<!-- Nav -->
+		<nav id="nav">
+			<ul class="icons">
+				<% # Country.where('year', Time.now.year).each do |country| %>
+				<% all_countries.each do |country| %>
+				<% if country.show_in_nav %>
+				<li>
+					<a href="<%= country_path(country.slug) %>">
+						<%= image_tag(country.avatar.url, class: "thumb") %>
+						<span><%= country.name %></span>
+					</a>
+				</li>
+				<% end %>
+				<% end %>
+			</ul>
+		</nav>
+
+ 		<!-- Header -->
+ 		<div id="header">
+
+ 			<!-- Logo -->
+ 			<h1 id="logo"><%= link_to raw("<b>Euro</b><b>Hack</b><b>Trip</b>"), root_path %></h1></br>
+ 			<p>Exploring the European Tech Scene</p>
+			<br>
+ 			<div id="trailer" data-remote="http://player.vimeo.com/video/95722140" data-toggle="lightbox" data-type="vimeo" data-width="750" data-title="Interview with Erik Hersman from iHub Nairobi"><i class="fa fa-play-circle"></i></div>
+		</div>
+		
+	</div>
+
+	<!-- Nav -->
+	<nav id="nav2">
+		<ul class="icons">
+		
+			<li class="fa fa-home">
+				<%=  link_to 'HOME', root_path %>
+			</li>
+
+			<li class="fa fa-question">
+				<%=  link_to 'ABOUT', '/about' %>
+			</li>
+
+			<li class="fa fa-lightbulb-o">
+				<%= link_to 'STARTUPS', '/startups' %>
+			</li>
+
+			<li class="fa fa-group">
+				<%  link_to 'ATTENDEES', @page_type == 'Home' ? '#attendees' : '/#attendees' %>
+				<%=  link_to 'ATTENDEES', '/attendees' %>
+			</li>
+
+			<li class="fa fa-pencil">
+				<a href="<%=  posts_path %>">
+					<span>BLOG</span>
+				</a>
+			</li>
+
+			<% #binding.pry %>
+			<% if !user_signed_in? %>
+				<li class="fa fa-sign-in">
+					<a href="/login">
+						<span>SIGN IN</span>
+					</a>
+				</li>
+				<li class="fa fa-group">
+					<a href="/register">
+						<span>JOIN</span>
+					</a>
+				</li>
+			<% end %>
+				<li class="fa fa-envelope">
+					<%= link_to 'CONTACT US', '#contact' %>
+				</li>
+				<li class="fa fa-puzzle-piece">
+					<a href="<%=  partners_path %>">
+						<span>PARTNERS</span>
+					</a>
+				</li>
+			<% if user_signed_in? %>
+				<!-- <a id="user-menu"> <i class="fa fa-cog" id="user-menu"></i></a> -->
+			<% end %>
+		</ul>
+		<% if user_signed_in? %>
+			<ul class="icons menu1">
+				<% if current_user == User.first %>
+				<li class="fa fa-user">
+					<%= link_to "#{current_user.first_name} #{current_user.last_name}".upcase, dashboard_index_path %>
+				</li>
+				<% else %>
+				<li class="fa fa-user">
+					<%= link_to "MY PROFILE".upcase, user_path(current_user) %>
+				</li>
+				<% end %>
+				<li class="fa fa-cog">
+					<%= link_to 'DASHBOARD', dashboard_index_path %> 
+				</li>
+				<li class="fa fa-sign-out">
+	          		<%= link_to "SIGN OUT", destroy_user_session_path, :method => :delete %>
+	         	</li>
+			</ul>
+		<% end %>
+
+	</nav>
+	
+
+	<div id="main-wrapper">
+
+		<% if flash[:notice] %>
+	      <div class="alert alert-success mids">
+	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	        <%= flash[:notice] %>
+	      </div>
+	    <% end %>
+
+	    <% if flash[:error] || flash[:alert] %>
+	    <% flash.each do |key, value| %>
+	    <div class="alert alert-danger mids">
+	    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	    	<% flash[:error] %>
+	    	<%= value %>
+	    </div>
+	    <% end %>
+	    <% end %>
+	
+	    <% if @page_type == 'Home' %>
+			<%= yield %>
+	    <% else %>
+	    <div class="well mids">
+			<%= yield %>
+		</div>
+	    <% end %>
+	</div>
+	<!-- Footer Wrapper -->
+	<div id="footer-wrapper">
+		<!-- Footer -->
+		<div id="footer" style="min-height: 570px;">
+			<header>
+				<h2>Interested? <strong>Get In touch:</strong></h2>
+				<hr style="background-color:#ccc; height:1px">
+			</header>
+			<section>
+				<div class="col-md-5" style="padding-right:15px">
+
+<a class="twitter-timeline" href="https://twitter.com/eurohacktrip" data-widget-id="452349532328570880">Tweets by @EuroHackTrip</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";js.setAttribute('onload', "twttr.events.bind('rendered',function(e) {niceScrollTw()});");fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+
+				</div>
+
+				<ul class="icons col-md-2">
+					<li class="icon icon-heart donate" id="donate">
+						<!-- <a href="#">Support Us!</a> -->
+<!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="VZ2N3ZPA2SB4J">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+ -->
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="ECHVBKRP8PAAQ">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+					</li>
+					<% if !user_signed_in? %>
+					<li class="icon icon-plus">
+						<a href="/register">Sign Up</a>
+					</li>
+					<li class="icon icon-signin">
+						<a href="/login">Sign In</a>
+					</li>
+					<% end %>
+					<li class="icon icon-facebook">
+						<a href="http://facebook.com/EuroHackTrip">Facebook</a>
+					<li class="icon icon-twitter">
+						<a href="http://twitter.com/eurohacktrip">Twitter</a>
+					</li>
+					<li class="icon icon-google-plus">
+						<a href="http://groups.google.com/forum/#!forum/euro-hack-trip">Google Group</a>
+					</li>
+					<li class="icon fa-desktop">
+						<a href="https://docs.google.com/presentation/d/1G0-ieag-CZoxLVI9rhCt2Px3Vh79_2jvqtMLs_ydpRw/edit?usp=sharing">Concept</a>
+					</li>
+					<li class="icon fa-puzzle-piece">
+						<!-- <a href="http://trello.com/b/4paWimZW/eurohacktrip">Trello Tasks</a> -->
+						<a href="/partnership">Partnership</a>
+					</li>
+					</li>
+					<% if user_signed_in? %>
+			        	<li class="icon fa-cog">
+			          		<%= link_to 'Dashboard', dashboard_index_path %> 
+			         	</li>
+			        	<li class="icon fa-sign-out">
+			          		<%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+			         	</li>
+					<% end %>
+				</ul>
+
+				<div id="contact" class="col-md-5">	
+					<%= form_for message, :url => contact_path do |form| %>
+						<div class="row half">
+							<div class="6u">
+							<%= form.text_field :name, class: "text", placeholder: "Name" %>
+							</div>
+							<div class="6u">
+							<%= form.text_field :email, class: "text", placeholder: "Email" %>
+							</div>
+
+							<div class="hide">
+							<%= form.hidden_field :message, class: "text", value: "Robot Catcher" %>
+							</div>
+							
+						</div>
+						<div class="row half">
+							<div class="12u">
+							<%= form.text_field :subject, class: "text", placeholder: "Subject" %>
+							</div>
+							<div class="12u">
+							<%= form.text_area :body, placeholder: "Message" %>
+							</div>
+						</div>
+						<div class="row half">
+							<div class="12u">
+							<%= form.submit "Send", class: "button button-icon icon icon-envelope pull-right" %>
+							</div>
+						</div>
+					<% end %>
+				</div>
+			</section> 	
+		</div>
+
+		<!-- Copyright -->
+		<div id="copyright" class="mids">
+			<span>&copy; <%= link_to "EuroHackTrip", root_path %> </span>
+			<ul class="links">
+				<li><%= link_to "2014", '/2014' %> </li>
+			</ul>
+		</div>
+
+	</div>
+
+</body>
+</html>

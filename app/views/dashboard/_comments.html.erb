@@ -1,0 +1,17 @@
+<% all_comments.each do |comment| %>
+	<div class="to-hide comment">
+		<h3><%= comment.commenter %></h3>
+		<h5><%= comment.content %></h5>
+		<% all_posts.each do |post| %>
+			<% if comment.post_id == post.id %>
+				<p>Posted in <%= link_to post.title, post %></p>
+			<% end %>
+		<% end %>
+		<div class="hidden-links">
+	  	<% if !comment.approved %>
+			<%= link_to 'Approve', comment_approve_path(comment), method: :post, data: { confirm: 'Are you sure you want to approve this comment?' } %> | 
+		<% end %>
+		<%= link_to 'Destroy Comment', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
+		</div>
+	</div>
+<% end %>

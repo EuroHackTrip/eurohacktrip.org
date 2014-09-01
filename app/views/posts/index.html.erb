@@ -1,0 +1,48 @@
+<% provide(:title, 'Blog') %>
+<link rel="stylesheet" type="text/css" href="/assets/posts.css">
+
+<div class="mids">
+<!-- everything else below here is the blogposts -->
+
+<div class="text-right">
+  <% if user_signed_in? %>
+    <%= link_to 'New Post', new_post_path, class: "btn btn-info" %>
+  <% end %>
+</div>
+
+  <% @posts.each do |post| %>
+    <% if post.published || post.published == nil %>
+    <div class="posts">
+      <h2><%= link_to post.title, post %></h2>
+      <% if post.user_id && User.find(post.user_id).first_name && User.find(post.user_id).last_name %>
+      <span class = "post-details">Posted by: <%= link_to author(post), author_path(User.find(post.user_id)) + "/posts" %> at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %></span></span>
+      <% else %>
+      <span class = "post-details">Posted at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %></span></span>
+      <% end %>
+      <%= raw shorten(post.content, 500) %> <%= link_to '...more', post %>
+      <% if post.tag_list.count > 0 %>
+      <p>Tags:
+        <% post.tag_list.each do |tag| %>
+        <span class="label label-info"><%= link_to tag, tag_path(tag), style: "color:white;"%></span>
+        <% end %>
+      </p>
+      <% end %>
+      <br>
+      <% if user_signed_in? %>
+      <span class="user">
+        <% if current_user.is_admin || (post.user_id && post.user_id == current_user.id) %>
+        <%= link_to 'Edit', edit_post_path(post) %> 
+        | 
+        <% end %>
+        <% if current_user.is_admin %>
+        <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </span>
+      <% end %>
+      <br>
+
+    </div>
+    <% end %>
+  <% end %>
+</div>
+<%= will_paginate @posts, :container => true %>

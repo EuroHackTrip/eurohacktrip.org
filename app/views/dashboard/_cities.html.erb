@@ -1,0 +1,36 @@
+<ul class="nav nav-tabs">
+  <li><a href="#all-cities" data-toggle="tab">All Cities</a></li>
+  <% if user_signed_in? && current_user.is_admin %>
+  <li><a href="#new-city" data-toggle="tab">
+    <span class="glyphicon glyphicon-plus-sign"></span>Add City</a></li>
+    <% end %>
+  </ul>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane active city" id="all-cities">
+      <% all_cities.each do |city| %>
+      <hr>
+      <div class = "to-hide city">
+        <div>
+          <%= city.year %>&nbsp;<%= city.name %>
+          <span class="pull-right"><%= city.dates %></span>
+          <br>
+          <%= city.country.name %><br>
+          <%= raw shorten(city.description, 150) %> ...
+        </div>
+        <div class="hidden-links">
+          <% if current_user.is_admin %>
+          <%= link_to 'Edit', edit_city_path(city) %> |
+          <%= link_to 'Delete', city, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    
+    <div class="tab-pane city" id="new-city">
+
+        <%= render 'cities/form' %>
+      
+    </div>
+ </div>

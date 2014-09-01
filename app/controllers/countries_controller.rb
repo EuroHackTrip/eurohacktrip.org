@@ -1,0 +1,92 @@
+class CountriesController < ApplicationController
+  before_action :set_country, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  impressionist :unique => [:impressionable_type, :impressionable_id, :session_hash]
+  # load_and_authorize_resource
+
+  # GET /countries
+  # GET /countries.json
+  def index
+    @countries = Country.all
+  end
+
+  # GET /countries/1
+  # GET /countries/1.json
+  def show
+    @country = Country.friendly.find(params[:id])
+    # @country = Country.friendly.find_by({'id' => params[:id]})
+    impressionist(@country)
+    puts response.body
+  end
+
+  # GET /countries/new
+  def new
+    @country = Country.new
+  end
+
+  # GET /countries/1/edit
+  def edit
+  end
+
+  # POST /countries
+  # POST /countries.json
+  def create
+    @country = Country.new(country_params)
+
+    respond_to do |format|
+      if @country.save
+        format.html { redirect_to dashboard_index_path, notice: 'Country was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @country }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @country.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /countries/1
+  # PATCH/PUT /countries/1.json
+  def update
+    respond_to do |format|
+      if @country.update(country_params)
+        format.html { redirect_to country_path, notice: 'Country was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @country.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def show_in_nav
+    @country = Country.friendly.find(params[:id])
+    @country.show_in_nav = !@country.show_in_nav
+    @country.save!
+    redirect_to dashboard_index_path
+  end
+
+  # DELETE /countries/1
+  # DELETE /countries/1.json
+  def destroy
+    @country.destroy
+    respond_to do |format|
+      format.html { redirect_to dashboard_index_path }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_country
+      if current_user.is_admin
+        @country = Country.friendly.find(params[:id])
+      else
+        redirect_to dashboard_index_path, alert: 'You don\'t have permission to do that.'
+      end
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def country_params
+      params.require(:country).permit(:name, :description, :flag, :map, :avatar, :show_in_nav)
+    end
+end

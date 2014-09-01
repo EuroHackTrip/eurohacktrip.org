@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  posts_per_page: 1
+  allow_comments: false
+
+two:
+  posts_per_page: 1
+  allow_comments: false

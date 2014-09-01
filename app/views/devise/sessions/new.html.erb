@@ -1,0 +1,26 @@
+<% provide(:title, 'Login') %>
+
+<h2 style="display:inline">Sign In</h2> <a href="/register" class="pull-right">Sign Up</a> 
+
+<%= form_for(resource, 
+	:as => resource_name, 
+	:url => session_path(resource_name), 
+	:html => {:id => 'sign_in', :style => "max-width: 350px; margin:0px auto;"}
+) do |f| %>
+
+  <div class="field"><%= f.label :email%>
+  <%= f.email_field :email, :autofocus => true, class:"text" %></div>
+  <br>
+
+  <div class="field"><%= f.label :password%>
+  <%= f.password_field :password, class:"text" %></div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div><%= f.check_box :remember_me %> <%= f.label :remember_me, style:"display:inline" %></div>
+  <% end -%>
+
+  <div><%= f.submit "Sign in", class:"button button-icon icon icon-signin" %></div>
+<% end %>
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+<% end -%>

@@ -1,0 +1,69 @@
+<%= form_for(@event) do |f| %>
+<% if @event.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+  <ul>
+    <% @event.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<div class="field">
+  <label for="event_link">Eventbrite Link /optional link:</label>
+  <%= f.text_field :event_link %>
+</div>
+<label for="eventlabel" class="fetched hide"></label>
+<div class="field">
+  <label for="event_link">Name/Theme:</label>
+  <%= f.text_field :event_name %>
+</div>
+<div class="field eventid hide">
+  <label for="event_id">Eventbrite ID (optional):</label>
+  <%= f.text_field :event_id %>
+</div>
+<div class="field">
+  <%= f.label :description %><br>
+  <%= f.text_field :description %>
+</div>
+<div class="field">
+  <b>Theme Icon:</b><br>
+  <%= f.text_field :icon %>
+</div>
+
+<div class="field">
+  <%= f.label :city_id %>
+  <%= f.select :city_id, City.all.collect {|city| [ city.name , city.id] }, { include_blank: 'Select Venue City' } %>
+</div>
+
+<div class="field">
+  <%= f.label :special, "Is this event for all attendees?" %>
+  <%= f.select :special, [['No', 0], ['Yes',1]], { include_blank: 'Select' } %>
+
+</div>
+
+<div class="field">
+  <label for="event_link">Venue:</label>
+  <%= f.text_field :event_venue %>
+</div>
+
+<div class="field">
+  <%= f.label :venue_pic %>
+  <%= f.file_field :venue_pic %>
+</div>
+
+<div class="field">
+  <b>Year:</b><br>
+  <%= f.text_field :year %>
+</div>
+
+<div class="field">
+  <b>Date:</b><br>
+  <%= f.text_field :date %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>

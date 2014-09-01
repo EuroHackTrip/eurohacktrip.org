@@ -1,0 +1,203 @@
+._fade-3{
+	opacity: 0.3;
+}
+._fade-5{
+	opacity: 0.5;
+}
+._right{
+	text-align: right;
+}
+._left{
+	text-align: left !important;
+}
+._lefty{
+	display: inline;
+	width: auto;
+	margin-left: 0px;
+}
+._righty{
+	display: inline;
+	width: auto;
+	margin-right: 0px;
+}
+._rightx{
+	position: absolute;
+	right: 0px;
+}
+._leftx{
+	position: absolute;
+	left: 0px;
+}
+._hide {
+	display: none;
+}
+._w100{
+	width:100% !important;
+}
+._max100{
+	max-width: 100% !important;
+}
+._p0{
+	padding: 0px !important;
+}
+._p5{
+	padding: 5px !important;
+}
+._p7{
+	padding: 7px !important;
+}
+._p10{
+	padding: 10px !important;
+}
+._m0{
+	margin: 0px !important;
+}
+._top-5{
+	margin-top: -5px !important;
+}
+._bottom-5{
+	margin-bottom: -5px !important;
+}
+._right-5{
+	margin-right: -5px !important;
+}
+._left-5{
+	margin-left: -5px !important;
+}
+._top-10{
+	margin-top: -10px !important;
+}
+._bottom-10{
+	margin-bottom: -10px !important;
+}
+._right-10{
+	margin-right: -10px !important;
+}
+._left-10{
+	margin-left: -10px !important;
+}
+._top5{
+	margin-top: 5px !important;
+}
+._bottom5{
+	margin-bottom: 5px !important;
+}
+._right5{
+	margin-right: 5px !important;
+}
+._left5{
+	margin-left: 5px !important;
+}
+._top10{
+	margin-top: 10px !important;
+}
+._bottom10{
+	margin-bottom: 10px !important;
+}
+._right10{
+	margin-right: 10px !important;
+}
+._left10{
+	margin-left: 10px !important;
+}
+._center{
+	text-align: center;
+	float: none;
+}
+._block{
+	display: block;
+}
+._in-block{
+	display: inline-block;
+}
+._inline{
+	display: inline;
+}
+._f10{
+	font-size: 10px;
+}
+._f20{
+	font-size: 20px;
+}
+._f25{
+	font-size: 25px;
+}
+._f30{
+	font-size: 30px;
+}
+._f40{
+	font-size: 40px;
+}
+._f50{
+	font-size: 50px;
+}
+._f60{
+	font-size: 60px;
+}
+._pink{
+	color: #FF6EE8 !important;
+}
+._aqua{
+	color: aqua !important;
+}
+._black{
+	color: black !important;
+}
+._white{
+	color: white !important;
+}
+._bg-white{
+	background-color: white;
+}
+._bg-black{
+	background-color: black;
+}
+._bg-trp{
+	background-color: transparent;
+}
+._round2{
+	border-radius: 2px;
+}
+._round3{
+	border-radius: 3px;
+}
+._round4{
+	border-radius: 4px;
+}
+._round5{
+	border-radius: 5px;
+}
+._round10{
+	border-radius: 10px;
+}
+._round20{
+	border-radius: 20px;
+}
+._round{
+	border-radius: 50%;
+}
+._circle10{
+	border-radius:50%;
+	width:10px !important;
+	height:10px !important;
+}
+._circle20{
+	border-radius:50%;
+	width:20px !important;
+	height:20px !important;
+}
+._circle30{
+	border-radius:50%;
+	width:30px !important;
+	height:30px !important;
+}
+._circle40{
+	border-radius:50%;
+	width:40px !important;
+	height:40px !important;
+}
+._circle50{
+	border-radius:50%;
+	width:50px !important;
+	height:50px !important;
+}

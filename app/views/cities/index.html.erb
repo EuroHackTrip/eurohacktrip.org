@@ -1,0 +1,31 @@
+<h2>All Cities</h2>
+
+<div class="row">
+  <% j=0 %>
+<% @cities = @cities.paginate(page:params[:page],per_page:8) %>
+  <% @cities.each do |city| %>
+      <div class="3u" style="<%= j%4 == 0  ? 'clear:both' : '' %>">
+        <section class="middle">
+        <% j = j+1 %>
+          <span class="pennant pennant-alt">
+            <%= link_to image_tag(city.photo.url), city_path(city.slug) %>
+          <span class="after"></span>
+          </span>
+          <!-- <span class="twelve-point-star"></span> -->
+          <header class="text-center">
+            <h3>
+            <%= link_to city.name, city_path(city.slug) %>, <%= link_to city.country.name, city.country %>
+            </h3>
+          </header>
+          <p><%= raw shorten(city.description, 200) %><%= link_to ' ...more', city_path(city.slug) %> </p>
+        </section>            
+      </div>
+  <% end %>
+
+<%= will_paginate @cities %>
+
+</div>
+<% if current_user && current_user.is_admin? %>
+<%= link_to 'New City', new_city_path %>
+<% end %>
+

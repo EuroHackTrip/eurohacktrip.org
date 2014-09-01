@@ -1,0 +1,48 @@
+<% provide(:title, 'The Team') %>
+<style>
+	#main-wrapper {
+		padding: 6em;
+	}
+</style>
+<h2 style="padding-top: 10px;">The Team</h2>
+<% @users.where(approved: true).each do |user| %>
+	<div class="col-sm-4" style="border-bottom: dotted 1px #aaa; padding-top:10px;">
+		<div class = "col-sm-6">
+
+		<% if ENV["RAILS_ENV"] == 'production' %>
+		<% begin %>
+			<%if user.photo.url %>
+				<%= image_tag(user.photo.url, style: "width: 220px;") %>
+			<% end %>
+		<% rescue Exception => e %>
+		<% end %>
+		<% else %>
+			<%= image_tag('/assets/user.png', style: "width: 220px;") %>
+		<% end %>
+
+		</div>
+		<div class="col-sm-6">
+			<% if user.first_name && user.last_name || user.city %>
+				<p class="name"><%= link_to user.first_name + " " + user.last_name, user_path(user) %></p>
+				<%= raw user.city %><br>
+				<br>
+			<% end %>
+			<table width="100%">
+				<% posts_by_author(user)[0, 5].each do |post| %>
+					<tr>
+						<td class="author-posts">
+							<%= link_to post.title, post %><br>
+						</td>
+					</tr>
+				<% end %>
+				<% if posts_by_author(user).length > 5 %>
+					<tr>
+						<td style="text-align:right;">
+							<%= link_to 'More posts by this user', author_path(user) +"/posts" %>
+						</td>
+					</tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+<% end %>

@@ -1,0 +1,58 @@
+<% provide(:title, 'Dashboard') %>
+<link rel="stylesheet" type="text/css" href="/assets/dashboard.css">
+<div style="padding-top: 10px;">
+	<ul class="nav nav-tabs" id = "tab">
+		
+        <!--<li><a href="#comments" data-toggle="tab">Comments <span class = "badge pull-right"><%= comments_count %></span></a></li>-->
+	    <% if !current_user.is_admin && current_user.startups.blank? %>
+	    <li><a id="to-startups" href="#startups" data-toggle="tab"><b>Add Your Startup!</b></a></li>
+        <% else %>
+	    <li><a id="to-startups" href="#startups" data-toggle="tab">Startups</a></li>
+
+        <% end %>
+        <li class="active"><a href="#posts"  data-toggle="tab">Posts <span class = "badge"><%= posts_count %></span></a></li>
+	    
+		<% if current_user.is_admin %>
+        	<li><a id="to-users" href="#users" data-toggle="tab">Users</a></li>
+	        <li><a id="to-countries" href="#countries" data-toggle="tab">Countries</a></li>
+	        <li><a id="to-cities" href="#cities" data-toggle="tab">Cities</a></li>
+	        <li><a id="to-events" href="#events" data-toggle="tab">Events</a></li>
+        	<li><a id="to-stats" href="#stats" data-toggle="tab">Statistics</a></li>
+        <% end %>
+        <li class="pull-right"><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
+        <li><a id="to-settings" href="#settings" data-toggle="tab">Settings</a></li>
+  	</ul>
+
+	<!-- Tab panes -->
+	<div class="tab-content well">
+
+	  <div class="tab-pane" id="users">
+	  	<%= render 'users' %>
+	  </div>
+	  <div class="tab-pane" id="countries">
+	  	<%= render 'countries' %>
+	  </div>
+	  <div class="tab-pane" id="cities">
+	  	<%= render 'cities' %>
+	  </div>
+	  <div class="tab-pane" id="events">
+	  	<%= render 'events' %>
+	  </div>
+	  <div class="tab-pane" id="startups">
+	  	<%= render 'startups' %>
+	  </div>
+	  <div class="tab-pane active" id="posts">
+	  	<%= render 'posts' %>
+	  </div>
+	  <div class="tab-pane" id="comments">
+	  	<%= render 'comments' %>
+	  </div>
+	  <div class="tab-pane" id="settings">
+	  	<%= render 'settings' %>
+	  </div>
+	  <div class="tab-pane" id="stats">
+	  	<%= render 'stats' %>
+	  </div>
+	</div>
+</div>
+

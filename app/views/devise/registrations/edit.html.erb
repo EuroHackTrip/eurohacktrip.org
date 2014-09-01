@@ -1,0 +1,96 @@
+<% provide(:title, 'Edit Account') %>
+
+<h2>Edit Account </h2>
+
+
+<%= form_for(resource, 
+  :as => resource_name, 
+  :url => registration_path(resource_name), 
+  ) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field"><%= f.label :first_name %>
+  <%= f.text_field :first_name, :autofocus => true, class: "text" %></div>
+
+  <div class="field"><%= f.label :last_name %>
+  <%= f.text_field :last_name, class: "text" %></div>
+
+
+  <div class="field"><%= f.label :email %>
+  <%= f.email_field :email, class: "text" %></div>
+
+  <div class="field">
+    <span>Changing photo?</span>
+    <span>
+      <a href="<%= @user.photo.url  %>"><%= @user.photo.original_filename  %></a>
+      <%= f.file_field :photo %> 
+    </span>
+  </div>
+
+  <div class="field"><%= f.label :country %>
+    <!-- custom country selection --> 
+    <%= select("user", 
+      :country, 
+      options_for_select(countries, current_user.country), 
+      {include_blank: 'Click to select'},
+      class: "text") %>
+    <!-- alternatively -->
+    <% select_tag :user_country, 
+      options_for_select(countries, current_user.country),
+      class: "text", name: 'user[country]' %>
+
+    <!-- gem country_select, disabled! -->
+    <!--  f.country_select :country, 
+    nil, 
+    {include_blank: 'Click to select'}, 
+    {class: "text", :style=>'100%;'} %> -->
+  </div><br />
+
+  <div class="field"><%= f.label :city, "City/Town" %>
+  <%= f.text_field :city, class: "text" %></div><br />
+
+  <div class="field" id="about"><%= f.label :about, "About Yourself..." %>
+  <%= f.text_area :about, :class => 'ckeditor' %>
+  <label class="user_about control-label" for="inputError"></label>
+  </div><br />
+
+  <div class="field" id="interest"><%= f.label :interest, "Your Interest in EuroHackTrip" %>
+  <%= f.text_area :interest, :class => 'ckeditor' %>
+  <label class="user_interest control-label" for="inputError"></label>
+  </div><br />
+
+  <div class="field"><%= f.label :video, "Video (Optional)" %>
+  <%= f.text_field :video, class: "text", placeholder:'http://...' %></div><br />
+
+  <div class="field"><%= f.label :funding_campaign, "Crowdfunding link (optional)" %>
+  <span class="info">
+    If you are raising money for the trip, provide your link below:
+  </span><br />
+  <%= f.text_field :funding_campaign, class: "text" %></div><br />
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div class="field">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="row">
+    <label class="_w100">Changing your Password?</label>
+ 
+    <div class="field 6u"><%= f.label :new_password %>
+    <%= f.password_field :password, :autocomplete => "off", class: "text" %>
+    </div>
+
+    <div class="field 6u"><%= f.label :confirm_new_password %>
+    <%= f.password_field :password_confirmation, class: "text" %>
+    </div>
+  </div>
+
+  <div class="field"><%= f.label :current_password %><b>We need your current password to confirm your changes</b>
+
+  <%= f.password_field :current_password, :autocomplete => "off", class: "text" %></div><br>
+  <div class="field"><%= f.submit "Update", class:"button button-icon icon icon-edit" %></div><br>
+<% end %>
+
+
+<%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class:"pull-right" %>
+
+<%= link_to "Back", :back %>

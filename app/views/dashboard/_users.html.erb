@@ -1,0 +1,37 @@
+<% if user_signed_in? %>
+	<% if current_user.is_admin %>
+		<% User.all.each do |user| %>
+			<% if user.first_name && user.last_name %>
+			<hr>
+				<div class = "to-hide">
+					<p><%= link_to user.first_name + " " + user.last_name, user_path(user) %></p>
+					<% if user.city %>
+						<%= user.city %>
+					<% end %>
+					<% if user.startups.first %>
+						| <%= link_to user.startups.first.name, user.startups.first %>
+					<% end %>
+					<div class="pull-right">
+						<% if posts_by_author(user).length > 0 %>
+							<%= link_to pluralize(posts_by_author(user).length, "post"), "/users/" + user.id.to_s %>
+						<% end %>
+					</div>
+					<br>
+		            <% if user != User.first %>
+						<% if !user.is_admin %>
+			              <%= link_to 'Make Admin', toggle_admin_path(user), method: :post, data: { confirm: 'Are you sure?' } %> | 
+			            <% else %>
+			              <%= link_to 'Remove Admin', toggle_admin_path(user), method: :post, data: { confirm: 'Are you sure?' } %> | 
+			            <% end %> 
+			            <% if !user.approved %>
+			              <%= link_to 'Approve', user_approve_path(user), method: :post, data: { confirm: 'Are you sure?' } %> | 
+			            <% else %>
+			              <%= link_to 'Disapprove', user_approve_path(user), method: :post, data: { confirm: 'Are you sure?' } %> | 
+			            <% end %> 
+			            <%= link_to 'Delete', user_delete_path(user), method: :delete, data: { confirm: 'Are you sure?' } %>
+		            <% end %> 
+				</div>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>

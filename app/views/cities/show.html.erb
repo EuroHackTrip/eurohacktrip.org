@@ -1,0 +1,118 @@
+<% provide(:title, @city.name) %>
+<div id="map" data-country-id="<%= @city.country.id %>">
+
+</div>
+	<!-- Main -->
+	<div id="main" class="mids">
+		<div class="row">
+
+			<div class="4u pull-right">
+				<!-- Excerpts -->
+				<section>
+					<ul class="divided">
+						<li>
+							<!-- Excerpt -->
+							<div class="well">
+							<article class="is-excerpt">
+								<h2 class="text-center"><%= @city.name %></h2>
+								<%= image_tag @city.photo.url, class:"big-logo" %>
+								<div>
+									<%= raw @city.description %>
+								</div>
+								<% if user_signed_in? %>
+								<% if current_user.is_admin %>
+								<span class="user">
+									<%= link_to 'Edit', edit_city_path(@city) %> | 
+									<%= link_to 'Delete', @city, method: :delete, data: { confirm: 'Are you sure?' } %>
+								</span>
+								<% end %>
+								<% end %>
+							</article>
+							</div>
+						</li>
+					</ul>
+				</section>
+			</div>
+
+			<!-- Content -->
+			<div id="content" class="8u">
+				<h3 class="text-center">Events Happening Here</h3>
+				<% @city.events.each do |event| %>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<a href="<%= url_for event %>">
+							<h3>THEME: <%= event.event_name %></h3>
+						</a>
+					</div>
+					<div class="panel-body">
+						<div class="col-md-3">
+							<%= link_to image_tag(event.venue_pic.url, class:"_w100"), event, alt:event.venue_pic.original_filename %>
+						</div>
+						<div class="col-md-9">
+							<%= raw shorten(event.description, 200) %>
+							<%= link_to '...More', event %>
+							<br/>
+							<h4><%= event.event_venue %>, <%= event.date %></h4>
+
+							<% if user_signed_in? %>
+							<% if current_user.is_admin %>
+							<%= link_to 'Edit', edit_event_path(event) %>
+							<%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+							<% end %>
+							<% end %>
+						</div>
+
+					</div>
+				</div>
+				<% end %>
+
+			</div>
+
+
+		</div>
+
+
+		<!-- Posts -->
+		<div class="12u">
+			<% @country = @city.country %>
+			<% all_posts.tagged_with(@country.name).each do |post| %>
+			<% if post.published || post.published == nil %>
+			<article>
+				<h3><%= link_to post.title, post_path(post) %></h3>
+				<% if post.user_id && User.find(post.user_id).first_name && User.find(post.user_id).last_name %>
+				<span class = "post-details">Posted by: <%= link_to author(post), author_path(User.find(post.user_id)) + "/posts" %>  at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %> </span></span><br>
+				<% else %>
+				<span class = "post-details">Posted  at <%= post.created_at %><span style = "float: right"><%= social_share_button_tag(post.title) %> </span></span><br>
+				<% end %>
+				<!--<%= post.created_at %> -->
+				<%= raw post.content %><br><br>
+				<% if user_signed_in? %>
+				<% if current_user.is_admin || (post.user_id && post.user_id == current_user.id) %>
+				<%= link_to 'Edit', edit_post_path(post) %> | 
+				<% end %>
+				<% if current_user.is_admin %>
+				<span>		        
+					<%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</span> | <link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
+				<% end %>
+				<% end %>
+
+				<%= link_to "Leave a Comment", "/posts/"+post.slug+"#add-comment", class: "links" %>
+				<br>
+				<br>
+					<!--
+					<% if post.comments.count > 0 %>
+						<%= link_to pluralize(post.comments.count, " comment") + " so far.", "/posts/"+post.id.to_s+"#comments", class: "links" %>
+					<% else %>
+						<%= link_to "Leave a Comment", "/posts/"+post.id.to_s+"#add-comment", class: "links" %>
+					<% end %>
+				-->
+			</article>
+			<% end %>
+			<% end %>
+
+			<%= will_paginate all_country_posts(@country.name), :container => true %>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,54 @@
+<% provide(:title, 'Articles by ' + request.fullpath.split("/")[1].split("-")[0] + " " + request.fullpath.split("/")[1].split("-")[1]) %>
+<style>
+  #main-wrapper {
+      padding: 6em;
+  }
+</style>
+
+<div class="text-right">
+  <% if user_signed_in? %>
+    <%= link_to 'New Post', new_post_path, class: "btn btn-info" %>
+  <% end %>
+</div>
+
+
+<% @posts.each do |post| %>
+  <% if user_signed_in? || post.published || post.published == nil %>
+    <div class="posts">
+          <h2><%= link_to post.title, post %></h2>
+          <span class = "post-details">Posted by: <%= link_to author(post), author_path(User.find(post.user_id)) + "/posts" %> at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %></span></span>
+          <div><%= raw post.content %></div>
+          <% if post.tag_list.count > 0 %>
+            <p>Tags:
+            <% post.tag_list.each do |tag| %>
+              <span class="label label-info"><%= link_to tag, tag_path(tag), style: "color:white;"%></span>
+            <% end %>
+            </p>
+          <% end %>
+          <% if post.comments.count > 0 %>
+            <%= link_to pluralize(post.comments.count, " comment") + " so far.", "/posts/"+post.id.to_s+"#comments", class: "links" %>
+          <% else %>
+            <%= link_to "Leave a Comment", "/posts/"+post.slug.to_s+"#add-comment", class: "links" %>
+          <% end %>
+          <br>
+          <% if user_signed_in? %>
+            <span class="user">
+              <% if current_user.is_admin || (post.user_id && post.user_id == current_user.id) %>
+                  <%= link_to 'Edit', edit_post_path(post) %> 
+                 | 
+              <% end %>
+              <% if current_user.is_admin %>
+                <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %> | 
+                <% if !post.published %>
+	              <%= link_to 'Publish', post_publish_path(post), method: :post, data: { confirm: 'Are you sure?' } %>
+	            <% else %>
+	              <%= link_to 'Unpublish', post_publish_path(post), method: :post, data: { confirm: 'Are you sure?' } %>
+	            <% end %>
+	              <% end %>
+            </span>
+          <% end %>
+          <br>
+          
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,82 @@
+<div class="text-center">
+<h2>Our Partners</h2>
+<h4>
+EuroHackTrip is made possible by a strong network of local and international partners.
+<%= link_to 'Learn More.', partnership_path %>
+</h4>
+<br>
+</div>
+  
+
+<div class="row">
+  <% @i = 'even' %>
+  <% @partners = @partners.paginate(page:params[:page],per_page:5) %>
+  <% @partners.each do |partner| %>
+    <% @i = @i == 'odd' ? 'even' : 'odd' %>
+
+
+     <div class="_in-block">
+
+      <!-- Sidebar -->
+      <div id="sidebar" class="col-sm-3<%= @i == 'even' ? ' pull-right' : '' %>">
+
+        <div class="panel-body">
+          <%= link_to image_tag(partner.logo.url, class:"_w100"), partner, alt:partner.logo.original_filename %>
+
+          <% if user_signed_in? %>
+          <% if current_user.is_admin %>
+          <%= link_to 'View', partner_path(partner) %> | 
+          <%= link_to 'Edit', edit_partner_path(partner) %>
+          <% end %>
+          <% end %>
+        </div>
+
+      </div>
+
+      <div id="content" class="col-sm-3<%= @i == 'odd' ? ' pull-right' : '' %>">
+      
+        <img src="/assets/partnership/<%= partner.tier %>.png" alt="<%= partner_tiers[partner.tier][0] %>" class="_w100">
+        <p class="text-center">
+        <%= partner_tiers[partner.tier][0] %> Partner, 
+        <%= partner.year %>
+        </p>
+
+      </div>
+
+      <!-- Content -->
+      <div id="content" class="col-sm-6">
+
+        <h2>
+          <%= partner.name %>
+        </h2>
+
+        <p>
+          <%= raw shorten(partner.description, 500) %>
+           <%= link_to '..more', partner.link %>
+        </p>
+
+      </div>
+
+    </div>
+
+  <% end %>
+</div>
+
+<div class="text-right">
+  <%= will_paginate @partners %>
+</div>
+
+<div class="text-center">
+  <h4>
+   <%= link_to 'Interested in being our partner?', partnership_path %>
+  </h4>
+</div>
+
+<% if user_signed_in? %>
+<% if current_user.is_admin %>
+  <div class="text-right">
+    <%= link_to 'New Partner', new_partner_path, class:"btn btn-info" %>
+  </div>
+<% end %>
+<% end %>
+

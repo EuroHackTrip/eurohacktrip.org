@@ -1,0 +1,54 @@
+ <%= form_for(@city) do |f| %>
+  <% if @city.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@city.errors.count, "error") %> prohibited this city from being saved:</h2>
+
+    <ul>
+      <% @city.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="field">
+    <b>Pick country to start the map:</b><br>
+    <%= f.select "country_id", Country.all.collect {|p| [ p.name, p.id ] }, { include_blank: 'Select A Country' } %>
+  </div>
+
+  <div class="field">
+    <b>Name of City:</b><br>
+    <%= f.text_field :name %>
+  </div>
+  
+  <div class="field">
+    <b>Year:</b><br>
+    <%= f.text_field :year %>
+  </div>
+  
+  <div class="field">
+    <b>Dates:</b><br>
+    <%= f.text_field :dates %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, :class => 'ckeditor' %>
+  </div>
+
+  <div class="field">
+    <b>Click on map to pin the City:</b>
+    <div id="mapmaker" style="height:300px;"></div>
+  </div>
+  <div class="field hide">
+    <b>City Location</b>(Do not edit):<%= f.text_field :map, style: 'width: 300px;'%>
+  </div>
+  <div class="actions">
+   <%= f.submit %>
+ </div>
+<% end %>

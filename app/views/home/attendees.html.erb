@@ -1,0 +1,40 @@
+<% provide(:title, 'Attendees') %>
+
+<div class="row">
+	<% j=0 %>
+	<% users = User.where(approved:1).order('created_at ASC') %>
+	<% users = users.paginate(page:params[:page],per_page:8) %>
+	<% users.each do |user| %>
+		
+			<% if user.approved %>
+			<div class="3u" style="<%= j%4 == 0  ? 'clear:both' : '' %>">
+				<section class="middle">
+				<% j = j+1 %>
+					<span class="pennant pennant-alt">
+						<%= link_to image_tag(user.photo.url), user %>
+					<span class="after"></span>
+					</span>
+					<!-- <span class="twelve-point-star"></span> -->
+					<header class="text-center">
+						<% if user.first_name && user.last_name %>
+						<h3>
+						<%= user.first_name + " " + user.last_name %>
+						</h3>
+						<% end %>
+						<% if !user.startups.blank? %>
+						 <h4>
+						 	<%= link_to user.startups.first.name, user.startups.first %>
+						 </h4>	
+						 	<%= user.city ? user.city : '' %>
+						 	<%= user.country ? ", "+ user.country : '' %>
+						<% end %>
+					</header>
+					<p><%= raw shorten(user.about, 250) %><%= link_to ' ...more', user %> </p>
+				</section>						
+			</div>
+		<% end %>
+	<% end %>
+	<div class="12u">
+		<%= will_paginate users %>
+	</div>
+</div>

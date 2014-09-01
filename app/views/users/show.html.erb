@@ -1,0 +1,116 @@
+<% if @user.first_name && @user.last_name %>
+<% provide(:title, @user.first_name + " " + @user.last_name) %>
+<% end %>
+
+
+<% if @user.approved || ( user_signed_in? && (current_user.is_admin || current_user  == @user)) %>
+
+	<!-- Main -->
+	<div id="main" class="mids">
+		<div class="row">
+
+			<!-- Content -->
+			<div id="content" class="8u skel-cell-mainContent">
+
+				<!-- Post -->
+				<article class="is-post">
+					<header>
+					</header>
+					<span class="image image-full">
+						<%if @user.photo.url %>
+							<%= image_tag(@user.photo.url) %>
+						<% end %>
+					<section>
+						
+						<% if @user.first_name && @user.last_name %>
+						<h2><%= @user.first_name + " " + @user.last_name %></h2>
+						<% end %>
+						
+						<% if !@user.startups.blank? %>
+							<% @s = @user.startups.first %>
+							<h3><%= link_to @s.name, @s %></h3>
+						<% end %>
+						<h3 class="_bottom10"><%= @user.city ? @user.city : nil %></h3>
+						<h3><%= @user.country ? @user.country : nil %></h3>
+						
+					</section>
+
+					</span>
+
+					<% if !@user.video.blank? %>
+					<div class="vid-wrapper">
+						<div class="media-box">
+							<iframe src="<%= embed_link(@user.video) %>" 
+							width="100%" height="100%" 
+							frameborder="0" allowfullscreen></iframe>
+						</div>
+					</div>
+					<% end %>
+					<% if @user.about %>
+						<%= raw @user.about %>
+					<% end %>
+					<h3>My Interest in EuroHackTrip:</h3>
+					<p>
+						<% if @user.interest %>
+							<%= raw @user.interest %>
+						<% end %>
+					</p>
+
+					<section style="margin-bottom:20px">
+					<% if !@user.funding_campaign.blank? %>
+						<%= link_to 'SUPPORT MY TRIP', @user.funding_campaign, {:class=>'btn btn-info btn-sm'} %>
+					<% end %>
+					<%= link_to 'Contact Me', "mailto:"+@user.email, {:class=>'btn btn-success btn-sm pull-right'} %>
+					</section>
+
+				</article>
+
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar" class="4u">
+
+				<!-- Excerpts -->
+
+				<section>
+					<% if user_signed_in? && current_user.is_admin %>
+					<%= link_to 'Edit This Account', edit_user_path(@user), {:class=>'btn btn-info btn-sm'} %>
+					<% elsif user_signed_in? && current_user == @user %>
+					<%= link_to 'Edit My Account', "/account/edit", {:class=>'btn btn-info btn-sm'} %>
+					<% end %>
+					<p>Posts Authored:</p><br>
+					<ul class="divided">
+						<% posts_by_author(@user)[0,5].each do |post| %>
+						<li>
+
+							<!-- Excerpt -->
+							<article class="is-excerpt">
+								<header>
+									<span class="date" style = "width:100%; text-align:right;"><%= post.created_at %></span>
+									<h3><%= link_to post.title, post %></h3>
+								</header>
+								<p><%= raw post.content.split("")[0, 150].join + "..." %></p>
+							</article>
+
+						</li>
+						<% end %>
+						<% if posts_by_author(@user).length > 5 %>
+							<ul class="actions">
+								<li><%= link_to 'More posts by this user', author_path(@user) +"/posts", class:"button button-icon icon icon-file", style:"width:100%;" %></li>
+							</ul>
+						<% end %>
+						<% if posts_by_author(@user).length == 0 %>
+							<p>No posts yet..</p>
+						<% end %>
+
+					</ul>
+				</section>
+
+
+			</div>
+
+		</div>
+	</div>
+<% else %>
+	<p>This user has not yet been approved.</p>
+<% end %>

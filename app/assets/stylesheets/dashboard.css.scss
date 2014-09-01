@@ -1,0 +1,46 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.post, .comment {
+	border-bottom: 1px solid #ebebeb;
+	padding: 8px 5px;
+}
+
+.hidden-links {
+	display: none;
+}
+.to-hide.hover .hidden-links {
+	display: inline;
+}
+.to-hide.hover {
+	background: #eeeeee;
+}
+
+.tbl {
+	width:70%;
+	text_align:right;
+}
+
+legend {
+	color: #00598D;
+}
+#main-wrapper {
+	padding: 0 5%;
+}
+#header {
+	padding: 0 5%;
+}
+#footer {
+	display: none;
+}
+img{
+	vertical-align: bottom !important;
+}
+#users .to-hide p{
+	margin:0px !important;
+}
+#users .to-hide{
+	margin-top: 2em;
+}
+element.style {
+}

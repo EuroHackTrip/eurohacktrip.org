@@ -1,0 +1,236 @@
+<% provide(:title, @event.event_name) %>
+<div id="map" data-country-id="<%= @event.city.country.id %>">
+
+</div>
+<!-- Main -->
+<div id="main" class="mids">
+
+  <div class="row">
+    <% if !@event.special? %>
+      <% @startups = @event.startups.joins(:users).where(users: { approved: 1}).uniq %>
+
+      <div class="4u pull-right">
+        <!-- Excerpts -->
+        <section>
+          <ul class="divided">
+            <li>
+              <!-- Excerpt -->
+              <div class="well">
+                <article class="is-excerpt text-center">
+                  <h3>
+                    <% if @event.event_link.blank? %>
+                    <%= @event.event_name %>
+                    <% else %>
+                    <%= link_to @event.event_name, @event.event_link %>
+                    <% end %>
+                  </h3>
+                  <h4><%= @event.event_venue %>, <%= link_to @event.city.name, @event.city %></h4>
+                  <div><%= @event.date %></div>
+
+                  <% if @event.event_link.blank? %>
+                  <%= image_tag @event.venue_pic, class:"big-logo" %>
+                  <% else %>
+                  <%= link_to image_tag(@event.venue_pic.url, class: "big-logo", alt: @event.event_name), @event.event_link %>
+                  <% end %>
+
+
+                  <div><%= raw @event.description %>
+                    <% if !@event.event_link.blank? %>
+                    <%= link_to 'more', @event.event_link %>
+                    <% end %>
+                  </div>
+
+                  <% if user_signed_in? %>
+                  <% if current_user.is_admin %>
+                  <span class="user">
+                    <%= link_to 'Edit', edit_event_path(@event) %> | 
+                    <%= link_to 'Delete', @event, method: :delete, data: { confirm: 'Are you sure?' } %>
+                  </span>
+                  <% end %>
+                  <% end %>
+                </article>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- Content -->
+      <div id="content" class="8u">
+
+        <h2 class="text-center"><%= @event.event_name %></h2>
+
+
+
+        <h3 class="text-center">Startups Meeting Here</h3>
+        <% @event.startups.joins(:users).where(users: { approved: 1}).uniq.each do |startup| %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <a href="<%= url_for startup %>">
+              <h3><%= startup.name %> , <%= startup.city %></h3>
+            </a>
+          </div>
+          <div class="panel-body">
+            <div class="col-md-3">
+              <%= link_to image_tag(startup.logo.url, class:"_w100"), startup, alt:startup.logo.original_filename %>
+            </div>
+            <div class="col-md-9">
+              <h4><%= startup.tagline %></h4>
+              <br/>
+              <%= raw shorten(startup.description, 200) %> 
+              <br>
+              <%= link_to '...more', startup %>
+
+              <% if user_signed_in? %>
+              <% if current_user.is_admin %>
+              <%= link_to 'Edit', edit_startup_path(startup) %>
+              <%= link_to 'Delete', startup, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <% end %>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+        <% end %>
+      </div>
+
+
+    <% else %>
+    <% @startups = Startup.all %>
+        <div class="12u">
+          <!-- Excerpts -->
+          <section>
+
+            <ul class="divided">
+              <li>
+                <!-- Excerpt -->
+                <div class="well">
+                  <article class="is-excerpt text-center">
+                    <h3>
+                      <% if @event.event_link.blank? %>
+                      <%= @event.event_name %>
+                      <% else %>
+                      <%= link_to @event.event_name, @event.event_link %>
+                      <% end %>
+                    </h3>
+                    <h4>
+                    <%= @event.event_venue %>, <%= link_to @event.city.name, @event.city %>
+                    </h4>
+                    <i><%= @event.date %></i>
+                    <hr>
+                    <h4>
+                      <%= raw @event.description %>
+                    </h4> 
+                    <br>
+
+                    <% if @event.event_link.blank? %>
+                    <%= image_tag @event.venue_pic, class:"big-logo" %>
+                    <% else %>
+                    <%= link_to image_tag(@event.venue_pic.url, class: "big-logo", alt: @event.event_name), @event.event_link %>
+                    <% end %>
+
+
+                    <% if !@event.event_link.blank? %>
+                      <h4>
+                        <%= link_to @event.event_link, @event.event_link %>
+                      </h4> 
+                    <% end %>
+
+                    <% if user_signed_in? %>
+                    <% if current_user.is_admin %>
+                    <span class="user">
+                      <%= link_to 'Edit', edit_event_path(@event) %> | 
+                      <%= link_to 'Delete', @event, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    </span>
+                    <% end %>
+                    <% end %>
+                  </article>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </div>
+    <% end %>
+    
+      <!-- Posts -->
+      <div class="12u">
+        <% @country = @event.city.country %>
+        <% all_posts.tagged_with(@country.name).each do |post| %>
+        <% if post.published || post.published == nil %>
+        <article>
+          <h3><%= link_to post.title, post_path(post) %></h3>
+          <% if post.user_id && User.find(post.user_id).first_name && User.find(post.user_id).last_name %>
+          <span class = "post-details">Posted by: <%= link_to author(post), author_path(User.find(post.user_id)) + "/posts" %>  at <%= post.created_at %><span class="pull-right"><%= social_share_button_tag(post.title) %> </span></span><br>
+          <% else %>
+          <span class = "post-details">Posted  at <%= post.created_at %><span style = "float: right"><%= social_share_button_tag(post.title) %> </span></span><br>
+          <% end %>
+          <!--<%= post.created_at %> -->
+          <%= raw post.content %><br><br>
+          <% if user_signed_in? %>
+          <% if current_user.is_admin || (post.user_id && post.user_id == current_user.id) %>
+          <%= link_to 'Edit', edit_post_path(post) %> | 
+          <% end %>
+          <% if current_user.is_admin %>
+          <span>            
+            <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </span> | <link rel="stylesheet" type="text/css" href="/assets/bootstrap.css">
+          <% end %>
+          <% end %>
+
+          <%= link_to "Leave a Comment", "/posts/"+post.slug+"#add-comment", class: "links" %>
+          <br>
+          <br>
+              <!--
+              <% if post.comments.count > 0 %>
+                <%= link_to pluralize(post.comments.count, " comment") + " so far.", "/posts/"+post.id.to_s+"#comments", class: "links" %>
+              <% else %>
+                <%= link_to "Leave a Comment", "/posts/"+post.id.to_s+"#add-comment", class: "links" %>
+              <% end %>
+            -->
+          </article>
+          <% end %>
+          <% end %>
+
+          <%= will_paginate all_country_posts(@country.name), :container => true %>
+        </div>
+      </div>
+
+  </div> <!-- row -->
+
+  <h3 class="text-center _w100">Participants</h3>
+
+</div>
+
+
+<!-- Carousel -->
+<div class="carousel _w100" id="attendees">
+
+  <div class="reel">
+    <% @startups.each do |startup| %>
+    <% startup.users.each do |user| %>
+    <% if user.approved %>
+    
+      <article>
+
+        <%= link_to image_tag(user.photo.url, style: "width: 220px;"), user %>
+        <header>
+          <% if user.first_name %>
+          <h3>
+            <%= user.first_name %>
+          </h3>
+          <% if !user.startups.blank? %>
+          <h4>
+            <%= link_to user.startups.first.name, user.startups.first %>
+          </h4>
+          <% end %>
+          <% end %>
+        </header>
+        <% if user.city %>
+        <p><%= user.city %> , <%= user.country %></p>
+        <% end %>             
+      </article>
+    <% end %>
+    <% end %>
+    <% end %>
+  </div>
+</div>

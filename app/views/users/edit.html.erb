@@ -1,0 +1,54 @@
+<% provide(:title, 'Edit Account') %>
+
+<h2>Edit Account </h2>
+
+<%= form_for(@user, :html => { :method => :put }) do |f| %>
+
+  
+  <div><%= f.label :first_name %><br />
+  <%= f.text_field :first_name, :autofocus => true %></div>
+
+  <div><%= f.label :last_name %><br />
+  <%= f.text_field :last_name %></div>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+ <div class="field">
+    <span>Changing photo?</span>
+    <span>
+      <a href="<%= @user.photo.url  %>"><%= @user.photo.original_filename  %></a>
+      <%= f.file_field :photo %> 
+    </span>
+  </div>
+
+  <div><%= f.label :video %>
+  <%= f.text_field :video %></div><br />
+
+  <div><%= f.label :about, "About Yourself" %><br />
+  <%= f.text_area :about, :class => 'ckeditor' %></div>
+
+  <div><%= f.label :country %>
+     <%= select("user", 
+      :country, 
+      options_for_select(countries, @user.country), 
+      {include_blank: 'Click to select'}, 
+      class: "text") %> 
+  </div><br />
+
+  <div>City/Town<br />
+  <%= f.text_field :city %></div>
+
+  <div><%= f.label :interest, "Your interest on EuroHackTrip" %><br />
+  <%= f.text_area :interest, :class => 'ckeditor' %></div><br />
+
+  <div><%= f.label :funding_campaign, "Crowdfunding campaign (optional)" %><br />
+  <%= f.text_field :funding_campaign %></div><br />
+
+  <div><%= f.submit "Update", class:"button button-icon icon icon-edit" %></div><br>
+<% end %>
+
+
+
+<%= link_to "Back", :back %>
+

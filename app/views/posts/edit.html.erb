@@ -1,0 +1,53 @@
+<% provide(:title, 'Edit Blog') %>
+<h1>Editing post</h1>
+
+
+<%= form_for(@post) do |f| %>
+        <% if @post.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+            <ul>
+            <% @post.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="row">
+          <div class="col-md-9">
+            <div class="field">
+              <%= f.label :title %>
+              <%= f.text_field :title, style: "width:98%;" %>
+            </div>
+            <div class="field">
+              <%= f.label :content %>
+              <%= f.text_area :content, style: "height:400px;width:550px;", :class => 'ckeditor'  %>
+            </div>
+            <br>
+            <div class="actions pull-right">
+              <%= f.submit "Publish", class: "btn btn-primary btn-lg" %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <fieldset>
+              <legend style="color:#00598D;">Post Settings</legend>
+              <h4 style="color:#00598D;">Published Under:</h4>
+              <%= f.select :tag_list, Country.all.collect {|country| [ country.name] }, { include_blank: 'Select Country' } %>
+              <!--<h4 style="color:#00598D;">Tags </h4>(Seperated by commas)
+              <%= f.text_field :tag_list, style: "width:170px;" %> -->
+              <hr>
+              <h4 style="color:#00598D;">Publishing</h4>
+              <%= f.check_box :published, {checked: @post.published} %> Publish
+              <br>
+              <div>
+                <em>By default, a post is published once you create it. Uncheck if you just want to save it as a draft and not publish it. Note that it won't be visible to your visitors</em>
+              </div>
+              <hr>
+            </fieldset>
+          </div>
+        </div>
+      <% end %>
+
+<%= link_to 'Show', @post %> |
+<%= link_to 'Back', dashboard_index_path %>

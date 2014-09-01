@@ -1,0 +1,65 @@
+  <!-- Main -->
+  <div id="main" class="mids">
+    <div class="row">
+
+      <div class="4u pull-right">
+        <!-- Excerpts -->
+        <section>
+            <div class="well">
+              <article class="is-excerpt">
+                <%= image_tag @startup.logo.url, class: "big-logo" %>
+                <div>
+                  From: <%= @startup.city %>
+                  <br>
+                  By:
+                    <% @startup.users.each do | user| %>
+                      <a href="<%= url_for user %>">
+                        <small class="founder badge _left10">
+                          <%= user.first_name %> <%= user.last_name %>
+                        </small>
+                      </a>
+                    <% end %>
+                  <br>
+                  Last Edit:
+                    <% user = User.find(@startup.user_id) %>
+                    <a href="<%= url_for user %>">
+                      <small class="founder badge _left10">
+                        <%= user.first_name %> <%= user.last_name %>
+                      </small>
+                    </a>
+                  <br>
+                  <% if @startup.participation.first %>
+                    <% event =  Event.find(@startup.participation.first.event_id) %>
+                    Event: <%= link_to event.event_name, event %>, 
+                    <%= link_to event.year, '/'+event.year.to_s %>
+                  <% end %>
+                  <br>
+                  <% if user_signed_in? %>
+                  <% if involved_in(@startup) %>
+                  <%= link_to 'Edit', edit_startup_path(@startup) %> |
+                  <%= link_to 'All Startups', startups_path %>
+                  <% end %>
+                  <% end %>
+
+                </div>
+              </article>
+            </div>
+        </section>
+      </div>
+
+      <!-- Content -->
+      <div id="content" class="8u">
+              <!-- Events -->
+        <header>
+          <h2><%= @startup.name %></h2><br>
+          <h4>"<%= @startup.tagline %>"</h4>
+        </header>
+
+        <div>
+          <%= raw @startup.description %>
+        </div>
+      
+      </div>
+
+    </div>
+  </div>

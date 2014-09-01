@@ -1,0 +1,32 @@
+<h2>All Countries</h2>
+
+<div class="row">
+  <% j=0 %>
+<% @countries = @countries.paginate(page:params[:page],per_page:8) %>
+  <% @countries.each do |country| %>
+      <div class="3u" style="<%= j%4 == 0  ? 'clear:both' : '' %>">
+        <section class="middle">
+        <% j = j+1 %>
+          <span class="pennant pennant-alt">
+            <%= link_to image_tag(country.avatar.url), country %>
+          <span class="after"></span>
+          </span>
+          <!-- <span class="twelve-point-star"></span> -->
+          <header class="text-center">
+            <h3>
+            <%= link_to country.name, country %>
+            </h3>
+          </header>
+          <p><%= raw shorten(country.description, 200) %><%= link_to ' ...more', country %> </p>
+        </section>            
+      </div>
+  <% end %>
+
+<%= will_paginate @countries %>
+
+</div>
+
+<% if current_user && current_user.is_admin? %>
+<%= link_to 'New Country', new_country_path %>
+<% end %>
+

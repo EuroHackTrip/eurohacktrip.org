@@ -1,0 +1,165 @@
+<% provide(:title, @title) %>
+
+
+
+<!-- Banner -->
+<section  class="banner text">
+	<!-- <p class="mids">Connecting Innovative Startups From <strong>Africa</strong> & <strong>Europe</strong></p> -->
+	<p class="mids">An <strong>Opportunity</strong> for <strong>Innovative Startups</strong> From <strong>Africa</strong></p>
+</section>
+
+
+<section class="cities">
+	<div class="container owl-carousel">
+		<% @cities = City.where('year', '2014') %>
+		<% if !@cities.blank? %>
+			<% @cities.each do |city| %>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="servicebox text-center">
+                    <div class="service-icon">
+                        <div class="servicetitle">
+                        	<h4><%= link_to city.name, city_path(city.slug) %></h4>
+                        	<span class="text-center"><%= city.dates %></span>
+                        	<hr>
+                        </div>
+                    	<div class="dm-icon-effect-1 he-wrap" data-effect="slide-left">
+                            <%= link_to image_tag(city.photo.url, class: "lazyOwl"), city_path(city.slug) %>
+                        </div>
+                        <%= raw shorten(city.description, 250) %>  <%= link_to ' ...more', city_path(city.slug), class: 'red' %>
+                    </div><!-- service-icon -->
+                </div><!-- servicebox -->
+            </div><!-- large-3 -->
+			<% end %>
+		<% end %>
+	</div><!-- end container -->
+</section><!-- end section -->
+
+<!-- Banner -->
+<section class="banner text">
+	<p class="mids">To Exchange <strong>Ideas</strong> About <strong>Homegrown Solutions</strong></p>
+	
+</section>
+
+
+<section class="events text-center">
+	<div class="container">
+	<% @events = Event.where(year:'2014') %>
+	<% if !@events.blank?  %>
+	<% @events.where(special:0).each do |event| %>
+
+	    <div class="widget col-lg-4 col-md-4 col-sm-12">
+            <div class="service-icon text-center">
+                <div class="dm-icon-effect-1" data-effect="slide-left">
+                    <%= link_to raw('<i class="dm-icon fa '+event.icon+' fa-4x"></i>'), event %>
+                </div>
+                <div class="servicetitle">
+                    <h4><%= link_to event.event_name, event %></h4>
+                    <span><%= event.description %></span>
+                    <hr>
+                </div>
+            </div><!-- service-icon -->
+            <% if !event.startups.blank? %>
+			<ul class="startups">			
+				<% event.startups.each do |startup| %>
+				<% if startup.users.first && startup.users.first.approved %>
+
+				<li>
+	            	<a class="img" href="/startups/<%= startup.id %>">
+						<img src="<%= startup.logo %>" alt="<%= startup.name %>" />
+	                </a>
+	                <span>
+		            	<a href="<%= url_for startup %>">
+		                	<b><%= startup.name %></b>&nbsp;
+		                	<span class="badge"><%= startup.city %></span>
+		                </a>
+		                <small><%= startup.tagline %></small>
+	                </span>
+				</li>
+				<% end %>
+				<% end %>
+			</ul><!-- recent posts -->
+			<% end %>
+	    </div><!-- end widget -->  
+	<% end %>
+	<% end %>
+
+	
+	<% @events.where(special:1).each do |event| %>
+	    <div class="widget col-sm-12">
+            <div class="service-icon text-center">
+                <div class="dm-icon-effect-1" data-effect="slide-left">
+                    <%= link_to raw('<i class="dm-icon fa '+event.icon+' fa-4x"></i>'), event %>
+                </div>
+                <div class="servicetitle">
+                    <h4><%= link_to event.event_name, event %></h4>
+                    <hr>
+                    <h4>
+                    	<%= event.description %>
+	                    <% if !event.event_link.blank? %>
+	                    	<br>
+	                        <%= link_to event.event_link, event.event_link %>
+	                    <% end %>
+                    </h4>
+                </div>
+            </div><!-- service-icon -->
+        </div><!-- widget -->
+    <% end %>
+
+	</div><!-- end container -->  
+
+	<% if !current_user || current_user.startups.blank?  %>
+			<!-- <a href="/startups/new" class="btn btn-danger glow add-startup">Add Your Startup!</a> -->
+	<% end %>
+
+
+</section><!-- end section -->
+
+
+
+<!-- Banner -->
+<section class="banner text">
+	<p class="mids">And Meet <strong>Capital</strong>, <strong>Market</strong> & <strong>Industry Opportunities</strong></p>
+</section>
+
+<section class="events text-center">
+	<div class="container">
+		<% @events.each do |event| %>
+	    <div class="widget col-lg-3 col-md-3 col-sm-12">
+	        <div class="servicebox text-center">
+	            <div class="service-icon">
+	                <div class="servicetitle">
+                    	<h4><%= link_to event.event_name, event %></h4>
+	                	<hr>
+	                </div>
+	            	<div class="dm-icon-effect-1 he-wrap" data-effect="slide-left">
+           				<%= link_to image_tag(event.venue_pic.url, class: "lazyOwl", alt: event.event_name), event %>
+	                </div>
+            		<h4><%= link_to event.event_venue, event %>, <%= link_to event.city.name, event.city %></h4>
+	                	<span class="text-center"><%= event.date %></span>
+	            </div><!-- service-icon -->
+	        </div><!-- servicebox -->
+	    </div><!-- end widget -->  
+		<% end %>
+	</div><!-- end container -->  
+</section><!-- end section -->
+
+
+
+<!-- Partners -->
+<section class="banner" id="banner2" >
+	<p class="title red"><%= link_to 'Partners', partners_path %></p>
+	<ul class="partners">
+		<%  Partner.where(year: Time.now.year).order('tier ASC').limit(5).each do |partner| %>
+			<li>
+				<a href="<%= partner_path(partner) %>">
+				<img src="<%= partner.logo.url %>" alt="<%= partner.name %>"/>
+				</a>
+			</li>
+		<% end %>
+	</ul>
+	<div class="">
+		<a class="small pull-left 4u red" href="/partners">More...</a>
+		<a class="small pull-right 4u red" href="/partnership">Interested?</a>
+	</div>
+	<!-- <a class="footer" href="#contact">Interested In Joining Us?</a> -->
+</section>

@@ -1,0 +1,81 @@
+
+
+<ul class="nav nav-tabs">
+  <li><a href="#all-events" data-toggle="tab">All events</a></li>
+  <% if user_signed_in? && current_user.is_admin %>
+    <li><a href="#new-event" data-toggle="tab">
+    <span class="glyphicon glyphicon-plus-sign"></span>Add event</a></li>
+  <% end %>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active event" id="all-events">
+  <ol>  
+    <% all_events.each do |event| %>
+      <div style="display:inline;">
+       
+ <!--        <iframe src="http://www.eventbrite.com/countdown-widget?eid=<%= event.event_id %>" frameborder="0" height="479" width="195" marginheight="0" marginwidth="0" scrolling="no" allowtransparency="true"></iframe> -->
+
+        <li style="font-size: 20px">
+
+          <% if ENV["RAILS_ENV"] == 'production' %>
+          <% begin %>
+
+            <% eventx = CityEvent.new(event.event_id) %>
+            <% e = eventx.response['event'] %>
+
+            <a href="<%= e['url'] %>" >
+            <%= e['title'] %>
+            </a>
+
+            <span style="font-size: 10px; text-align: right; float: right">
+              At <%= e['venue']['name'] %> <br/>
+              <%= e['tickets'][0]['ticket']['quantity_available'] %> Tickets Remaining
+              <a href="<%= e['url'] %>">Order</a>
+            </span>
+
+          <% rescue Exception => e %>
+
+
+            <div class="hide">
+              <%= "Error: #{$!}" %> <br/>
+              <%= "Error: #{e}" %> <br/>
+              <%= "Error:" + e.inspect %>
+            </div>
+            
+          <% end %>
+          <% end %>
+
+
+            <a href="<%= event.event_link %>" >
+            <%= event.event_name %>
+            </a>
+
+            <span style="font-size: 10px; text-align: right; float: right">
+              At <%= event.event_venue %>, <%= event.date %> <br/>
+              <a href="<%= event.event_link %>">Order</a>
+            </span>
+
+
+        </li>
+
+        <div class="not-hidden-links">
+          <% if current_user.is_admin %>
+            <%= link_to 'Edit', edit_event_path(event) %> |
+            <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </div>
+
+        <hr>
+    
+       
+      </div>
+    <% end %>
+  </ol>
+  </div>
+  <div class="tab-pane event" id="new-event">
+
+    <%= render 'events/form' %>
+
+  </div>
+</div>

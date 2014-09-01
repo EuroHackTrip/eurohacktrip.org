@@ -1,0 +1,86 @@
+<ul class="nav nav-tabs">
+  <li><a href="#all-posts" data-toggle="tab">All Posts</a></li>
+  <li><a href="#my-posts" data-toggle="tab">My Posts</a></li>
+  <li><a href="#new-post" data-toggle="tab">New Post</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content" data-no-turbolink>
+  <div class="tab-pane active post" id="all-posts">
+    <% all_posts.each do |post| %>
+    <div class = "to-hide post">
+      <hr>
+      <div>
+        <%= link_to post.title, edit_post_path(post) %>
+        <% post.tag_list.each do |tag| %>
+        <span class="label label-info"><%= link_to tag, tag_path(tag), style: "color:white;"%></span>
+        <% end %>
+      </div>
+      <% if !post.published %>
+      <div>Publishing Status: <span class="label label-warning">Not Published</span></div>
+      <% end %>
+      <% if post.user_id && User.find(post.user_id).first_name && User.find(post.user_id).last_name %>
+      <div>Posted by: <%= link_to author(post), author_path(User.find(post.user_id)) + "/posts" %></div>
+      <% end %>
+      <div class="hidden-links">
+        <% if current_user.is_admin || (post.user_id && post.user_id == current_user.id) %>
+        <%= link_to "Edit", edit_post_path(post) %> | 
+        <% end %>
+        
+        <% if current_user.is_admin %>
+        <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %> |
+        <% if !post.published %>
+        <%= link_to 'Publish', post_publish_path(post), method: :post, data: { confirm: 'Are you sure?' } %> | 
+        <% else %>
+        <%= link_to 'Unpublish', post_publish_path(post), method: :post, data: { confirm: 'Are you sure?' } %> | 
+        <% end %>
+        <% end %>
+        <%= link_to 'View', post %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <div class="tab-pane" id="my-posts">
+    <% posts_by_author(current_user).each do |post| %>
+    <div class = "to-hide post">
+      <div>
+        <%= link_to post.title, edit_post_path(post) %>
+        <% post.tag_list.each do |tag| %>
+        <span class="label label-info"><%= link_to tag, tag_path(tag), style: "color:white;"%></span>
+        <% end %>
+      </div>
+      <% if !post.published %>
+      <div>Publishing Status: <span class="label label-warning">Not Published</span></div>
+      <% end %>
+      <% if post.user_id && User.find(post.user_id).first_name && User.find(post.user_id).last_name %>
+      <div>Posted by: <%= link_to author(post), author_path(User.find(post.user_id)) + "/posts" %></div>
+      <% end %>
+      <div class="hidden-links">
+        <% if current_user.is_admin || (post.user_id && post.user_id == current_user.id) %>
+        <%= link_to "Edit", edit_post_path(post) %> | 
+        <% end %>
+        
+        <% if current_user.is_admin %>
+        <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %> |
+        <% if !post.published %>
+        <%= link_to 'Publish', post_publish_path(post), method: :post, data: { confirm: 'Are you sure?' } %> | 
+        <% else %>
+        <%= link_to 'Unpublish', post_publish_path(post), method: :post, data: { confirm: 'Are you sure?' } %> | 
+        <% end %>
+        <% end %>
+        <%= link_to 'View', post %>
+        
+
+      </div>
+      <br>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="tab-pane" id="new-post">
+    
+    <%= render 'posts/form' %>
+
+  </div>
+  
+</div>
