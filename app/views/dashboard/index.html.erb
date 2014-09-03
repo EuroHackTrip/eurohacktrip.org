@@ -14,9 +14,9 @@
 	    
 		<% if current_user.is_admin %>
         	<li><a id="to-users" href="#users" data-toggle="tab">Users</a></li>
+        	<li><a id="to-stops" href="#stops" data-toggle="tab">Stops</a></li>
 	        <li><a id="to-countries" href="#countries" data-toggle="tab">Countries</a></li>
 	        <li><a id="to-cities" href="#cities" data-toggle="tab">Cities</a></li>
-	        <li><a id="to-events" href="#events" data-toggle="tab">Events</a></li>
         	<li><a id="to-stats" href="#stats" data-toggle="tab">Statistics</a></li>
         <% end %>
         <li class="pull-right"><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
@@ -35,11 +35,11 @@
 	  <div class="tab-pane" id="cities">
 	  	<%= render 'cities' %>
 	  </div>
-	  <div class="tab-pane" id="events">
-	  	<%= render 'events' %>
-	  </div>
 	  <div class="tab-pane" id="startups">
 	  	<%= render 'startups' %>
+	  </div>
+	  <div class="tab-pane" id="stops">
+	  	<%= render 'stops' %>
 	  </div>
 	  <div class="tab-pane active" id="posts">
 	  	<%= render 'posts' %>

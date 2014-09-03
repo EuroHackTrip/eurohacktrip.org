@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ParticipationTest < ActiveSupport::TestCase
+class StopTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,0 +1,42 @@
+<%= simple_form_for(@stop) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="field"><%= f.label :name %>
+  <%= f.text_field :name, :autofocus => true, class: "text" %></div><br />
+
+  <div class="field">
+    
+    <% if @stop.pic  %>
+      Picture: <a href="<%= @stop.pic.url  %>"><%= @stop.pic.original_filename  %></a><br>
+    <% else  %>
+      <%= f.label :pic %>
+    <% end  %>
+      <%= f.file_field :pic %>
+    <label for="stop_pic" class="error"></label>
+  </div><br>
+
+  <div class="field"><%= f.label :year, "Year" %>
+  <%= f.text_field :year, class: "text" %></div><br />
+
+  <div class="field"><%= f.label :dates, "Dates" %>
+  <%= f.text_field :dates, class: "text" %></div><br />
+
+  <div class="field"><%= f.label :dates, "Website link" %>
+  <%= f.text_field :link, class: "text" %></div><br />
+
+  <div class="field">
+    <b>Pick country to start the map:</b><br>
+    <%= f.select "city_id", City.all.collect {|p| [ p.name, p.id ] }, { include_blank: 'Select A City' } %>
+  </div>
+
+  <div class="field" id="description"><%= f.label :description, "Describe this venue and the activities here" %><br />
+  <%= f.text_area :description, :class => 'ckeditor' %>
+  <label class="stop_description control-label" for="inputError"></label>
+  </div><br>
+
+  <div><%= f.submit "Submit", class:"button button-icon icon icon-sign-up" %></div>
+<% end %>
+
+
+
+

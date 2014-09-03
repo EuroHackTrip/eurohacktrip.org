@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :posts_count, :comments_count, :all_posts, :all_comments, 
-  :all_countries, :all_cities, :all_people, :all_startups, :all_events, 
+  :all_countries, :all_cities, :all_people, :all_startups, :all_stops, 
   :all_partners, :partner_tiers, :involved_in,
   :approved_comments_count, :homepage_content, :total_unique, 
   :total_returning, :total_unique_post_views, :page_views, 
@@ -120,8 +120,8 @@ def all_startups
   Startup.all
 end
 
-def all_events
-  Event.all
+def all_stops
+  Stop.all
 end
 
 def all_partners

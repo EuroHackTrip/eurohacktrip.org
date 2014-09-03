@@ -41,70 +41,28 @@
 </section>
 
 
-<section class="events text-center">
+<section class="startups text-center">
 	<div class="container">
-	<% @events = Event.where(year:'2014') %>
-	<% if !@events.blank?  %>
-	<% @events.where(special:0).each do |event| %>
-
-	    <div class="widget col-lg-4 col-md-4 col-sm-12">
-            <div class="service-icon text-center">
-                <div class="dm-icon-effect-1" data-effect="slide-left">
-                    <%= link_to raw('<i class="dm-icon fa '+event.icon+' fa-4x"></i>'), event %>
-                </div>
-                <div class="servicetitle">
-                    <h4><%= link_to event.event_name, event %></h4>
-                    <span><%= event.description %></span>
-                    <hr>
-                </div>
-            </div><!-- service-icon -->
-            <% if !event.startups.blank? %>
-			<ul class="startups">			
-				<% event.startups.each do |startup| %>
-				<% if startup.users.first && startup.users.first.approved %>
-
-				<li>
-	            	<a class="img" href="<%= startup_path(startup) %>">
-						<img src="<%= startup.logo %>" alt="<%= startup.name %>" />
-	                </a>
-	                <span>
-		            	<a href="<%= url_for startup %>">
-		                	<b><%= startup.name %></b>&nbsp;
-		                	<span class="badge"><%= startup.city %></span>
+		<% Startup.where(year:2014).each do |startup| %>
+			<div class="widget _w20 col-sm-12">
+			<% if startup.users.first && startup.users.first.approved %>
+	            <div class="service-icon text-center">
+	               <!--  <div class="dm-icon-effect-1" data-effect="slide-left">
+	                    <%= link_to raw('<i class="dm-icon fa '+startup.category.to_s+' fa-4x"></i>'), startup %>
+	                </div> -->
+	                <div class="servicetitle">
+	                    <a class="img" href="<%= startup_path(startup) %>">
+							<img src="<%= startup.logo %>" alt="<%= startup.name %>" class="_w100" />
 		                </a>
-		                <small><%= startup.tagline %></small>
-	                </span>
-				</li>
-				<% end %>
-				<% end %>
-			</ul><!-- recent posts -->
+	                    <hr>
+		                <br>
+	                    <h4><%= link_to startup.name, startup %></h4>
+	                    <span><%= startup.tagline %></span>&nbsp;<span class="badge"><%= startup.city %></span>
+	                </div>
+	            </div><!-- service-icon -->
 			<% end %>
 	    </div><!-- end widget -->  
-	<% end %>
-	<% end %>
-
-	
-	<% @events.where(special:1).each do |event| %>
-	    <div class="widget col-sm-12">
-            <div class="service-icon text-center">
-                <div class="dm-icon-effect-1" data-effect="slide-left">
-                    <%= link_to raw('<i class="dm-icon fa '+event.icon+' fa-4x"></i>'), event %>
-                </div>
-                <div class="servicetitle">
-                    <h4><%= link_to event.event_name, event %></h4>
-                    <hr>
-                    <h4>
-                    	<%= event.description %>
-	                    <% if !event.event_link.blank? %>
-	                    	<br>
-	                        <%= link_to event.event_link, event.event_link %>
-	                    <% end %>
-                    </h4>
-                </div>
-            </div><!-- service-icon -->
-        </div><!-- widget -->
-    <% end %>
-
+		<% end %>
 	</div><!-- end container -->  
 
 	<% if !current_user || current_user.startups.blank?  %>
@@ -118,28 +76,45 @@
 
 <!-- Banner -->
 <section class="banner text">
-	<p class="mids">And Meet <strong>Capital</strong>, <strong>Market</strong> & <strong>Industry Opportunities</strong></p>
+	<p class="mids">And Find <strong>Capital</strong>, <strong>Market</strong> & <strong>Industry Opportunities</strong></p>
 </section>
 
-<section class="events text-center">
+<section class="stops text-center">
 	<div class="container">
-		<% @events.each do |event| %>
-	    <div class="widget col-lg-3 col-md-3 col-sm-12">
-	        <div class="servicebox text-center">
-	            <div class="service-icon">
-	                <div class="servicetitle">
-                    	<h4><%= link_to event.event_name, event %></h4>
-	                	<hr>
-	                </div>
-	            	<div class="dm-icon-effect-1 he-wrap" data-effect="slide-left">
-           				<%= link_to image_tag(event.venue_pic.url, class: "lazyOwl", alt: event.event_name), event %>
-	                </div>
-            		<h4><%= link_to event.event_venue, event %>, <%= link_to event.city.name, event.city %></h4>
-	                	<span class="text-center"><%= event.date %></span>
-	            </div><!-- service-icon -->
-	        </div><!-- servicebox -->
-	    </div><!-- end widget -->  
+		<% @stops = Stop.where(year:'2014') %>
+		<% @stops.each do |stop| %>
+	    <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="servicebox text-center">
+                <div class="service-icon">
+                    <div class="servicetitle">
+                    	<h4><%= link_to stop.name, stop.city %></h4>
+                    	<span class="text-center"><%= stop.dates %></span>
+                    	<hr>
+                    </div>
+                	<div class="dm-icon-effect-1 he-wrap" data-effect="slide-left">
+                        <%= link_to image_tag(stop.pic.url, class: "lazyOwl glow"), stop.city %>
+                    </div>
+                    <%= raw shorten(stop.description, 250) %>  <%= link_to ' ...more', stop.city, class: 'red' %>
+                </div><!-- service-icon -->
+            </div><!-- servicebox -->
+        </div><!-- large-3 -->
 		<% end %>
+		<div class="widget col-sm-12">
+            <div class="service-icon text-center">
+                <div class="dm-icon-effect-1 effect-slide-left in" data-effect="slide-left" style="-webkit-transition: all 0.7s ease-in-out; transition: all 0.7s ease-in-out;">
+                    <a href="/events/slush"><i class="dm-icon fa fa-asterisk fa-4x"></i></a>
+                </div>
+                <div class="servicetitle">
+                    <h4><a href="/events/slush">Slush</a></h4>
+                    <hr>
+                    <h4>
+                    	"Slush is the focal point for Eurasian startups and tech talent to meet with top-tier international investors, executives and media. In 2013, Slush gathered 7000 attendees and 1200 companies from 68 countries for the two-day event." - http://slush.org
+	                    	<br>
+	                        <a href="http://slush.org">http://slush.org</a>
+                    </h4>
+                </div>
+            </div><!-- service-icon -->
+        </div>
 	</div><!-- end container -->  
 </section><!-- end section -->
 

@@ -2,46 +2,15 @@
 <%= simple_form_for(@startup) do |f| %>
   <%= f.error_notification %>
 
-  <div class="field"><%= f.label :participation, "Click on the event you will participate:" %>
-    <!-- /input-group -->
+  <% if current_user.is_admin %>
 
-    <div class="text-center">
-      <div class="btn-group participation" data-toggle="buttons">
-        <% @events = Event.where('year', Time.now.year.to_s) %>
-        <% if @events %>
-          <% @events.where.not(special:1).each do | event| %>
-            <% if @startup.participation.count > 0  %>
-                <% if @startup.participation.first.event_id == event.id %>
-                  <label class="btn active" for="<%= event.id %>">
-                    <i class="fa <%= event.icon %> fa-4x"></i>
-                    <h3><%= event.event_name %></h3>
-                    <span><%= event.city.name %></span>
-                    <input type="radio" name="participation" value="<%= event.id %>">
-                  </label>
-                  <% else %>
-                    <label class="btn" for="<%= event.id %>">
-                      <i class="fa <%= event.icon %> fa-4x"></i>
-                      <h3><%= event.event_name %></h3>
-                      <span><%= event.city.name %></span>
-                      <input type="radio" name="participation" value="<%= event.id %>">
-                    </label>
-                  <% end %>
-            <% else %>
-              <label class="btn" for="<%= event.id %>">
-                <i class="fa <%= event.icon %> fa-4x"></i>
-                <h3><%= event.event_name %></h3>
-                <span><%= event.city.name %></span>
-                <input type="radio" name="participation" value="<%= event.id %>">
-              </label>
-            <% end %>
+  <div class="field"><%= f.label :year, "Year" %>
+  <%= f.text_field :year, class: "text" %></div><br />
 
-          <% end %>
-        <% end %>
-        <!-- <input type="hidden" name="participation" >    -->
-      </div>
-    </div>
+  <div class="field"><%= f.label :category, "Category" %>
+  <%= f.text_field :category, class: "text" %></div><br />
 
-  </div>
+  <% end %>
 
   <div class="field"><%= f.label :name %>
   <%= f.text_field :name, :autofocus => true, class: "text" %></div><br />

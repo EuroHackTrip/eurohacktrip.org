@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140711202251) do
+ActiveRecord::Schema.define(version: 20140903162346) do
 
   create_table "bootsy_image_galleries", force: true do |t|
     t.integer  "bootsy_resource_id"
@@ -77,28 +77,6 @@ ActiveRecord::Schema.define(version: 20140711202251) do
 
   add_index "countries", ["slug"], name: "index_countries_on_slug", unique: true, using: :btree
 
-  create_table "events", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "event_link"
-    t.string   "event_name"
-    t.string   "event_venue"
-    t.integer  "event_id"
-    t.integer  "city_id"
-    t.string   "year"
-    t.text     "description"
-    t.string   "icon"
-    t.string   "date"
-    t.boolean  "special"
-    t.string   "venue_pic_file_name"
-    t.string   "venue_pic_content_type"
-    t.integer  "venue_pic_file_size"
-    t.datetime "venue_pic_updated_at"
-    t.string   "slug"
-  end
-
-  add_index "events", ["city_id"], name: "index_events_on_city_id", using: :btree
-
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
@@ -160,16 +138,6 @@ ActiveRecord::Schema.define(version: 20140711202251) do
   add_index "involvements", ["startup_id"], name: "index_involvements_on_startup_id", using: :btree
   add_index "involvements", ["user_id"], name: "index_involvements_on_user_id", using: :btree
 
-  create_table "participations", force: true do |t|
-    t.integer  "startup_id"
-    t.integer  "event_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "participations", ["event_id"], name: "index_participations_on_event_id", using: :btree
-  add_index "participations", ["startup_id"], name: "index_participations_on_startup_id", using: :btree
-
   create_table "partners", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -228,9 +196,30 @@ ActiveRecord::Schema.define(version: 20140711202251) do
     t.datetime "logo_updated_at"
     t.integer  "user_id"
     t.string   "slug"
+    t.string   "category"
+    t.string   "year"
   end
 
   add_index "startups", ["user_id"], name: "index_startups_on_user_id", using: :btree
+
+  create_table "stops", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "year"
+    t.string   "dates"
+    t.string   "link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "pic_file_name"
+    t.string   "pic_content_type"
+    t.integer  "pic_file_size"
+    t.datetime "pic_updated_at"
+    t.string   "slug"
+    t.integer  "city_id"
+  end
+
+  add_index "stops", ["city_id"], name: "index_stops_on_city_id", using: :btree
+  add_index "stops", ["slug"], name: "index_stops_on_slug", unique: true, using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

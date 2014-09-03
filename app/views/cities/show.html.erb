@@ -37,27 +37,26 @@
 			<!-- Content -->
 			<div id="content" class="8u">
 				<h3 class="text-center">Events Happening Here</h3>
-				<% @city.events.each do |event| %>
+				<% @city.stops.each do |stop| %>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<a href="<%= url_for event %>">
-							<h3>THEME: <%= event.event_name %></h3>
+						<a href="<%= url_for stop %>">
+							<h3><%= stop.name %></h3>
 						</a>
 					</div>
 					<div class="panel-body">
 						<div class="col-md-3">
-							<%= link_to image_tag(event.venue_pic.url, class:"_w100"), event, alt:event.venue_pic.original_filename %>
+							<%= link_to image_tag(stop.pic.url, class:"_w100"), stop, alt:stop.pic.original_filename %>
 						</div>
 						<div class="col-md-9">
-							<%= raw shorten(event.description, 200) %>
-							<%= link_to '...More', event %>
+							<%= raw stop.description %>
 							<br/>
-							<h4><%= event.event_venue %>, <%= event.date %></h4>
+							<h4><%= stop.dates %></h4>
 
 							<% if user_signed_in? %>
 							<% if current_user.is_admin %>
-							<%= link_to 'Edit', edit_event_path(event) %>
-							<%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+							<%= link_to 'Edit', edit_stop_path(stop) %>
+							<%= link_to 'Delete', stop, method: :delete, data: { confirm: 'Are you sure?' } %>
 							<% end %>
 							<% end %>
 						</div>

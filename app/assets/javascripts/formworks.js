@@ -1,14 +1,5 @@
 $(document).ready(function() {
 
-	$('.participation label').click(function() { //startup participations, highlight active
-	    // $(this).addClass('active').siblings().removeClass('active');
-	    $(this).button('toggle');
-	 //    pn = $('.participation label').map(function(){
-		// 	return $(this).is('.active') ? parseInt($(this).attr('for')) : null;
-		// }).get();
-	 //    $('input[name="participation"]').last().val(pn);
-	});
-
 	$('input[type="file"]').next().on('click', function(e){
 		e.preventDefault()
 		// console.log($(this));
@@ -17,7 +8,6 @@ $(document).ready(function() {
 			.children('label.error').remove(); 
 			img_ratio =1
 	})
-
 
 	validateImg = function(ell){
 		ell.change(function(){

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @stop.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @stop.description %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @stop.year %>
+</p>
+
+<p>
+  <strong>Dates:</strong>
+  <%= @stop.dates %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @stop.link %>
+</p>
+
+<%= link_to 'Edit', edit_stop_path(@stop) %> |
+<%= link_to 'Back', stops_path %>

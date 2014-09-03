@@ -2,6 +2,7 @@ class City < ActiveRecord::Base
   belongs_to :country
 
   has_many :events
+  has_many :stops
   
   has_attached_file :photo, :default_url => "/assets/eu.png"
 

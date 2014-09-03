@@ -28,12 +28,6 @@
                       </small>
                     </a>
                   <br>
-                  <% if @startup.participation.first %>
-                    <% event =  Event.find(@startup.participation.first.event_id) %>
-                    Event: <%= link_to event.event_name, event %>, 
-                    <%= link_to event.year, '/'+event.year.to_s %>
-                  <% end %>
-                  <br>
                   <% if user_signed_in? %>
                   <% if involved_in(@startup) %>
                   <%= link_to 'Edit', edit_startup_path(@startup) %> |

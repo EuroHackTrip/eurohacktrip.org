@@ -28,12 +28,9 @@ class StartupsController < ApplicationController
   def create
 
     # render json: params
-    # render json: params['participation']
     # render json: ActiveSupport::JSON.decode(params['involvement'])
 
-    if params['participation'].blank?
-      redirect_to request.referer, notice: 'Hey, click on the events you will participate!'
-    elsif ActiveSupport::JSON.decode(params['involvement']).blank? 
+    if ActiveSupport::JSON.decode(params['involvement']).blank? 
       redirect_to request.referer, notice: 'Hey, you have to add people involved in your startup!'
     else
       
@@ -49,7 +46,6 @@ class StartupsController < ApplicationController
                 Involvement.create! startup_id:@startup.id, user_id:co 
               end
             end
-          Participation.create! startup_id:@startup.id, event_id:params['participation']
           format.html { redirect_to @startup, notice: 'Startup was successfully created.' }
           format.json { render action: 'show', status: :created, location: @startup }
         else
@@ -65,7 +61,6 @@ class StartupsController < ApplicationController
   def update
 
     # render json: params
-    # render json: params['participation']
 
     if ActiveSupport::JSON.decode(params['involvement']).blank? 
       redirect_to request.referer, notice: 'Hey, you have to add people involved in your startup!'
@@ -83,8 +78,6 @@ class StartupsController < ApplicationController
               Involvement.create! startup_id:@startup.id, user_id:co 
             end
           end
-          # Participation.where(startup_id:@startup.id).delete_all
-          # Participation.create! startup_id:@startup.id, event_id:params['participation']
           format.html { redirect_to @startup, notice: 'Startup was successfully updated.' }
           format.json { head :no_content }
         else
@@ -113,7 +106,7 @@ class StartupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def startup_params
-      params.require(:startup).permit(:name, :logo, :city, :tagline, :description)
+      params.require(:startup).permit(:name, :logo, :city, :tagline, :description, :year, :category )
     end
 
     def check_involved

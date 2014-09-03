@@ -1,0 +1,32 @@
+<ul class="nav nav-tabs">
+  <li><a href="#all-stops" data-toggle="tab">Stops</a></li>
+  <li><a href="#new-stop" data-toggle="tab">
+  <span class="glyphicon glyphicon-plus-sign"></span>Add A Stop</a></li>
+</ul>
+<!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active stop" id="all-stops">
+        <% all_stops.each do |stop| %>
+            <div class = "to-hide stop">
+            <hr>
+            <div>
+              <%= image_tag stop.pic.url, size: "50x50" %><br>
+               
+              <%= link_to stop.name, stop_path(stop.slug) %><br>
+              <%= stop.description %><br>
+              <%= stop.year %>
+            </div>
+            <% if current_user.is_admin %>
+              <%= link_to 'Edit', edit_stop_path(stop) %> |
+              <%= link_to 'Delete', stop, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+<div class="tab-pane" id="new-stop">
+
+  <%= render 'stops/form' %>
+
+</div>
+
+</div>

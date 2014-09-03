@@ -244,7 +244,7 @@ transition: background-color 0.25s ease-in-out;
 section.cities {
 	margin-bottom: 1em !important;
 }
-section.events {
+section.stops {
 	margin-bottom: 2em !important;
 }
 section.startups .title{
@@ -732,11 +732,11 @@ a:hover, b:hover {
     text-decoration: none;
     font-weight: bold;
 }
-.events a.glow {
+.startups a.glow {
     color: #ffffff;
     background-color: rgba(239,131,118, 1);
 }
-.events a.glow:hover {
+.startups a.glow:hover {
     -webkit-transition: -webkit-transform 0.5s;
     -moz-transition: -moz-transform 0.5s;
     transition: transform 0.5s;
@@ -841,4 +841,7 @@ ul#ui-id-1 li {
 ul#ui-id-1 li:hover a {
 	font-weight: bold;
 	color: rgba(239,131,118, 1);
+}
+._w20{
+	width: 20%;
 }

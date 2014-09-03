@@ -1,6 +1,6 @@
 EurohacktripOrg::Application.routes.draw do
 
-  resources :participations
+  resources :stops
 
   resources :partners
 
@@ -48,9 +48,7 @@ EurohacktripOrg::Application.routes.draw do
   resources :countries
   resources :cities
 
-  
-  resources :events
-  # created_at:datetime updated_at:datetime event_link:string event_name:string event_venue:string event_id:integer city:references
+    # created_at:datetime updated_at:datetime event_link:string event_name:string event_venue:string event_id:integer city:references
   
   #ping our eventbrite client:
   get 'eventbrite/:id' => 'events#pingeventbrite'
@@ -148,3 +146,4 @@ end
 
 
 # rails g scaffold startup name:string logo:string city:string tagline:string description:text
+#  rails g scaffold stops name:string description:text year:string dates:string link:string
