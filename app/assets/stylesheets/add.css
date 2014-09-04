@@ -206,6 +206,13 @@ ul.partners a img{
 	}
 }
 
+
+@media(min-width: 768px) {
+	._w20{
+		width: 20%;
+	}
+}
+
 .banner li.aht{
 	background-image:url('partners/aht.png');
 }
@@ -841,10 +848,4 @@ ul#ui-id-1 li {
 ul#ui-id-1 li:hover a {
 	font-weight: bold;
 	color: rgba(239,131,118, 1);
-}
-
-@media(max-width: 700px) {
-	._w20{
-		width: 20%;
-	}
 }
