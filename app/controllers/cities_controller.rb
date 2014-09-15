@@ -82,11 +82,11 @@ class CitiesController < ApplicationController
       end
       data['country_name'] = Country.find(city.country_id).name.downcase
      
-      event = Event.where(city_id: city.id).first
+      stop = Stop.where(city_id: city.id).first
       
-      if event  
-        data['event_id'] = event.id
-        data['theme'] = event.event_name
+      if stop  
+        data['stop_id'] = stop.id
+        data['theme'] = stop.name
         data['dates'] = city.dates
       end
 
