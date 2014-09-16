@@ -124,7 +124,7 @@
 <section class="banner" id="banner2" >
 	<p class="title red"><%= link_to 'Partners', partners_path %></p>
 	<ul class="partners">
-		<%  Partner.where(year: Time.now.year).order('tier ASC').limit(5).each do |partner| %>
+		<%  Partner.where(year: Time.now.year).order('tier ASC').each do |partner| %>
 			<li>
 				<a href="<%= partner_path(partner) %>">
 				<img src="<%= partner.logo.url %>" alt="<%= partner.name %>"/>

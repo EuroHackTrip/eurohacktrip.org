@@ -140,7 +140,8 @@ background: linear-gradient(to bottom,  #424242 0%,#f2f2f2 40%,#f2f2f2 40%,#f7f7
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#424242', endColorstr='#424242',GradientType=0 ); /* IE6-8 */
 
 background: url('/assets/designs/bg01.png');
-background-size: 100% 100%;
+background-size: 100%;
+background-repeat: no-repeat;
 
 }
 .banner .title {
@@ -157,7 +158,7 @@ background-size: 100% 100%;
 	text-decoration: none !important;
 }
 ul.partners{
-	height: 200px;
+	/*height: 200px;*/
 	width: 100%;
 }
 
