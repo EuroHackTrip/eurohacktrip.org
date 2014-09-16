@@ -68,7 +68,7 @@ class StartupsController < ApplicationController
       @startup.user_id = current_user.id
       respond_to do |format|
         if @startup.update(startup_params)
-          @startup.slug = @startup.name.downcase
+          @startup.slug = nil
           @startup.save!
           # team =  params['involvement'].split(',')
           team = ActiveSupport::JSON.decode(params['involvement'])

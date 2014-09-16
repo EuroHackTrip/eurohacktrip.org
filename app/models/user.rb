@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   after_create :set_name
   def set_name
     self.name = "#{self.first_name} #{self.last_name}"
-    self.slug = "#{self.first_name.downcase}-#{self.last_name.downcase}"
+    self.slug = "#{self.name.parameterize.downcase}"
     self.save!
   end
 

@@ -44,7 +44,7 @@ class PartnersController < ApplicationController
   def update
     respond_to do |format|
       if @partner.update(partner_params)
-        @partner.slug = @partner.name.downcase
+        @partner.slug = nil
         @partner.save!
         format.html { redirect_to @partner, notice: 'Partner was successfully updated.' }
         format.json { head :no_content }

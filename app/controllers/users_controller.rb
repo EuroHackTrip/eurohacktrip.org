@@ -61,8 +61,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update(user_params)
-        @user.name = "#{@user.first_name}-#{@user.last_name}"
-        @user.slug = @user.name.downcase
+        @user.name = "#{@user.first_name} #{@user.last_name}"
+        @user.slug = nil
         @user.save!
         format.html { redirect_to user_path(@user), notice: 'User was successfully updated.' }
         format.json { head :no_content }
