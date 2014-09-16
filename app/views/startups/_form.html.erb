@@ -17,12 +17,12 @@
 
   <div class="field">
     
+    <%= f.label :logo, 'Logo - 300px square, transparent' %>
     <% if @startup.logo  %>
-      Logo: <a href="<%= @startup.logo.url  %>"><%= @startup.logo.original_filename  %></a><br>
-    <% else  %>
-      <%= f.label :logo %>
+      <a href="<%= @startup.logo.url  %>"><%= @startup.logo.original_filename  %></a><br>
+      Update...
     <% end  %>
-      <%= f.file_field :logo %>
+    <%= f.file_field :logo %>
     <label for="startup_logo" class="error"></label>
   </div><br>
 

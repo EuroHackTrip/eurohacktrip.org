@@ -20,9 +20,9 @@
   <%= f.email_field :email, class: "text" %></div>
 
   <div class="field">
-    <span>Changing photo?</span>
     <span>
-      <a href="<%= @user.photo.url  %>"><%= @user.photo.original_filename  %></a>
+      Photo: <a href="<%= @user.photo.url  %>"><%= @user.photo.original_filename  %></a>
+      Changing? Use 300px square, transparent
       <%= f.file_field :photo %> 
     </span>
   </div>
