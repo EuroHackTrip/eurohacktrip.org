@@ -857,7 +857,7 @@ ul#ui-id-1 li:hover a {
 
 
 /* ============================================================
-  GLOBAL
+  Partners image overlay
 ============================================================ */
 .partners li {
   position: relative;
@@ -912,7 +912,7 @@ a.expand {
 }
 
 /* ============================================================
-  EFFECT 1 - SLIDE IN BOTTOM
+  EFFECT - SLIDE IN BOTTOM
 ============================================================ */
 .partners .overlay {
   bottom: 0;
