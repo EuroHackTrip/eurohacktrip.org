@@ -129,7 +129,19 @@
 				<a href="<%= partner_path(partner) %>">
 				<img src="<%= partner.logo.url %>" alt="<%= partner.name %>"/>
 				<br>
-				<%= partner_tiers[partner.tier][0] %> 
+				
+				<%= partner.name %> 
+
+				<div class="overlay">
+                    <a href="<%= partner_path(partner) %>" class="expand">
+	                    <% t = partner_tiers[partner.tier][0] %> 
+	                    <img src="/assets/partnership/<%= partner.tier %>.png" alt="<%= t %>">
+	                    <br>
+	                    <%= t %>
+                    </a>
+                    <a class="close-overlay hidden">x</a>
+                </div>
+
 				</a>
 			</li>
 		<% end %>

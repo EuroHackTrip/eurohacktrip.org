@@ -278,7 +278,7 @@ ul.startups img{
 ul.startups a{
 	display: block;
 }
-ul.startups a.img {
+ul.startups ali {
 	float: left;
 }
 ul.startups a b{
@@ -849,4 +849,98 @@ ul#ui-id-1 li {
 ul#ui-id-1 li:hover a {
 	font-weight: bold;
 	color: rgba(239,131,118, 1);
+}
+
+
+
+
+
+
+/* ============================================================
+  GLOBAL
+============================================================ */
+.partners li {
+  position: relative;
+  margin-bottom: 5px;
+  overflow: hidden;
+}
+
+.partners li img {
+  max-width: 100%;
+}
+
+.overlay {
+  display: block;
+  position: absolute;
+  z-index: 20;
+  background: rgba(237, 120, 106, 0.9);
+  overflow: hidden;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+a.close-overlay {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  width: 45px;
+  height: 45px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 45px;
+  text-align: center;
+  background-color: #000;
+  cursor: pointer;
+}
+a.close-overlay.hidden {
+  display: none;
+}
+
+a.expand {
+	position: absolute;
+	z-index: 100;
+	height: 170px;
+	text-align: center;
+	color: #fff;
+	font-weight: 700;
+	font-size: 1.5em;
+}
+
+/* ============================================================
+  EFFECT 1 - SLIDE IN BOTTOM
+============================================================ */
+.partners .overlay {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 0;
+}
+.partners .overlay a.expand {
+	left: 0;
+	right: 0;
+	top: 20px;
+	margin: auto;
+	height: 100%;
+}
+.partners li.hover .overlay {
+  height: 100%;
+}
+
+.partners .overlay img {
+  max-height: 70%;
+
+background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 80%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,1)), color-stop(0%,rgba(255,255,255,0.8)), color-stop(80%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.8) 0%,rgba(255,255,255,0) 80%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.8) 0%,rgba(255,255,255,0) 80%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.8) 0%,rgba(255,255,255,0) 80%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.8) 0%,rgba(255,255,255,0) 80%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
 }
