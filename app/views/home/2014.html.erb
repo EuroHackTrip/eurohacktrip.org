@@ -121,7 +121,7 @@
 
 
 <!-- Partners -->
-<section class="banner" id="banner2" >
+<section class="banner" id="partners" >
 	<p class="title red"><%= link_to 'Partners', partners_path %></p>
 	<ul class="partners">
 		<%  Partner.where(year: Time.now.year).order('tier ASC').limit(10).each do |partner| %>
