@@ -12,8 +12,8 @@ EurohacktripOrg::Application.routes.draw do
   get "home/index"
 
   get 'about' => "home#about"
+  get 'team' => "home#team"
   get 'attendees' => "home#attendees"
-  # get 'about' => "home#about"
 
   get ':id', to: "home#year", :constraints => { :id => /[0-9]+/ }
 
