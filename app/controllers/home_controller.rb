@@ -38,4 +38,5 @@ class HomeController < ApplicationController
     redirect_to "#"
     # redirect_to "http://indiegogo.com/eurohacktrip"
   end
+
 end

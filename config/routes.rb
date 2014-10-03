@@ -15,6 +15,9 @@ EurohacktripOrg::Application.routes.draw do
   get 'team' => "home#team"
   get 'attendees' => "home#attendees"
 
+  get 'concept', :to => redirect('assets/docs/Concept.pdf')
+  get 'proposal', :to => redirect('assets/docs/Proposal.pdf')
+
   get ':id', to: "home#year", :constraints => { :id => /[0-9]+/ }
 
   #users api
