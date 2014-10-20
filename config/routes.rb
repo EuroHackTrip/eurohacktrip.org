@@ -14,7 +14,8 @@ EurohacktripOrg::Application.routes.draw do
   get 'about' => "home#about"
   get 'team' => "home#team"
   get 'attendees' => "home#attendees"
-  get 'campaign' => "home#campaign"
+  get 'campaign' => redirect('https://onepercentclub.com/en/#!/projects/eurohacktrip')
+  get 'content' => "home#campaign"
 
   get 'concept', :to => redirect('assets/docs/Concept.pdf')
   get 'proposal', :to => redirect('assets/docs/Proposal.pdf')
