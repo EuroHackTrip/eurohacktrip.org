@@ -16,6 +16,11 @@ class HomeController < ApplicationController
     render "home/attendees"
   end
 
+  def campaign
+    @title = 'Campaign'
+    render "home/campaign"
+  end
+
   def year
     @message = Message.new
     @id = params[:id]
