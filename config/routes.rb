@@ -4,7 +4,6 @@ EurohacktripOrg::Application.routes.draw do
 
   resources :partners
 
-  get "budget" => redirect('http://goo.gl/C4Hwo6')
   get "partnership" => 'home#partnership', as: :partnership
   get "partner" => 'home#partner' 
 
@@ -14,11 +13,12 @@ EurohacktripOrg::Application.routes.draw do
   get 'about' => "home#about"
   get 'team' => "home#team"
   get 'attendees' => "home#attendees"
-  get 'campaign' => redirect('https://onepercentclub.com/en/#!/projects/eurohacktrip')
-  get 'content' => "home#campaign"
 
   get 'concept', :to => redirect('assets/docs/Concept.pdf')
   get 'proposal', :to => redirect('assets/docs/Proposal.pdf')
+  get 'content' => redirect('http://goo.gl/9X5RgM')
+  get "budget" => redirect('http://goo.gl/C4Hwo6')
+  get 'campaign' => redirect('https://onepercentclub.com/en/#!/projects/eurohacktrip-in-amsterdam')
 
   get ':id', to: "home#year", :constraints => { :id => /[0-9]+/ }
 
