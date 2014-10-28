@@ -113,7 +113,7 @@ $(document).ready(function(){
 			// map.fitBounds(markersgroup);
 			// setTimeout(function(){ map.panBy([0, -20]); }, 1000)
 
-			// custom paralax effect... 
+			// custom parallax effect... 
 			pos = 0
 			$(window).scroll(function(){ 
 				// console.log(pos);
