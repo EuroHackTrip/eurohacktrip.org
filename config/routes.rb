@@ -21,6 +21,8 @@ EurohacktripOrg::Application.routes.draw do
   get "trailer" => redirect('https://www.youtube.com/watch?v=fIUYdQYuCUQ')
   get "video" => redirect('https://www.youtube.com/watch?v=fIUYdQYuCUQ')
   get 'campaign' => redirect('https://onepercentclub.com/en/#!/projects/eurohacktrip-in-amsterdam')
+  get "video" => redirect('https://www.youtube.com/watch?v=fIUYdQYuCUQ')
+  get "card" => redirect('http://goo.gl/9Zt4jx')
 
   get ':id', to: "home#year", :constraints => { :id => /[0-9]+/ }
 
