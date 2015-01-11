@@ -3,7 +3,8 @@ class HomeController < ApplicationController
     @message = Message.new
     @page_type = 'Home'
     @title = Time.now.year.to_s
-    render "home/"+Time.now.year.to_s
+    # render "home/"+Time.now.year.to_s
+    render "home/2014"
   end
 
   def about
