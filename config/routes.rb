@@ -15,7 +15,7 @@ EurohacktripOrg::Application.routes.draw do
   get 'attendees' => "home#attendees"
 
   get 'concept', :to => redirect('assets/docs/Concept.pdf')
-  get 'proposal', :to => redirect('assets/docs/Proposal.pdf')
+  # get 'proposal', :to => redirect('assets/docs/Proposal.pdf')
   get 'content' => redirect('http://goo.gl/9X5RgM')
   get "budget" => redirect('http://goo.gl/C4Hwo6')
   get "trailer" => redirect('https://www.youtube.com/watch?v=fIUYdQYuCUQ')
