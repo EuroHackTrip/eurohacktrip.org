@@ -11,7 +11,7 @@ EurohacktripOrg::Application.routes.draw do
   get "home/index"
 
   get 'about' => "home#about"
-  get 'team' => "home#team"
+  # get 'team' => "home#team"
   get 'attendees' => "home#attendees"
 
   get 'concept', :to => redirect('assets/docs/Concept.pdf')
