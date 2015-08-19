@@ -13,7 +13,7 @@ development:
   database: eurohacktrip.org
   pool: 5
   username: root
-  password: 'ttunawesmake'# If you create a password for your MySQL installation
+  password: ''# If you create a password for your MySQL installation
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
