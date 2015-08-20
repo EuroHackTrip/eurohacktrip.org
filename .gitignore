@@ -16,7 +16,7 @@
 /tmp
 # Ignore application configuration
 /config/application.yml
-/config/database2.yml
+/config/database.yml
 /public
 deployment.log
 
